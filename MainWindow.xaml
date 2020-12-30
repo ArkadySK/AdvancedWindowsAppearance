@@ -1,0 +1,263 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdvancedWindowsAppearence"
+        xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared" x:Class="AdvancedWindowsAppearence.MainWindow"
+        mc:Ignorable="d"
+        Title="Advanced Appearance" Width="440" SizeToContent="Height" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="NoResize">
+    <StackPanel>
+        <Border Margin="5">
+            <StackPanel>
+                <Grid Height="220" Background="{DynamicResource {x:Static SystemColors.DesktopBrushKey}}" Margin="10" Style="{x:Null}" OverridesDefaultStyle="True" FocusVisualStyle="{x:Null}">
+                    <Image x:Name="ImageWallpaper"></Image>
+                    <Polygon Points="100,100 0,100 100,0" Fill="{DynamicResource {x:Static SystemColors.DesktopBrushKey}}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,0"/>
+
+
+                    <!-- Inactive Window -->
+                    <Grid Width="350" Height="100" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Background="{DynamicResource {x:Static SystemColors.InactiveBorderBrushKey}}">
+                        <Border Margin="{DynamicResource {x:Static SystemParameters.Border}}" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+
+                            <!--Inactive Header-->
+                            <Grid Height="{DynamicResource {x:Static SystemParameters.CaptionHeightKey}}" VerticalAlignment="Top" >
+                                <Grid.Background>
+                                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                        <GradientStop Color="{DynamicResource {x:Static SystemColors.InactiveCaptionColorKey}}"/>
+                                        <GradientStop Color="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionColorKey}}" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Margin="1" HorizontalAlignment="Right" Style="{x:Null}" Content="r"  Grid.Column="3" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Width="{DynamicResource {x:Static SystemParameters.SmallWindowCaptionButtonWidthKey}}" FontFamily="Marlett" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}"/>
+                                <Button Margin="1" HorizontalAlignment="Right" Style="{x:Null}" Content="1"  Grid.Column="2" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Width="{DynamicResource {x:Static SystemParameters.SmallWindowCaptionButtonWidthKey}}" FontFamily="Marlett" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}"/>
+                                <Button Margin="1" HorizontalAlignment="Right" Style="{x:Null}" Content="0"  Grid.Column="1" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Width="{DynamicResource {x:Static SystemParameters.SmallWindowCaptionButtonWidthKey}}" FontFamily="Marlett" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}"/>
+                                <Label Padding="1" Content="Inactive Window" FontFamily="{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}" FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" Foreground="{DynamicResource {x:Static SystemColors.InactiveCaptionTextBrushKey}}" />
+                            </Grid>
+
+                        </Border>
+                    </Grid>
+
+
+
+                    <!-- Active Window -->
+                    <Grid Width="370" HorizontalAlignment="Center" Margin="5 35" VerticalAlignment="Top" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
+                        <Border Margin="{DynamicResource {x:Static SystemParameters.ResizeFrameVerticalBorderWidth}}" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+
+                            <!--Active Header-->
+                            <Grid VerticalAlignment="Top" >
+                                <Grid.Background>
+                                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                        <GradientStop Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                                        <GradientStop Color="{DynamicResource {x:Static SystemColors.GradientActiveCaptionColorKey}}" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Button Margin="1" HorizontalAlignment="Right" Style="{x:Null}" Content="r"  Grid.Column="3" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Width="{DynamicResource {x:Static SystemParameters.SmallWindowCaptionButtonWidthKey}}" FontFamily="Marlett" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}"/>
+                                <Button Margin="1" HorizontalAlignment="Right" Style="{x:Null}" Content="1"  Grid.Column="2" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Width="{DynamicResource {x:Static SystemParameters.SmallWindowCaptionButtonWidthKey}}" FontFamily="Marlett" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}"/>
+                                <Button Margin="1" HorizontalAlignment="Right" Style="{x:Null}" Content="0"  Grid.Column="1" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Width="{DynamicResource {x:Static SystemParameters.SmallWindowCaptionButtonWidthKey}}" FontFamily="Marlett" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}"/>
+                                <Label Padding="1" Height="{DynamicResource {x:Static SystemParameters.CaptionHeightKey}}" Content="Active Window" FontFamily="{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}" FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" />
+
+                                <!--Content of Active Window-->
+                                <Menu Grid.Row="1" Height="{DynamicResource {x:Static SystemParameters.MenuBarHeightKey}}" Grid.ColumnSpan="4">
+                                    <MenuItem Header="Normal" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"  />
+                                    <MenuItem Header="Disabled" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" IsEnabled="False" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"/>
+                                    <MenuItem Header="Selected" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"/>
+                                </Menu>
+                                <Label Padding="2" Content="Window Text" Grid.Row="2" Grid.ColumnSpan="4" Panel.ZIndex="1" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+                                <TextBlock TextDecorations="Underline" Padding="2" Text="Hypertext link" Grid.Row="3" Grid.ColumnSpan="4" Panel.ZIndex="1" Foreground="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+                                <ScrollBar Grid.Column="1" Height="50" Panel.ZIndex="2" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Right" Grid.Row="2" Width="{DynamicResource {x:Static SystemParameters.ScrollWidth}}"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+
+
+                    <!-- MessageBox -->
+                    <Grid Width="250" Height="Auto" HorizontalAlignment="Left" Margin="22 5" VerticalAlignment="Bottom" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
+                        <Border Margin="{DynamicResource {x:Static SystemParameters.Border}}" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="7*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="{DynamicResource {x:Static SystemParameters.CaptionHeight}}"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <!--MessageBox Header-->
+                                <Grid Height="{DynamicResource {x:Static SystemParameters.CaptionHeightKey}}" VerticalAlignment="Top" Grid.ColumnSpan="2" >
+                                    <Grid.Background>
+                                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                            <GradientStop Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
+                                            <GradientStop Color="{DynamicResource {x:Static SystemColors.GradientActiveCaptionColorKey}}" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Grid.Background>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button Margin="1" HorizontalAlignment="Right" Style="{x:Null}" Content="r"  Grid.Column="1" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Width="{DynamicResource {x:Static SystemParameters.SmallWindowCaptionButtonHeightKey}}" FontFamily="Marlett" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}"/>
+                                    <Label Padding="1" Content="Message Box" FontFamily="{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}" FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" />
+
+                                </Grid>
+                                <!--MessageBox Message-->
+                                <Label Margin="0 0 0 25" VerticalAlignment="Bottom" Grid.Row="1" Grid.ColumnSpan="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">Message Text</Label>
+                                <Button Width="80" Height="22" VerticalAlignment="Bottom" Grid.Row="2" Grid.ColumnSpan="2" Margin="6">OK</Button>
+                                <Label Margin="0 -2 0 0" Grid.Column="1" Padding="1" Panel.ZIndex="100" Content="Tool Tip" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"/>
+
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+
+
+                </Grid>
+
+                <!-- Colors a Metrics  -->
+                <TabControl>
+                    <TabItem Header="Colors and Metrics" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
+                        <!-- obsah okna -->
+                        <StackPanel Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+
+                            <Grid Height="100" Margin="5 0 5 5" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="127*"/>
+                                    <ColumnDefinition Width="77*"/>
+                                    <ColumnDefinition Width="87*"/>
+                                    <ColumnDefinition Width="59*"/>
+                                    <ColumnDefinition Width="58*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="15"/>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="15"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Label Content="Item:" Padding="5 0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="0,0,0,35" Grid.RowSpan="2"/>
+                                <Label Content="Size:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0.333,35" Grid.RowSpan="2"/>
+                                <Label Content="Color1:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="87,0,0,35" Grid.RowSpan="2"/>
+                                <Label Content="Color2:" Padding="0" Grid.Column="4" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0,35" Grid.RowSpan="2"/>
+
+                                <ComboBox x:Name="comboBoxItems" Grid.Column="0" Grid.Row="1" Margin="5,5.333,5,0" Height="22" VerticalAlignment="Top" DropDownClosed="comboBoxItems_DropDownClosed" SelectionChanged="comboBoxItems_SelectionChanged" Grid.ColumnSpan="2"/>
+                                <Label Visibility="Hidden" x:Name="labelComboBoxItems" Content="aaaaa" Panel.ZIndex="10" Grid.Row="1" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2,2.333,2,2" MouseDown="labelComboBoxItems_MouseDown" Grid.ColumnSpan="2" PreviewTextInput="NumberValidationTextBox"/>
+                                <TextBox x:Name="textBoxItemSize" Grid.Column="2" Grid.Row="1" Margin="5,5.333,4.333,0" Height="22" VerticalAlignment="Top" InputScope="Number" MaxLines="1" MaxLength="2" TextChanged="textBoxItemSize_TextChanged" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+                                <Button x:Name="buttonItemColor1" Grid.Row="1" Padding="0" Margin="87,5.333,5,0" Grid.Column="2" Height="22" VerticalAlignment="Top" Click="buttonEditItemColor1_Click" Grid.ColumnSpan="2">
+                                    <Button x:Name="imageItemColor1" Padding="15 5" BorderThickness="2"/>
+                                </Button>
+                                <Button x:Name="buttonItemColor2" Grid.Row="1" Margin="0,5.333,5,0" Grid.Column="4" Height="22" VerticalAlignment="Top" Click="buttonEditItemColor2_Click">
+                                    <Button x:Name="imageItemColor2" Padding="15 5" BorderThickness="2"/>
+                                </Button>
+
+
+                                <Label Content="Font:" Padding="5 0" Grid.Row="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="0,0,0,35" Grid.RowSpan="2"/>
+                                <Label Content="Size:" Padding="0" Grid.Column="2" Grid.Row="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0.333,35" Grid.RowSpan="2"/>
+                                <Label Content="Color:" Padding="0" Grid.Column="2" Grid.Row="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="87,0,0,35" Grid.RowSpan="2"/>
+
+                                <ComboBox x:Name="comboBoxFonts" Grid.Column="0" Grid.Row="3" Margin="5,5.333,5,0" Height="22" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                                <ComboBox x:Name="comboBoxFontSize" Grid.Column="2" Grid.Row="3" Margin="5,5.333,5.333,0" Height="22" VerticalAlignment="Top" IsEditable="True" PreviewTextInput="NumberValidationTextBox">
+                                    <ComboBoxItem Content="6"/>
+                                    <ComboBoxItem Content="7"/>
+                                    <ComboBoxItem Content="8"/>
+                                    <ComboBoxItem Content="9"/>
+                                    <ComboBoxItem Content="10"/>
+                                    <ComboBoxItem Content="11"/>
+                                    <ComboBoxItem Content="12"/>
+                                    <ComboBoxItem Content="13"/>
+                                    <ComboBoxItem Content="14"/>
+                                    <ComboBoxItem Content="15"/>
+                                    <ComboBoxItem Content="16"/>
+                                </ComboBox>
+                                <Button x:Name="buttonFontColor" Padding="2" Grid.Row="3" Margin="87,5.333,5,0" Grid.Column="2" Height="22" VerticalAlignment="Top" Click="buttonEditFontColor_Click" Grid.ColumnSpan="2">
+                                    <Button x:Name="imageFontColor" Padding="15 5" BorderThickness="2"/>
+                                </Button>
+
+                                <ToggleButton x:Name="buttonFontBold" Content="B" Grid.Row="3" Margin="0,5.333,0,0" Width="22" Grid.Column="4" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold" Click="buttonFontBold_Click"/>
+                                <ToggleButton x:Name="buttonFontItalic" Content="I" Grid.Row="3" Margin="0,5.333,10,0" Width="22" Grid.Column="4" Height="22" VerticalAlignment="Top" HorizontalAlignment="Right" FontStyle="Italic" Click="buttonFontItalic_Click"/>
+
+                            </Grid>
+
+                        </StackPanel>
+                    </TabItem>
+
+                    <!-- Aero nastavenia -->
+                    <TabItem Header="Title Colors" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
+                        <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">Aero Color</Label>
+                            <Button x:Name="buttonAeroColor" Grid.Row="0" Margin="5" Grid.Column="2" Height="25" VerticalAlignment="Top" Click="buttonAeroColor_Click">
+                                <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2"/>
+                            </Button>
+                            <Label VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.Row="1">Color Opacity</Label>
+                            <Slider x:Name="sliderColorOpacity" Grid.Row="1" Grid.Column="1" Margin="3" Maximum="255" ValueChanged="sliderColorOpacity_ValueChanged"/>
+                            <TextBox IsEnabled="False" x:Name="textBoxColorOpacity" Grid.Row="1" Grid.Column="2" Margin="5 5" Text="" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
+                        </Grid>
+                    </TabItem>
+
+                    <!-- Nastavenia teemy -->
+                    <TabItem Header="Theme Settings" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
+                        <StackPanel Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+                            <Grid Margin="3 2 0 10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Padding="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">Theme Name</Label>
+                                <TextBox Margin="2" x:Name="textBoxThemeName" Grid.Column="1"/>
+                            </Grid>
+                            
+                            <CheckBox x:Name="checkBoxOverwriteThemeStyle" Grid.Row="1" Content="Overwrite theme style" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Click="CheckBoxOverwriteThemeStyle_Click" Checked="checkBoxOverwriteThemeStyle_Checked"/>
+                            <StackPanel x:Name="stackPanelAeroSettingsButtons"  Margin="2" HorizontalAlignment="Center" IsEnabled="false">
+                                <RadioButton Content="Aero (Windows default)" Margin="2" Click="ToggleButtonAero_Click"/>
+                                <RadioButton Content="Aero Lite (alternative, has window border, available in Windows 10 and 8.1)" Margin="2" Click="ToggleButtonAeroLite_Click"/>
+                                <RadioButton Content="High Contrast (more color options)" Margin="2" Click="ToggleButtonHighContrast_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </TabItem>
+                </TabControl>
+               
+            </StackPanel>
+        </Border>
+
+
+        <!-- buttony-->
+        <Grid Height="32" Margin="0 0 0 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" Margin="5" Content="OK" Click="Button_Click_1" Visibility="Hidden"/>
+            <Button Grid.Column="2" Margin="5" Content="Cancel" Click="Button_Click"/>
+            <Button Grid.Column="3" Margin="5" Content="Apply" Click="Button_Click_2"/>
+
+        </Grid>
+    </StackPanel>
+</Window>
