@@ -4,10 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdvancedWindowsAppearence"
-        xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared" x:Class="AdvancedWindowsAppearence.MainWindow"
+        x:Class="AdvancedWindowsAppearence.MainWindow"
         mc:Ignorable="d"
         Title="Advanced Appearance" Width="440" SizeToContent="Height" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="NoResize">
     <StackPanel>
+        
+        
         <Border Margin="5">
             <StackPanel>
                 <Grid Height="220" Background="{DynamicResource {x:Static SystemColors.DesktopBrushKey}}" Margin="10" Style="{x:Null}" OverridesDefaultStyle="True" FocusVisualStyle="{x:Null}">
@@ -135,72 +137,80 @@
                 <!-- Colors a Metrics  -->
                 <TabControl>
                     <TabItem Header="Colors and Metrics" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
-                        <!-- obsah okna -->
-                        <StackPanel Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
-
-                            <Grid Height="100" Margin="5 0 5 5" >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="127*"/>
-                                    <ColumnDefinition Width="77*"/>
-                                    <ColumnDefinition Width="87*"/>
-                                    <ColumnDefinition Width="59*"/>
-                                    <ColumnDefinition Width="58*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="15"/>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="15"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Label Content="Item:" Padding="5 0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="0,0,0,35" Grid.RowSpan="2"/>
-                                <Label Content="Size:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0.333,35" Grid.RowSpan="2"/>
-                                <Label Content="Color1:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="87,0,0,35" Grid.RowSpan="2"/>
-                                <Label Content="Color2:" Padding="0" Grid.Column="4" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0,35" Grid.RowSpan="2"/>
-
-                                <ComboBox x:Name="comboBoxItems" Grid.Column="0" Grid.Row="1" Margin="5,5.333,5,0" Height="22" VerticalAlignment="Top" DropDownClosed="comboBoxItems_DropDownClosed" SelectionChanged="comboBoxItems_SelectionChanged" Grid.ColumnSpan="2"/>
-                                <Label Visibility="Hidden" x:Name="labelComboBoxItems" Content="aaaaa" Panel.ZIndex="10" Grid.Row="1" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2,2.333,2,2" MouseDown="labelComboBoxItems_MouseDown" Grid.ColumnSpan="2" PreviewTextInput="NumberValidationTextBox"/>
-                                <TextBox x:Name="textBoxItemSize" Grid.Column="2" Grid.Row="1" Margin="5,5.333,4.333,0" Height="22" VerticalAlignment="Top" InputScope="Number" MaxLines="1" MaxLength="2" TextChanged="textBoxItemSize_TextChanged" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
-                                <Button x:Name="buttonItemColor1" Grid.Row="1" Padding="0" Margin="87,5.333,5,0" Grid.Column="2" Height="22" VerticalAlignment="Top" Click="buttonEditItemColor1_Click" Grid.ColumnSpan="2">
-                                    <Button x:Name="imageItemColor1" Padding="15 5" BorderThickness="2"/>
-                                </Button>
-                                <Button x:Name="buttonItemColor2" Grid.Row="1" Margin="0,5.333,5,0" Grid.Column="4" Height="22" VerticalAlignment="Top" Click="buttonEditItemColor2_Click">
-                                    <Button x:Name="imageItemColor2" Padding="15 5" BorderThickness="2"/>
-                                </Button>
-
-
-                                <Label Content="Font:" Padding="5 0" Grid.Row="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="0,0,0,35" Grid.RowSpan="2"/>
-                                <Label Content="Size:" Padding="0" Grid.Column="2" Grid.Row="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0.333,35" Grid.RowSpan="2"/>
-                                <Label Content="Color:" Padding="0" Grid.Column="2" Grid.Row="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="87,0,0,35" Grid.RowSpan="2"/>
-
-                                <ComboBox x:Name="comboBoxFonts" Grid.Column="0" Grid.Row="3" Margin="5,5.333,5,0" Height="22" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                                <ComboBox x:Name="comboBoxFontSize" Grid.Column="2" Grid.Row="3" Margin="5,5.333,5.333,0" Height="22" VerticalAlignment="Top" IsEditable="True" PreviewTextInput="NumberValidationTextBox">
-                                    <ComboBoxItem Content="6"/>
-                                    <ComboBoxItem Content="7"/>
-                                    <ComboBoxItem Content="8"/>
-                                    <ComboBoxItem Content="9"/>
-                                    <ComboBoxItem Content="10"/>
-                                    <ComboBoxItem Content="11"/>
-                                    <ComboBoxItem Content="12"/>
-                                    <ComboBoxItem Content="13"/>
-                                    <ComboBoxItem Content="14"/>
-                                    <ComboBoxItem Content="15"/>
-                                    <ComboBoxItem Content="16"/>
-                                </ComboBox>
-                                <Button x:Name="buttonFontColor" Padding="2" Grid.Row="3" Margin="87,5.333,5,0" Grid.Column="2" Height="22" VerticalAlignment="Top" Click="buttonEditFontColor_Click" Grid.ColumnSpan="2">
-                                    <Button x:Name="imageFontColor" Padding="15 5" BorderThickness="2"/>
-                                </Button>
-
-                                <ToggleButton x:Name="buttonFontBold" Content="B" Grid.Row="3" Margin="0,5.333,0,0" Width="22" Grid.Column="4" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold" Click="buttonFontBold_Click"/>
-                                <ToggleButton x:Name="buttonFontItalic" Content="I" Grid.Row="3" Margin="0,5.333,10,0" Width="22" Grid.Column="4" Height="22" VerticalAlignment="Top" HorizontalAlignment="Right" FontStyle="Italic" Click="buttonFontItalic_Click"/>
-
-                            </Grid>
-
-                        </StackPanel>
+                        <Grid Margin="5" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="127*"/>
+                                <ColumnDefinition Width="77*"/>
+                                <ColumnDefinition Width="87*"/>
+                                <ColumnDefinition Width="59*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Item:" Padding="5 0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="0,0,0,35" Grid.RowSpan="2"/>
+                            <Label Content="Size:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0,35" Grid.RowSpan="2"/>
+                            <Label Content="Color:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="87,0,0,35" Grid.RowSpan="2"/>
+                            
+                            <ComboBox x:Name="comboBoxItems" Grid.Column="0" Grid.Row="1" Margin="5,5.333,5,0" Height="22" VerticalAlignment="Top" DropDownClosed="comboBoxItems_DropDownClosed" SelectionChanged="comboBoxItems_SelectionChanged" Grid.ColumnSpan="2"/>
+                            <Label Visibility="Hidden" x:Name="labelComboBoxItems" Content="aaaaa" Panel.ZIndex="10" Grid.Row="1" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2,2.333,2,2" MouseDown="labelComboBoxItems_MouseDown" Grid.ColumnSpan="2" PreviewTextInput="NumberValidationTextBox"/>
+                            <TextBox x:Name="textBoxItemSize" Grid.Column="2" Grid.Row="1" Margin="5,5,5,0" Height="22" VerticalAlignment="Top" InputScope="Number" MaxLines="1" MaxLength="2" TextChanged="textBoxItemSize_TextChanged" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+                            <Button x:Name="buttonItemColor" Grid.Row="1" Padding="0" Margin="5,5,5,0" Grid.Column="3" Height="22" VerticalAlignment="Top" Click="buttonEditItemColor_Click" >
+                                <Button x:Name="imageItemColor" Padding="15 5" BorderThickness="2"/>
+                            </Button>
+                        </Grid>
                     </TabItem>
 
+                    
+                    <!-- Font Tab-->
+                    <TabItem Header="Fonts" >
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="110*"/>
+                                <ColumnDefinition Width="110*"/>
+                                <ColumnDefinition Width="87*"/>
+                                <ColumnDefinition Width="59*"/>
+                                <ColumnDefinition Width="58*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Item:" Padding="5 0" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0,35" Grid.RowSpan="2"/>
+                            <Label Content="Font:" Padding="5 0" Grid.Row="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.Column="1" HorizontalContentAlignment="Right" Margin="5 5 5 0" VerticalContentAlignment="Center" Grid.RowSpan="2"/>
+                            <Label Content="Size:" Padding="0" Grid.Column="2" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0.333,35" Grid.RowSpan="2"/>
+                            <Label Content="Color:" Padding="0" Grid.Column="2" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="87,0,0,35" Grid.RowSpan="2"/>
+
+                            <ComboBox x:Name="comboBoxFonts" Grid.Column="0" Grid.Row="1" Margin="5,5.333,5,0" Height="22" VerticalAlignment="Top" Grid.ColumnSpan="2" DropDownClosed="comboBoxFonts_DropDownClosed" SelectionChanged="comboBoxFonts_SelectionChanged"/>
+                            <ComboBox x:Name="comboBoxFont" Grid.Column="2" Grid.Row="2" Margin="5,5.333,5,0" Height="22" VerticalAlignment="Top" Grid.ColumnSpan="3" DropDownOpened="ComboBox_Disabled_DropDownOpened"  MouseEnter="ComboBox_Disabled_MouseEnter"/>
+                            <ComboBox x:Name="comboBoxFontSize" Grid.Column="2" Grid.Row="1" Margin="5,5.333,5.333,0" Height="22" VerticalAlignment="Top" IsEditable="True" PreviewTextInput="NumberValidationTextBox" DropDownOpened="ComboBox_Disabled_DropDownOpened" MouseEnter="ComboBox_Disabled_MouseEnter">
+                                <ComboBoxItem Content="6"/>
+                                <ComboBoxItem Content="7"/>
+                                <ComboBoxItem Content="8"/>
+                                <ComboBoxItem Content="9"/>
+                                <ComboBoxItem Content="10"/>
+                                <ComboBoxItem Content="11"/>
+                                <ComboBoxItem Content="12"/>
+                                <ComboBoxItem Content="13"/>
+                                <ComboBoxItem Content="14"/>
+                                <ComboBoxItem Content="15"/>
+                                <ComboBoxItem Content="16"/>
+                            </ComboBox>
+                            <Button x:Name="buttonFontColor" Padding="2" Grid.Row="1" Margin="87,5.333,5,0" Grid.Column="2" Height="22" VerticalAlignment="Top" Click="buttonEditFontColor_Click" Grid.ColumnSpan="2">
+                                <Button x:Name="imageFontColor" Padding="15 5" BorderThickness="2"/>
+                            </Button>
+
+                            <ToggleButton x:Name="buttonFontBold" Content="B" Grid.Row="1" Margin="0,5.333,0,0" Width="22" Grid.Column="4" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold" Click="buttonFontBold_Click"/>
+                            <ToggleButton x:Name="buttonFontItalic" Content="I" Grid.Row="1" Margin="0,5.333,10,0" Width="22" Grid.Column="4" Height="22" VerticalAlignment="Top" HorizontalAlignment="Right" FontStyle="Italic" Click="buttonFontItalic_Click"/>
+
+                        </Grid>
+                    </TabItem>
+                    
+                    
                     <!-- Aero nastavenia -->
                     <TabItem Header="Title Colors" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
-                        <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+                        <Grid Margin="5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="2*"/>
@@ -222,8 +232,8 @@
 
                     <!-- Nastavenia teemy -->
                     <TabItem Header="Theme Settings" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
-                        <StackPanel Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
-                            <Grid Margin="3 2 0 10">
+                        <StackPanel>
+                            <Grid Margin="5">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
@@ -231,8 +241,8 @@
                                 <Label Padding="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">Theme Name</Label>
                                 <TextBox Margin="2" x:Name="textBoxThemeName" Grid.Column="1"/>
                             </Grid>
-                            
-                            <CheckBox x:Name="checkBoxOverwriteThemeStyle" Grid.Row="1" Content="Overwrite theme style" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Click="CheckBoxOverwriteThemeStyle_Click" Checked="checkBoxOverwriteThemeStyle_Checked"/>
+
+                            <CheckBox Margin="5 0 5 -1" x:Name="checkBoxOverwriteThemeStyle" Grid.Row="1" Content="Overwrite theme style" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Click="CheckBoxOverwriteThemeStyle_Click" Checked="checkBoxOverwriteThemeStyle_Checked"/>
                             <StackPanel x:Name="stackPanelAeroSettingsButtons"  Margin="2" HorizontalAlignment="Center" IsEnabled="false">
                                 <RadioButton Content="Aero (Windows default)" Margin="2" Click="ToggleButtonAero_Click"/>
                                 <RadioButton Content="Aero Lite (alternative, has window border, available in Windows 10 and 8.1)" Margin="2" Click="ToggleButtonAeroLite_Click"/>
@@ -240,9 +250,7 @@
                             </StackPanel>
                         </StackPanel>
                     </TabItem>
-                    <TabItem Header="aaaaaaa">
-                        
-                    </TabItem>
+                    
                 </TabControl>
                
             </StackPanel>
@@ -257,7 +265,6 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Margin="5" Content="OK" Click="Button_Click_1" Visibility="Hidden"/>
             <Button Grid.Column="2" Margin="5" Content="Cancel" Click="Button_Click"/>
             <Button Grid.Column="3" Margin="5" Content="Apply" Click="Button_Click_2"/>
 

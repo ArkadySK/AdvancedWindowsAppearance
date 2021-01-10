@@ -66,15 +66,18 @@ namespace AdvancedWindowsAppearence
 
         }
 
-        public ThemeSettings(string displayName, Color colorizationColor, string aeroStyle, string wallpaperPath, AppearanceSetting[] appearanceSettings)
+        public ThemeSettings(string displayName, Color colorizationColor, string aeroStyle, string wallpaperPath, AppearanceSetting[] itemSettings, AppearanceSetting[] fontSettings)
         {
 
             List<ColorSetting> changedColorSettings = new List<ColorSetting>();
+            var aa = itemSettings.ToList();
+            aa.AddRange(fontSettings);
 
+            AppearanceSetting[] appearanceSettings = aa.ToArray();
             string themePath = GetThemePath();
             string[] themeSettingsIni = GetThemeFile(themePath);
             List<string> newThemeSettingsIni = themeSettingsIni.ToList();
-            List<string> newColorsIni = new List<string>();
+
             int i = 0;
             int ColorIdIndex = -1; ///nech ho to bugne xd
             string colorsId = @"[Control Panel\Colors]";
@@ -102,27 +105,22 @@ namespace AdvancedWindowsAppearence
             foreach (var s in appearanceSettings)
             {
                 if (s == null) continue;
+                if (!s.IsEdited) continue;
 
-                if (s.Color1Value != null)
+                if (s.ItemColor != null)
                 {
                     ColorSetting cs = new ColorSetting();
                     cs.IsFoundInTheme = false;
-                    cs.Value = s.Color1RegeditPath + "=" + s.Color1Value;
-                    cs.RegeditName = s.Color1RegeditPath;
+                    s.ConvertColorValuesToRegedit();
+                    cs.Value = s.ItemColorRegeditPath + "=" + s.ItemColorValue;
+                    cs.RegeditName = s.ItemColorRegeditPath;
                     changedColorSettings.Add(cs);
                 }
-                if (s.Color2Value != null)
+                if (s.FontColor != null)
                 {
                     ColorSetting cs = new ColorSetting();
                     cs.IsFoundInTheme = false;
-                    cs.Value = s.Color2RegeditPath + "=" + s.Color2Value;
-                    cs.RegeditName = s.Color2RegeditPath;
-                    changedColorSettings.Add(cs);
-                }
-                if (s.FontColorValue != null)
-                {
-                    ColorSetting cs = new ColorSetting();
-                    cs.IsFoundInTheme = false;
+                    s.ConvertColorValuesToRegedit();
                     cs.Value = s.FontColorRegeditPath + "=" + s.FontColorValue;
                     cs.RegeditName = s.FontColorRegeditPath;
                     changedColorSettings.Add(cs);
@@ -162,12 +160,6 @@ namespace AdvancedWindowsAppearence
 
 
             #endregion
-
-            /*
-            foreach (var c in changedColorSettings)
-            {
-                newThemeSettingsIni.Add(c.Value);
-            }*/
 
             string newTheme = "";
             foreach (string l in newThemeSettingsIni)

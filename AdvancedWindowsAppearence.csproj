@@ -41,9 +41,9 @@
     <Reference Include="ActiproSoftware.Shared.Wpf, Version=20.1.0.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL">
       <HintPath>packages\ActiproSoftware.Controls.WPF.Shared.20.1.0\lib\net40\ActiproSoftware.Shared.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="ActiproSoftware.Themes.Aero.Wpf, Version=20.1.0.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL">
-      <HintPath>packages\ActiproSoftware.Controls.WPF.Themes.Aero.20.1.0\lib\net40\ActiproSoftware.Themes.Aero.Wpf.dll</HintPath>
-    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationFramework.Classic" />
+    <Reference Include="PresentationFramework.Luna" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -61,7 +61,6 @@
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

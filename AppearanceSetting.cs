@@ -19,43 +19,54 @@ namespace AdvancedWindowsAppearence
         public float? Size;
         readonly string SizeRegeditPath;
         readonly string FontRegeditPath;
-        public readonly string Color1RegeditPath;
-        public readonly string Color2RegeditPath;
-        readonly string AeroColor1RegeditPath; //weirdo kod
-        readonly string AeroColor2RegeditPath; //eeeeee eee
+        public readonly string ItemColorRegeditPath;
+        readonly string AeroColorRegeditPath; //weirdo kod
         public readonly string FontColorRegeditPath;
         string WallpaperPath;
-
+        string Type;
         public Color? FontColor;
         public string FontColorValue;
-        public Color? Color1;
-        public string Color1Value;
-        public Color? Color2;
-        public string Color2Value;
+        public Color? ItemColor;
+        public string ItemColorValue;
 
-        readonly bool IsAeroColor;
-
-        public AppearanceSetting(string _name, string _sizeRegeditPath, string _fontRegedithPath, string _fontColorRegeditPath, string _color1RegeditPath, string _color2RegeditPath)
+        public AppearanceSetting(string _name, string _sizeRegeditPath, string _fontRegedithPath, string _fontColorRegeditPath, string _colorRegeditPath, string _color2RegeditPath)
         {
             Name = _name;
             FontRegeditPath = _fontRegedithPath;
             FontColorRegeditPath = _fontColorRegeditPath;
             SizeRegeditPath = _sizeRegeditPath;
-            Color1RegeditPath = _color1RegeditPath;
-            Color2RegeditPath = _color2RegeditPath;
-            IsAeroColor = false;
+            ItemColorRegeditPath = _colorRegeditPath;
+            LoadColorValues();
+        }
+
+        public AppearanceSetting(string _name, string _regeditPath, string _colorRegeditPath, string _type)
+        {
+            Name = _name;
+            Type = _type;
+            switch (Type)
+            {
+                case "Item":
+                    {
+                        SizeRegeditPath = _regeditPath;
+                        ItemColorRegeditPath = _colorRegeditPath;
+                        break;
+                    }
+                case "Font":
+                    {
+                        FontRegeditPath = _regeditPath;
+                        FontColorRegeditPath = _colorRegeditPath;
+                        break;
+                    }
+            }
             LoadColorValues();
         }
 
         public AppearanceSetting(string _name, string _aeroColor1RegeditPath, string _aeroColor2RegeditPath)
         {
             Name = _name;
-            AeroColor1RegeditPath = _aeroColor1RegeditPath;
-            AeroColor2RegeditPath = _aeroColor2RegeditPath;
-
-            Color1 = GetAeroColorFromRegedit(AeroColor1RegeditPath);
-            Color2 = GetAeroColorFromRegedit(AeroColor2RegeditPath);
-            IsAeroColor = true;
+            AeroColorRegeditPath = _aeroColor1RegeditPath;          
+            ItemColor = GetAeroColorFromRegedit(AeroColorRegeditPath);
+            Type = "AeroColor";
         }
 
         public AppearanceSetting(string _name, string _wallpaperPath) //wallpaper
@@ -66,6 +77,7 @@ namespace AdvancedWindowsAppearence
             {
                 WallpaperPath = GetWallpaperPath();
             }
+            Type = "Wallpaper";
         }
 
         public string GetWallpaperPath()
@@ -84,10 +96,8 @@ namespace AdvancedWindowsAppearence
         {
             Font = GetFontFromRegedit(FontRegeditPath);
             Size = GetSizeFromRegedit(SizeRegeditPath);
-            Color1 = GetColorFromRegedit(Color1RegeditPath);
-            Color2 = GetColorFromRegedit(Color2RegeditPath);
+            ItemColor = GetColorFromRegedit(ItemColorRegeditPath);
             FontColor = GetColorFromRegedit(FontColorRegeditPath);
-
         }
 
 
@@ -121,16 +131,12 @@ namespace AdvancedWindowsAppearence
         public void ConvertColorValuesToRegedit()
         {
 
-            if (!IsAeroColor)
+            if (Type!="AeroColor")
             {
 
-                if (Color1.HasValue)
+                if (ItemColor.HasValue)
                 {
-                    Color1Value = Color_ToRegeditFormat(Color1.Value);
-                }
-                if (Color2.HasValue)
-                {
-                    Color2Value = Color_ToRegeditFormat(Color2.Value);
+                    ItemColorValue = Color_ToRegeditFormat(ItemColor.Value);
                 }
                 if (FontColor.HasValue)
                 {
@@ -142,7 +148,7 @@ namespace AdvancedWindowsAppearence
         public void SaveColorsToRegedit()
         {
 
-            if (!IsAeroColor)
+            if (Type != "AeroColor")
             {
                 RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Colors", true);
                 if (key == null)
@@ -150,14 +156,11 @@ namespace AdvancedWindowsAppearence
                     Registry.CurrentUser.CreateSubKey(@"Control Panel\Colors");
                 }
 
-                if (Color1.HasValue)
+                if (ItemColor.HasValue)
                 {
-                    key.SetValue(Color1RegeditPath, Color1Value, RegistryValueKind.String);
+                    key.SetValue(ItemColorRegeditPath, ItemColorValue, RegistryValueKind.String);
                 }
-                if (Color2.HasValue)
-                {
-                    key.SetValue(Color2RegeditPath, Color1Value, RegistryValueKind.String);
-                }
+               
                 if (FontColor.HasValue)
                 {
                     key.SetValue(FontColorRegeditPath, FontColorValue, RegistryValueKind.String);
@@ -233,7 +236,7 @@ namespace AdvancedWindowsAppearence
         Font GetFontFromRegedit(string regeditpath)
         {
             Font regeditFont;
-            if (regeditpath == "") return null;
+            if (regeditpath == null || regeditpath == "") return null;
 
             RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(@"Control Panel\Desktop\WindowMetrics");
             byte[] fonttemp = (byte[])registryKey.GetValue(regeditpath);          
@@ -263,7 +266,7 @@ namespace AdvancedWindowsAppearence
 
         int? GetSizeFromRegedit(string regeditpath)
         {
-            if (regeditpath == "") return null;
+            if (regeditpath == null || regeditpath == "") return null;
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics");
             if (registryKey == null) return null;
             int intsize = int.Parse(registryKey.GetValue(regeditpath).ToString());
@@ -275,7 +278,7 @@ namespace AdvancedWindowsAppearence
 
         Color? GetColorFromRegedit(string regeditpath)
         {
-            if (regeditpath == "") return null;
+            if (regeditpath == null || regeditpath == "") return null;
             Color color = new Color();
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Colors");
             if (registryKey == null) return null;
@@ -288,7 +291,8 @@ namespace AdvancedWindowsAppearence
 
         Color? GetAeroColorFromRegedit(string regeditpath)
         {
-            if (regeditpath == "") return null;
+            if (regeditpath == null || regeditpath == "") return null;
+
             Color color = new Color();
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\DWM");
             if (registryKey == null) return null;
