@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:AdvancedWindowsAppearence"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <Style x:Key="SystemButton"  TargetType="Button">
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

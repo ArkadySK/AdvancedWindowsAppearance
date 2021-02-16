@@ -13,7 +13,7 @@ namespace AdvancedWindowsAppearence
     {
         public struct ColorSetting
         {
-            public string RegeditName { get; set; }
+            public string RegistryName { get; set; }
             public string Value { get; set; }
             public bool IsFoundInTheme{get; set; }
         }
@@ -28,7 +28,6 @@ namespace AdvancedWindowsAppearence
 
             Registry.SetValue(RegistryKey, "ThemeChangesDesktopIcons", 1);
             Registry.SetValue(RegistryKey, "ThemeChangesMousePointers", 1);*/
-            //theme = theme.Split('\\').Last().Split('.').First().ToString();
             return themepath;
         }
 
@@ -51,7 +50,7 @@ namespace AdvancedWindowsAppearence
         {
             Process process = new Process();
             ProcessStartInfo startInfo = new ProcessStartInfo();
-            //startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             string arg = @"C:\WINDOWS\system32\themecpl.dll,OpenThemeAction " + themePath;
             startInfo.FileName = @"C:\WINDOWS\system32\rundll32.exe";
             startInfo.Arguments = arg;
@@ -111,18 +110,18 @@ namespace AdvancedWindowsAppearence
                 {
                     ColorSetting cs = new ColorSetting();
                     cs.IsFoundInTheme = false;
-                    s.ConvertColorValuesToRegedit();
-                    cs.Value = s.ItemColorRegeditPath + "=" + s.ItemColorValue;
-                    cs.RegeditName = s.ItemColorRegeditPath;
+                    s.ConvertColorValuesToRegistry();
+                    cs.Value = s.ItemColorRegistryPath + "=" + s.ItemColorValue;
+                    cs.RegistryName = s.ItemColorRegistryPath;
                     changedColorSettings.Add(cs);
                 }
                 if (s.FontColor != null)
                 {
                     ColorSetting cs = new ColorSetting();
                     cs.IsFoundInTheme = false;
-                    s.ConvertColorValuesToRegedit();
-                    cs.Value = s.FontColorRegeditPath + "=" + s.FontColorValue;
-                    cs.RegeditName = s.FontColorRegeditPath;
+                    s.ConvertColorValuesToRegistry();
+                    cs.Value = s.FontColorRegistryPath + "=" + s.FontColorValue;
+                    cs.RegistryName = s.FontColorRegistryPath;
                     changedColorSettings.Add(cs);
                 }
             }
@@ -136,11 +135,11 @@ namespace AdvancedWindowsAppearence
                 int y = 0;
                 foreach (string l in themeSettingsIni)
                 {
-                    if (l.Contains(changedColorSettings[index].RegeditName+"="))
+                    if (l.Contains(changedColorSettings[index].RegistryName+"="))
                     {
                         ColorSetting colorSetting = new ColorSetting();
                         colorSetting.IsFoundInTheme = true;
-                        colorSetting.RegeditName= changedColorSettings[index].RegeditName;
+                        colorSetting.RegistryName= changedColorSettings[index].RegistryName;
                         colorSetting.Value = changedColorSettings[index].Value;
                         changedColorSettings[index] = colorSetting;
                         newThemeSettingsIni[y] = changedColorSettings[index].Value;
@@ -179,6 +178,13 @@ namespace AdvancedWindowsAppearence
             SaveTheme(newThemePath, newTheme);
             ///nacitanie temy
             LoadNewTheme(newThemePath);
+
+            //nacitanie fontov
+            foreach(var f in fontSettings)
+            {
+                if (f != null)
+                    f.SaveFontToRegistry();
+            }
         }
     }
 }

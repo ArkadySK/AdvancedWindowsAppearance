@@ -14,32 +14,34 @@ namespace AdvancedWindowsAppearence
         public bool IsEdited;
         public Font Font;
         public bool Font_isBold;
-        public bool Font_isItalic;      
+        public bool Font_isItalic;
         public string Name;
+        public int FontSize;
         public float? Size;
-        readonly string SizeRegeditPath;
-        readonly string FontRegeditPath;
-        public readonly string ItemColorRegeditPath;
-        readonly string AeroColorRegeditPath; //weirdo kod
-        public readonly string FontColorRegeditPath;
+        readonly string SizeRegistryPath;
+        readonly string FontRegistryPath;
+        public readonly string ItemColorRegistryPath;
+        readonly string AeroColorRegistryPath; //weirdo kod
+        public readonly string FontColorRegistryPath;
         string WallpaperPath;
         string Type;
         public Color? FontColor;
         public string FontColorValue;
         public Color? ItemColor;
         public string ItemColorValue;
+        readonly int fontNameStartIndex = 28; //odtialto zacina string (nazov fontu) vramci jedneko keyu v registri
 
-        public AppearanceSetting(string _name, string _sizeRegeditPath, string _fontRegedithPath, string _fontColorRegeditPath, string _colorRegeditPath, string _color2RegeditPath)
+        public AppearanceSetting(string _name, string _sizeRegistryPath, string _fontRegistryhPath, string _fontColorRegistryPath, string _colorRegistryPath, string _color2RegistryPath)
         {
             Name = _name;
-            FontRegeditPath = _fontRegedithPath;
-            FontColorRegeditPath = _fontColorRegeditPath;
-            SizeRegeditPath = _sizeRegeditPath;
-            ItemColorRegeditPath = _colorRegeditPath;
+            FontRegistryPath = _fontRegistryhPath;
+            FontColorRegistryPath = _fontColorRegistryPath;
+            SizeRegistryPath = _sizeRegistryPath;
+            ItemColorRegistryPath = _colorRegistryPath;
             LoadColorValues();
         }
 
-        public AppearanceSetting(string _name, string _regeditPath, string _colorRegeditPath, string _type)
+        public AppearanceSetting(string _name, string _regeditPath, string _colorRegistryPath, string _type)
         {
             Name = _name;
             Type = _type;
@@ -47,25 +49,26 @@ namespace AdvancedWindowsAppearence
             {
                 case "Item":
                     {
-                        SizeRegeditPath = _regeditPath;
-                        ItemColorRegeditPath = _colorRegeditPath;
+                        SizeRegistryPath = _regeditPath;
+                        ItemColorRegistryPath = _colorRegistryPath;
                         break;
                     }
                 case "Font":
                     {
-                        FontRegeditPath = _regeditPath;
-                        FontColorRegeditPath = _colorRegeditPath;
+                        FontRegistryPath = _regeditPath;
+                        FontColorRegistryPath = _colorRegistryPath;
                         break;
                     }
             }
             LoadColorValues();
         }
 
-        public AppearanceSetting(string _name, string _aeroColor1RegeditPath, string _aeroColor2RegeditPath)
+        public AppearanceSetting(string _name, string _aeroColor1RegistryPath, string _aeroColor2RegistryPath)
         {
             Name = _name;
-            AeroColorRegeditPath = _aeroColor1RegeditPath;          
-            ItemColor = GetAeroColorFromRegedit(AeroColorRegeditPath);
+            AeroColorRegistryPath = _aeroColor1RegistryPath;
+            DWMSetting dWM = new DWMSetting();
+            ItemColor = dWM.GetAeroColorFromRegistry(AeroColorRegistryPath);
             Type = "AeroColor";
         }
 
@@ -94,96 +97,39 @@ namespace AdvancedWindowsAppearence
 
         void LoadColorValues()
         {
-            Font = GetFontFromRegedit(FontRegeditPath);
-            Size = GetSizeFromRegedit(SizeRegeditPath);
-            ItemColor = GetColorFromRegedit(ItemColorRegeditPath);
-            FontColor = GetColorFromRegedit(FontColorRegeditPath);
+            Font = GetFontFromRegistry(FontRegistryPath);
+            Size = GetSizeFromRegistry(SizeRegistryPath);
+            ItemColor = GetColorFromRegistry(ItemColorRegistryPath);
+            FontColor = GetColorFromRegistry(FontColorRegistryPath);
         }
 
 
-        public void SaveFontToRegedit() /// to do: fixni font 
+        string Color_ToRegistryFormat(Color color)
         {
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics");
-            byte[] regeditval = (byte[])key.GetValue(FontRegeditPath);
-            key.Close();
-            //key.Dispose();
-
-            if (Font_isBold)
-                regeditval[17] = 02;
-            else
-                regeditval[17] = 01;
-
-            if (Font_isItalic)
-                regeditval[20] = 01;
-            else
-                regeditval[20] = 00;
-
-            RegistryKey newKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics", true);
-            newKey.SetValue(FontRegeditPath, regeditval, RegistryValueKind.Binary);
-            newKey.Close();
+            return color.R + " " + color.G + " " + color.B;
         }
 
-        string Color_ToRegeditFormat(Color color)
-        {
-           return color.R + " " + color.G + " " + color.B;
-        }
-
-        public void ConvertColorValuesToRegedit()
-        {
-
-            if (Type!="AeroColor")
-            {
-
-                if (ItemColor.HasValue)
-                {
-                    ItemColorValue = Color_ToRegeditFormat(ItemColor.Value);
-                }
-                if (FontColor.HasValue)
-                {
-                    FontColorValue = Color_ToRegeditFormat(FontColor.Value);
-                }
-            }
-        }
-
-        public void SaveColorsToRegedit()
+        public void ConvertColorValuesToRegistry()
         {
 
             if (Type != "AeroColor")
             {
-                RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Colors", true);
-                if (key == null)
-                {
-                    Registry.CurrentUser.CreateSubKey(@"Control Panel\Colors");
-                }
 
                 if (ItemColor.HasValue)
                 {
-                    key.SetValue(ItemColorRegeditPath, ItemColorValue, RegistryValueKind.String);
+                    ItemColorValue = Color_ToRegistryFormat(ItemColor.Value);
                 }
-               
                 if (FontColor.HasValue)
                 {
-                    key.SetValue(FontColorRegeditPath, FontColorValue, RegistryValueKind.String);
+                    FontColorValue = Color_ToRegistryFormat(FontColor.Value);
                 }
-
-                key.Close();
             }
         }
-
-        public void SaveSizeToRegedit()
+       
+        public void ChangeFontName(string name)
         {
-            if (!Size.HasValue) return;
-
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics", true);
-            float sizeTemp = -15;
-
-            if (SizeRegeditPath == "Shell Icon Size")
-                sizeTemp = Size.Value;
-            else
-                sizeTemp = -15 * Size.Value;
-
-            key.SetValue(SizeRegeditPath, sizeTemp, RegistryValueKind.String);
-            key.Close();
+            this.Font = FindFontFromString(name);
+            IsEdited = true;
         }
 
         public void ChangeFontBoldness(bool isBold) //fixni aby to nebolo hneď (až po Apply)
@@ -196,7 +142,7 @@ namespace AdvancedWindowsAppearence
         {
             Font_isItalic = isItalic;
             IsEdited = true;
-            
+
         }
 
         public void ChangeSize(float size)
@@ -209,9 +155,9 @@ namespace AdvancedWindowsAppearence
         {
             List<Font> fonts = new List<Font>();
 
-            foreach (FontFamily font in FontFamily.Families)
+            foreach (FontFamily fontfamily in FontFamily.Families)
             {
-                Font f = new Font(font, 666); //fixni to potom na deviatku
+                Font f = new Font(fontfamily, 9);
                 fonts.Add(f);
 
             }
@@ -233,20 +179,30 @@ namespace AdvancedWindowsAppearence
         }
 
 
-        Font GetFontFromRegedit(string regeditpath)
+
+        Font GetFontFromRegistry(string regeditpath)
         {
             Font regeditFont;
             if (regeditpath == null || regeditpath == "") return null;
 
             RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(@"Control Panel\Desktop\WindowMetrics");
-            byte[] fonttemp = (byte[])registryKey.GetValue(regeditpath);          
-            string fontstring = Encoding.Unicode.GetString(fonttemp, 0, fonttemp.Count());
+
+            byte[] fonttemp = (byte[])registryKey.GetValue(regeditpath);
+            List<byte> fontNametemp = new List<byte>();
+            int i = 0;
+            foreach (byte b in fonttemp)
+            {
+                Console.Write(b + ", ");
+                if (i >= fontNameStartIndex && b != 0)
+                {
+                    fontNametemp.Add(b);
+                }
+                i++;
+            }
+            string fontstring = Encoding.ASCII.GetString(fontNametemp.ToArray());
             registryKey.Close();
 
-            regeditFont = FindFontFromString(fontstring);
-            fontstring = fontstring.Replace(regeditFont.Name, "");
-            fontstring = fontstring.Replace(fontstring[0].ToString(), "");
-            fontstring = fontstring.Replace("?", "");
+            regeditFont = FindFontFromString(fontstring);        
 
             Console.WriteLine(fontstring);
             if (fonttemp[17] == 02)
@@ -257,60 +213,122 @@ namespace AdvancedWindowsAppearence
             {
                 Font_isItalic = true;
             }
-            /*MemoryStream memoryStream = new MemoryStream(regeditval);
-            BinaryReader binaryReader = new BinaryReader(memoryStream);
-            Console.WriteLine(binaryReader.ReadInt32());
-            Console.WriteLine(binaryReader.ReadChars(regeditval.Count()));*/
-            return regeditFont;
-        } 
+            int sizetemp = (int)fonttemp[0];
+            Console.WriteLine(sizetemp);
+            this.FontSize = (256 - sizetemp) / 2;
 
-        int? GetSizeFromRegedit(string regeditpath)
+            return regeditFont;
+        }
+
+        int? GetSizeFromRegistry(string regeditpath)
         {
             if (regeditpath == null || regeditpath == "") return null;
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics");
             if (registryKey == null) return null;
-            int intsize = int.Parse(registryKey.GetValue(regeditpath).ToString());
-            if(regeditpath != "Shell Icon Size")
-                intsize = intsize / (-15);
+
+            var sizeReg = registryKey.GetValue(regeditpath);
             registryKey.Close();
+            if (sizeReg == null) return null;
+
+            int intsize = int.Parse(sizeReg.ToString());
+            if (regeditpath != "Shell Icon Size")
+                intsize = intsize / (-15);
+
             return intsize;
         }
 
-        Color? GetColorFromRegedit(string regeditpath)
+        Color? GetColorFromRegistry(string regeditpath)
         {
             if (regeditpath == null || regeditpath == "") return null;
             Color color = new Color();
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Colors");
             if (registryKey == null) return null;
-            var colorReg = registryKey.GetValue(regeditpath).ToString().Split(' ');
+
+            var colorReg = registryKey.GetValue(regeditpath);
             registryKey.Close();
-            color = Color.FromArgb(int.Parse(colorReg[0]), int.Parse(colorReg[1]), int.Parse(colorReg[2]));
+            if (colorReg == null) return null;
+
+            var colorRegString = colorReg.ToString().Split(' ');
+            color = Color.FromArgb(int.Parse(colorRegString[0]), int.Parse(colorRegString[1]), int.Parse(colorRegString[2]));
 
             return color;
         }
 
-        Color? GetAeroColorFromRegedit(string regeditpath)
+        public void SaveFontToRegistry() /// to do: fixni font 
         {
-            if (regeditpath == null || regeditpath == "") return null;
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics");
+            List<byte> regeditValBytes = ((byte[])key.GetValue(FontRegistryPath)).ToList();
+            key.Close();
 
-            Color color = new Color();
-            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\DWM");
-            if (registryKey == null) return null;
+            if (Font_isBold)
+                regeditValBytes[17] = 2;
+            else
+                regeditValBytes[17] = 1;
 
-            var colorReg = registryKey.GetValue(regeditpath, null);
-            if (colorReg == null) return Color.Silver;
-            registryKey.Close();
-            try
+            if (Font_isItalic)
+                regeditValBytes[20] = 1;
+            else
+                regeditValBytes[20] = 0;
+            regeditValBytes.RemoveRange(fontNameStartIndex, regeditValBytes.Count - fontNameStartIndex);
+
+            byte fontsizetemp = (byte)(256 - 2 * this.FontSize);
+            regeditValBytes[0] = fontsizetemp;
+
+            List<byte> fontNameBytes = new List<byte>();
+            foreach (char c in this.Font.Name)
             {
-                color = (Color)(new ColorConverter()).ConvertFromInvariantString(colorReg.ToString());
+                byte b = (byte)c;
+                fontNameBytes.Add(b);
+                fontNameBytes.Add(0);
             }
-            catch
-            {
-                return null;
-            }
-            
 
-            return color;
+            List<byte> newRegistryValBytes = regeditValBytes;
+            newRegistryValBytes.AddRange(fontNameBytes);
+            RegistryKey newKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics", true);
+            newKey.SetValue(FontRegistryPath, newRegistryValBytes.ToArray(), RegistryValueKind.Binary);
+            newKey.Close();
+        }
+
+
+        public void SaveColorsToRegistry()
+        {
+
+            if (Type != "AeroColor")
+            {
+                RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Colors", true);
+                if (key == null)
+                {
+                    Registry.CurrentUser.CreateSubKey(@"Control Panel\Colors");
+                }
+
+                if (ItemColor.HasValue)
+                {
+                    key.SetValue(ItemColorRegistryPath, ItemColorValue, RegistryValueKind.String);
+                }
+
+                if (FontColor.HasValue)
+                {
+                    key.SetValue(FontColorRegistryPath, FontColorValue, RegistryValueKind.String);
+                }
+
+                key.Close();
+            }
+        }
+
+        public void SaveSizeToRegistry()
+        {
+            if (!Size.HasValue) return;
+
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics", true);
+            float sizeTemp = -15;
+
+            if (SizeRegistryPath == "Shell Icon Size")
+                sizeTemp = Size.Value;
+            else
+                sizeTemp = -15 * Size.Value;
+
+            key.SetValue(SizeRegistryPath, sizeTemp, RegistryValueKind.String);
+            key.Close();
         }
     }
 }

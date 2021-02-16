@@ -23,7 +23,7 @@ namespace AdvancedWindowsAppearence
     public partial class MainWindow : Window
     {
 
-        AppearanceSetting[] itemSettings = new AppearanceSetting[28];
+        AppearanceSetting[] itemSettings = new AppearanceSetting[32];
         AppearanceSetting[] fontSettings = new AppearanceSetting[5];
         AppearanceSetting AeroColors = new AppearanceSetting("Aero Colors", "ColorizationColor", "ColorizationColorInactive");
 
@@ -70,22 +70,22 @@ namespace AdvancedWindowsAppearence
             
             comboBoxItems.Items.Clear();
 
-            // chyba: ButtonDkShadow, ButtonAlternateFace, MenuBar
+            // chyba: GrayText
 
-            
+
             itemSettings[0] = new AppearanceSetting("Active Title Color 1", "", "ActiveTitle", "Item");
             itemSettings[1] = new AppearanceSetting("Active Title Color 2", "", "GradientActiveTitle", "Item");
             itemSettings[2] = new AppearanceSetting("Active Title Text", "", "TitleText", "Item");
             itemSettings[3] = new AppearanceSetting("Active Window Border", "", "ActiveBorder", "Item");
             itemSettings[4] = new AppearanceSetting("Application Background", "", "AppWorkspace", "Item");
-            itemSettings[5] = new AppearanceSetting("Button Face", "", "ButtonFace", "Item");
+            itemSettings[5] = new AppearanceSetting("Button Face / 3D Objects", "", "ButtonFace", "Item");
             itemSettings[6] = new AppearanceSetting("Button Light", "", "ButtonLight", "Item");
             itemSettings[7] = new AppearanceSetting("Button Shadow", "", "ButtonShadow", "Item");
             itemSettings[8] = new AppearanceSetting("Caption Buttons Height", "CaptionHeight", "", "Item");
             itemSettings[9] = new AppearanceSetting("Desktop", "", "Background", "Item");
             itemSettings[10] = new AppearanceSetting("Hilight", "", "Hilight", "Item");
             itemSettings[11] = new AppearanceSetting("Hilighted Text", "", "HilightText", "Item");
-            itemSettings[12] = new AppearanceSetting("Hypertext link", "", "HotTrackingColor", "Item");
+            itemSettings[12] = new AppearanceSetting("Hypertext link / Hilight (Fill)", "", "HotTrackingColor", "Item");
             itemSettings[13] = new AppearanceSetting("Icon Size", "Shell Icon Size", "", "Item");
             itemSettings[14] = new AppearanceSetting("Icon Horizontal Spacing", "IconSpacing", "", "Item");
             itemSettings[15] = new AppearanceSetting("Icon Vertical Spacing", "IconVerticalSpacing", "", "Item");
@@ -101,13 +101,31 @@ namespace AdvancedWindowsAppearence
             itemSettings[25] = new AppearanceSetting("Window Border Width", "BorderWidth", "", "Item");
             itemSettings[26] = new AppearanceSetting("Window Padded Border", "PaddedBorderWidth", "WindowFrame", "Item");
             itemSettings[27] = new AppearanceSetting("Window Text Color", "", "WindowText", "Item");
+            itemSettings[28] = new AppearanceSetting("ButtonAlternateFace", "", "ButtonAlternateFace", "Item");
+            itemSettings[29] = new AppearanceSetting("ButtonDkShadow", "", "ButtonDkShadow", "Item");
+            itemSettings[30] = new AppearanceSetting("Gray Text", "fff", "eee", "Item");
+            itemSettings[31] = new AppearanceSetting("Button Text Color", "", "ButtonText", "Item");
+            
 
 
 
-            foreach (var a in itemSettings)
+
+            foreach (var s in itemSettings)
             {
-                if (a != null)
-                    comboBoxItems.Items.Add(a.Name);
+                
+                ComboBoxItem comboBoxItem = new ComboBoxItem();
+                if (s == null)
+                    comboBoxItem.Visibility = Visibility.Collapsed;
+                else
+                {
+                    comboBoxItem.Content = s.Name;
+                    if (s.ItemColor == null && s.Size == null) { 
+                        comboBoxItem.Visibility = Visibility.Collapsed;
+                        comboBoxItem.Height = 0;
+                    }
+                }              
+                comboBoxItems.Items.Add(comboBoxItem);
+                               
             }
 
             SelectItem(itemSettings[5]);
@@ -208,7 +226,7 @@ namespace AdvancedWindowsAppearence
             {
                 comboBoxFont.IsEnabled = true;
                 comboBoxFont.Text = selSetting.Font.Name;
-                comboBoxFontSize.Text = selSetting.Font.Size.ToString();
+                comboBoxFontSize.Text = selSetting.FontSize.ToString();
                 buttonFontBold.IsEnabled = true;
                 buttonFontItalic.IsEnabled = true;
                 buttonFontBold.IsChecked = selSetting.Font_isBold;
@@ -216,10 +234,6 @@ namespace AdvancedWindowsAppearence
                 comboBoxFontSize.IsEnabled = true;
             }
 
-            //300iq fix temp only
-            comboBoxFontSize.IsReadOnly = true;
-            comboBoxFont.IsReadOnly = true;
-            comboBoxFontSize.Text = "";
         }
 
         void UpdateColors(AppearanceSetting appearanceSetting)
@@ -323,10 +337,10 @@ namespace AdvancedWindowsAppearence
         }
         #endregion
 
+
         #region Fonts Tab
         private void comboBoxFonts_DropDownClosed(object sender, EventArgs e)
         {
-            //labelComboBoxFonts.Content = comboBoxFonts.Text;
             int i = comboBoxFonts.SelectedIndex;
             if (i != -1)
                 SelectFont(fontSettings[i]);
@@ -334,7 +348,6 @@ namespace AdvancedWindowsAppearence
 
         private void comboBoxFonts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //labelComboBoxFonts.Content = comboBoxFonts.Text;
             int i = comboBoxFonts.SelectedIndex;
             if (i != -1)
                 SelectFont(fontSettings[i]);
@@ -359,7 +372,44 @@ namespace AdvancedWindowsAppearence
             var selSetting = GetSelFontSetting();
             selSetting.ChangeFontItalicness(buttonFontItalic.IsChecked.Value);
         }
+
+        private void ComboBox_Disabled_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            comboBox.ToolTip = "This value cannot be changed";
+        }
+
+        private void ComboBox_Disabled_DropDownOpened(object sender, EventArgs e)
+        {
+            MessageBox.Show("This value cannot be changed", "Feature not implemented", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
+        }
+
+        private void comboBoxFont_TextInput(object sender, TextCompositionEventArgs e)
+        {
+            /*if (comboBoxFonts.SelectedIndex == -1) return;
+            var selSetting = GetSelFontSetting();
+            selSetting.ChangeFontName(comboBoxFont.Text);
+            Console.WriteLine(comboBoxFont.Text);*/
+        }
+
+        private void comboBoxFont_DropDownClosed(object sender, EventArgs e)
+        {
+            if(comboBoxFonts.SelectedIndex == -1) return;
+            var selSetting = GetSelFontSetting();
+            selSetting.ChangeFontName(comboBoxFont.Text);
+            Console.WriteLine(comboBoxFont.Text);
+        }
+
+        private void comboBoxFontSize_DropDownClosed(object sender, EventArgs e)
+        {
+            if (comboBoxFonts.SelectedIndex == -1) return;
+            var s = GetSelFontSetting();
+            s.FontSize = int.Parse(comboBoxFontSize.Text);
+        }
+
         #endregion
+
 
         #region Save Changes
 
@@ -389,18 +439,19 @@ namespace AdvancedWindowsAppearence
                 if (!setting.IsEdited) continue;
 
                 if (setting.Font!=null)
-                setting.SaveFontToRegedit();
+                setting.SaveFontToRegistry();
                 if (setting.Size.HasValue)
-                setting.SaveSizeToRegedit();
+                setting.SaveSizeToRegistry();
 
-                setting.SaveColorsToRegedit();
+                setting.SaveColorsToRegistry();
 
                 setting.IsEdited = false;
             }
-            MessageBox.Show("You need to log off or restart to apply these changes.", "Logoff required", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("You need to restart to apply these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         #endregion
+
 
         #region Theme Style
         void UpdateThemeStyle(string style)
@@ -458,7 +509,7 @@ namespace AdvancedWindowsAppearence
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
+            e.Handled = regex.IsMatch(e.Text);           
         }
 
         private void textBoxColorOpacity_TextChanged(object sender, TextChangedEventArgs e)
@@ -489,17 +540,15 @@ namespace AdvancedWindowsAppearence
             Close();
         }
 
-        private void ComboBox_Disabled_MouseEnter(object sender, MouseEventArgs e)
+        int f_count = 0; //extra kek
+        private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            ComboBox comboBox = (ComboBox)sender;
-            comboBox.ToolTip = "This value cannot be changed";
+            if (e.Key == Key.F)
+                f_count++;
+            if(f_count >= 10)
+            {
+                DWMhidden.Visibility = Visibility.Visible;
+            }
         }
-
-        private void ComboBox_Disabled_DropDownOpened(object sender, EventArgs e)
-        {
-            MessageBox.Show("This value cannot be changed", "Feature not implemented", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-
-        }
-
     }
 }
