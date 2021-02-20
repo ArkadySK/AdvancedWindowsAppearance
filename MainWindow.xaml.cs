@@ -24,7 +24,7 @@ namespace AdvancedWindowsAppearence
     {
 
         AppearanceSetting[] itemSettings = new AppearanceSetting[32];
-        AppearanceSetting[] fontSettings = new AppearanceSetting[5];
+        AppearanceSetting[] fontSettings = new AppearanceSetting[6];
         AppearanceSetting AeroColors = new AppearanceSetting("Aero Colors", "ColorizationColor", "ColorizationColorInactive");
 
         bool isHighContrast = false; //finish this feature
@@ -136,8 +136,9 @@ namespace AdvancedWindowsAppearence
             fontSettings[0] = new AppearanceSetting("Active / Inactive Title Font", "CaptionFont", "", "Font");
             fontSettings[1] = new AppearanceSetting("Icon Font", "IconFont", "", "Font");
             fontSettings[2] = new AppearanceSetting("Menu Font", "MenuFont", "MenuText", "Font");
-            fontSettings[3] = new AppearanceSetting("Status Font", "StatusFont", "InfoText", "Font");
-            fontSettings[4] = new AppearanceSetting("Window Text Font", "MessageFont", "WindowText", "Font");
+            fontSettings[3] = new AppearanceSetting("Palette Title Font", "SmCaptionFont", "", "Font");
+            fontSettings[4] = new AppearanceSetting("Status Font", "StatusFont", "InfoText", "Font");
+            fontSettings[5] = new AppearanceSetting("Window Text Font", "MessageFont", "WindowText", "Font");
 
             foreach (var a in fontSettings)
             {
@@ -221,6 +222,7 @@ namespace AdvancedWindowsAppearence
                 buttonFontBold.IsEnabled = false;
                 buttonFontItalic.IsEnabled = false;
                 comboBoxFontSize.IsEnabled = false;
+                textBlockPreview.Content = null;
             }
             else
             {
@@ -232,8 +234,15 @@ namespace AdvancedWindowsAppearence
                 buttonFontBold.IsChecked = selSetting.Font_isBold;
                 buttonFontItalic.IsChecked = selSetting.Font_isItalic;              
                 comboBoxFontSize.IsEnabled = true;
+                UpdateFontPreview(selSetting.Font.Name);
             }
 
+        }
+
+        void UpdateFontPreview(string name)
+        {
+            textBlockPreview.Content = "The quick brown fox jumps over the lazy dog";
+            textBlockPreview.FontFamily = new System.Windows.Media.FontFamily(name);
         }
 
         void UpdateColors(AppearanceSetting appearanceSetting)
@@ -397,8 +406,8 @@ namespace AdvancedWindowsAppearence
         {
             if(comboBoxFonts.SelectedIndex == -1) return;
             var selSetting = GetSelFontSetting();
-            selSetting.ChangeFontName(comboBoxFont.Text);
-            Console.WriteLine(comboBoxFont.Text);
+            selSetting.ChangeFontName(comboBoxFont.Text);          
+            UpdateFontPreview(comboBoxFont.Text);
         }
 
         private void comboBoxFontSize_DropDownClosed(object sender, EventArgs e)

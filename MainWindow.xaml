@@ -144,6 +144,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="15"/>
                                 <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Label Content="Item:" Padding="5 0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="0,0,0,35" Grid.RowSpan="2"/>
                             <Label Content="Size:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0,35" Grid.RowSpan="2"/>
@@ -155,6 +156,7 @@
                             <Button x:Name="buttonItemColor" Grid.Row="1" Padding="0" Margin="5,5,5,0" Grid.Column="3" Height="22" VerticalAlignment="Top" Click="buttonEditItemColor_Click" >
                                 <Button x:Name="imageItemColor" Padding="15 5" BorderThickness="2"/>
                             </Button>
+                            <TextBlock Padding="5" TextAlignment="Center" Grid.ColumnSpan="5" Grid.Row="2" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" TextWrapping="WrapWithOverflow" Margin="0 5 0 0" >New sizes are applied after logoff / restart.</TextBlock>
                         </Grid>
                     </TabItem>
 
@@ -163,26 +165,26 @@
                     <TabItem Header="Fonts" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
                         <Grid Margin="5">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="110*"/>
-                                <ColumnDefinition Width="110*"/>
-                                <ColumnDefinition Width="87*"/>
-                                <ColumnDefinition Width="59*"/>
-                                <ColumnDefinition Width="58*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="14*"/>
+                                <ColumnDefinition Width="9*"/>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="4*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="15"/>
                                 <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <Label Content="Item:" Padding="5 0" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0,35" Grid.RowSpan="2"/>
-                            <Label Content="Font:" Padding="5 0" Grid.Row="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.Column="1" HorizontalContentAlignment="Right" Margin="5 5 5 0" VerticalContentAlignment="Center"/>
+                            <Label Content="Font:" Grid.Row="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.Column="0" HorizontalContentAlignment="Right" Margin="5"/>
                             <Label Content="Size:" Padding="0" Grid.Column="2" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0.333,35" Grid.RowSpan="2"/>
                             <Label Content="Color:" Padding="0" Grid.Column="2" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="87,0,0,35" Grid.RowSpan="2"/>
-
-                            <ComboBox x:Name="comboBoxFonts" Grid.Column="0" Grid.Row="1" Margin="5,5.333,5,0" Height="22" VerticalAlignment="Top" Grid.ColumnSpan="2" DropDownClosed="comboBoxFonts_DropDownClosed" SelectionChanged="comboBoxFonts_SelectionChanged"/>
-                            <ComboBox x:Name="comboBoxFont" Grid.Column="2" Grid.Row="2" Margin="5,5.333,5,0" Height="22" VerticalAlignment="Top" Grid.ColumnSpan="3" PreviewTextInput="comboBoxFont_TextInput" DropDownClosed="comboBoxFont_DropDownClosed"/>
-                            <ComboBox x:Name="comboBoxFontSize" Grid.Column="2" Grid.Row="1" Margin="5,5.333,5.333,0" Height="22" VerticalAlignment="Top" IsEditable="True" PreviewTextInput="NumberValidationTextBox" DropDownClosed="comboBoxFontSize_DropDownClosed">
+                            <ComboBox x:Name="comboBoxFonts" Grid.Column="0" Grid.Row="1" Margin="5,5,5,0" Height="22" VerticalAlignment="Top" Grid.ColumnSpan="2" DropDownClosed="comboBoxFonts_DropDownClosed" SelectionChanged="comboBoxFonts_SelectionChanged"/>
+                            <ComboBox x:Name="comboBoxFont" Grid.Column="1" Grid.Row="2" Margin="5" Height="22" VerticalAlignment="Center" PreviewTextInput="comboBoxFont_TextInput" DropDownClosed="comboBoxFont_DropDownClosed"/>
+                            <Label x:Name="textBlockPreview" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="5" Padding="0" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" BorderThickness="1">preview</Label>
+                            <ComboBox x:Name="comboBoxFontSize" Grid.Column="2" Grid.Row="1" Margin="5" Height="22" VerticalAlignment="Top" IsEditable="True" PreviewTextInput="NumberValidationTextBox" DropDownClosed="comboBoxFontSize_DropDownClosed">
                                 <ComboBoxItem Content="6"/>
                                 <ComboBoxItem Content="7"/>
                                 <ComboBoxItem Content="8"/>
@@ -195,13 +197,13 @@
                                 <ComboBoxItem Content="15"/>
                                 <ComboBoxItem Content="16"/>
                             </ComboBox>
-                            <Button x:Name="buttonFontColor" Padding="2" Grid.Row="1" Margin="87,5.333,5,0" Grid.Column="2" Height="22" VerticalAlignment="Top" Click="buttonEditFontColor_Click" Grid.ColumnSpan="2">
+                            <Button x:Name="buttonFontColor" Padding="2" Grid.Row="1" Margin="5" Grid.Column="3" Height="22" VerticalAlignment="Top" Click="buttonEditFontColor_Click">
                                 <Button x:Name="imageFontColor" Padding="15 5" BorderThickness="2"/>
                             </Button>
 
-                            <ToggleButton x:Name="buttonFontBold" Content="B" Grid.Row="1" Margin="0,5.333,0,0" Width="22" Grid.Column="4" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold" Click="buttonFontBold_Click"/>
-                            <ToggleButton x:Name="buttonFontItalic" Content="I" Grid.Row="1" Margin="0,5.333,10,0" Width="22" Grid.Column="4" Height="22" VerticalAlignment="Top" HorizontalAlignment="Right" FontStyle="Italic" Click="buttonFontItalic_Click"/>
-                            <TextBlock Padding="5" TextAlignment="Center" Grid.ColumnSpan="5" Grid.Row="3" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" TextWrapping="WrapWithOverflow" >Changes made to fonts are applied after restart</TextBlock>
+                            <ToggleButton x:Name="buttonFontBold" Content="B" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold" Click="buttonFontBold_Click"/>
+                            <ToggleButton x:Name="buttonFontItalic" Content="I" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="22" VerticalAlignment="Top" HorizontalAlignment="Right" FontStyle="Italic" Click="buttonFontItalic_Click"/>
+                            <TextBlock Padding="5" TextAlignment="Center" Grid.ColumnSpan="5" Grid.Row="3" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" TextWrapping="WrapWithOverflow" Margin="0 5 0 0" >Changes made to fonts are applied after restart</TextBlock>
 
                         </Grid>
                     </TabItem>
@@ -258,7 +260,7 @@
                             <CheckBox Content="Enable transparent taskbar"/>
                             <CheckBox Content="Apps use light theme"/>
                             <CheckBox Content="System uses light theme"/>
-                            <TextBlock Padding="5" TextAlignment="Center" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" TextWrapping="WrapWithOverflow">Some changes made to DWM (Desktop Window Composition) are applied after restart</TextBlock>
+                            <TextBlock Margin="0 5 0 0" Padding="5" TextAlignment="Center" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" TextWrapping="WrapWithOverflow">Some changes made to DWM (Desktop Window Composition) are applied after restart</TextBlock>
                         </StackPanel>
                     </TabItem>
 
