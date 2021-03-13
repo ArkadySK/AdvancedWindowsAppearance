@@ -4,11 +4,31 @@
              xmlns:local="clr-namespace:AdvancedWindowsAppearence"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary>
-            <Style x:Key="SystemButton"  TargetType="Button">
-                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+        <ResourceDictionary >
+
+            <Style x:Key="SystemButton"  TargetType="Button" >
+                <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSize}}"/>
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
             </Style>
+            
+            <Style x:Key="CaptionButton0" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+
+                <Setter Property="FontFamily" Value="Marlett"/>
+                <!--
+                <Setter Property="Width" Value="{DynamicResource {x:Static SystemParameters.SmallWindowCaptionButtonWidth}}"/>
+                <Setter Property="Height" Value="{DynamicResource {x:Static SystemParameters.SmallWindowCaptionButtonHeight}}"/>               
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>              
+                <Setter Property="Padding" Value="0"/>
+                -->
+                <Setter Property="Margin" Value="1"/>
+                <Setter Property="FontStyle" Value="Normal"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

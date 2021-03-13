@@ -7,19 +7,25 @@
         x:Class="AdvancedWindowsAppearence.MainWindow"
         mc:Ignorable="d"
         Title="Advanced Appearance" Width="470" SizeToContent="Height" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="NoResize" KeyDown="Window_KeyDown">
+
     <StackPanel>
-        
-        
         <Border Margin="5">
             <StackPanel>
-                <Grid Height="220" Background="{DynamicResource {x:Static SystemColors.DesktopBrushKey}}" Margin="10" Style="{x:Null}" OverridesDefaultStyle="True" FocusVisualStyle="{x:Null}">
+                <Grid IsEnabled="False" Height="220" Background="{DynamicResource {x:Static SystemColors.DesktopBrushKey}}" Margin="0 0 0 10" Style="{x:Null}" OverridesDefaultStyle="True" FocusVisualStyle="{x:Null}">
+                    <Grid.Resources>
+                        <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                                <ResourceDictionary Source="/PresentationFramework.Classic;component/themes/Classic.xaml"/>
+                            </ResourceDictionary.MergedDictionaries>
+                        </ResourceDictionary >
+                    </Grid.Resources>
                     <Image x:Name="ImageWallpaper"></Image>
                     <Polygon Points="100,100 0,100 100,0" Fill="{DynamicResource {x:Static SystemColors.DesktopBrushKey}}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,0"/>
 
 
                     <!-- Inactive Window -->
                     <Grid Width="350" Height="100" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Background="{DynamicResource {x:Static SystemColors.InactiveBorderBrushKey}}">
-                        <Border Margin="{DynamicResource {x:Static SystemParameters.Border}}" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+                        <Border x:Name="InactiveWindowBorder" Margin="{DynamicResource {x:Static SystemParameters.Border}}" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
 
                             <!--Inactive Header-->
                             <Grid Height="{DynamicResource {x:Static SystemParameters.CaptionHeightKey}}" VerticalAlignment="Top" >
@@ -35,9 +41,9 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Margin="1" HorizontalAlignment="Right" Style="{x:Null}" Content="r"  Grid.Column="3" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Width="{DynamicResource {x:Static SystemParameters.SmallWindowCaptionButtonWidthKey}}" FontFamily="Marlett" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}"/>
-                                <Button Margin="1" HorizontalAlignment="Right" Style="{x:Null}" Content="1"  Grid.Column="2" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Width="{DynamicResource {x:Static SystemParameters.SmallWindowCaptionButtonWidthKey}}" FontFamily="Marlett" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}"/>
-                                <Button Margin="1" HorizontalAlignment="Right" Style="{x:Null}" Content="0"  Grid.Column="1" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Width="{DynamicResource {x:Static SystemParameters.SmallWindowCaptionButtonWidthKey}}" FontFamily="Marlett" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}"/>
+                                <Button FontFamily="Marlett" Content="r"  Grid.Column="3" Margin="2 1" Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                <Button FontFamily="Marlett" Content="1"  Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                <Button FontFamily="Marlett" Content="0"  Grid.Column="1" Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
                                 <Label Padding="1" Content="Inactive Window" FontFamily="{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}" FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" Foreground="{DynamicResource {x:Static SystemColors.InactiveCaptionTextBrushKey}}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}"/>
                             </Grid>
 
@@ -48,7 +54,7 @@
 
                     <!-- Active Window -->
                     <Grid Width="370" HorizontalAlignment="Center" Margin="5 35" VerticalAlignment="Top" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
-                        <Border Margin="{DynamicResource {x:Static SystemParameters.ResizeFrameVerticalBorderWidth}}" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+                        <Border x:Name="ActiveWindowBorder" Margin="{DynamicResource {x:Static SystemParameters.ResizeFrameVerticalBorderWidth}}" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
 
                             <!--Active Header-->
                             <Grid VerticalAlignment="Top" >
@@ -72,16 +78,16 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <Button Margin="1" HorizontalAlignment="Right" Style="{x:Null}" Content="r"  Grid.Column="3" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Width="{DynamicResource {x:Static SystemParameters.SmallWindowCaptionButtonWidthKey}}" FontFamily="Marlett" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" FontStyle="{DynamicResource {x:Static SystemFonts.SmallCaptionFontStyleKey}}"/>
-                                <Button Margin="1" HorizontalAlignment="Right" Style="{x:Null}" Content="1"  Grid.Column="2" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Width="{DynamicResource {x:Static SystemParameters.SmallWindowCaptionButtonWidthKey}}" FontFamily="Marlett" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}"/>
-                                <Button Margin="1" HorizontalAlignment="Right" Style="{x:Null}" Content="0"  Grid.Column="1" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Width="{DynamicResource {x:Static SystemParameters.SmallWindowCaptionButtonWidthKey}}" FontFamily="Marlett" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}"/>
+                                <Button FontFamily="Marlett" Content="r" Grid.Column="3" Margin="2 1" Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                <Button FontFamily="Marlett" Content="1" Grid.Column="2" Margin="1" Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                <Button FontFamily="Marlett" Content="0" Grid.Column="1" Margin="1" Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
                                 <Label Padding="1" Height="{DynamicResource {x:Static SystemParameters.CaptionHeightKey}}" Content="Active Window" FontFamily="{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}" FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}" />
 
                                 <!--Content of Active Window-->
                                 <Menu Grid.Row="1" Height="{DynamicResource {x:Static SystemParameters.MenuBarHeightKey}}" Grid.ColumnSpan="4">
                                     <MenuItem Header="Normal" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"  />
-                                    <MenuItem Header="Disabled" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" IsEnabled="False" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"/>
-                                    <MenuItem Header="Selected" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}"/>
+                                    <MenuItem Header="Disabled" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" IsEnabled="False" Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                    <MenuItem Header="Selected" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" Foreground="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}"/>
                                 </Menu>
                                 <Label Padding="2" Content="Window Text" Grid.Row="2" Grid.ColumnSpan="4" Panel.ZIndex="1" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
                                 <TextBlock TextDecorations="Underline" Padding="2" Text="Hypertext link" Grid.Row="3" Grid.ColumnSpan="4" Panel.ZIndex="1" Foreground="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
@@ -117,13 +123,13 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Button Margin="1" HorizontalAlignment="Right" Style="{x:Null}" Content="r"  Grid.Column="1" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Width="{DynamicResource {x:Static SystemParameters.SmallWindowCaptionButtonHeightKey}}" FontFamily="Marlett" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" FontStyle="{DynamicResource {x:Static SystemFonts.SmallCaptionFontStyleKey}}"/>
+                                    <Button FontFamily="Marlett" HorizontalAlignment="Right" Content="r" Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"  Grid.Column="1" Margin="2"/>
                                     <Label Padding="1" Content="Message Box" FontFamily="{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}" FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}"/>
 
                                 </Grid>
                                 <!--MessageBox Message-->
                                 <Label Margin="0 0 0 34" VerticalAlignment="Bottom" Grid.Row="1" Grid.ColumnSpan="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">Message Text</Label>
-                                <Button Style="{StaticResource SystemButton}" Width="65" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Grid.ColumnSpan="2" Margin="3">OK</Button>
+                                <Button Width="65" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Grid.ColumnSpan="2" Margin="3" Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}">OK</Button>
                                 <Label Margin="0 -2 0 0" Grid.Column="1" Padding="1" Panel.ZIndex="100" Content="Tool Tip" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"/>
                                 <Rectangle Panel.ZIndex="-1" Height="26" VerticalAlignment="Bottom" Fill="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" Grid.ColumnSpan="2" Grid.Row="1"/>
                             </Grid>
@@ -132,7 +138,8 @@
                 </Grid>
 
                 <!-- Colors a Metrics  -->
-                <TabControl>
+                <TabControl Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
+                    
                     <TabItem Header="Colors and Metrics" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
                         <Grid Margin="5" >
                             <Grid.ColumnDefinitions>
@@ -150,10 +157,10 @@
                             <Label Content="Size:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0,35" Grid.RowSpan="2"/>
                             <Label Content="Color:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="87,0,0,35" Grid.RowSpan="2"/>
                             
-                            <ComboBox x:Name="comboBoxItems" Grid.Column="0" Grid.Row="1" Margin="5,5.333,5,0" Height="22" VerticalAlignment="Top" DropDownClosed="comboBoxItems_DropDownClosed" SelectionChanged="comboBoxItems_SelectionChanged" Grid.ColumnSpan="2"/>
+                            <ComboBox x:Name="comboBoxItems" Grid.Column="0" Grid.Row="1" Margin="5,5.333,5,0" Height="25" VerticalAlignment="Top" DropDownClosed="comboBoxItems_DropDownClosed" SelectionChanged="comboBoxItems_SelectionChanged" Grid.ColumnSpan="2"/>
                             <Label Visibility="Hidden" x:Name="labelComboBoxItems" Content="aaaaa" Panel.ZIndex="10" Grid.Row="1" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2,2.333,2,2" MouseDown="labelComboBoxItems_MouseDown" Grid.ColumnSpan="2" PreviewTextInput="NumberValidationTextBox"/>
-                            <TextBox x:Name="textBoxItemSize" Grid.Column="2" Grid.Row="1" Margin="5,5,5,0" Height="22" VerticalAlignment="Top" InputScope="Number" MaxLines="1" MaxLength="2" TextChanged="textBoxItemSize_TextChanged" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
-                            <Button x:Name="buttonItemColor" Grid.Row="1" Padding="0" Margin="5,5,5,0" Grid.Column="3" Height="22" VerticalAlignment="Top" Click="buttonEditItemColor_Click" >
+                            <TextBox x:Name="textBoxItemSize" Grid.Column="2" Grid.Row="1" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" InputScope="Number" MaxLines="1" MaxLength="2" TextChanged="textBoxItemSize_TextChanged" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+                            <Button x:Name="buttonItemColor" Grid.Row="1" Padding="0" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonEditItemColor_Click" >
                                 <Button x:Name="imageItemColor" Padding="15 5" BorderThickness="2"/>
                             </Button>
                             <TextBlock Padding="5" TextAlignment="Center" Grid.ColumnSpan="5" Grid.Row="2" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" TextWrapping="WrapWithOverflow" Margin="0 5 0 0" >New sizes are applied after logoff / restart.</TextBlock>
@@ -181,10 +188,10 @@
                             <Label Content="Font:" Grid.Row="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.Column="0" HorizontalContentAlignment="Right" Margin="5"/>
                             <Label Content="Size:" Padding="0" Grid.Column="2" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0.333,35" Grid.RowSpan="2"/>
                             <Label Content="Color:" Padding="0" Grid.Column="2" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="87,0,0,35" Grid.RowSpan="2"/>
-                            <ComboBox x:Name="comboBoxFonts" Grid.Column="0" Grid.Row="1" Margin="5,5,5,0" Height="22" VerticalAlignment="Top" Grid.ColumnSpan="2" DropDownClosed="comboBoxFonts_DropDownClosed" SelectionChanged="comboBoxFonts_SelectionChanged"/>
-                            <ComboBox x:Name="comboBoxFont" Grid.Column="1" Grid.Row="2" Margin="5" Height="22" VerticalAlignment="Center" PreviewTextInput="comboBoxFont_TextInput" DropDownClosed="comboBoxFont_DropDownClosed"/>
-                            <Label x:Name="textBlockPreview" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="5" Padding="0" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" BorderThickness="1">preview</Label>
-                            <ComboBox x:Name="comboBoxFontSize" Grid.Column="2" Grid.Row="1" Margin="5" Height="22" VerticalAlignment="Top" IsEditable="True" PreviewTextInput="NumberValidationTextBox" DropDownClosed="comboBoxFontSize_DropDownClosed">
+                            <ComboBox x:Name="comboBoxFonts" Grid.Column="0" Grid.Row="1" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2" DropDownClosed="comboBoxFonts_DropDownClosed" SelectionChanged="comboBoxFonts_SelectionChanged"/>
+                            <ComboBox x:Name="comboBoxFont" Grid.Column="1" Grid.Row="2" Margin="5" Height="25" VerticalAlignment="Center" PreviewTextInput="comboBoxFont_TextInput" DropDownClosed="comboBoxFont_DropDownClosed"/>
+                            <Label x:Name="textBlockPreview" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="5" Padding="0" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" BorderThickness="1" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}">preview</Label>
+                            <ComboBox x:Name="comboBoxFontSize" Grid.Column="2" Grid.Row="1" Margin="5" Height="25" VerticalAlignment="Top" IsEditable="True" PreviewTextInput="NumberValidationTextBox" DropDownClosed="comboBoxFontSize_DropDownClosed">
                                 <ComboBoxItem Content="6"/>
                                 <ComboBoxItem Content="7"/>
                                 <ComboBoxItem Content="8"/>
@@ -197,12 +204,12 @@
                                 <ComboBoxItem Content="15"/>
                                 <ComboBoxItem Content="16"/>
                             </ComboBox>
-                            <Button x:Name="buttonFontColor" Padding="2" Grid.Row="1" Margin="5" Grid.Column="3" Height="22" VerticalAlignment="Top" Click="buttonEditFontColor_Click">
+                            <Button x:Name="buttonFontColor" Padding="2" Grid.Row="1" Margin="5" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonEditFontColor_Click">
                                 <Button x:Name="imageFontColor" Padding="15 5" BorderThickness="2"/>
                             </Button>
 
-                            <ToggleButton x:Name="buttonFontBold" Content="B" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold" Click="buttonFontBold_Click"/>
-                            <ToggleButton x:Name="buttonFontItalic" Content="I" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="22" VerticalAlignment="Top" HorizontalAlignment="Right" FontStyle="Italic" Click="buttonFontItalic_Click"/>
+                            <ToggleButton x:Name="buttonFontBold" Content="B" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold" Click="buttonFontBold_Click"/>
+                            <ToggleButton x:Name="buttonFontItalic" Content="I" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" FontStyle="Italic" Click="buttonFontItalic_Click"/>
                             <TextBlock Padding="5" TextAlignment="Center" Grid.ColumnSpan="5" Grid.Row="3" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" TextWrapping="WrapWithOverflow" Margin="0 5 0 0" >Changes made to fonts are applied after restart</TextBlock>
 
                         </Grid>

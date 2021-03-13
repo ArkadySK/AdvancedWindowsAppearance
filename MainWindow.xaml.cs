@@ -35,6 +35,7 @@ namespace AdvancedWindowsAppearence
             LoadItems();
             UpdateFontList();
             LoadFonts();
+            LoadDPIScale();
             LoadAeroTab();
             UpdateWallpaperInfo();
             LoadThemeName();
@@ -65,14 +66,19 @@ namespace AdvancedWindowsAppearence
 
         }
 
+        double dpi = 1;
+
+        void LoadDPIScale()
+        {
+            dpi = SystemFonts.CaptionFontSize / fontSettings[0].FontSize;
+        }
+
         void LoadItems()
         {
             
             comboBoxItems.Items.Clear();
 
             // chyba: GrayText
-
-
             itemSettings[0] = new AppearanceSetting("Active Title Color 1", "", "ActiveTitle", "Item");
             itemSettings[1] = new AppearanceSetting("Active Title Color 2", "", "GradientActiveTitle", "Item");
             itemSettings[2] = new AppearanceSetting("Active Title Text", "", "TitleText", "Item");
@@ -105,10 +111,10 @@ namespace AdvancedWindowsAppearence
             itemSettings[29] = new AppearanceSetting("ButtonDkShadow", "", "ButtonDkShadow", "Item");
             itemSettings[30] = new AppearanceSetting("Gray Text", "fff", "eee", "Item");
             itemSettings[31] = new AppearanceSetting("Button Text Color", "", "ButtonText", "Item");
-            
 
 
-
+            ActiveWindowBorder.Margin = new Thickness((float)(itemSettings[25].Size + itemSettings[26].Size));
+            InactiveWindowBorder.Margin = ActiveWindowBorder.Margin;
 
             foreach (var s in itemSettings)
             {
@@ -124,10 +130,8 @@ namespace AdvancedWindowsAppearence
                         comboBoxItem.Height = 0;
                     }
                 }              
-                comboBoxItems.Items.Add(comboBoxItem);
-                               
+                comboBoxItems.Items.Add(comboBoxItem);                            
             }
-
             SelectItem(itemSettings[5]);
         }
 
@@ -234,15 +238,43 @@ namespace AdvancedWindowsAppearence
                 buttonFontBold.IsChecked = selSetting.Font_isBold;
                 buttonFontItalic.IsChecked = selSetting.Font_isItalic;              
                 comboBoxFontSize.IsEnabled = true;
-                UpdateFontPreview(selSetting.Font.Name);
+                UpdateFontPreview(selSetting.Font, selSetting.FontSize, selSetting.Font_isBold, selSetting.Font_isItalic, selSetting.FontColor);
             }
 
         }
 
-        void UpdateFontPreview(string name)
+        void UpdateFontPreview(System.Drawing.Font f, int size, bool isBold, bool isItalic, System.Drawing.Color? textCol)
+        {
+            var textColtemp = System.Drawing.Color.Black;
+            if (textCol.HasValue)
+                textColtemp = textCol.Value;
+            UpdateFontPreview(f, size);
+            UpdateFontPreview(isBold, isItalic);
+            UpdateFontPreview(textColtemp);
+        }
+
+        void UpdateFontPreview(bool isBold, bool isItalic)
+        {
+            if (isItalic)
+                textBlockPreview.FontStyle = FontStyles.Italic;
+            else
+                textBlockPreview.FontStyle = FontStyles.Normal;
+            if (isBold)
+                textBlockPreview.FontWeight = FontWeights.Bold;
+            else
+                textBlockPreview.FontWeight = FontWeights.Normal;           
+        }
+
+        void UpdateFontPreview(System.Drawing.Color? textCol)
+        {
+            textBlockPreview.Foreground = MediaColorToBrush(textCol);
+        }
+
+        void UpdateFontPreview(System.Drawing.Font f, int size)
         {
             textBlockPreview.Content = "The quick brown fox jumps over the lazy dog";
-            textBlockPreview.FontFamily = new System.Windows.Media.FontFamily(name);
+            textBlockPreview.FontFamily = new System.Windows.Media.FontFamily(f.FontFamily.Name);
+            textBlockPreview.FontSize = size * dpi;
         }
 
         void UpdateColors(AppearanceSetting appearanceSetting)
@@ -368,30 +400,21 @@ namespace AdvancedWindowsAppearence
             selSetting.FontColor = OpenColorDialog(selSetting.FontColor);
             UpdateColors(selSetting);
             selSetting.IsEdited = true;
+            UpdateFontPreview(selSetting.FontColor.Value);
         }
 
         private void buttonFontBold_Click(object sender, RoutedEventArgs e)
         {
             var selSetting = GetSelFontSetting();
             selSetting.ChangeFontBoldness(buttonFontBold.IsChecked.Value);
+            UpdateFontPreview(selSetting.Font_isBold, selSetting.Font_isItalic);
         }
 
         private void buttonFontItalic_Click(object sender, RoutedEventArgs e)
         {
             var selSetting = GetSelFontSetting();
             selSetting.ChangeFontItalicness(buttonFontItalic.IsChecked.Value);
-        }
-
-        private void ComboBox_Disabled_MouseEnter(object sender, MouseEventArgs e)
-        {
-            ComboBox comboBox = (ComboBox)sender;
-            comboBox.ToolTip = "This value cannot be changed";
-        }
-
-        private void ComboBox_Disabled_DropDownOpened(object sender, EventArgs e)
-        {
-            MessageBox.Show("This value cannot be changed", "Feature not implemented", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-
+            UpdateFontPreview(selSetting.Font_isBold, selSetting.Font_isItalic);
         }
 
         private void comboBoxFont_TextInput(object sender, TextCompositionEventArgs e)
@@ -407,14 +430,16 @@ namespace AdvancedWindowsAppearence
             if(comboBoxFonts.SelectedIndex == -1) return;
             var selSetting = GetSelFontSetting();
             selSetting.ChangeFontName(comboBoxFont.Text);          
-            UpdateFontPreview(comboBoxFont.Text);
+            UpdateFontPreview(selSetting.Font, selSetting.FontSize);
         }
 
         private void comboBoxFontSize_DropDownClosed(object sender, EventArgs e)
         {
             if (comboBoxFonts.SelectedIndex == -1) return;
             var s = GetSelFontSetting();
-            s.FontSize = int.Parse(comboBoxFontSize.Text);
+            int size = int.Parse(comboBoxFontSize.Text);
+            s.FontSize = size;
+            UpdateFontPreview(s.Font, size);
         }
 
         #endregion

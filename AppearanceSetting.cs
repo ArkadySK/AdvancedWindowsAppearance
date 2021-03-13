@@ -192,7 +192,6 @@ namespace AdvancedWindowsAppearence
             int i = 0;
             foreach (byte b in fonttemp)
             {
-                Console.Write(b + ", ");
                 if (i >= fontNameStartIndex && b != 0)
                 {
                     fontNametemp.Add(b);
@@ -204,7 +203,6 @@ namespace AdvancedWindowsAppearence
 
             regeditFont = FindFontFromString(fontstring);        
 
-            Console.WriteLine(fontstring);
             if (fonttemp[17] == 02)
             {
                 Font_isBold = true;
@@ -214,7 +212,6 @@ namespace AdvancedWindowsAppearence
                 Font_isItalic = true;
             }
             int sizetemp = (int)fonttemp[0];
-            Console.WriteLine(sizetemp);
             this.FontSize = (256 - sizetemp) / 2;
 
             return regeditFont;
