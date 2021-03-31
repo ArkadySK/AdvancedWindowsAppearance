@@ -163,7 +163,7 @@
                             <Button x:Name="buttonItemColor" Grid.Row="1" Padding="0" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonEditItemColor_Click" >
                                 <Button x:Name="imageItemColor" Padding="15 5" BorderThickness="2"/>
                             </Button>
-                            <TextBlock Padding="5" TextAlignment="Center" Grid.ColumnSpan="5" Grid.Row="2" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" TextWrapping="WrapWithOverflow" Margin="0 5 0 0" >New sizes are applied after logoff / restart.</TextBlock>
+                            <TextBlock Padding="5" TextAlignment="Center" Grid.ColumnSpan="5" Grid.Row="2" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" TextWrapping="WrapWithOverflow" Margin="0 5 0 0" >New sizes are applied after logoff. Colors are applied immediatelly as a theme.</TextBlock>
                         </Grid>
                     </TabItem>
 
@@ -259,14 +259,17 @@
                         </StackPanel>
                     </TabItem>
 
-                    <!--DWM a regedit nastavenia-->
-                    <TabItem x:Name="DWMhidden" Header="Desktop Composition" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}" Visibility="Hidden">
-                        <StackPanel Margin="5">
-                            <CheckBox Content="Show accent color on the title bars"/>
-                            <CheckBox Content="Show accent color on the start, actioncenter"/>
-                            <CheckBox Content="Enable transparent taskbar"/>
-                            <CheckBox Content="Apps use light theme"/>
-                            <CheckBox Content="System uses light theme"/>
+     
+                    <!--DWM a regedit nastavenia (win8 a win10)-->
+                    <TabItem x:Name="pageModern" Header="Modern Apps Settings" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
+                        <StackPanel>
+                            <ListBox x:Name="listBoxDMW" Margin="5" ItemsSource="{Binding DWMSettings}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <CheckBox Content="{Binding Name}" IsChecked="{Binding Checked}"></CheckBox>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
                             <TextBlock Margin="0 5 0 0" Padding="5" TextAlignment="Center" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" TextWrapping="WrapWithOverflow">Some changes made to DWM (Desktop Window Composition) are applied after restart</TextBlock>
                         </StackPanel>
                     </TabItem>
@@ -280,12 +283,14 @@
         <!-- buttony-->
         <Grid Height="32" Margin="0 0 0 5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource SystemButton}" Grid.Column="2" Margin="5" Content="Cancel" Click="Button_Click"/>
-            <Button Style="{StaticResource SystemButton}" Grid.Column="1" Margin="5" Content="Apply" Click="Button_Click_2"/>
+            <Button Style="{StaticResource SystemButton}" Grid.Column="3" Margin="5" Content="Cancel" Click="Button_Click"/>
+            <Button Style="{StaticResource SystemButton}" Grid.Column="2" Margin="5" Content="Apply" Click="Button_Click_2"/>
+            <Button Style="{StaticResource SystemButton}" Grid.Column="0" Margin="5" Content="Restore All Defaults" Click="Button_Click_1" />
 
         </Grid>
     </StackPanel>

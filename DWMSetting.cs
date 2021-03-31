@@ -6,18 +6,24 @@ using System.Text;
 
 namespace AdvancedWindowsAppearence
 {
-    class DWMSetting
+    public class DWMSetting
     {
-        public int Value;
+        public bool? Checked { get; set; }
+        public string Name { get; set; }
         public bool IsEdited;
         readonly string RegistryPath;
 
         public DWMSetting() {}
 
-        public DWMSetting(string _registrypath)
+        public DWMSetting(string name, string registrypath)
         {
-            RegistryPath = _registrypath;
-            Value = (int)GetValueFromRegistry(RegistryPath);
+            Name = name;
+            RegistryPath = registrypath;
+            var val = GetValueFromRegistry(RegistryPath);
+            if (val is int)
+                Checked = ((int)val != 0);
+            else if (val is bool) Checked = (bool)val;
+            Console.WriteLine("DWM setting name: " + name + ", regedit value" + val + ", is checked in UI: " + Checked);
         }
 
         public Color? GetAeroColorFromRegistry(string registrypath)
@@ -42,23 +48,27 @@ namespace AdvancedWindowsAppearence
         object GetValueFromRegistry(string registrypath)
         {
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\DWM", true);
-            if (registryKey == null) return null;
+            if (registryKey == null)
+            {
+                registryKey.Close();
+                return null;
+            }
             var val = registryKey.GetValue(registrypath);
+
+            if (val == null) val = true; 
             registryKey.Close();
             return val;
-        }
-
-        public void EditValue(int newVal)
-        {
-            Value = newVal;
-            IsEdited = true;
         }
         
         public void SaveToRegistry()
         {
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\DWM", true);
-            if (registryKey == null) return;
-            registryKey.SetValue(RegistryPath, Value, RegistryValueKind.DWord);
+            if (registryKey == null)
+            {
+                registryKey.Close();
+                return;
+            }
+            registryKey.SetValue(RegistryPath, Checked, RegistryValueKind.DWord);
             registryKey.Close();
             IsEdited = false;
         }

@@ -83,6 +83,7 @@
     </Compile>
     <Compile Include="AppearanceSetting.cs" />
     <Compile Include="DWMSetting.cs" />
+    <Compile Include="DWMSettingsControler.cs" />
     <Compile Include="ThemeSettings.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
