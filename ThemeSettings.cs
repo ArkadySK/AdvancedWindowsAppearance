@@ -20,8 +20,9 @@ namespace AdvancedWindowsAppearence
 
         public string GetThemePath()
         {
-            string RegistryKey = @"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes";
-            string themepath = (string)Registry.GetValue(RegistryKey, "CurrentTheme", string.Empty);
+            
+            string RegistryPath = @"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes";
+            string themepath = (string)Registry.GetValue(RegistryPath, "CurrentTheme", string.Empty);
 
             /*int ChangeIcons = (int)Registry.GetValue(RegistryKey, "ThemeChangesDesktopIcons", 0);
             int ChangeCursors = (int)Registry.GetValue(RegistryKey, "ThemeChangesMousePointers", 0);

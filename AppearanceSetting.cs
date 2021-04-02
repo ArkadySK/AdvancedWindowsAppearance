@@ -21,7 +21,6 @@ namespace AdvancedWindowsAppearence
         readonly string SizeRegistryPath;
         readonly string FontRegistryPath;
         public readonly string ItemColorRegistryPath;
-        readonly string AeroColorRegistryPath; //weirdo kod
         public readonly string FontColorRegistryPath;
         string WallpaperPath;
         string Type;
@@ -61,15 +60,6 @@ namespace AdvancedWindowsAppearence
                     }
             }
             LoadColorValues();
-        }
-
-        public AppearanceSetting(string _name, string _aeroColor1RegistryPath, string _aeroColor2RegistryPath)
-        {
-            Name = _name;
-            AeroColorRegistryPath = _aeroColor1RegistryPath;
-            DWMSetting dWM = new DWMSetting();
-            ItemColor = dWM.GetAeroColorFromRegistry(AeroColorRegistryPath);
-            Type = "AeroColor";
         }
 
         public AppearanceSetting(string _name, string _wallpaperPath) //wallpaper
@@ -112,17 +102,13 @@ namespace AdvancedWindowsAppearence
         public void ConvertColorValuesToRegistry()
         {
 
-            if (Type != "AeroColor")
-            {
-
-                if (ItemColor.HasValue)
+            if (ItemColor.HasValue)
                 {
                     ItemColorValue = Color_ToRegistryFormat(ItemColor.Value);
-                }
-                if (FontColor.HasValue)
-                {
+            }
+            if (FontColor.HasValue)
+            {
                     FontColorValue = Color_ToRegistryFormat(FontColor.Value);
-                }
             }
         }
        
@@ -180,14 +166,14 @@ namespace AdvancedWindowsAppearence
 
 
 
-        Font GetFontFromRegistry(string regeditpath)
+        Font GetFontFromRegistry(string registrypath)
         {
             Font regeditFont;
-            if (regeditpath == null || regeditpath == "") return null;
+            if (registrypath == null || registrypath == "") return null;
 
             RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(@"Control Panel\Desktop\WindowMetrics");
 
-            byte[] fonttemp = (byte[])registryKey.GetValue(regeditpath);
+            byte[] fonttemp = (byte[])registryKey.GetValue(registrypath);
             List<byte> fontNametemp = new List<byte>();
             int i = 0;
             foreach (byte b in fonttemp)
@@ -217,31 +203,31 @@ namespace AdvancedWindowsAppearence
             return regeditFont;
         }
 
-        int? GetSizeFromRegistry(string regeditpath)
+        int? GetSizeFromRegistry(string registrypath)
         {
-            if (regeditpath == null || regeditpath == "") return null;
+            if (registrypath == null || registrypath == "") return null;
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics");
             if (registryKey == null) return null;
 
-            var sizeReg = registryKey.GetValue(regeditpath);
+            var sizeReg = registryKey.GetValue(registrypath);
             registryKey.Close();
             if (sizeReg == null) return null;
 
             int intsize = int.Parse(sizeReg.ToString());
-            if (regeditpath != "Shell Icon Size")
+            if (registrypath != "Shell Icon Size")
                 intsize = intsize / (-15);
 
             return intsize;
         }
 
-        Color? GetColorFromRegistry(string regeditpath)
+        Color? GetColorFromRegistry(string registrypath)
         {
-            if (regeditpath == null || regeditpath == "") return null;
+            if (registrypath == null || registrypath == "") return null;
             Color color = new Color();
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Colors");
             if (registryKey == null) return null;
 
-            var colorReg = registryKey.GetValue(regeditpath);
+            var colorReg = registryKey.GetValue(registrypath);
             registryKey.Close();
             if (colorReg == null) return null;
 
@@ -290,26 +276,23 @@ namespace AdvancedWindowsAppearence
         public void SaveColorsToRegistry()
         {
 
-            if (Type != "AeroColor")
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Colors", true);
+            if (key == null)
             {
-                RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Colors", true);
-                if (key == null)
-                {
-                    Registry.CurrentUser.CreateSubKey(@"Control Panel\Colors");
-                }
-
-                if (ItemColor.HasValue)
-                {
-                    key.SetValue(ItemColorRegistryPath, ItemColorValue, RegistryValueKind.String);
-                }
-
-                if (FontColor.HasValue)
-                {
-                    key.SetValue(FontColorRegistryPath, FontColorValue, RegistryValueKind.String);
-                }
-
-                key.Close();
+                Registry.CurrentUser.CreateSubKey(@"Control Panel\Colors");
             }
+
+            if (ItemColor.HasValue)
+            {
+                key.SetValue(ItemColorRegistryPath, ItemColorValue, RegistryValueKind.String);
+            }
+
+            if (FontColor.HasValue)
+            {
+                key.SetValue(FontColorRegistryPath, FontColorValue, RegistryValueKind.String);
+            }
+
+            key.Close();
         }
 
         public void SaveSizeToRegistry()

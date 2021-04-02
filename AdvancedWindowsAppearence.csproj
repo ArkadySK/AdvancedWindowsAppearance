@@ -77,13 +77,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="AeroColorRegistrySetting.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppearanceSetting.cs" />
-    <Compile Include="DWMSetting.cs" />
-    <Compile Include="DWMSettingsControler.cs" />
+    <Compile Include="RegistrySetting.cs" />
+    <Compile Include="RegistrySettingsControler.cs" />
     <Compile Include="ThemeSettings.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

@@ -227,14 +227,20 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Label VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">Aero Color</Label>
+                            <Label VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">Theme Color</Label>
                             <Button x:Name="buttonAeroColor" Grid.Row="0" Margin="5" Grid.Column="2" Height="25" VerticalAlignment="Top" Click="buttonAeroColor_Click">
                                 <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2"/>
                             </Button>
                             <Label VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.Row="1">Color Opacity</Label>
                             <Slider x:Name="sliderColorOpacity" Grid.Row="1" Grid.Column="1" Margin="3" Maximum="255" ValueChanged="sliderColorOpacity_ValueChanged"/>
                             <TextBox IsEnabled="False" x:Name="textBoxColorOpacity" Grid.Row="1" Grid.Column="2" Margin="5 5" Text="" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
+                            <ComboBox Grid.Row="2" Grid.Column="1" Text="Inactive Window Color"/>
+                            <CheckBox IsChecked="True" Grid.Row="2" Grid.Column="0" Content="Enabled" VerticalAlignment="Center"/>
+                            <Button x:Name="buttonAeroColorInactive" Grid.Row="2" Margin="5" Grid.Column="2" Height="25" VerticalAlignment="Top" Click="buttonAeroColorInactive_Click">
+                                <Button x:Name="imageAeroColorInactive" Padding="10" BorderThickness="2"/>
+                            </Button>
                         </Grid>
                     </TabItem>
 
@@ -263,7 +269,7 @@
                     <!--DWM a regedit nastavenia (win8 a win10)-->
                     <TabItem x:Name="pageModern" Header="Modern Apps Settings" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
                         <StackPanel>
-                            <ListBox x:Name="listBoxDMW" Margin="5" ItemsSource="{Binding DWMSettings}">
+                            <ListBox x:Name="listBoxDMW" Margin="5" ItemsSource="{Binding RegistrySettings}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <CheckBox Content="{Binding Name}" IsChecked="{Binding Checked}"></CheckBox>
