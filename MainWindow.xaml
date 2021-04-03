@@ -14,7 +14,7 @@
                 <Grid IsEnabled="False" Height="220" Background="{DynamicResource {x:Static SystemColors.DesktopBrushKey}}" Margin="0 0 0 10" Style="{x:Null}" OverridesDefaultStyle="True" FocusVisualStyle="{x:Null}">
                     <Grid.Resources>
                         <ResourceDictionary>
-                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary.MergedDictionaries>
                                 <ResourceDictionary Source="/PresentationFramework.Classic;component/themes/Classic.xaml"/>
                             </ResourceDictionary.MergedDictionaries>
                         </ResourceDictionary >
@@ -139,7 +139,7 @@
 
                 <!-- Colors a Metrics  -->
                 <TabControl Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
-                    
+
                     <TabItem Header="Colors and Metrics" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
                         <Grid Margin="5" >
                             <Grid.ColumnDefinitions>
@@ -156,7 +156,7 @@
                             <Label Content="Item:" Padding="5 0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="0,0,0,35" Grid.RowSpan="2"/>
                             <Label Content="Size:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0,35" Grid.RowSpan="2"/>
                             <Label Content="Color:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="87,0,0,35" Grid.RowSpan="2"/>
-                            
+
                             <ComboBox x:Name="comboBoxItems" Grid.Column="0" Grid.Row="1" Margin="5,5.333,5,0" Height="25" VerticalAlignment="Top" DropDownClosed="comboBoxItems_DropDownClosed" SelectionChanged="comboBoxItems_SelectionChanged" Grid.ColumnSpan="2"/>
                             <Label Visibility="Hidden" x:Name="labelComboBoxItems" Content="aaaaa" Panel.ZIndex="10" Grid.Row="1" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2,2.333,2,2" MouseDown="labelComboBoxItems_MouseDown" Grid.ColumnSpan="2" PreviewTextInput="NumberValidationTextBox"/>
                             <TextBox x:Name="textBoxItemSize" Grid.Column="2" Grid.Row="1" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" InputScope="Number" MaxLines="1" MaxLength="2" TextChanged="textBoxItemSize_TextChanged" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
@@ -167,7 +167,7 @@
                         </Grid>
                     </TabItem>
 
-                    
+
                     <!-- Font Tab-->
                     <TabItem Header="Fonts" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
                         <Grid Margin="5">
@@ -214,32 +214,39 @@
 
                         </Grid>
                     </TabItem>
-                    
-                    
+
+
                     <!-- Aero nastavenia -->
                     <TabItem Header="Title Colors" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
                         <Grid Margin="5">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="125"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="45"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Label VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">Theme Color</Label>
-                            <Button x:Name="buttonAeroColor" Grid.Row="0" Margin="5" Grid.Column="2" Height="25" VerticalAlignment="Top" Click="buttonAeroColor_Click">
-                                <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2"/>
+                            <Label VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="1">Theme Color</Label>
+                            <Button x:Name="buttonThemeColor" Grid.Row="0" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonThemeColor_Click">
+                                <Button x:Name="imageThemeColor" Padding="10" BorderThickness="2"/>
                             </Button>
-                            <Label VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.Row="1">Color Opacity</Label>
-                            <Slider x:Name="sliderColorOpacity" Grid.Row="1" Grid.Column="1" Margin="3" Maximum="255" ValueChanged="sliderColorOpacity_ValueChanged"/>
-                            <TextBox IsEnabled="False" x:Name="textBoxColorOpacity" Grid.Row="1" Grid.Column="2" Margin="5 5" Text="" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
-                            <ComboBox Grid.Row="2" Grid.Column="1" Text="Inactive Window Color"/>
-                            <CheckBox IsChecked="True" Grid.Row="2" Grid.Column="0" Content="Enabled" VerticalAlignment="Center"/>
-                            <Button x:Name="buttonAeroColorInactive" Grid.Row="2" Margin="5" Grid.Column="2" Height="25" VerticalAlignment="Top" Click="buttonAeroColorInactive_Click">
-                                <Button x:Name="imageAeroColorInactive" Padding="10" BorderThickness="2"/>
+                            <Label VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.Row="1" Margin="1">Theme Color Opacity</Label>
+                            <Slider x:Name="sliderColorOpacity" Grid.Row="1" Grid.Column="1" Margin="3" Maximum="255" ValueChanged="sliderColorOpacity_ValueChanged" Grid.ColumnSpan="2"/>
+                            <TextBox IsEnabled="False" x:Name="textBoxColorOpacity" Grid.Row="1" Grid.Column="3" Margin="5,4.667,5,5.333" Text="" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
+                            <ComboBox x:Name="comboBoxAeroColors" ItemsSource="{Binding AeroColors}" Grid.Row="2" Grid.ColumnSpan="2">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <CheckBox x:Name="checkBoxAeroColorEnabled" Grid.Row="2" Grid.Column="2" Content="Enabled" VerticalAlignment="Center" Margin="5" IsChecked="{Binding SelectedItem.Enabled, ElementName=comboBoxAeroColors}"/>
+                            <Button x:Name="buttonAeroColor" Grid.Row="2" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonAeroColor_Click" IsEnabled="{Binding SelectedItem.Enabled, ElementName=comboBoxAeroColors}">
+                                <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2" Background="{Binding SelectedItem.ItemBrush, ElementName=comboBoxAeroColors}"/>
                             </Button>
                         </Grid>
                     </TabItem>
@@ -265,7 +272,7 @@
                         </StackPanel>
                     </TabItem>
 
-     
+
                     <!--DWM a regedit nastavenia (win8 a win10)-->
                     <TabItem x:Name="pageModern" Header="Modern Apps Settings" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
                         <StackPanel>
@@ -281,7 +288,7 @@
                     </TabItem>
 
                 </TabControl>
-               
+
             </StackPanel>
         </Border>
 

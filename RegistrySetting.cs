@@ -46,6 +46,21 @@ namespace AdvancedWindowsAppearence
             return val;
         }
 
+        public void RemoveFromRegistry()
+        {
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(RegistryPath, true);
+            if (registryKey == null)
+            {
+                registryKey.Close();
+                return;
+            }
+            try
+            {
+                registryKey.DeleteValue(RegistryKey);
+            }
+            catch { }
+        } 
+
         public void SaveToRegistry()
         {
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(RegistryPath, true);

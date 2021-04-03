@@ -25,8 +25,11 @@ namespace AdvancedWindowsAppearence
 
         AppearanceSetting[] itemSettings = new AppearanceSetting[32];
         AppearanceSetting[] fontSettings = new AppearanceSetting[6];
-        AeroColorRegistrySetting ThemeColor = new AeroColorRegistrySetting("Aero Colors", "", "ColorizationColor");
-        AeroColorRegistrySetting AeroColorInactive = new AeroColorRegistrySetting("Aero Color Inactive", "", "AccentColorInactive");
+        AeroColorRegistrySetting themeColor = new AeroColorRegistrySetting("Aero Colors", "", "ColorizationColor");
+
+        RegistrySettingsControler RegistrySettingsController = new RegistrySettingsControler();
+        AeroColorsController AeroColorsController = new AeroColorsController();
+
 
         bool isHighContrast = false; //finish this feature
         
@@ -38,6 +41,7 @@ namespace AdvancedWindowsAppearence
             LoadFonts();
             LoadDPIScale();
             LoadAeroTab();
+            LoadAeroColors();
             UpdateWallpaperInfo();
             LoadThemeName();
             LoadRegistrySettings();
@@ -47,11 +51,10 @@ namespace AdvancedWindowsAppearence
 
         void LoadAeroTab()
         {
-            if (!ThemeColor.ItemColor.HasValue)
+            if (!themeColor.ItemColor.HasValue)
                 return;
-            byte a = ThemeColor.ItemColor.Value.A;
-            imageAeroColor.Background = MediaColorToBrush(ThemeColor.ItemColor);
-            imageAeroColorInactive.Background = MediaColorToBrush(AeroColorInactive.ItemColor);
+            byte a = themeColor.ItemColor.Value.A;
+            imageThemeColor.Background = MediaColorToBrush(themeColor.ItemColor);
             textBoxColorOpacity.Text = a.ToString();
             sliderColorOpacity.Value = a;
         }
@@ -154,20 +157,28 @@ namespace AdvancedWindowsAppearence
             SelectFont(fontSettings[0]);
         }
 
-        RegistrySettingsControler RegistrySettingsController = new RegistrySettingsControler();
+        void LoadAeroColors()
+        {
+            comboBoxAeroColors.DataContext = AeroColorsController;
+            AeroColorsController.Add("Active Window Color", "AccentColor");
+            AeroColorsController.Add("Active Window Border", "ColorizationColor");
+            AeroColorsController.Add("Inactive Window Color", "AccentColorInactive");
+        }
 
+        
         void LoadRegistrySettings()
         {
             listBoxDMW.DataContext = RegistrySettingsController;
             RegistrySettingsController.Add("Show accent color on the title bars", "ColorPrevalence", new Version(10,0));
             RegistrySettingsController.Add("Enable transparent taskbar", "ColorizationOpaqueBlend", new Version(6, 2));
-            RegistrySettingsController.Add("Enable composition", "Composition", new Version(6, 1));           
+            //RegistrySettingsController.Add("Enable composition", "Composition", new Version(6, 1));           
             RegistrySettingsController.Add("Enable peek at desktop", "EnableAeroPeek", new Version(6, 1));
+            RegistrySettingsController.Add("Hibernate Thumbnails", "AlwaysHibernateThumbnails", new Version(6, 1));
             RegistrySettingsController.AddWithPath("Enable transparency effects", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "EnableTransparency", new Version(10, 0));
             RegistrySettingsController.AddWithPath("Show accent color on the start and actioncenter", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "ColorPrevalence", new Version(10,0));
             RegistrySettingsController.AddWithPath("Apps use light theme", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", new Version(10, 0));
             RegistrySettingsController.AddWithPath("System uses light theme", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", new Version(10, 0));
-            //RegistrySettingsController.AddWithPath("Always show scrollbars in modern apps", "", new Version(10,0));
+            RegistrySettingsController.AddWithPath("Always show scrollbars in modern apps", @"Control Panel\Accessibility", "DynamicScrollbars", new Version(10,0));
         }
 
         List<System.Drawing.Font> GetSystemFonts()
@@ -482,7 +493,7 @@ namespace AdvancedWindowsAppearence
             string wallpaperPath = ""; //chyyba na to UI 
 
             
-            ThemeSettings SaveTheme = new ThemeSettings(themeName, ThemeColor.ItemColor.Value, aeroStyle, wallpaperPath, itemSettings, fontSettings);
+            ThemeSettings SaveTheme = new ThemeSettings(themeName, themeColor.ItemColor.Value, aeroStyle, wallpaperPath, itemSettings, fontSettings);
             
             foreach (var setting in itemSettings)
             {
@@ -499,7 +510,8 @@ namespace AdvancedWindowsAppearence
                 setting.IsEdited = false;
             }
             MessageBox.Show("You need to restart to apply these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
-            AeroColorInactive.SaveToRegistry();
+
+            AeroColorsController.SaveAll();
             RegistrySettingsController.SaveAll();
         }
 
@@ -553,9 +565,9 @@ namespace AdvancedWindowsAppearence
 
         #region Aero Tab
 
-        private void buttonAeroColor_Click(object sender, RoutedEventArgs e)
+        private void buttonThemeColor_Click(object sender, RoutedEventArgs e)
         {
-            ThemeColor.ItemColor = OpenColorDialog(ThemeColor.ItemColor);
+            themeColor.ItemColor = OpenColorDialog(themeColor.ItemColor);
             LoadAeroTab();
         }
 
@@ -574,7 +586,7 @@ namespace AdvancedWindowsAppearence
             byte a = new byte();
             if (alpha > byte.MaxValue || alpha < byte.MinValue) return;
             a = byte.Parse(alpha.ToString());
-            ThemeColor.ItemColor = System.Drawing.Color.FromArgb(alpha ,ThemeColor.ItemColor.Value.R, ThemeColor.ItemColor.Value.G, ThemeColor.ItemColor.Value.B);
+            themeColor.ItemColor = System.Drawing.Color.FromArgb(alpha ,themeColor.ItemColor.Value.R, themeColor.ItemColor.Value.G, themeColor.ItemColor.Value.B);
             LoadAeroTab();
         }
 
@@ -582,7 +594,7 @@ namespace AdvancedWindowsAppearence
         {
             byte a = new byte();
             a = Convert.ToByte(sliderColorOpacity.Value);
-            ThemeColor.ItemColor = System.Drawing.Color.FromArgb(a, ThemeColor.ItemColor.Value.R, ThemeColor.ItemColor.Value.G, ThemeColor.ItemColor.Value.B);
+            themeColor.ItemColor = System.Drawing.Color.FromArgb(a, themeColor.ItemColor.Value.R, themeColor.ItemColor.Value.G, themeColor.ItemColor.Value.B);
             LoadAeroTab();
         }
         #endregion
@@ -609,9 +621,10 @@ namespace AdvancedWindowsAppearence
             }
         }
 
-        private void buttonAeroColorInactive_Click(object sender, RoutedEventArgs e)
+        private void buttonAeroColor_Click(object sender, RoutedEventArgs e)
         {
-            AeroColorInactive.ItemColor = OpenColorDialog(AeroColorInactive.ItemColor);
+            AeroColorsController.ChangeColorCurrent((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem);
+            OpenColorDialog(((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor);
             LoadAeroTab();
         }
     }

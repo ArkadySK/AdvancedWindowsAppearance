@@ -78,6 +78,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="AeroColorRegistrySetting.cs" />
+    <Compile Include="AeroColorsController.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>

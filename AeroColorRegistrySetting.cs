@@ -11,6 +11,14 @@ namespace AdvancedWindowsAppearence
     class AeroColorRegistrySetting: RegistrySetting
     {
         public Color? ItemColor { get; set; }
+        public bool Enabled { get; set; }
+        public System.Windows.Media.Brush ItemBrush { 
+            get 
+            {
+                var col = ItemColor;
+                return new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(col.Value.A, col.Value.R, col.Value.G, col.Value.B));
+            } 
+        }
 
         public AeroColorRegistrySetting(string name, string registrypath, string registrykey)
         {
@@ -29,10 +37,15 @@ namespace AdvancedWindowsAppearence
             Color color = new Color();
 
             var colorReg = GetValueFromRegistry();
-            if (colorReg == null) return Color.Silver;
+            if (colorReg == null)
+            {
+                this.Enabled = false; 
+                return Color.Silver;
+            }
             try
             {
                 color = (Color)(new ColorConverter()).ConvertFromInvariantString(colorReg.ToString());
+                this.Enabled = true;
             }
             catch
             {
