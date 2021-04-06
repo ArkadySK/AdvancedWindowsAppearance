@@ -69,7 +69,7 @@ namespace AdvancedWindowsAppearence
 
         string Color_ConvertToRegistryFormat(Color color)
         {
-            string colorstring = (color.B | (color.G << 8) | (color.R << 16) | (color.A << 24)).ToString();
+            string colorstring = (color.R | (color.G << 8) | (color.B << 16) | (color.A << 24)).ToString();
             return colorstring;
         }
     }

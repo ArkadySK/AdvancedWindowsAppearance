@@ -18,7 +18,8 @@ namespace AdvancedWindowsAppearence
         }
         public void AddWithPath(string name, string registrypath, string registrykey, Version winVer)
         {
-            if (winVer > Environment.OSVersion.Version) return;
+            Console.WriteLine("system is supported: " + (Environment.OSVersion.Version >= winVer) + ", registrysetting: " + name + " //system version: " + Environment.OSVersion.Version);
+            if (winVer.CompareTo(Environment.OSVersion.Version) >= 0) return;
             RegistrySetting registrySetting = new RegistrySetting(name, registrypath, registrykey);
             RegistrySettings.Add(registrySetting);
         }

@@ -28,7 +28,6 @@ namespace AdvancedWindowsAppearence
             if (winVer > Environment.OSVersion.Version) return;
             AeroColorRegistrySetting setting = new AeroColorRegistrySetting(name, registrypath, registrykey);
             AeroColors.Add(setting);
-            Console.WriteLine("name: " + setting.Name + ", regkey: " + setting.RegistryKey);
         }
 
         public void RemoveFromRegistry(AeroColorRegistrySetting setting)
@@ -41,7 +40,6 @@ namespace AdvancedWindowsAppearence
             foreach (AeroColorRegistrySetting setting in AeroColors)
             {
                 if (setting == null) continue;
-                if (!setting.Checked.HasValue) continue;
                 if (!setting.Enabled) RemoveFromRegistry(setting);
                 else
                 setting.SaveToRegistry();

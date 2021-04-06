@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
+using System.Threading;
 
 namespace AdvancedWindowsAppearence
 {
@@ -25,7 +27,7 @@ namespace AdvancedWindowsAppearence
 
         AppearanceSetting[] itemSettings = new AppearanceSetting[32];
         AppearanceSetting[] fontSettings = new AppearanceSetting[6];
-        AeroColorRegistrySetting themeColor = new AeroColorRegistrySetting("Aero Colors", "", "ColorizationColor");
+        AeroColorRegistrySetting themeColor = new AeroColorRegistrySetting("Theme Color", "", "ColorizationColor");
 
         RegistrySettingsControler RegistrySettingsController = new RegistrySettingsControler();
         AeroColorsController AeroColorsController = new AeroColorsController();
@@ -161,7 +163,6 @@ namespace AdvancedWindowsAppearence
         {
             comboBoxAeroColors.DataContext = AeroColorsController;
             AeroColorsController.Add("Active Window Color", "AccentColor");
-            AeroColorsController.Add("Active Window Border", "ColorizationColor");
             AeroColorsController.Add("Inactive Window Color", "AccentColorInactive");
         }
 
@@ -170,7 +171,7 @@ namespace AdvancedWindowsAppearence
         {
             listBoxDMW.DataContext = RegistrySettingsController;
             RegistrySettingsController.Add("Show accent color on the title bars", "ColorPrevalence", new Version(10,0));
-            RegistrySettingsController.Add("Enable transparent taskbar", "ColorizationOpaqueBlend", new Version(6, 2));
+            RegistrySettingsController.Add("Enable opaque taskbar (win 8 only)", "ColorizationOpaqueBlend", new Version(6, 2));
             //RegistrySettingsController.Add("Enable composition", "Composition", new Version(6, 1));           
             RegistrySettingsController.Add("Enable peek at desktop", "EnableAeroPeek", new Version(6, 1));
             RegistrySettingsController.Add("Hibernate Thumbnails", "AlwaysHibernateThumbnails", new Version(6, 1));
@@ -192,6 +193,25 @@ namespace AdvancedWindowsAppearence
 
             }
             return fonts;
+        }
+
+        void KillDWM()
+        {
+            var processes = Process.GetProcesses();
+            foreach (Process p in processes)
+            {
+                if (p.ProcessName == "dwm")
+                {
+                    try
+                    {
+                        p.Kill();
+                    }
+                    catch
+                    {
+                        Console.WriteLine("not poss to kill dwm.exe, sry");
+                    }
+                }
+            }
         }
 
         void UpdateFontList()
@@ -242,7 +262,6 @@ namespace AdvancedWindowsAppearence
                 textBoxItemSize.Text = nullableFloat.Value.ToString();
             }
         }
-
 
         void UpdateFontInfo(AppearanceSetting selSetting)
         {
@@ -509,10 +528,12 @@ namespace AdvancedWindowsAppearence
 
                 setting.IsEdited = false;
             }
-            MessageBox.Show("You need to restart to apply these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            AeroColorsController.SaveAll();
+            Thread.Sleep(2000);
             RegistrySettingsController.SaveAll();
+            AeroColorsController.SaveAll();
+            KillDWM();
+            MessageBox.Show("You need to restart to apply these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         #endregion
@@ -624,8 +645,7 @@ namespace AdvancedWindowsAppearence
         private void buttonAeroColor_Click(object sender, RoutedEventArgs e)
         {
             AeroColorsController.ChangeColorCurrent((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem);
-            OpenColorDialog(((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor);
-            LoadAeroTab();
+            ((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor = OpenColorDialog(((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor);
         }
     }
 }
