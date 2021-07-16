@@ -154,7 +154,16 @@ namespace AdvancedWindowsAppearence
                 if (!cs.IsFoundInTheme)
                 {
                     ///zisti index colorid a insertni ho za neho
-                    newThemeSettingsIni.Insert(ColorIdIndex-1, cs.Value);
+                    try
+                    {
+                        newThemeSettingsIni.Insert(ColorIdIndex - 1, cs.Value);
+
+                    }
+                    catch
+                    {
+                        newThemeSettingsIni.Add(colorsId);
+                        newThemeSettingsIni.Add(cs.Value);
+                    }
                 }
             }
 
