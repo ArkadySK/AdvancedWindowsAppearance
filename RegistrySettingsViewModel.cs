@@ -23,15 +23,17 @@ namespace AdvancedWindowsAppearence
             RegistrySetting registrySetting = new RegistrySetting(name, registrypath, registrykey);
             RegistrySettings.Add(registrySetting);
         }
-        public void SaveAll()
+        public async Task SaveAll()
         {
+            List<Task> tasks = new List<Task>(); 
             foreach (RegistrySetting registrySetting in RegistrySettings)
             {
                 if (registrySetting == null) continue;
                 if (!registrySetting.Checked.HasValue) continue;
 
-                registrySetting.SaveToRegistry();
+                tasks.Add(Task.Run(() => registrySetting.SaveToRegistry()));
             }
+            await Task.WhenAll(tasks);
         }
     }
 }

@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace AdvancedWindowsAppearence
 {
@@ -494,14 +495,14 @@ namespace AdvancedWindowsAppearence
 
         #region Save Changes
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            SaveChanges();
+            await SaveChanges();
         }
 
         string aeroStyle = "";
 
-        void SaveChanges() {         
+         async Task SaveChanges() {         
             if (!checkBoxOverwriteThemeStyle.IsChecked.Value)
             {
                 isHighContrast = false;
@@ -512,7 +513,7 @@ namespace AdvancedWindowsAppearence
             string wallpaperPath = ""; //chyyba na to UI 
 
             
-            ThemeSettings SaveTheme = new ThemeSettings(themeName, themeColor.ItemColor.Value, aeroStyle, wallpaperPath, itemSettings, fontSettings);
+            ThemeSettings SaveTheme = Task.Run(() => new ThemeSettings(themeName, themeColor.ItemColor.Value, aeroStyle, wallpaperPath, itemSettings, fontSettings)).Result;
             
             foreach (var setting in itemSettings)
             {
@@ -529,8 +530,8 @@ namespace AdvancedWindowsAppearence
                 setting.IsEdited = false;
             }
 
-            Thread.Sleep(2000);
-            registrySettingsViewModel.SaveAll();
+            await Task.Delay(2000);
+            await registrySettingsViewModel.SaveAll();
             aeroColorsViewModel.SaveAll();
             KillDWM();
             MessageBox.Show("You need to restart to apply these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
