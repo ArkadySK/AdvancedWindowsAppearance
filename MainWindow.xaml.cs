@@ -29,8 +29,8 @@ namespace AdvancedWindowsAppearence
         AppearanceSetting[] fontSettings = new AppearanceSetting[6];
         AeroColorRegistrySetting themeColor = new AeroColorRegistrySetting("Theme Color", "", "ColorizationColor");
 
-        RegistrySettingsControler RegistrySettingsController = new RegistrySettingsControler();
-        AeroColorsController AeroColorsController = new AeroColorsController();
+        RegistrySettingsViewModel registrySettingsViewModel = new RegistrySettingsViewModel();
+        AeroColorsViewModel aeroColorsViewModel = new AeroColorsViewModel();
 
 
         bool isHighContrast = false; //finish this feature
@@ -161,25 +161,25 @@ namespace AdvancedWindowsAppearence
 
         void LoadAeroColors()
         {
-            comboBoxAeroColors.DataContext = AeroColorsController;
-            AeroColorsController.Add("Active Window Color", "AccentColor");
-            AeroColorsController.Add("Inactive Window Color", "AccentColorInactive");
+            comboBoxAeroColors.DataContext = aeroColorsViewModel;
+            aeroColorsViewModel.Add("Active Window Color", "AccentColor");
+            aeroColorsViewModel.Add("Inactive Window Color", "AccentColorInactive");
         }
 
         
         void LoadRegistrySettings()
         {
-            listBoxDMW.DataContext = RegistrySettingsController;
-            RegistrySettingsController.Add("Show accent color on the title bars", "ColorPrevalence", new Version(10,0));
-            RegistrySettingsController.Add("Enable opaque taskbar (win 8 only)", "ColorizationOpaqueBlend", new Version(6, 2));
+            listBoxDMW.DataContext = registrySettingsViewModel;
+            registrySettingsViewModel.Add("Show accent color on the title bars", "ColorPrevalence", new Version(10,0));
+            registrySettingsViewModel.Add("Enable opaque taskbar (win 8 only)", "ColorizationOpaqueBlend", new Version(6, 2));
             //RegistrySettingsController.Add("Enable composition", "Composition", new Version(6, 1));           
-            RegistrySettingsController.Add("Enable peek at desktop", "EnableAeroPeek", new Version(6, 1));
-            RegistrySettingsController.Add("Hibernate Thumbnails", "AlwaysHibernateThumbnails", new Version(6, 1));
-            RegistrySettingsController.AddWithPath("Enable transparency effects", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "EnableTransparency", new Version(10, 0));
-            RegistrySettingsController.AddWithPath("Show accent color on the start and actioncenter", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "ColorPrevalence", new Version(10,0));
-            RegistrySettingsController.AddWithPath("Apps use light theme", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", new Version(10, 0));
-            RegistrySettingsController.AddWithPath("System uses light theme", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", new Version(10, 0));
-            RegistrySettingsController.AddWithPath("Always show scrollbars in modern apps", @"Control Panel\Accessibility", "DynamicScrollbars", new Version(10,0));
+            registrySettingsViewModel.Add("Enable peek at desktop", "EnableAeroPeek", new Version(6, 1));
+            registrySettingsViewModel.Add("Hibernate Thumbnails", "AlwaysHibernateThumbnails", new Version(6, 1));
+            registrySettingsViewModel.AddWithPath("Enable transparency effects", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "EnableTransparency", new Version(10, 0));
+            registrySettingsViewModel.AddWithPath("Show accent color on the start and actioncenter", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "ColorPrevalence", new Version(10,0));
+            registrySettingsViewModel.AddWithPath("Apps use light theme", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", new Version(10, 0));
+            registrySettingsViewModel.AddWithPath("System uses light theme", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", new Version(10, 0));
+            registrySettingsViewModel.AddWithPath("Always show scrollbars in modern apps", @"Control Panel\Accessibility", "DynamicScrollbars", new Version(10,0));
         }
 
         List<System.Drawing.Font> GetSystemFonts()
@@ -530,8 +530,8 @@ namespace AdvancedWindowsAppearence
             }
 
             Thread.Sleep(2000);
-            RegistrySettingsController.SaveAll();
-            AeroColorsController.SaveAll();
+            registrySettingsViewModel.SaveAll();
+            aeroColorsViewModel.SaveAll();
             KillDWM();
             MessageBox.Show("You need to restart to apply these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
         }
@@ -631,20 +631,9 @@ namespace AdvancedWindowsAppearence
 
         }
 
-        int f_count = 0; //extra kek
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.F)
-                f_count++;
-            if(f_count >= 10)
-            {
-                pageModern.Visibility = Visibility.Visible;
-            }
-        }
-
         private void buttonAeroColor_Click(object sender, RoutedEventArgs e)
         {
-            AeroColorsController.ChangeColorCurrent((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem);
+            aeroColorsViewModel.ChangeColorCurrent((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem);
             ((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor = OpenColorDialog(((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor);
         }
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AdvancedWindowsAppearence
 {
-    class AeroColorsController
+    class AeroColorsViewModel
     {
         public ObservableCollection<AeroColorRegistrySetting> AeroColors { get; set; } = new ObservableCollection<AeroColorRegistrySetting>();
 

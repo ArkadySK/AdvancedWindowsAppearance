@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AdvancedWindowsAppearence
 {
-    public class RegistrySettingsControler
+    public class RegistrySettingsViewModel
     {
         public ObservableCollection<RegistrySetting> RegistrySettings { get; set; } = new ObservableCollection<RegistrySetting>();
 

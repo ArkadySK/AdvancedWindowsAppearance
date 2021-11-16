@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AdvancedWindowsAppearence"
         x:Class="AdvancedWindowsAppearence.MainWindow"
         mc:Ignorable="d"
-        Title="Advanced Appearance" Width="470" SizeToContent="Height" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="NoResize" KeyDown="Window_KeyDown">
+        Title="Advanced Appearance" Width="470" SizeToContent="Height" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="NoResize">
 
     <StackPanel>
         <Border Margin="5">
