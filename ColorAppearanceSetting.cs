@@ -51,24 +51,6 @@ namespace AdvancedWindowsAppearence
 
             return intsize;
         }
-
-        Color? GetColorFromRegistry(string registrypath)
-        {
-            if (registrypath == null || registrypath == "") return null;
-            Color color = new Color();
-            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Colors");
-            if (registryKey == null) return null;
-
-            var colorReg = registryKey.GetValue(registrypath);
-            registryKey.Close();
-            if (colorReg == null) return null;
-
-            var colorRegString = colorReg.ToString().Split(' ');
-            color = Color.FromArgb(int.Parse(colorRegString[0]), int.Parse(colorRegString[1]), int.Parse(colorRegString[2]));
-
-            return color;
-        }
-
         public void SaveToRegistry()
         {
 
