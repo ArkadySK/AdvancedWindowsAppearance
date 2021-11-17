@@ -11,8 +11,8 @@ namespace AdvancedWindowsAppearence
 {
     public class GeneralViewModel
     {
-        public ColorAppearanceSetting[] ColorSettings = new ColorAppearanceSetting[32];
-        public FontAppearanceSetting[] FontSettings = new FontAppearanceSetting[6];
+        public ColorAppearanceSetting[] ColorSettings;
+        public FontAppearanceSetting[] FontSettings;
         public WallpaperAppearanceSetting Wallpaper = new WallpaperAppearanceSetting();
 
         public AeroColorRegistrySetting ThemeColor = new AeroColorRegistrySetting("Theme Color", "", "ColorizationColor");
@@ -21,6 +21,14 @@ namespace AdvancedWindowsAppearence
         public double DPI = 1;
 
         public string ThemeStyle = "";
+
+        public GeneralViewModel()
+        {
+            LoadRegistrySettings();
+            LoadColors();
+            LoadFonts();
+            LoadDPIScale();
+        }
 
         public void UpdateThemeStyle(string style)
         {
@@ -34,7 +42,21 @@ namespace AdvancedWindowsAppearence
 
         void LoadDPIScale()
         {
-            DPI = SystemFonts.CaptionFont.Size / FontSettings[0].FontSize;
+            DPI = System.Windows.SystemFonts.CaptionFontSize / FontSettings[0].FontSize;
+        }
+
+        void LoadRegistrySettings()
+        {
+            RegistrySettingsViewModel.Add("Show accent color on the title bars", "ColorPrevalence", new Version(10, 0));
+            RegistrySettingsViewModel.Add("Enable opaque taskbar (win 8 only)", "ColorizationOpaqueBlend", new Version(6, 2));
+            //RegistrySettingsController.Add("Enable composition", "Composition", new Version(6, 1));           
+            RegistrySettingsViewModel.Add("Enable peek at desktop", "EnableAeroPeek", new Version(6, 1));
+            RegistrySettingsViewModel.Add("Hibernate Thumbnails", "AlwaysHibernateThumbnails", new Version(6, 1));
+            RegistrySettingsViewModel.AddWithPath("Enable transparency effects", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "EnableTransparency", new Version(10, 0));
+            RegistrySettingsViewModel.AddWithPath("Show accent color on the start and actioncenter", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "ColorPrevalence", new Version(10, 0));
+            RegistrySettingsViewModel.AddWithPath("Apps use light theme", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", new Version(10, 0));
+            RegistrySettingsViewModel.AddWithPath("System uses light theme", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", new Version(10, 0));
+            RegistrySettingsViewModel.AddWithPath("Always show scrollbars in modern apps", @"Control Panel\Accessibility", "DynamicScrollbars", new Version(10, 0));
         }
 
         void LoadColors()
@@ -79,12 +101,14 @@ namespace AdvancedWindowsAppearence
 
         void LoadFonts()
         {
-            FontSettings[0] = new FontAppearanceSetting("Active / Inactive Title Font", "CaptionFont", "");
-            FontSettings[1] = new FontAppearanceSetting("Icon Font", "IconFont", "");
-            FontSettings[2] = new FontAppearanceSetting("Menu Font", "MenuFont", "MenuText");
-            FontSettings[3] = new FontAppearanceSetting("Palette Title Font", "SmCaptionFont", "");
-            FontSettings[4] = new FontAppearanceSetting("Status Font", "StatusFont", "InfoText");
-            FontSettings[5] = new FontAppearanceSetting("Window Text Font", "MessageFont", "WindowText");
+            FontSettings = new FontAppearanceSetting[] {
+                new FontAppearanceSetting("Active / Inactive Title Font", "CaptionFont", ""),
+                new FontAppearanceSetting("Icon Font", "IconFont", ""),
+                new FontAppearanceSetting("Menu Font", "MenuFont", "MenuText"),
+                new FontAppearanceSetting("Palette Title Font", "SmCaptionFont", ""),
+                new FontAppearanceSetting("Status Font", "StatusFont", "InfoText"),
+                new FontAppearanceSetting("Window Text Font", "MessageFont", "WindowText")
+            };
         }
 
         void KillDWM()
