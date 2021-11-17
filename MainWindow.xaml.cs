@@ -163,8 +163,8 @@ namespace AdvancedWindowsAppearence
         void LoadAeroColors()
         {
             comboBoxAeroColors.DataContext = aeroColorsViewModel;
-            aeroColorsViewModel.Add("Active Window Color", "AccentColor");
-            aeroColorsViewModel.Add("Inactive Window Color", "AccentColorInactive");
+            aeroColorsViewModel.AddNoCheck("Active Window Color", "AccentColor");
+            aeroColorsViewModel.AddNoCheck("Inactive Window Color", "AccentColorInactive");
         }
 
         
