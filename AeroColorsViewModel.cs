@@ -11,7 +11,10 @@ namespace AdvancedWindowsAppearence
     {
         public ObservableCollection<AeroColorRegistrySetting> AeroColors { get; set; } = new ObservableCollection<AeroColorRegistrySetting>();
 
-        public void Add(string name, string registrykey)
+        /// <summary>
+        /// this does not check if you have the requested version of windows
+        /// </summary>
+        public void AddNoCheck(string name, string registrykey)
         {
             var winVer = new Version(6,2);
             var registryPath = @"Software\Microsoft\Windows\DWM";
