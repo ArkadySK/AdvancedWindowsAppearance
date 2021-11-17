@@ -26,13 +26,6 @@ namespace AdvancedWindowsAppearence
     public partial class MainWindow : Window
     {
         GeneralViewModel Settings = new GeneralViewModel();
-        AeroColorRegistrySetting themeColor = new AeroColorRegistrySetting("Theme Color", "", "ColorizationColor");
-
-        RegistrySettingsViewModel registrySettingsViewModel = new RegistrySettingsViewModel();
-        AeroColorsViewModel aeroColorsViewModel = new AeroColorsViewModel();
-
-
-        bool isHighContrast = false; //finish this feature
         
         public MainWindow()
         {
@@ -45,18 +38,17 @@ namespace AdvancedWindowsAppearence
             UpdateWallpaperInfo();
             LoadThemeName();
             LoadRegistrySettings();
-
-            SelectItem(Settings.itemSettings[12]);
         }
 
         void LoadAeroTab()
         {
-            if (!themeColor.ItemColor.HasValue)
+            /*
+            if (!ThemeColor.ItemColor.HasValue)
                 return;
             byte a = themeColor.ItemColor.Value.A;
             imageThemeColor.Background = MediaColorToBrush(themeColor.ItemColor);
             textBoxColorOpacity.Text = a.ToString();
-            sliderColorOpacity.Value = a;
+            sliderColorOpacity.Value = a;*/
         }
 
         void LoadThemeName()
@@ -75,11 +67,6 @@ namespace AdvancedWindowsAppearence
         }
 
         double dpi = 1;
-
-        void LoadDPIScale()
-        {
-            dpi = SystemFonts.CaptionFontSize / fontSettings[0].FontSize;
-        }
 
         
         void LoadAeroColors()
@@ -118,25 +105,7 @@ namespace AdvancedWindowsAppearence
             return fonts;
         }
 
-        void KillDWM()
-        {
-            var processes = Process.GetProcesses();
-            foreach (Process p in processes)
-            {
-                if (p.ProcessName == "dwm")
-                {
-                    try
-                    {
-                        p.Kill();
-                    }
-                    catch
-                    {
-                        Console.WriteLine("not poss to kill dwm.exe, sry");
-                    }
-                }
-            }
-        }
-
+        
         void UpdateFontList()
         {
             comboBoxFont.Items.Clear();
@@ -177,7 +146,7 @@ namespace AdvancedWindowsAppearence
             }
         }
 
-        void UpdateFontInfo(AppearanceSetting selSetting)
+        void UpdateFontInfo(FontAppearanceSetting selSetting)
         {
             if (selSetting.Font == null)
             {
@@ -238,41 +207,6 @@ namespace AdvancedWindowsAppearence
             textBlockPreview.FontSize = size * dpi;
         }
 
-        void UpdateColors(AppearanceSetting appearanceSetting)
-        {
-            if (appearanceSetting.ItemColor.HasValue)
-            {
-                imageItemColor.Background = MediaColorToBrush(appearanceSetting.ItemColor);
-                buttonItemColor.IsEnabled = true;
-            }
-            else
-                buttonItemColor.IsEnabled = false;
-
-            
-            if (appearanceSetting.FontColor.HasValue)
-            {
-                imageFontColor.Background = MediaColorToBrush(appearanceSetting.FontColor);
-                buttonFontColor.IsEnabled = true;
-            }
-            else
-                buttonFontColor.IsEnabled = false;
-
-        }
-
-        void SelectItem(AppearanceSetting appearanceSetting)
-        {
-            UpdateColors(appearanceSetting);
-            UpdateItemSize(appearanceSetting.Size);
-            comboBoxItems.Text = appearanceSetting.Name;
-        }
-
-        void SelectFont(AppearanceSetting appearanceSetting)
-        {
-            UpdateColors(appearanceSetting);
-            UpdateFontInfo(appearanceSetting);
-            comboBoxFonts.Text = appearanceSetting.Name;
-        }
-
         Brush MediaColorToBrush(System.Drawing.Color? col)
         {
             if (col == null)
@@ -301,32 +235,12 @@ namespace AdvancedWindowsAppearence
 
 
         #region Colors And Metrics Tab
-        private void comboBoxItems_DropDownClosed(object sender, EventArgs e)
-        {
-            labelComboBoxItems.Content = comboBoxItems.Text;
-            int i = comboBoxItems.SelectedIndex;
-            if(i!=-1)
-                SelectItem(itemSettings[i]);
-        }
-
-        private void comboBoxItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            labelComboBoxItems.Content = comboBoxItems.Text;
-            int i = comboBoxItems.SelectedIndex;
-            if (i != -1)
-                SelectItem(itemSettings[i]);
-        }
-
-        private void labelComboBoxItems_MouseDown(object sender, MouseButtonEventArgs e) //
-        {
-            comboBoxItems.IsDropDownOpen = true;
-        }
+        
 
         private void buttonEditItemColor_Click(object sender, RoutedEventArgs e)
         {
             var selSetting = GetSelItemSetting();
             selSetting.ItemColor = OpenColorDialog(selSetting.ItemColor);
-            UpdateColors(selSetting);
             selSetting.IsEdited = true;
         }
 
@@ -341,25 +255,12 @@ namespace AdvancedWindowsAppearence
 
 
         #region Fonts Tab
-        private void comboBoxFonts_DropDownClosed(object sender, EventArgs e)
-        {
-            int i = comboBoxFonts.SelectedIndex;
-            if (i != -1)
-                SelectFont(fontSettings[i]);
-        }
-
-        private void comboBoxFonts_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            int i = comboBoxFonts.SelectedIndex;
-            if (i != -1)
-                SelectFont(fontSettings[i]);
-        }
+        
 
         private void buttonEditFontColor_Click(object sender, RoutedEventArgs e)
         {
             var selSetting = GetSelFontSetting();
             selSetting.FontColor = OpenColorDialog(selSetting.FontColor);
-            UpdateColors(selSetting);
             selSetting.IsEdited = true;
             UpdateFontPreview(selSetting.FontColor.Value);
         }
@@ -407,75 +308,34 @@ namespace AdvancedWindowsAppearence
 
 
         #region Save Changes
-
+        
         private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            await SaveChanges();
+            await Settings.SaveChanges(textBoxThemeName.Text);
         }
 
         string aeroStyle = "";
 
-         async Task SaveChanges() {         
-            if (!checkBoxOverwriteThemeStyle.IsChecked.Value)
-            {
-                isHighContrast = false;
-                aeroStyle = "";
-            }
-
-            string themeName = textBoxThemeName.Text;
-            string wallpaperPath = ""; //chyyba na to UI 
-
-            
-            ThemeSettings SaveTheme = Task.Run(() => new ThemeSettings(themeName, themeColor.ItemColor.Value, aeroStyle, wallpaperPath, itemSettings, fontSettings)).Result;
-            
-            foreach (var setting in itemSettings)
-            {
-                if (setting == null) continue;
-                if (!setting.IsEdited) continue;
-
-                if (setting.Font!=null)
-                setting.SaveFontToRegistry();
-                if (setting.Size.HasValue)
-                setting.SaveSizeToRegistry();
-
-                setting.SaveColorsToRegistry();
-
-                setting.IsEdited = false;
-            }
-
-            await Task.Delay(2000);
-            await registrySettingsViewModel.SaveAll();
-            aeroColorsViewModel.SaveAll();
-            KillDWM();
-            MessageBox.Show("You need to restart to apply these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
+        
         #endregion
 
 
         #region Theme Style
-        void UpdateThemeStyle(string style)
-        {
-            if (style == "") aeroStyle = "";
-            aeroStyle = @"%SystemRoot%\resources\Themes\"+style+ ".msstyles";
-        }
+        
 
         private void ToggleButtonAero_Click(object sender, RoutedEventArgs e)
         {
-            UpdateThemeStyle("Aero\\Aero");
-            isHighContrast = false;
+            Settings.UpdateThemeStyle("Aero\\Aero");
         }
 
         private void ToggleButtonAeroLite_Click(object sender, RoutedEventArgs e)
         {
-            UpdateThemeStyle("Aero\\AeroLite");
-            isHighContrast = false;
+            Settings.UpdateThemeStyle("Aero\\AeroLite");
         }
 
         private void ToggleButtonHighContrast_Click(object sender, RoutedEventArgs e)
         {
-            UpdateThemeStyle("Aero\\AeroLite");
-            isHighContrast = true;
+            Settings.UpdateThemeStyle("Aero\\AeroLite");
         }
 
         private void CheckBoxOverwriteThemeStyle_Click(object sender, RoutedEventArgs e)
@@ -489,7 +349,7 @@ namespace AdvancedWindowsAppearence
             if (!checkBoxOverwriteThemeStyle.IsChecked.Value)
             {
                 checkBoxOverwriteThemeStyle.IsChecked = false;
-                UpdateThemeStyle("");
+                Settings.UpdateThemeStyle("");
             }
             else if (checkBoxOverwriteThemeStyle.IsChecked.Value)
                 checkBoxOverwriteThemeStyle.IsChecked = true;
@@ -502,7 +362,7 @@ namespace AdvancedWindowsAppearence
 
         private void buttonThemeColor_Click(object sender, RoutedEventArgs e)
         {
-            themeColor.ItemColor = OpenColorDialog(themeColor.ItemColor);
+            Settings.ThemeColor.ItemColor = OpenColorDialog(Settings.ThemeColor.ItemColor);
             LoadAeroTab();
         }
 
@@ -521,7 +381,7 @@ namespace AdvancedWindowsAppearence
             byte a = new byte();
             if (alpha > byte.MaxValue || alpha < byte.MinValue) return;
             a = byte.Parse(alpha.ToString());
-            themeColor.ItemColor = System.Drawing.Color.FromArgb(alpha ,themeColor.ItemColor.Value.R, themeColor.ItemColor.Value.G, themeColor.ItemColor.Value.B);
+            Settings.ThemeColor.ItemColor = System.Drawing.Color.FromArgb(alpha , Settings.ThemeColor.ItemColor.Value.R, Settings.ThemeColor.ItemColor.Value.G, Settings.ThemeColor.ItemColor.Value.B);
             LoadAeroTab();
         }
 
@@ -529,7 +389,7 @@ namespace AdvancedWindowsAppearence
         {
             byte a = new byte();
             a = Convert.ToByte(sliderColorOpacity.Value);
-            themeColor.ItemColor = System.Drawing.Color.FromArgb(a, themeColor.ItemColor.Value.R, themeColor.ItemColor.Value.G, themeColor.ItemColor.Value.B);
+            Settings.ThemeColor.ItemColor = System.Drawing.Color.FromArgb(a, Settings.ThemeColor.ItemColor.Value.R, Settings.ThemeColor.ItemColor.Value.G, Settings.ThemeColor.ItemColor.Value.B);
             LoadAeroTab();
         }
         #endregion
