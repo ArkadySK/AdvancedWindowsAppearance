@@ -24,10 +24,11 @@ namespace AdvancedWindowsAppearence
 
         public GeneralViewModel()
         {
-            LoadRegistrySettings();
-            LoadColors();
-            LoadFonts();
-            LoadDPIScale();
+            InitAeroColors();
+            InitRegistrySettings();
+            InitColors();
+            InitFonts();
+            InitDPIScale();
         }
 
         public void UpdateThemeStyle(string style)
@@ -40,12 +41,18 @@ namespace AdvancedWindowsAppearence
             ThemeStyle = @"%SystemRoot%\resources\Themes\" + style + ".msstyles";
         }
 
-        void LoadDPIScale()
+        void InitAeroColors()
+        {
+            AeroColorsViewModel.AddNoCheck("Active Window Color", "AccentColor");
+            AeroColorsViewModel.AddNoCheck("Inactive Window Color", "AccentColorInactive");
+        }
+
+        void InitDPIScale()
         {
             DPI = System.Windows.SystemFonts.CaptionFontSize / FontSettings[0].FontSize;
         }
 
-        void LoadRegistrySettings()
+        void InitRegistrySettings()
         {
             RegistrySettingsViewModel.Add("Show accent color on the title bars", "ColorPrevalence", new Version(10, 0));
             RegistrySettingsViewModel.Add("Enable opaque taskbar (win 8 only)", "ColorizationOpaqueBlend", new Version(6, 2));
@@ -59,7 +66,7 @@ namespace AdvancedWindowsAppearence
             RegistrySettingsViewModel.AddWithPath("Always show scrollbars in modern apps", @"Control Panel\Accessibility", "DynamicScrollbars", new Version(10, 0));
         }
 
-        void LoadColors()
+        void InitColors()
         {
             ColorSettings = new ColorAppearanceSetting[] {
                 new ColorAppearanceSetting("Active Title Color 1", "", "ActiveTitle"),
@@ -99,7 +106,7 @@ namespace AdvancedWindowsAppearence
             InactiveWindowBorder.Margin = ActiveWindowBorder.Margin;*/
         }
 
-        void LoadFonts()
+        void InitFonts()
         {
             FontSettings = new FontAppearanceSetting[] {
                 new FontAppearanceSetting("Active / Inactive Title Font", "CaptionFont", ""),
@@ -173,6 +180,7 @@ namespace AdvancedWindowsAppearence
         {
             RunRegFile("Colors fix.reg");
             RunRegFile("Window Metrics fix");
+            await Task.Delay(200);
         }
     }
 }
