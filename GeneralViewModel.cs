@@ -10,6 +10,7 @@ namespace AdvancedWindowsAppearence
     {
         public AppearanceSetting[] ColorSettings = new ColorAppearanceSetting[32];
         public AppearanceSetting[] FontSettings = new FontAppearanceSetting[6];
+        public WallpaperAppearanceSetting Wallpaper = new WallpaperAppearanceSetting();
 
         void LoadColors()
         {
