@@ -10,14 +10,9 @@ namespace AdvancedWindowsAppearence
     public class WallpaperAppearanceSetting: AppearanceSetting
     {
         public string Path;
-        public WallpaperAppearanceSetting(string _name, string _path)
+        public WallpaperAppearanceSetting()
         {
-            Name = _name;
-            Path = _path;
-            if (_path == "")
-            {
-                Path = GetWallpaperPath();
-            }
+            Path = GetWallpaperPath();
         }
 
         string GetWallpaperPath()
