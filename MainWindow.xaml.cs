@@ -25,9 +25,7 @@ namespace AdvancedWindowsAppearence
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        AppearanceSetting[] itemSettings = new AppearanceSetting[32];
-        AppearanceSetting[] fontSettings = new AppearanceSetting[6];
+        GeneralViewModel Settings = new GeneralViewModel();
         AeroColorRegistrySetting themeColor = new AeroColorRegistrySetting("Theme Color", "", "ColorizationColor");
 
         RegistrySettingsViewModel registrySettingsViewModel = new RegistrySettingsViewModel();
@@ -39,9 +37,8 @@ namespace AdvancedWindowsAppearence
         public MainWindow()
         {
             InitializeComponent();
-            LoadItems();
+            
             UpdateFontList();
-            LoadFonts();
             LoadDPIScale();
             LoadAeroTab();
             LoadAeroColors();
@@ -49,7 +46,7 @@ namespace AdvancedWindowsAppearence
             LoadThemeName();
             LoadRegistrySettings();
 
-            SelectItem(itemSettings[12]);
+            SelectItem(Settings.itemSettings[12]);
         }
 
         void LoadAeroTab()
@@ -84,82 +81,7 @@ namespace AdvancedWindowsAppearence
             dpi = SystemFonts.CaptionFontSize / fontSettings[0].FontSize;
         }
 
-        void LoadItems()
-        {
-            
-            comboBoxItems.Items.Clear();
-
-            itemSettings[0] = new AppearanceSetting("Active Title Color 1", "", "ActiveTitle", "Item");
-            itemSettings[1] = new AppearanceSetting("Active Title Color 2", "", "GradientActiveTitle", "Item");
-            itemSettings[2] = new AppearanceSetting("Active Title Text", "", "TitleText", "Item");
-            itemSettings[3] = new AppearanceSetting("Active Window Border", "", "ActiveBorder", "Item");
-            itemSettings[4] = new AppearanceSetting("Application Background", "", "AppWorkspace", "Item");
-            itemSettings[5] = new AppearanceSetting("Button Alternate Face", "", "ButtonAlternateFace", "Item");
-            itemSettings[6] = new AppearanceSetting("Button Dark Shadow (Right & Bottom)", "", "ButtonDkShadow", "Item");
-            itemSettings[7] = new AppearanceSetting("Button Face / 3D Objects", "", "ButtonFace", "Item");
-            itemSettings[8] = new AppearanceSetting("Button Light", "", "ButtonLight", "Item");
-            itemSettings[9] = new AppearanceSetting("Button Shadow Color", "", "ButtonShadow", "Item");
-            itemSettings[10] = new AppearanceSetting("Button Text Color", "", "ButtonText", "Item");
-            itemSettings[11] = new AppearanceSetting("Caption Buttons Height", "CaptionHeight", "", "Item");
-            itemSettings[12] = new AppearanceSetting("Desktop", "", "Background", "Item");
-            itemSettings[13] = new AppearanceSetting("Gray Text", "", "GrayText", "Item");
-            itemSettings[14] = new AppearanceSetting("Hilight", "", "Hilight", "Item");
-            itemSettings[15] = new AppearanceSetting("Hilighted Text", "", "HilightText", "Item");
-            itemSettings[16] = new AppearanceSetting("Hypertext link / Hilight (Fill)", "", "HotTrackingColor", "Item");
-            itemSettings[17] = new AppearanceSetting("Icon Size", "Shell Icon Size", "", "Item");
-            itemSettings[18] = new AppearanceSetting("Icon Horizontal Spacing", "IconSpacing", "", "Item");
-            itemSettings[19] = new AppearanceSetting("Icon Vertical Spacing", "IconVerticalSpacing", "", "Item");
-            itemSettings[20] = new AppearanceSetting("Inactive Title Color 1", "", "InactiveTitle", "Item");
-            itemSettings[21] = new AppearanceSetting("Inactive Title Color 2", "", "GradientInactiveTitle", "Item");
-            itemSettings[22] = new AppearanceSetting("Inactive Title Text", "", "InactiveTitleText", "Item");
-            itemSettings[23] = new AppearanceSetting("Inactive Window Border", "", "InactiveBorder", "Item");
-            itemSettings[24] = new AppearanceSetting("Menu", "MenuHeight", "Menu", "Item");
-            itemSettings[25] = new AppearanceSetting("Scrollbar", "ScrollWidth", "Scrollbar", "Item");
-            itemSettings[26] = new AppearanceSetting("Selected Items", "", "MenuHilight", "Item");
-            itemSettings[27] = new AppearanceSetting("Tool Tip", "", "InfoWindow", "Item");
-            itemSettings[28] = new AppearanceSetting("Window", "", "Window", "Item");
-            itemSettings[29] = new AppearanceSetting("Window Border Width", "BorderWidth", "", "Item");
-            itemSettings[30] = new AppearanceSetting("Window Padded Border", "PaddedBorderWidth", "WindowFrame", "Item");
-            itemSettings[31] = new AppearanceSetting("Window Text Color", "", "WindowText", "Item");
-
-            ActiveWindowBorder.Margin = new Thickness((float)(itemSettings[29].Size + itemSettings[30].Size)); //Window Border Width + Window Padded Border
-            InactiveWindowBorder.Margin = ActiveWindowBorder.Margin;
-
-            foreach (var s in itemSettings)
-            {               
-                ComboBoxItem comboBoxItem = new ComboBoxItem();
-                if (s == null)
-                    comboBoxItem.Visibility = Visibility.Collapsed;
-                else
-                {
-                    comboBoxItem.Content = s.Name;
-                    if (s.ItemColor == null && s.Size == null) { 
-                        comboBoxItem.Visibility = Visibility.Collapsed;
-                        comboBoxItem.Height = 0;
-                    }
-                }              
-                comboBoxItems.Items.Add(comboBoxItem);                            
-            }
-        }
-
-        void LoadFonts()
-        {
-            fontSettings[0] = new AppearanceSetting("Active / Inactive Title Font", "CaptionFont", "", "Font");
-            fontSettings[1] = new AppearanceSetting("Icon Font", "IconFont", "", "Font");
-            fontSettings[2] = new AppearanceSetting("Menu Font", "MenuFont", "MenuText", "Font");
-            fontSettings[3] = new AppearanceSetting("Palette Title Font", "SmCaptionFont", "", "Font");
-            fontSettings[4] = new AppearanceSetting("Status Font", "StatusFont", "InfoText", "Font");
-            fontSettings[5] = new AppearanceSetting("Window Text Font", "MessageFont", "WindowText", "Font");
-
-            foreach (var a in fontSettings)
-            {
-                if (a != null)
-                    comboBoxFonts.Items.Add(a.Name);
-            }
-
-            SelectFont(fontSettings[0]);
-        }
-
+        
         void LoadAeroColors()
         {
             comboBoxAeroColors.DataContext = aeroColorsViewModel;
@@ -229,26 +151,6 @@ namespace AdvancedWindowsAppearence
         {
             ImageWallpaper.Source = GetCurrentWallpaperSource();
             ImageWallpaper.Stretch = Stretch.UniformToFill;
-        }
-
-        ImageSource GetCurrentWallpaperSource()
-        {
-            ImageSource wallpaper;
-            AppearanceSetting appearanceSettingWallpaper = new AppearanceSetting("Wallpaper", "");
-            string path = appearanceSettingWallpaper.GetWallpaperPath();
-            if (path == "") return null;
-            wallpaper = new BitmapImage(new Uri(path));
-            return wallpaper;
-        }
-
-        AppearanceSetting GetSelItemSetting()
-        {
-            return itemSettings[comboBoxItems.SelectedIndex]; 
-        }
-
-        AppearanceSetting GetSelFontSetting()
-        {
-            return fontSettings[comboBoxFonts.SelectedIndex];
         }
 
         void UpdateItemSize(float? nullableFloat)
@@ -627,6 +529,9 @@ namespace AdvancedWindowsAppearence
             Close();
         }
 
+        /// <summary>
+        /// restore all changes
+        /// </summary>
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 

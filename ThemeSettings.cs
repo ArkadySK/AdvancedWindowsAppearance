@@ -112,8 +112,8 @@ namespace AdvancedWindowsAppearence
                     ColorSetting cs = new ColorSetting();
                     cs.IsFoundInTheme = false;
                     s.ConvertColorValuesToRegistry();
-                    cs.Value = s.ItemColorRegistryPath + "=" + s.ItemColorValue;
-                    cs.RegistryName = s.ItemColorRegistryPath;
+                    cs.Value = s.ColorRegistryPath + "=" + s.ItemColorValue;
+                    cs.RegistryName = s.ColorRegistryPath;
                     changedColorSettings.Add(cs);
                 }
                 if (s.FontColor != null)

@@ -9,36 +9,13 @@ using System.IO;
 
 namespace AdvancedWindowsAppearence
 {
-    class AppearanceSetting
+    public class AppearanceSetting
     {
         public bool IsEdited;
-        public Font Font;
-        public bool Font_isBold;
-        public bool Font_isItalic;
         public string Name;
-        public int FontSize;
         public float? Size;
-        readonly string SizeRegistryPath;
-        readonly string FontRegistryPath;
-        public readonly string ItemColorRegistryPath;
-        public readonly string FontColorRegistryPath;
-        string WallpaperPath;
-        string Type;
-        public Color? FontColor;
-        public string FontColorValue;
-        public Color? ItemColor;
-        public string ItemColorValue;
-        readonly int fontNameStartIndex = 28; //odtialto zacina string (nazov fontu) vramci jedneko keyu v registri
 
-        public AppearanceSetting(string _name, string _sizeRegistryPath, string _fontRegistryhPath, string _fontColorRegistryPath, string _colorRegistryPath, string _color2RegistryPath)
-        {
-            Name = _name;
-            FontRegistryPath = _fontRegistryhPath;
-            FontColorRegistryPath = _fontColorRegistryPath;
-            SizeRegistryPath = _sizeRegistryPath;
-            ItemColorRegistryPath = _colorRegistryPath;
-            LoadColorValues();
-        }
+
 
         public AppearanceSetting(string _name, string _regeditPath, string _colorRegistryPath, string _type)
         {
@@ -49,7 +26,7 @@ namespace AdvancedWindowsAppearence
                 case "Item":
                     {
                         SizeRegistryPath = _regeditPath;
-                        ItemColorRegistryPath = _colorRegistryPath;
+                        ColorRegistryPath = _colorRegistryPath;
                         break;
                     }
                 case "Font":
@@ -62,36 +39,7 @@ namespace AdvancedWindowsAppearence
             LoadColorValues();
         }
 
-        public AppearanceSetting(string _name, string _wallpaperPath) //wallpaper
-        {
-            Name = _name;
-            WallpaperPath = _wallpaperPath;
-            if (_wallpaperPath == "")
-            {
-                WallpaperPath = GetWallpaperPath();
-            }
-            Type = "Wallpaper";
-        }
-
-        public string GetWallpaperPath()
-        {
-            try
-            {
-                return Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop").GetValue("Wallpaper").ToString();
-            }
-            catch
-            {
-                return "";
-            }
-        }
-
-        void LoadColorValues()
-        {
-            Font = GetFontFromRegistry(FontRegistryPath);
-            Size = GetSizeFromRegistry(SizeRegistryPath);
-            ItemColor = GetColorFromRegistry(ItemColorRegistryPath);
-            FontColor = GetColorFromRegistry(FontColorRegistryPath);
-        }
+        
 
 
         string Color_ToRegistryFormat(Color color)
@@ -166,7 +114,7 @@ namespace AdvancedWindowsAppearence
 
 
 
-        Font GetFontFromRegistry(string registrypath)
+        internal Font GetFontFromRegistry(string registrypath)
         {
             Font regeditFont;
             if (registrypath == null || registrypath == "") return null;
@@ -203,7 +151,7 @@ namespace AdvancedWindowsAppearence
             return regeditFont;
         }
 
-        int? GetSizeFromRegistry(string registrypath)
+        internal int? GetSizeFromRegistry(string registrypath)
         {
             if (registrypath == null || registrypath == "") return null;
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics");
@@ -220,7 +168,7 @@ namespace AdvancedWindowsAppearence
             return intsize;
         }
 
-        Color? GetColorFromRegistry(string registrypath)
+        internal Color? GetColorFromRegistry(string registrypath)
         {
             if (registrypath == null || registrypath == "") return null;
             Color color = new Color();
@@ -284,7 +232,7 @@ namespace AdvancedWindowsAppearence
 
             if (ItemColor.HasValue)
             {
-                key.SetValue(ItemColorRegistryPath, ItemColorValue, RegistryValueKind.String);
+                key.SetValue(ColorRegistryPath, ItemColorValue, RegistryValueKind.String);
             }
 
             if (FontColor.HasValue)
