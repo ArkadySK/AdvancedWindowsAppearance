@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdvancedWindowsAppearence
 {
-    internal class FontAppearanceSetting: AppearanceSetting
+    public class FontAppearanceSetting: AppearanceSetting
     {
         public Font Font;
         public bool Font_isBold;
