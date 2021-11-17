@@ -162,5 +162,17 @@ namespace AdvancedWindowsAppearence
             MessageBox.Show("You need to restart to apply these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
+        void RunRegFile(string path) {
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = "reg.exe";
+            startInfo.Arguments = "IMPORT " + path;
+            Process.Start(startInfo);
+        }
+
+        public async Task ResetToDefaults()
+        {
+            RunRegFile("Colors fix.reg");
+            RunRegFile("Window Metrics fix");
+        }
     }
 }
