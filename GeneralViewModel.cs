@@ -12,6 +12,11 @@ namespace AdvancedWindowsAppearence
         public AppearanceSetting[] FontSettings = new FontAppearanceSetting[6];
         public WallpaperAppearanceSetting Wallpaper = new WallpaperAppearanceSetting();
 
+        public AeroColorRegistrySetting ThemeColor = new AeroColorRegistrySetting("Theme Color", "", "ColorizationColor");
+        public RegistrySettingsViewModel RegistrySettingsViewModel = new RegistrySettingsViewModel();
+        public AeroColorsViewModel AeroColorsViewModel = new AeroColorsViewModel();
+
+
         void LoadColors()
         {
             ColorSettings[0] = new ColorAppearanceSetting("Active Title Color 1", "", "ActiveTitle");
@@ -58,6 +63,42 @@ namespace AdvancedWindowsAppearence
             FontSettings[3] = new FontAppearanceSetting("Palette Title Font", "SmCaptionFont", "");
             FontSettings[4] = new FontAppearanceSetting("Status Font", "StatusFont", "InfoText");
             FontSettings[5] = new FontAppearanceSetting("Window Text Font", "MessageFont", "WindowText");
+        }
+
+        async Task SaveChanges()
+        {
+            if (!checkBoxOverwriteThemeStyle.IsChecked.Value)
+            {
+                isHighContrast = false;
+                aeroStyle = "";
+            }
+
+            string themeName = textBoxThemeName.Text;
+            string wallpaperPath = ""; //chyyba na to UI 
+
+
+            ThemeSettings SaveTheme = Task.Run(() => new ThemeSettings(themeName, ThemeColor.ItemColor.Value, aeroStyle, wallpaperPath, itemSettings, fontSettings)).Result;
+
+            foreach (var setting in itemSettings)
+            {
+                if (setting == null) continue;
+                if (!setting.IsEdited) continue;
+
+                if (setting.Font != null)
+                    setting.SaveFontToRegistry();
+                if (setting.Size.HasValue)
+                    setting.SaveSizeToRegistry();
+
+                setting.SaveColorsToRegistry();
+
+                setting.IsEdited = false;
+            }
+
+            await Task.Delay(2000);
+            await RegistrySettingsViewModel.SaveAll();
+            AeroColorsViewModel.SaveAll();
+            KillDWM();
+            MessageBox.Show("You need to restart to apply these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
     }

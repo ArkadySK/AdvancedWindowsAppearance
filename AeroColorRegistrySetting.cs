@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdvancedWindowsAppearence
 {
-    class AeroColorRegistrySetting: RegistrySetting
+    public class AeroColorRegistrySetting: RegistrySetting
     {
         public Color? ItemColor { get; set; }
         public bool Enabled { get; set; }
