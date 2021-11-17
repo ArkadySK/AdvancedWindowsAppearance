@@ -9,18 +9,18 @@ namespace AdvancedWindowsAppearence
 {
     public class WallpaperAppearanceSetting: AppearanceSetting
     {
-        public string WallpaperPath;
-        public WallpaperAppearanceSetting(string _name, string _wallpaperPath)
+        public string Path;
+        public WallpaperAppearanceSetting(string _name, string _path)
         {
             Name = _name;
-            WallpaperPath = _wallpaperPath;
-            if (_wallpaperPath == "")
+            Path = _path;
+            if (_path == "")
             {
-                WallpaperPath = GetWallpaperPath();
+                Path = GetWallpaperPath();
             }
         }
 
-        public string GetWallpaperPath()
+        string GetWallpaperPath()
         {
             try
             {
