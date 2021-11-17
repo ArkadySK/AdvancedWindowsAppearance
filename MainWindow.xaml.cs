@@ -149,8 +149,19 @@ namespace AdvancedWindowsAppearence
 
         void UpdateWallpaperInfo()
         {
-            ImageWallpaper.Source = GetCurrentWallpaperSource();
+            ImageWallpaper.Source = Settings.Wallpaper.Path
             ImageWallpaper.Stretch = Stretch.UniformToFill;
+        }
+
+        ColorAppearanceSetting GetSelItemSetting()
+        {
+            return (ColorAppearanceSetting)comboBoxItems.SelectedItem; 
+        }
+
+        FontAppearanceSetting GetSelFontSetting()
+        {
+            return (FontAppearanceSetting)comboBoxItems.SelectedItem;
+
         }
 
         void UpdateItemSize(float? nullableFloat)
