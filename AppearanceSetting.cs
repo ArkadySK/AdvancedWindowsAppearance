@@ -6,7 +6,7 @@ namespace AdvancedWindowsAppearence
 {
     public class AppearanceSetting
     {
-        public bool IsEdited;
+        public bool IsEdited { get; set; }
         public string Name { get; set; }
         public float? Size { get; set; }
         public bool HasSize 
