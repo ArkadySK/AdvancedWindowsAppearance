@@ -10,6 +10,7 @@
 
     <Window.Resources>
         <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <local:BrushToColor x:Key="brushToColor" />
         </ResourceDictionary>
     </Window.Resources>
@@ -162,7 +163,7 @@
                             <Label Content="Size:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0,35" Grid.RowSpan="2"/>
                             <Label Content="Color:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="87,0,0,35" Grid.RowSpan="2"/>
 
-                            <ComboBox x:Name="comboBoxItems" ItemsSource="{Binding ColorSettings}" Grid.Column="0" Grid.Row="1" Margin="5,5.333,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                            <ComboBox x:Name="comboBoxItems" ItemsSource="{Binding ColorSettings}" SelectedIndex="12" Grid.Column="0" Grid.Row="1" Margin="5,5.333,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <Label Padding="0" Content="{Binding Name}"/>
@@ -173,7 +174,8 @@
                             <Button x:Name="buttonItemColor" Grid.Row="1" Padding="0" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonEditItemColor_Click" IsEnabled="{Binding SelectedItem.HasColor, ElementName=comboBoxItems}">
                                 <Button x:Name="imageItemColor" Padding="15 5" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxItems, Converter={StaticResource brushToColor}}" /> <!-- -->
                             </Button>
-                            <TextBlock Padding="5" TextAlignment="Center" Grid.ColumnSpan="5" Grid.Row="2" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" TextWrapping="WrapWithOverflow" Margin="0 5 0 0" >New sizes are applied after logoff. Colors are applied immediatelly as a theme.</TextBlock>
+
+                            <TextBlock Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxItems, Mode=OneWay, FallbackValue=Collapsed}"  Padding="5" TextAlignment="Center" Grid.ColumnSpan="5" Grid.Row="2" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" TextWrapping="WrapWithOverflow" Margin="0 5 0 0" >New sizes are applied after logoff. Colors are applied immediatelly as a theme.</TextBlock>
                         </Grid>
                     </TabItem>
 
@@ -200,7 +202,7 @@
                             
                             <Label Content="Color:" Padding="0" Grid.Column="2" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="87,0,0,35" Grid.RowSpan="2"/>
 
-                            <ComboBox x:Name="comboBoxFonts" ItemsSource="{Binding FontSettings}" Grid.Row="1" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2" SelectionChanged="comboBoxFonts_SelectionChanged">
+                            <ComboBox x:Name="comboBoxFonts" ItemsSource="{Binding FontSettings}" SelectedIndex="0" Grid.Row="1" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2" SelectionChanged="comboBoxFonts_SelectionChanged">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <Label Padding="0" Content="{Binding Name}"/>
@@ -208,7 +210,7 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
 
-                            <ComboBox x:Name="comboBoxFont" Text="{Binding Path=SelectedItem.Font, ElementName=comboBoxFonts}" Grid.Column="1" Grid.Row="2" Margin="5" Height="25" VerticalAlignment="Center" PreviewTextInput="comboBoxFont_TextInput" DropDownClosed="comboBoxFont_DropDownClosed"/>
+                            <ComboBox x:Name="comboBoxFont" Text="{Binding Path=SelectedItem.FontName, ElementName=comboBoxFonts, Mode=OneWay}" Grid.Column="1" Grid.Row="2" Margin="5" Height="25" VerticalAlignment="Center" PreviewTextInput="comboBoxFont_TextInput" DropDownClosed="comboBoxFont_DropDownClosed"/>
                             <Label x:Name="textBlockPreview" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="5" Padding="0" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" BorderThickness="1" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}">preview</Label>
                             <ComboBox x:Name="comboBoxFontSize" Text="{Binding SelectedItem.Size, ElementName=comboBoxFonts}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxFonts}" Grid.Column="2" Grid.Row="1" Margin="5" Height="25" VerticalAlignment="Top" IsEditable="True" PreviewTextInput="NumberValidationTextBox" DropDownClosed="comboBoxFontSize_DropDownClosed">
                                 <ComboBoxItem Content="6"/>
@@ -227,9 +229,9 @@
                                 <Button x:Name="imageFontColor" Padding="15 5" BorderThickness="2"/>
                             </Button>
 
-                            <ToggleButton x:Name="buttonFontBold" IsChecked="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts}" Content="B" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold" Click="buttonFontBold_Click"/>
-                            <ToggleButton x:Name="buttonFontItalic" IsChecked="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts}" Content="I" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" FontStyle="Italic" Click="buttonFontItalic_Click"/>
-                            <TextBlock Padding="5" TextAlignment="Center" Grid.ColumnSpan="5" Grid.Row="3" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" TextWrapping="WrapWithOverflow" Margin="0 5 0 0" >Changes made to fonts are applied after restart</TextBlock>
+                            <ToggleButton x:Name="buttonFontBold" IsChecked="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts}" Content="B" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold"/>
+                            <ToggleButton x:Name="buttonFontItalic" IsChecked="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts}" Content="I" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" FontStyle="Italic"/>
+                            <TextBlock Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxFonts, Mode=OneWay, FallbackValue=Collapsed}" Padding="5" TextAlignment="Center" Grid.ColumnSpan="5" Grid.Row="3" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" TextWrapping="WrapWithOverflow" Margin="0 5 0 0" >Changes made to fonts are applied after restart</TextBlock>
 
                         </Grid>
                     </TabItem>

@@ -6,7 +6,7 @@ namespace AdvancedWindowsAppearence
 {
     public class AppearanceSetting
     {
-        public bool IsEdited { get; set; }
+        public bool IsEdited { get; set; } = false;
         public string Name { get; set; }
         public float? Size { get; set; }
         public bool HasSize 
@@ -42,6 +42,12 @@ namespace AdvancedWindowsAppearence
             color = Color.FromArgb(int.Parse(colorRegString[0]), int.Parse(colorRegString[1]), int.Parse(colorRegString[2]));
 
             return color;
+        }
+        public void ChangeSize(float size)
+        {
+            if (Size == size) return;
+            Size = size;
+            IsEdited = true;
         }
 
     }

@@ -154,20 +154,6 @@ namespace AdvancedWindowsAppearence
             UpdateFontPreview(selSetting.FontColor.Value);
         }
 
-        private void buttonFontBold_Click(object sender, RoutedEventArgs e)
-        {
-            var selSetting = GetSelFontSetting();
-            selSetting.ChangeFontBoldness(buttonFontBold.IsChecked.Value);
-            UpdateFontPreview(selSetting.IsBold, selSetting.IsItalic);
-        }
-
-        private void buttonFontItalic_Click(object sender, RoutedEventArgs e)
-        {
-            var selSetting = GetSelFontSetting();
-            selSetting.ChangeFontItalicness(buttonFontItalic.IsChecked.Value);
-            UpdateFontPreview(selSetting.IsBold, selSetting.IsItalic);
-        }
-
         private void comboBoxFont_TextInput(object sender, TextCompositionEventArgs e)
         {
             /*if (comboBoxFonts.SelectedIndex == -1) return;

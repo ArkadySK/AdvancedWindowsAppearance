@@ -39,12 +39,6 @@ namespace AdvancedWindowsAppearence
             ItemColor = GetColorFromRegistry(ColorRegistryPath);
         }
 
-        public void ChangeSize(float size)
-        {
-            Size = size;
-            IsEdited = true;
-        }
-
         int? GetSizeFromRegistry(string registrypath)
         {
             if (registrypath == null || registrypath == "") return null;

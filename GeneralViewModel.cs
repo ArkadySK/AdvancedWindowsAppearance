@@ -156,16 +156,18 @@ namespace AdvancedWindowsAppearence
 
         async Task SaveToRegistry()
         {
-            List<Task> tasks = new List<Task>();
-            foreach (var f in FontSettings)
-            {
-                if (f != null)
-                    tasks.Add(Task.Run( () => f.SaveToRegistry()));
-            }
+            List<Task> tasks = new List<Task>();      
             foreach (var c in ColorSettings)
             {
-                if (c != null)
-                    tasks.Add(Task.Run(() => c.SaveToRegistry()));
+                if (c != null) continue;
+                c.IsEdited = false;
+                tasks.Add(Task.Run(() => c.SaveToRegistry()));
+            }
+            foreach (var f in FontSettings)
+            {
+                if (f == null) continue;
+                tasks.Add(Task.Run(() => f.SaveToRegistry()));
+                f.IsEdited = false;
             }
             await Task.WhenAll(tasks);
             Debug.WriteLine("Values saved to registry successfully.");
