@@ -32,19 +32,8 @@ namespace AdvancedWindowsAppearence
             InitializeComponent();
             AssignDataContexts();
             UpdateFontList();
-            LoadAeroTab();
             UpdateWallpaperInfo();
             LoadThemeName();
-        }
-
-        void LoadAeroTab()
-        {
-            if (!Settings.ThemeColor.ItemColor.HasValue)
-                return;
-            byte a = Settings.ThemeColor.ItemColor.Value.A;
-            imageThemeColor.Background = MediaColorToBrush(Settings.ThemeColor.ItemColor);
-            textBoxColorOpacity.Text = a.ToString();
-            sliderColorOpacity.Value = a;
         }
 
         void LoadThemeName()
@@ -64,8 +53,9 @@ namespace AdvancedWindowsAppearence
 
         void AssignDataContexts()
         {
-            listBoxDMW.DataContext = Settings.RegistrySettingsViewModel;
-            comboBoxAeroColors.DataContext = Settings.AeroColorsViewModel;
+            //listBoxDMW.DataContext = Settings.RegistrySettingsViewModel;
+            //comboBoxAeroColors.DataContext = Settings.AeroColorsViewModel;
+            this.DataContext = Settings;
             //color
             //font
             //title colors
@@ -177,7 +167,7 @@ namespace AdvancedWindowsAppearence
 
         void UpdateFontPreview(System.Drawing.Color? textCol)
         {
-            textBlockPreview.Foreground = MediaColorToBrush(textCol);
+            textBlockPreview.Foreground = BrushToColor.MediaColorToBrush(textCol);
         }
 
         void UpdateFontPreview(System.Drawing.Font f, int size)
@@ -185,15 +175,6 @@ namespace AdvancedWindowsAppearence
             textBlockPreview.Content = "The quick brown fox jumps over the lazy dog";
             textBlockPreview.FontFamily = new System.Windows.Media.FontFamily(f.FontFamily.Name);
             textBlockPreview.FontSize = size * Settings.DPI;
-        }
-
-        Brush MediaColorToBrush(System.Drawing.Color? col)
-        {
-            if (col == null)
-                return null;
-
-            Brush returnbrush = new SolidColorBrush(Color.FromArgb(col.Value.A, col.Value.R, col.Value.G, col.Value.B));
-            return returnbrush;
         }
 
         System.Drawing.Color OpenColorDialog(System.Drawing.Color? defaultCol)
@@ -335,8 +316,7 @@ namespace AdvancedWindowsAppearence
         #region Aero Tab
         private void buttonThemeColor_Click(object sender, RoutedEventArgs e)
         {
-            Settings.ThemeColor.ItemColor = OpenColorDialog(Settings.ThemeColor.ItemColor);
-            LoadAeroTab();
+            Settings.ThemeColor.ItemColor = OpenColorDialog(Settings.ThemeColor.ItemColor);           
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -355,7 +335,6 @@ namespace AdvancedWindowsAppearence
             if (alpha > byte.MaxValue || alpha < byte.MinValue) return;
             a = byte.Parse(alpha.ToString());
             Settings.ThemeColor.ItemColor = System.Drawing.Color.FromArgb(alpha , Settings.ThemeColor.ItemColor.Value.R, Settings.ThemeColor.ItemColor.Value.G, Settings.ThemeColor.ItemColor.Value.B);
-            LoadAeroTab();
         }
 
         private void sliderColorOpacity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -363,12 +342,12 @@ namespace AdvancedWindowsAppearence
             byte a = new byte();
             a = Convert.ToByte(sliderColorOpacity.Value);
             Settings.ThemeColor.ItemColor = System.Drawing.Color.FromArgb(a, Settings.ThemeColor.ItemColor.Value.R, Settings.ThemeColor.ItemColor.Value.G, Settings.ThemeColor.ItemColor.Value.B);
-            LoadAeroTab();
         }
         #endregion
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        //Close Program
+        private void Button_Click(object sender, RoutedEventArgs e) 
         {
             Close();
         }
@@ -382,6 +361,7 @@ namespace AdvancedWindowsAppearence
                 Close();
         }
 
+        //check if this works
         private void buttonAeroColor_Click(object sender, RoutedEventArgs e)
         {
             Settings.AeroColorsViewModel.ChangeColorCurrent((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem);
