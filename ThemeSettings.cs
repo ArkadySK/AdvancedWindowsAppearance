@@ -11,7 +11,7 @@ namespace AdvancedWindowsAppearence
 {
     class ThemeSettings
     {
-        public struct ColorSetting
+        public struct ColorRegistrySetting
         {
             public string RegistryName { get; set; }
             public string Value { get; set; }
@@ -40,40 +40,16 @@ namespace AdvancedWindowsAppearence
             return ThemeSettingsIni.Split(Environment.NewLine.ToCharArray());        
         }
 
-        private void SaveTheme(string themePath, string newThemeSettingsIni)
-        {       
-            StreamWriter streamWriter = new StreamWriter(themePath);
-            streamWriter.Write(newThemeSettingsIni);
-            streamWriter.Close();
-        }
-
-        void LoadNewTheme(string themePath)
-        {
-            Process process = new Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            string arg = @"C:\WINDOWS\system32\themecpl.dll,OpenThemeAction " + themePath;
-            startInfo.FileName = @"C:\WINDOWS\system32\rundll32.exe";
-            startInfo.Arguments = arg;
-            process.StartInfo = startInfo;
-
-            process.Start();
-            process.Close();
-        }
-
         public ThemeSettings()
         {
 
         }
 
-        public ThemeSettings(string displayName, Color colorizationColor, string aeroStyle, string wallpaperPath, AppearanceSetting[] itemSettings, AppearanceSetting[] fontSettings)
+        public ThemeSettings(string displayName, Color colorizationColor, string aeroStyle, string wallpaperPath, ColorAppearanceSetting[] colorAppearanceSettings, FontAppearanceSetting[] fontAppearanceSettings)
         {
 
-            List<ColorSetting> changedColorSettings = new List<ColorSetting>();
-            var aa = itemSettings.ToList();
-            aa.AddRange(fontSettings);
+            List<ColorRegistrySetting> changedColorSettings = new List<ColorRegistrySetting>();
 
-            AppearanceSetting[] appearanceSettings = aa.ToArray();
             string themePath = GetThemePath();
             string[] themeSettingsIni = GetThemeFile(themePath);
             List<string> newThemeSettingsIni = themeSettingsIni.ToList();
@@ -100,27 +76,31 @@ namespace AdvancedWindowsAppearence
                 }
                 i++;
             }
-            
+
             #region ColorSettings
-            foreach (var s in appearanceSettings)
+
+            foreach (ColorAppearanceSetting s in colorAppearanceSettings)
             {
                 if (s == null) continue;
                 if (!s.IsEdited) continue;
 
                 if (s.ItemColor != null)
                 {
-                    ColorSetting cs = new ColorSetting();
+                    ColorRegistrySetting cs = new ColorRegistrySetting();
                     cs.IsFoundInTheme = false;
-                    s.ConvertColorValuesToRegistry();
+                    s.ConvertColorValuesToRegistry(s.ItemColor);
                     cs.Value = s.ColorRegistryPath + "=" + s.ItemColorValue;
                     cs.RegistryName = s.ColorRegistryPath;
                     changedColorSettings.Add(cs);
                 }
+            }
+            foreach (FontAppearanceSetting s in fontAppearanceSettings)
+            {
                 if (s.FontColor != null)
                 {
-                    ColorSetting cs = new ColorSetting();
+                    ColorRegistrySetting cs = new ColorRegistrySetting();
                     cs.IsFoundInTheme = false;
-                    s.ConvertColorValuesToRegistry();
+                    s.ConvertColorValuesToRegistry(s.FontColor);
                     cs.Value = s.FontColorRegistryPath + "=" + s.FontColorValue;
                     cs.RegistryName = s.FontColorRegistryPath;
                     changedColorSettings.Add(cs);
@@ -138,18 +118,18 @@ namespace AdvancedWindowsAppearence
                 {
                     if (l.Contains(changedColorSettings[index].RegistryName+"="))
                     {
-                        ColorSetting colorSetting = new ColorSetting();
-                        colorSetting.IsFoundInTheme = true;
-                        colorSetting.RegistryName= changedColorSettings[index].RegistryName;
-                        colorSetting.Value = changedColorSettings[index].Value;
-                        changedColorSettings[index] = colorSetting;
+                        ColorRegistrySetting colorRegistrySetting = new ColorRegistrySetting();
+                        colorRegistrySetting.IsFoundInTheme = true;
+                        colorRegistrySetting.RegistryName= changedColorSettings[index].RegistryName;
+                        colorRegistrySetting.Value = changedColorSettings[index].Value;
+                        changedColorSettings[index] = colorRegistrySetting;
                         newThemeSettingsIni[y] = changedColorSettings[index].Value;
                     }
                 y++;
                 }
             }
 
-            foreach (ColorSetting cs in changedColorSettings)
+            foreach (ColorRegistrySetting cs in changedColorSettings)
             {
                 if (!cs.IsFoundInTheme)
                 {
@@ -184,17 +164,49 @@ namespace AdvancedWindowsAppearence
             }
 
             string newThemePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Microsoft\Windows\Themes\" + displayName + ".theme";
-            ///ulozenie temy
+            ///save theme
             SaveTheme(newThemePath, newTheme);
-            ///nacitanie temy
+            ///load theme
             LoadNewTheme(newThemePath);
 
-            //nacitanie fontov
-            foreach(var f in fontSettings)
+            //save fonts and colors to registry
+            SaveToRegistry(fontAppearanceSettings, colorAppearanceSettings);
+        }
+
+        private void SaveToRegistry(FontAppearanceSetting[] fontAppearanceSettings, ColorAppearanceSetting[] colorAppearanceSettings)
+        {
+            foreach (var f in fontAppearanceSettings)
             {
                 if (f != null)
-                    f.SaveFontToRegistry();
+                    f.SaveToRegistry();
             }
+            foreach (var c in colorAppearanceSettings)
+            {
+                if (c != null)
+                    c.SaveToRegistry();
+            }
+            Debug.WriteLine("Values saved to registry successfully.");
+        }
+
+        private void SaveTheme(string themePath, string newThemeSettingsIni)
+        {
+            StreamWriter streamWriter = new StreamWriter(themePath);
+            streamWriter.Write(newThemeSettingsIni);
+            streamWriter.Close();
+        }
+
+        private void LoadNewTheme(string themePath)
+        {
+            Process process = new Process();
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            string arg = @"C:\WINDOWS\system32\themecpl.dll,OpenThemeAction " + themePath;
+            startInfo.FileName = @"C:\WINDOWS\system32\rundll32.exe";
+            startInfo.Arguments = arg;
+            process.StartInfo = startInfo;
+
+            process.Start();
+            process.Close();
         }
     }
 }
