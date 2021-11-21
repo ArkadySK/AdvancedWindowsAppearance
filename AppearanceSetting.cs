@@ -15,7 +15,6 @@ namespace AdvancedWindowsAppearence
         }
 
 
-
         string Color_ToRegistryFormat(Color color)
         {
             return color.R + " " + color.G + " " + color.B;

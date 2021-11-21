@@ -13,6 +13,10 @@ namespace AdvancedWindowsAppearence
         readonly string SizeRegistryPath;
         public readonly string ColorRegistryPath;
         public Color? ItemColor { get; set; }
+        public bool HasColor
+        {
+            get { return ColorRegistryPath != null; }
+        }
         public string ItemColorValue;
 
         public ColorAppearanceSetting(string _name, string _regeditPath, string _colorRegistryPath)
