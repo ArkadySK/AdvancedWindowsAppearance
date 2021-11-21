@@ -99,82 +99,8 @@ namespace AdvancedWindowsAppearence
 
         FontAppearanceSetting GetSelFontSetting()
         {
-            return (FontAppearanceSetting)comboBoxItems.SelectedItem;
+            return (FontAppearanceSetting)comboBoxFonts.SelectedItem;
 
-        }
-
-        void UpdateItemSize(float? nullableFloat)
-        {
-            textBoxItemSize.IsEnabled = nullableFloat.HasValue;
-
-            if (nullableFloat == null) {
-                textBoxItemSize.Text = "";           
-            }
-            else
-            {
-                textBoxItemSize.Text = nullableFloat.Value.ToString();
-            }
-        }
-
-        void UpdateFontInfo(FontAppearanceSetting selSetting)
-        {
-            if (selSetting.Font == null)
-            {
-                comboBoxFont.IsEnabled = false;
-                comboBoxFont.Text = "";
-                comboBoxFontSize.Text = "";
-                buttonFontBold.IsEnabled = false;
-                buttonFontItalic.IsEnabled = false;
-                comboBoxFontSize.IsEnabled = false;
-                textBlockPreview.Content = null;
-            }
-            else
-            {
-                comboBoxFont.IsEnabled = true;
-                comboBoxFont.Text = selSetting.Font.Name;
-                comboBoxFontSize.Text = selSetting.Size.ToString();
-                buttonFontBold.IsEnabled = true;
-                buttonFontItalic.IsEnabled = true;
-                buttonFontBold.IsChecked = selSetting.Font_isBold;
-                buttonFontItalic.IsChecked = selSetting.Font_isItalic;              
-                comboBoxFontSize.IsEnabled = true;
-                UpdateFontPreview(selSetting.Font, selSetting.Size.GetValueOrDefault(0), selSetting.Font_isBold, selSetting.Font_isItalic, selSetting.FontColor);
-            }
-
-        }
-
-        void UpdateFontPreview(System.Drawing.Font f, float size, bool isBold, bool isItalic, System.Drawing.Color? textCol)
-        {
-            var textColtemp = System.Drawing.Color.Black;
-            if (textCol.HasValue)
-                textColtemp = textCol.Value;
-            UpdateFontPreview(f, size);
-            UpdateFontPreview(isBold, isItalic);
-            UpdateFontPreview(textColtemp);
-        }
-
-        void UpdateFontPreview(bool isBold, bool isItalic)
-        {
-            if (isItalic)
-                textBlockPreview.FontStyle = FontStyles.Italic;
-            else
-                textBlockPreview.FontStyle = FontStyles.Normal;
-            if (isBold)
-                textBlockPreview.FontWeight = FontWeights.Bold;
-            else
-                textBlockPreview.FontWeight = FontWeights.Normal;           
-        }
-
-        void UpdateFontPreview(System.Drawing.Color? textCol)
-        {
-            textBlockPreview.Foreground = BrushToColor.MediaColorToBrush(textCol);
-        }
-
-        void UpdateFontPreview(System.Drawing.Font f, float size)
-        {
-            textBlockPreview.Content = "The quick brown fox jumps over the lazy dog";
-            textBlockPreview.FontFamily = new System.Windows.Media.FontFamily(f.FontFamily.Name);
-            textBlockPreview.FontSize = size * Settings.DPI;
         }
 
         System.Drawing.Color OpenColorDialog(System.Drawing.Color? defaultCol)
@@ -195,8 +121,7 @@ namespace AdvancedWindowsAppearence
         }
 
 
-        #region Colors And Metrics Tab
-        
+        #region Colors And Metrics Tab      
 
         private void buttonEditItemColor_Click(object sender, RoutedEventArgs e)
         {
@@ -216,7 +141,13 @@ namespace AdvancedWindowsAppearence
 
 
         #region Fonts Tab
-        
+
+        private void comboBoxFonts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selSetting = GetSelFontSetting();
+            if (selSetting == null) return;
+            UpdateFontPreview(selSetting.Font, selSetting.Size.GetValueOrDefault(0), selSetting.IsBold, selSetting.IsItalic, selSetting.FontColor);
+        }
 
         private void buttonEditFontColor_Click(object sender, RoutedEventArgs e)
         {
@@ -230,14 +161,14 @@ namespace AdvancedWindowsAppearence
         {
             var selSetting = GetSelFontSetting();
             selSetting.ChangeFontBoldness(buttonFontBold.IsChecked.Value);
-            UpdateFontPreview(selSetting.Font_isBold, selSetting.Font_isItalic);
+            UpdateFontPreview(selSetting.IsBold, selSetting.IsItalic);
         }
 
         private void buttonFontItalic_Click(object sender, RoutedEventArgs e)
         {
             var selSetting = GetSelFontSetting();
             selSetting.ChangeFontItalicness(buttonFontItalic.IsChecked.Value);
-            UpdateFontPreview(selSetting.Font_isBold, selSetting.Font_isItalic);
+            UpdateFontPreview(selSetting.IsBold, selSetting.IsItalic);
         }
 
         private void comboBoxFont_TextInput(object sender, TextCompositionEventArgs e)
@@ -265,11 +196,61 @@ namespace AdvancedWindowsAppearence
             UpdateFontPreview(s.Font, size);
         }
 
+        void UpdateItemSize(float? nullableFloat)
+        {
+            textBoxItemSize.IsEnabled = nullableFloat.HasValue;
+
+            if (nullableFloat == null)
+            {
+                textBoxItemSize.Text = "";
+            }
+            else
+            {
+                textBoxItemSize.Text = nullableFloat.Value.ToString();
+            }
+        }
+
+
+        void UpdateFontPreview(System.Drawing.Font f, float size, bool isBold, bool isItalic, System.Drawing.Color? textCol)
+        {
+            var textColtemp = System.Drawing.Color.Black;
+            if (textCol.HasValue)
+                textColtemp = textCol.Value;
+            UpdateFontPreview(f, size);
+            UpdateFontPreview(isBold, isItalic);
+            UpdateFontPreview(textColtemp);
+        }
+
+        void UpdateFontPreview(bool isBold, bool isItalic)
+        {
+            if (isItalic)
+                textBlockPreview.FontStyle = FontStyles.Italic;
+            else
+                textBlockPreview.FontStyle = FontStyles.Normal;
+            if (isBold)
+                textBlockPreview.FontWeight = FontWeights.Bold;
+            else
+                textBlockPreview.FontWeight = FontWeights.Normal;
+        }
+
+        void UpdateFontPreview(System.Drawing.Color? textCol)
+        {
+            textBlockPreview.Foreground = BrushToColor.MediaColorToBrush(textCol);
+        }
+
+        void UpdateFontPreview(System.Drawing.Font f, float size)
+        {
+            textBlockPreview.Content = "The quick brown fox jumps over the lazy dog";
+            textBlockPreview.FontFamily = new System.Windows.Media.FontFamily(f.FontFamily.Name);
+            textBlockPreview.FontSize = size * Settings.DPI;
+        }
+
+
         #endregion
 
 
         #region Save Changes
-        
+
         private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
             await Settings.SaveChanges(textBoxThemeName.Text);

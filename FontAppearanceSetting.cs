@@ -11,8 +11,8 @@ namespace AdvancedWindowsAppearence
     public class FontAppearanceSetting: AppearanceSetting
     {
         public Font Font { get; set; }
-        public bool Font_isBold { get; set; }
-        public bool Font_isItalic { get; set; }
+        public bool IsBold { get; set; }
+        public bool IsItalic { get; set; }
         readonly string FontRegistryPath;
         public readonly string FontColorRegistryPath;
         public Color? FontColor { get; set; }
@@ -43,13 +43,13 @@ namespace AdvancedWindowsAppearence
 
         public void ChangeFontBoldness(bool isBold) //fixni aby to nebolo hneď (až po Apply)
         {
-            Font_isBold = isBold;
+            IsBold = isBold;
             IsEdited = true;
         }
 
         public void ChangeFontItalicness(bool isItalic)
         {
-            Font_isItalic = isItalic;
+            IsItalic = isItalic;
             IsEdited = true;
 
         }
@@ -105,11 +105,11 @@ namespace AdvancedWindowsAppearence
 
             if (fonttemp[17] == 02)
             {
-                Font_isBold = true;
+                IsBold = true;
             }
             if (fonttemp[20] == 01)
             {
-                Font_isItalic = true;
+                IsItalic = true;
             }
             int sizetemp = (int)fonttemp[0];
             this.Size = (256 - sizetemp) / 2;
@@ -123,12 +123,12 @@ namespace AdvancedWindowsAppearence
             List<byte> regeditValBytes = ((byte[])key.GetValue(FontRegistryPath)).ToList();
             key.Close();
 
-            if (Font_isBold)
+            if (IsBold)
                 regeditValBytes[17] = 2;
             else
                 regeditValBytes[17] = 1;
 
-            if (Font_isItalic)
+            if (IsItalic)
                 regeditValBytes[20] = 1;
             else
                 regeditValBytes[20] = 0;
