@@ -8,6 +8,11 @@
         mc:Ignorable="d"
         Title="Advanced Appearance" Width="470" SizeToContent="Height" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="NoResize">
 
+    <Window.Resources>
+        <ResourceDictionary>
+            <local:BrushToColor x:Key="brushToColor" />
+        </ResourceDictionary>
+    </Window.Resources>
     <StackPanel>
         <Border Margin="5">
             <StackPanel>
@@ -138,7 +143,7 @@
                 </Grid>
 
                 <!-- Colors a Metrics  -->
-                <TabControl Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
+                <TabControl x:Name="colorsTab" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
 
                     <TabItem Header="Colors and Metrics" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
                         <Grid Margin="5" >
@@ -157,10 +162,16 @@
                             <Label Content="Size:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0,35" Grid.RowSpan="2"/>
                             <Label Content="Color:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="87,0,0,35" Grid.RowSpan="2"/>
 
-                            <ComboBox x:Name="comboBoxItems" Grid.Column="0" Grid.Row="1" Margin="5,5.333,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                            <TextBox x:Name="textBoxItemSize" Grid.Column="2" Grid.Row="1" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" InputScope="Number" MaxLines="1" MaxLength="2" TextChanged="textBoxItemSize_TextChanged" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+                            <ComboBox x:Name="comboBoxItems" ItemsSource="{Binding ColorSettings}" Grid.Column="0" Grid.Row="1" Margin="5,5.333,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Padding="0" Content="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <TextBox x:Name="textBoxItemSize" Text="{Binding SelectedItem.Size, ElementName=comboBoxItems}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxItems}" Grid.Column="2" Grid.Row="1" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" InputScope="Number" MaxLines="1" MaxLength="2" TextChanged="textBoxItemSize_TextChanged" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
                             <Button x:Name="buttonItemColor" Grid.Row="1" Padding="0" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonEditItemColor_Click" >
-                                <Button x:Name="imageItemColor" Padding="15 5" BorderThickness="2"/>
+                                <Button x:Name="imageItemColor" Padding="15 5" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxItems, Converter={StaticResource brushToColor}}" /> <!-- -->
                             </Button>
                             <TextBlock Padding="5" TextAlignment="Center" Grid.ColumnSpan="5" Grid.Row="2" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" TextWrapping="WrapWithOverflow" Margin="0 5 0 0" >New sizes are applied after logoff. Colors are applied immediatelly as a theme.</TextBlock>
                         </Grid>
@@ -168,7 +179,7 @@
 
 
                     <!-- Font Tab-->
-                    <TabItem Header="Fonts" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
+                    <TabItem x:Name="fontsTab" Header="Fonts" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
                         <Grid Margin="5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="4*"/>
@@ -275,7 +286,7 @@
                     <!--DWM a regedit nastavenia (win8 a win10)-->
                     <TabItem x:Name="pageModern" Header="Modern Apps Settings" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
                         <StackPanel>
-                            <ListBox x:Name="listBoxDMW" Margin="5" ItemsSource="{Binding RegistrySettings}">
+                            <ListBox x:Name="listBoxDMW" Margin="5" ItemsSource="{Binding RegistrySettingsViewModel.RegistrySettings}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <CheckBox Content="{Binding Name}" IsChecked="{Binding Checked}"></CheckBox>

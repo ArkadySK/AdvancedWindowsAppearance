@@ -9,6 +9,11 @@ namespace AdvancedWindowsAppearence
         public bool IsEdited;
         public string Name { get; set; }
         public float? Size { get; set; }
+        public bool HasSize 
+        {
+            get { return Size != null; }
+        }
+
 
 
         string Color_ToRegistryFormat(Color color)
