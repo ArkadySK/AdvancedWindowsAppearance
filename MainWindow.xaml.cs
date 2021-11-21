@@ -323,15 +323,15 @@ namespace AdvancedWindowsAppearence
         }
         #region Save Changes
 
-        private async void ComboBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            ComboBox comboBox = sender as ComboBox;
-            if (comboBox.Text == "Save as Theme") 
+            if (saveChangesComboBox.Text == "Save as Theme") 
                 Settings.UseThemes = true;
             else
                 Settings.UseThemes = false;
             await Settings.SaveChanges();
         }
         #endregion
+
     }
 }
