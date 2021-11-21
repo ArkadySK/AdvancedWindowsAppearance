@@ -20,9 +20,9 @@ namespace AdvancedWindowsAppearence
         public AeroColorsViewModel AeroColorsViewModel { get; set; } = new AeroColorsViewModel();
         public double DPI = 1;
 
-        bool UseThemes = true; //when false: it means to not apply theme, only to change registry settings
+        public bool UseThemes = true; //when false: it means to not apply theme, only to change registry settings
 
-
+        public string ThemeName = "";
         public string ThemeStyle = "";
 
         public GeneralViewModel()
@@ -140,7 +140,21 @@ namespace AdvancedWindowsAppearence
             }
         }
 
-        private async void SaveToRegistry(FontAppearanceSetting[] fontAppearanceSettings, ColorAppearanceSetting[] colorAppearanceSettings)
+        public async Task SaveChanges()
+        {
+            if (UseThemes)
+            {
+                await SaveToTheme();
+            }
+            else
+            {
+                await SaveToRegistry();
+            }
+            await RegistrySettingsViewModel.SaveAll();
+            await AeroColorsViewModel.SaveAll();
+        }
+
+        async Task SaveToRegistry()
         {
             List<Task> tasks = new List<Task>();
             foreach (var f in FontSettings)
@@ -153,32 +167,23 @@ namespace AdvancedWindowsAppearence
                 if (c != null)
                     tasks.Add(Task.Run(() => c.SaveToRegistry()));
             }
-            await RegistrySettingsViewModel.SaveAll();
-            await AeroColorsViewModel.SaveAll();
             await Task.WhenAll(tasks);
             Debug.WriteLine("Values saved to registry successfully.");
         }
 
-        public async Task SaveToTheme(string themeName)
+        async Task SaveToTheme()
         {
             string wallpaperPath = Wallpaper.Path; //make UI for this
 
             if (!UseThemes) return; //if user does not want to save changes into theme
 
-            ThemeSettings SaveTheme = Task.Run(() => new ThemeSettings(themeName, ThemeColor.ItemColor.Value, ThemeStyle, wallpaperPath, ColorSettings, FontSettings)).Result;
+            ThemeSettings SaveTheme = Task.Run(() => new ThemeSettings(ThemeName, ThemeColor.ItemColor.Value, ThemeStyle, wallpaperPath, ColorSettings, FontSettings)).Result;
 
             foreach (var setting in ColorSettings)
             {
                 if (setting == null) continue;
                 if (!setting.IsEdited) continue;
-
-                if (setting.Font != null)
-                    setting.SaveFontToRegistry();
-                if (setting.Size.HasValue)
-                    setting.SaveSizeToRegistry();
-
-                setting.SaveColorsToRegistry();
-
+                setting.SaveToRegistry();
                 setting.IsEdited = false;
             }
 

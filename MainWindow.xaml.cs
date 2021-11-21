@@ -53,11 +53,8 @@ namespace AdvancedWindowsAppearence
 
         void AssignDataContexts()
         {
-            //listBoxDMW.DataContext = Settings.RegistrySettingsViewModel;
-            //comboBoxAeroColors.DataContext = Settings.AeroColorsViewModel;
             this.DataContext = Settings;
-            //color
-            //font
+            //to do:
             //title colors
             //theme settings
         }
@@ -196,21 +193,6 @@ namespace AdvancedWindowsAppearence
             UpdateFontPreview(s.Font, size);
         }
 
-        void UpdateItemSize(float? nullableFloat)
-        {
-            textBoxItemSize.IsEnabled = nullableFloat.HasValue;
-
-            if (nullableFloat == null)
-            {
-                textBoxItemSize.Text = "";
-            }
-            else
-            {
-                textBoxItemSize.Text = nullableFloat.Value.ToString();
-            }
-        }
-
-
         void UpdateFontPreview(System.Drawing.Font f, float size, bool isBold, bool isItalic, System.Drawing.Color? textCol)
         {
             var textColtemp = System.Drawing.Color.Black;
@@ -246,15 +228,6 @@ namespace AdvancedWindowsAppearence
         }
 
 
-        #endregion
-
-
-        #region Save Changes
-
-        private async void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            await Settings.SaveChanges(textBoxThemeName.Text);
-        }        
         #endregion
 
 
@@ -348,5 +321,17 @@ namespace AdvancedWindowsAppearence
             Settings.AeroColorsViewModel.ChangeColorCurrent((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem);
             ((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor = OpenColorDialog(((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor);
         }
+        #region Save Changes
+
+        private async void ComboBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            if (comboBox.Text == "Save as Theme") 
+                Settings.UseThemes = true;
+            else
+                Settings.UseThemes = false;
+            await Settings.SaveChanges();
+        }
+        #endregion
     }
 }
