@@ -76,6 +76,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BrushToColor.cs" />
     <Compile Include="FontAppearanceSetting.cs" />
     <Compile Include="WallpaperAppearanceSetting.cs" />
     <Page Include="MainWindow.xaml">
