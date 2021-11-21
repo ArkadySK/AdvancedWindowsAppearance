@@ -11,13 +11,13 @@ namespace AdvancedWindowsAppearence
 {
     public class GeneralViewModel
     {
-        public ColorAppearanceSetting[] ColorSettings;
-        public FontAppearanceSetting[] FontSettings;
-        public WallpaperAppearanceSetting Wallpaper = new WallpaperAppearanceSetting();
+        public ColorAppearanceSetting[] ColorSettings { get; set; }
+        public FontAppearanceSetting[] FontSettings { get; set; }
+        public WallpaperAppearanceSetting Wallpaper { get; set; } = new WallpaperAppearanceSetting();
 
-        public AeroColorRegistrySetting ThemeColor = new AeroColorRegistrySetting("Theme Color", "", "ColorizationColor");
-        public RegistrySettingsViewModel RegistrySettingsViewModel = new RegistrySettingsViewModel();
-        public AeroColorsViewModel AeroColorsViewModel = new AeroColorsViewModel();
+        public AeroColorRegistrySetting ThemeColor { get; set; } = new AeroColorRegistrySetting("Theme Color", "", "ColorizationColor");
+        public RegistrySettingsViewModel RegistrySettingsViewModel { get; set; } = new RegistrySettingsViewModel();
+        public AeroColorsViewModel AeroColorsViewModel { get; set; } = new AeroColorsViewModel();
         public double DPI = 1;
 
         public string ThemeStyle = "";

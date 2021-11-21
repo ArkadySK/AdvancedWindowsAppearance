@@ -7,8 +7,8 @@ namespace AdvancedWindowsAppearence
     public class AppearanceSetting
     {
         public bool IsEdited;
-        public string Name;
-        public float? Size;
+        public string Name { get; set; }
+        public float? Size { get; set; }
 
 
         string Color_ToRegistryFormat(Color color)

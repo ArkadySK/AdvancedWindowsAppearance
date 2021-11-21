@@ -10,15 +10,15 @@ namespace AdvancedWindowsAppearence
 {
     public class FontAppearanceSetting: AppearanceSetting
     {
-        public Font Font;
-        public bool Font_isBold;
-        public bool Font_isItalic;
-        public int FontSize;
+        public Font Font { get; set; }
+        public bool Font_isBold { get; set; }
+        public bool Font_isItalic { get; set; }
+        public int FontSize { get; set; }
         readonly string FontRegistryPath;
         public readonly string FontColorRegistryPath;
-        public Color? FontColor;
+        public Color? FontColor { get; set; }
         public string FontColorValue;
-        readonly int fontNameStartIndex = 28; //odtialto zacina string (nazov fontu) vramci jedneko keyu v registri
+        const int fontNameStartIndex = 28; //odtialto zacina string (nazov fontu) vramci jedneko keyu v registri
 
 
         public FontAppearanceSetting(string _name, string _regeditPath, string _colorRegistryPath)
