@@ -11,6 +11,12 @@ namespace AdvancedWindowsAppearence
     public class FontAppearanceSetting: AppearanceSetting
     {
         public Font Font { get; set; }
+        public string FontName { 
+            get 
+            {
+                return Font.Name;
+            } 
+        }
         public bool IsBold { get; set; }
         public bool IsItalic { get; set; }
         readonly string FontRegistryPath;
