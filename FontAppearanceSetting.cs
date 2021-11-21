@@ -17,8 +17,32 @@ namespace AdvancedWindowsAppearence
                 return Font.Name;
             } 
         }
-        public bool IsBold { get; set; }
-        public bool IsItalic { get; set; }
+        bool isBold;
+        public bool IsBold { get
+            {
+                return isBold;
+            }
+            set
+            {
+                isBold = value;
+                IsEdited = true;
+            }
+        }
+
+        bool isItalic;
+        public bool IsItalic 
+        {
+            get
+            {
+                return isItalic;
+            }
+            set
+            {
+                isItalic = value;
+                IsEdited = true;
+            }
+        }
+
         readonly string FontRegistryPath;
         public readonly string FontColorRegistryPath;
         public Color? FontColor { get; set; }
@@ -53,18 +77,6 @@ namespace AdvancedWindowsAppearence
             IsEdited = true;
         }
 
-        public void ChangeFontBoldness(bool isBold) //fixni aby to nebolo hneď (až po Apply)
-        {
-            IsBold = isBold;
-            IsEdited = true;
-        }
-
-        public void ChangeFontItalicness(bool isItalic)
-        {
-            IsItalic = isItalic;
-            IsEdited = true;
-
-        }
         List<Font> GetSystemFonts()
         {
             List<Font> fonts = new List<Font>();
