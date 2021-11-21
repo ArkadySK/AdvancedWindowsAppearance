@@ -38,15 +38,17 @@ namespace AdvancedWindowsAppearence
             setting.RemoveFromRegistry();
         }
 
-        public void SaveAll()
+        public async Task SaveAll()
         {
+            List<Task> tasks = new List<Task>();
             foreach (AeroColorRegistrySetting setting in AeroColors)
             {
                 if (setting == null) continue;
                 if (!setting.Enabled) RemoveFromRegistry(setting);
                 else
-                setting.SaveToRegistry();
+                    tasks.Add(Task.Run(() => setting.SaveToRegistry()));
             }
+            await Task.WhenAll(tasks);
         }
         public void ChangeColorCurrent(AeroColorRegistrySetting aerocolor)
         {
