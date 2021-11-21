@@ -11,9 +11,6 @@ namespace AdvancedWindowsAppearence
 {
     class ThemeSettings
     {
-        bool UseThemes = true; //when false: it means to not apply theme, only to change registry settings
-
-
         public struct ColorRegistrySetting
         {
             public string RegistryName { get; set; }
@@ -50,14 +47,6 @@ namespace AdvancedWindowsAppearence
 
         public ThemeSettings(string displayName, Color colorizationColor, string aeroStyle, string wallpaperPath, ColorAppearanceSetting[] colorAppearanceSettings, FontAppearanceSetting[] fontAppearanceSettings)
         {
-
-            if (!UseThemes) //skip creation of theme if not needed
-            {
-
-                //save fonts and colors to registry
-                SaveToRegistry(fontAppearanceSettings, colorAppearanceSettings);
-                return;
-            }
 
             List<ColorRegistrySetting> changedColorSettings = new List<ColorRegistrySetting>();
 
@@ -181,24 +170,6 @@ namespace AdvancedWindowsAppearence
             SaveTheme(newThemePath, newTheme);
             ///load the new theme
             LoadNewTheme(newThemePath);
-
-            //save fonts (only) to registry
-            SaveToRegistry(fontAppearanceSettings, null);
-        }
-
-        private void SaveToRegistry(FontAppearanceSetting[] fontAppearanceSettings, ColorAppearanceSetting[] colorAppearanceSettings)
-        {
-            foreach (var f in fontAppearanceSettings)
-            {
-                if (f != null)
-                    f.SaveToRegistry();
-            }
-            foreach (var c in colorAppearanceSettings)
-            {
-                if (c != null)
-                    c.SaveToRegistry();
-            }
-            Debug.WriteLine("Values saved to registry successfully.");
         }
 
         private void SaveTheme(string themePath, string newThemeSettingsIni)

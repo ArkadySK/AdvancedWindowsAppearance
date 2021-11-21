@@ -20,6 +20,9 @@ namespace AdvancedWindowsAppearence
         public AeroColorsViewModel AeroColorsViewModel { get; set; } = new AeroColorsViewModel();
         public double DPI = 1;
 
+        bool UseThemes = true; //when false: it means to not apply theme, only to change registry settings
+
+
         public string ThemeStyle = "";
 
         public GeneralViewModel()
@@ -137,15 +140,32 @@ namespace AdvancedWindowsAppearence
             }
         }
 
-
-        public async Task SaveChanges(string themeName)
+        private async void SaveToRegistry(FontAppearanceSetting[] fontAppearanceSettings, ColorAppearanceSetting[] colorAppearanceSettings)
         {
-            string wallpaperPath = Wallpaper.Path; //finish UI for this
+            List<Task> tasks = new List<Task>();
+            foreach (var f in FontSettings)
+            {
+                if (f != null)
+                    tasks.Add(Task.Run( () => f.SaveToRegistry()));
+            }
+            foreach (var c in ColorSettings)
+            {
+                if (c != null)
+                    tasks.Add(Task.Run(() => c.SaveToRegistry()));
+            }
+            await RegistrySettingsViewModel.SaveAll();
+            await AeroColorsViewModel.SaveAll();
+            await Task.WhenAll(tasks);
+            Debug.WriteLine("Values saved to registry successfully.");
+        }
 
+        public async Task SaveToTheme(string themeName)
+        {
+            string wallpaperPath = Wallpaper.Path; //make UI for this
 
+            if (!UseThemes) return; //if user does not want to save changes into theme
 
-            /* TO DO: FINISH IT
-            ThemeSettings SaveTheme = Task.Run(() => new ThemeSettings(themeName, ThemeColor.ItemColor.Value, aeroStyle, wallpaperPath, itemSettings, fontSettings)).Result;
+            ThemeSettings SaveTheme = Task.Run(() => new ThemeSettings(themeName, ThemeColor.ItemColor.Value, ThemeStyle, wallpaperPath, ColorSettings, FontSettings)).Result;
 
             foreach (var setting in ColorSettings)
             {
@@ -163,8 +183,6 @@ namespace AdvancedWindowsAppearence
             }
 
             await Task.Delay(2000);
-            await RegistrySettingsViewModel.SaveAll();
-            AeroColorsViewModel.SaveAll();*/
             KillDWM();
             MessageBox.Show("You need to restart to apply these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
         }
