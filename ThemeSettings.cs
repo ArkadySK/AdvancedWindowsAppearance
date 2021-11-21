@@ -11,6 +11,9 @@ namespace AdvancedWindowsAppearence
 {
     class ThemeSettings
     {
+        bool UseThemes = true; //when false: it means to not apply theme, only to change registry settings
+
+
         public struct ColorRegistrySetting
         {
             public string RegistryName { get; set; }
@@ -48,6 +51,14 @@ namespace AdvancedWindowsAppearence
         public ThemeSettings(string displayName, Color colorizationColor, string aeroStyle, string wallpaperPath, ColorAppearanceSetting[] colorAppearanceSettings, FontAppearanceSetting[] fontAppearanceSettings)
         {
 
+            if (!UseThemes) //skip creation of theme if not needed
+            {
+
+                //save fonts and colors to registry
+                SaveToRegistry(fontAppearanceSettings, colorAppearanceSettings);
+                return;
+            }
+
             List<ColorRegistrySetting> changedColorSettings = new List<ColorRegistrySetting>();
 
             string themePath = GetThemePath();
@@ -55,7 +66,7 @@ namespace AdvancedWindowsAppearence
             List<string> newThemeSettingsIni = themeSettingsIni.ToList();
 
             int i = 0;
-            int ColorIdIndex = -1; ///nech ho to bugne xd
+            int ColorIdIndex = -1;
             string colorsId = @"[Control Panel\Colors]";
             if (!themeSettingsIni.Contains(colorsId))
             {
@@ -83,28 +94,30 @@ namespace AdvancedWindowsAppearence
             {
                 if (s == null) continue;
                 if (!s.IsEdited) continue;
-
-                if (s.ItemColor != null)
-                {
-                    ColorRegistrySetting cs = new ColorRegistrySetting();
-                    cs.IsFoundInTheme = false;
-                    s.ConvertColorValuesToRegistry(s.ItemColor);
-                    cs.Value = s.ColorRegistryPath + "=" + s.ItemColorValue;
-                    cs.RegistryName = s.ColorRegistryPath;
-                    changedColorSettings.Add(cs);
-                }
+                if (s.ItemColor == null) continue;
+                
+                ColorRegistrySetting cs = new ColorRegistrySetting();
+                cs.IsFoundInTheme = false;
+                s.ConvertColorValuesToRegistry(s.ItemColor);
+                cs.Value = s.ColorRegistryPath + "=" + s.ItemColorValue;
+                cs.RegistryName = s.ColorRegistryPath;
+                changedColorSettings.Add(cs);
+                
             }
+
             foreach (FontAppearanceSetting s in fontAppearanceSettings)
             {
-                if (s.FontColor != null)
-                {
-                    ColorRegistrySetting cs = new ColorRegistrySetting();
-                    cs.IsFoundInTheme = false;
-                    s.ConvertColorValuesToRegistry(s.FontColor);
-                    cs.Value = s.FontColorRegistryPath + "=" + s.FontColorValue;
-                    cs.RegistryName = s.FontColorRegistryPath;
-                    changedColorSettings.Add(cs);
-                }
+                if (s == null) continue;
+                if (!s.IsEdited) continue;
+                if (s.FontColor == null) continue;
+
+                ColorRegistrySetting cs = new ColorRegistrySetting();
+                cs.IsFoundInTheme = false;
+                s.ConvertColorValuesToRegistry(s.FontColor);
+                cs.Value = s.FontColorRegistryPath + "=" + s.FontColorValue;
+                cs.RegistryName = s.FontColorRegistryPath;
+                changedColorSettings.Add(cs);
+                
             }
 
             ColorIdIndex = Array.IndexOf(themeSettingsIni, colorsId);
@@ -133,7 +146,7 @@ namespace AdvancedWindowsAppearence
             {
                 if (!cs.IsFoundInTheme)
                 {
-                    ///zisti index colorid a insertni ho za neho
+                    ///find infex of colorId and insert the rest after it
                     try
                     {
                         newThemeSettingsIni.Insert(ColorIdIndex - 1, cs.Value);
@@ -166,11 +179,11 @@ namespace AdvancedWindowsAppearence
             string newThemePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Microsoft\Windows\Themes\" + displayName + ".theme";
             ///save theme
             SaveTheme(newThemePath, newTheme);
-            ///load theme
+            ///load the new theme
             LoadNewTheme(newThemePath);
 
-            //save fonts and colors to registry
-            SaveToRegistry(fontAppearanceSettings, colorAppearanceSettings);
+            //save fonts (only) to registry
+            SaveToRegistry(fontAppearanceSettings, null);
         }
 
         private void SaveToRegistry(FontAppearanceSetting[] fontAppearanceSettings, ColorAppearanceSetting[] colorAppearanceSettings)
