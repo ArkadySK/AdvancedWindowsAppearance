@@ -132,18 +132,18 @@ namespace AdvancedWindowsAppearence
             {
                 comboBoxFont.IsEnabled = true;
                 comboBoxFont.Text = selSetting.Font.Name;
-                comboBoxFontSize.Text = selSetting.FontSize.ToString();
+                comboBoxFontSize.Text = selSetting.Size.ToString();
                 buttonFontBold.IsEnabled = true;
                 buttonFontItalic.IsEnabled = true;
                 buttonFontBold.IsChecked = selSetting.Font_isBold;
                 buttonFontItalic.IsChecked = selSetting.Font_isItalic;              
                 comboBoxFontSize.IsEnabled = true;
-                UpdateFontPreview(selSetting.Font, selSetting.FontSize, selSetting.Font_isBold, selSetting.Font_isItalic, selSetting.FontColor);
+                UpdateFontPreview(selSetting.Font, selSetting.Size.GetValueOrDefault(0), selSetting.Font_isBold, selSetting.Font_isItalic, selSetting.FontColor);
             }
 
         }
 
-        void UpdateFontPreview(System.Drawing.Font f, int size, bool isBold, bool isItalic, System.Drawing.Color? textCol)
+        void UpdateFontPreview(System.Drawing.Font f, float size, bool isBold, bool isItalic, System.Drawing.Color? textCol)
         {
             var textColtemp = System.Drawing.Color.Black;
             if (textCol.HasValue)
@@ -170,7 +170,7 @@ namespace AdvancedWindowsAppearence
             textBlockPreview.Foreground = BrushToColor.MediaColorToBrush(textCol);
         }
 
-        void UpdateFontPreview(System.Drawing.Font f, int size)
+        void UpdateFontPreview(System.Drawing.Font f, float size)
         {
             textBlockPreview.Content = "The quick brown fox jumps over the lazy dog";
             textBlockPreview.FontFamily = new System.Windows.Media.FontFamily(f.FontFamily.Name);
@@ -253,7 +253,7 @@ namespace AdvancedWindowsAppearence
             if(comboBoxFonts.SelectedIndex == -1) return;
             var selSetting = GetSelFontSetting();
             selSetting.ChangeFontName(comboBoxFont.Text);          
-            UpdateFontPreview(selSetting.Font, selSetting.FontSize);
+            UpdateFontPreview(selSetting.Font, selSetting.Size.GetValueOrDefault(0));
         }
 
         private void comboBoxFontSize_DropDownClosed(object sender, EventArgs e)
@@ -261,7 +261,7 @@ namespace AdvancedWindowsAppearence
             if (comboBoxFonts.SelectedIndex == -1) return;
             var s = GetSelFontSetting();
             int size = int.Parse(comboBoxFontSize.Text);
-            s.FontSize = size;
+            s.Size = size;
             UpdateFontPreview(s.Font, size);
         }
 

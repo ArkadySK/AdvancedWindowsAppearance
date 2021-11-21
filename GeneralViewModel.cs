@@ -49,7 +49,7 @@ namespace AdvancedWindowsAppearence
 
         void InitDPIScale()
         {
-            DPI = System.Windows.SystemFonts.CaptionFontSize / FontSettings[0].FontSize;
+            DPI = System.Windows.SystemFonts.CaptionFontSize / FontSettings[0].Size.GetValueOrDefault(1f);
         }
 
         void InitRegistrySettings()

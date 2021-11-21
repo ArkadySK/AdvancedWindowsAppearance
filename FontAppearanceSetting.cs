@@ -13,7 +13,6 @@ namespace AdvancedWindowsAppearence
         public Font Font { get; set; }
         public bool Font_isBold { get; set; }
         public bool Font_isItalic { get; set; }
-        public int FontSize { get; set; }
         readonly string FontRegistryPath;
         public readonly string FontColorRegistryPath;
         public Color? FontColor { get; set; }
@@ -113,7 +112,7 @@ namespace AdvancedWindowsAppearence
                 Font_isItalic = true;
             }
             int sizetemp = (int)fonttemp[0];
-            this.FontSize = (256 - sizetemp) / 2;
+            this.Size = (256 - sizetemp) / 2;
 
             return regeditFont;
         }
@@ -135,7 +134,7 @@ namespace AdvancedWindowsAppearence
                 regeditValBytes[20] = 0;
             regeditValBytes.RemoveRange(fontNameStartIndex, regeditValBytes.Count - fontNameStartIndex);
 
-            byte fontsizetemp = (byte)(256 - 2 * this.FontSize);
+            byte fontsizetemp = (byte)(256 - 2 * this.Size);
             regeditValBytes[0] = fontsizetemp;
 
             List<byte> fontNameBytes = new List<byte>();
