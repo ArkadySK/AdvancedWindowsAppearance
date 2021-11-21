@@ -16,7 +16,13 @@ namespace AdvancedWindowsAppearence
         readonly string FontRegistryPath;
         public readonly string FontColorRegistryPath;
         public Color? FontColor { get; set; }
-        public string FontColorValue;
+        public string FontColorValue 
+        { 
+            get
+            {
+                return ConvertColorValuesToRegistry(FontColor);
+            } 
+        }
         const int fontNameStartIndex = 28; //odtialto zacina string (nazov fontu) vramci jedneko keyu v registri
 
 

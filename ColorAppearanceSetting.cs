@@ -17,7 +17,13 @@ namespace AdvancedWindowsAppearence
         {
             get { return !string.IsNullOrEmpty(ColorRegistryPath); }
         }
-        public string ItemColorValue;
+        public string ItemColorValue
+        {
+            get
+            {
+                return ConvertColorValuesToRegistry(ItemColor);
+            }
+        }
 
         public ColorAppearanceSetting(string _name, string _regeditPath, string _colorRegistryPath)
         {
