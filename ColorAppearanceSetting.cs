@@ -15,7 +15,7 @@ namespace AdvancedWindowsAppearence
         public Color? ItemColor { get; set; }
         public bool HasColor
         {
-            get { return ColorRegistryPath != null; }
+            get { return !string.IsNullOrEmpty(ColorRegistryPath); }
         }
         public string ItemColorValue;
 
