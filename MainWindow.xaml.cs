@@ -286,14 +286,15 @@ namespace AdvancedWindowsAppearence
         #endregion
 
 
+        #region Buttons Panel
         //Close Program
-        private void Button_Click(object sender, RoutedEventArgs e) 
+        private void CloseButton_Click(object sender, RoutedEventArgs e) 
         {
             Close();
         }
 
         // restore all changes done to registry (colors, fonts, sizes) 
-        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        private async void ButtonRestore_Click(object sender, RoutedEventArgs e)
         {
             await Settings.ResetToDefaults();
             var msgBox = MessageBox.Show("Colors, sizes and fonts were restored. \n\nPlease restart the computer.\nProgram will now close.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -307,9 +308,8 @@ namespace AdvancedWindowsAppearence
             Settings.AeroColorsViewModel.ChangeColorCurrent((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem);
             ((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor = OpenColorDialog(((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor);
         }
-        #region Save Changes
 
-        private async void Button_Click_2(object sender, RoutedEventArgs e)
+        private async void ButtonApply_Click(object sender, RoutedEventArgs e)
         {
             if (saveChangesComboBox.Text == "Apply as theme") 
                 Settings.UseThemes = true;
