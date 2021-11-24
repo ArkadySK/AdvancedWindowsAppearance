@@ -296,10 +296,11 @@ namespace AdvancedWindowsAppearence
         // restore all changes done to registry (colors, fonts, sizes) 
         private async void ButtonRestore_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show("Restore all settings related to advanced theming? \n\nA restart will be required.", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.No) return;
+            
             await Settings.ResetToDefaults();
-            var msgBox = MessageBox.Show("Colors, sizes and fonts were restored. \n\nPlease restart the computer.\nProgram will now close.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-            if (msgBox == MessageBoxResult.OK)
-                Close();
+            MessageBox.Show("Colors, sizes and fonts were restored. \n\nPlease restart the computer.\nProgram will now close.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);         
         }
 
         //check if this works
