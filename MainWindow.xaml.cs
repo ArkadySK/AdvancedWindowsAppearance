@@ -311,7 +311,7 @@ namespace AdvancedWindowsAppearence
 
         private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            if (saveChangesComboBox.Text == "Save as Theme") 
+            if (saveChangesComboBox.Text == "Apply as theme") 
                 Settings.UseThemes = true;
             else
                 Settings.UseThemes = false;
