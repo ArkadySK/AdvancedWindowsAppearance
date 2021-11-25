@@ -11,6 +11,18 @@ namespace AdvancedWindowsAppearence
     public class AeroColorRegistrySetting: RegistrySetting
     {
         public Color? ItemColor { get; set; }
+        public byte Opacity 
+        {
+            get 
+            {
+                return ItemColor.GetValueOrDefault(Color.Transparent).A;
+            }
+            set
+            {
+                ItemColor = Color.FromArgb(value, ItemColor.Value.R, ItemColor.Value.G, ItemColor.Value.B);
+            }
+        }
+
         public bool Enabled { get; set; }
         public System.Windows.Media.Brush ItemBrush { 
             get 
