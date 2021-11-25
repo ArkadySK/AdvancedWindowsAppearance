@@ -258,7 +258,7 @@
                             <Label VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.Row="1" Margin="1">Theme Color Opacity</Label>
                             <Slider x:Name="sliderColorOpacity" Grid.Row="1" Grid.Column="1" Margin="3" Maximum="255" ValueChanged="sliderColorOpacity_ValueChanged" Grid.ColumnSpan="2"/>
                             <TextBox IsEnabled="False" x:Name="textBoxColorOpacity" Grid.Row="1" Grid.Column="3" Margin="5,4.667,5,5.333" Text="" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
-                            <ComboBox x:Name="comboBoxAeroColors" ItemsSource="{Binding AeroColors}" Grid.Row="2" Grid.ColumnSpan="2">
+                            <ComboBox x:Name="comboBoxAeroColors" ItemsSource="{Binding AeroColorsViewModel.AeroColors}" Grid.Row="2" Grid.ColumnSpan="2">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <Label Content="{Binding Name}"/>
