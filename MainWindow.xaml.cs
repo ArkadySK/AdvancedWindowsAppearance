@@ -254,9 +254,15 @@ namespace AdvancedWindowsAppearence
 
 
         #region Aero Tab
+
         private void buttonThemeColor_Click(object sender, RoutedEventArgs e)
         {
             Settings.ThemeColor.ItemColor = OpenColorDialog(Settings.ThemeColor.ItemColor);           
+        }
+
+        private void buttonAeroColor_Click(object sender, RoutedEventArgs e)
+        {
+            ((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor = OpenColorDialog(((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor);
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -294,13 +300,6 @@ namespace AdvancedWindowsAppearence
             
             await Settings.ResetToDefaults();
             MessageBox.Show("Colors, sizes and fonts were restored. \n\nPlease restart the computer.\nProgram will now close.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);         
-        }
-
-        //check if this works
-        private void buttonAeroColor_Click(object sender, RoutedEventArgs e)
-        {
-            Settings.AeroColorsViewModel.ChangeColorCurrent((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem);
-            ((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor = OpenColorDialog(((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor);
         }
 
         private async void ButtonApply_Click(object sender, RoutedEventArgs e)
