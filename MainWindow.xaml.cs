@@ -276,13 +276,6 @@ namespace AdvancedWindowsAppearence
             a = byte.Parse(alpha.ToString());
             Settings.ThemeColor.ItemColor = System.Drawing.Color.FromArgb(alpha , Settings.ThemeColor.ItemColor.Value.R, Settings.ThemeColor.ItemColor.Value.G, Settings.ThemeColor.ItemColor.Value.B);
         }
-
-        private void sliderColorOpacity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            byte a = new byte();
-            a = Convert.ToByte(sliderColorOpacity.Value);
-            Settings.ThemeColor.ItemColor = System.Drawing.Color.FromArgb(a, Settings.ThemeColor.ItemColor.Value.R, Settings.ThemeColor.ItemColor.Value.G, Settings.ThemeColor.ItemColor.Value.B);
-        }
         #endregion
 
 
