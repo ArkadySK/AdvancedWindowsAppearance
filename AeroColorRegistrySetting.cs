@@ -1,16 +1,35 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AdvancedWindowsAppearence
 {
-    public class AeroColorRegistrySetting: RegistrySetting
+    public class AeroColorRegistrySetting: RegistrySetting , INotifyPropertyChanged
     {
-        public Color? ItemColor { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private Color? _itemColor;
+        public Color? ItemColor { get
+            {
+                return _itemColor; 
+            }
+            set 
+            {
+                _itemColor = value;
+                NotifyPropertyChanged();
+            } 
+        }
         public byte Opacity 
         {
             get 
@@ -20,6 +39,7 @@ namespace AdvancedWindowsAppearence
             set
             {
                 ItemColor = Color.FromArgb(value, ItemColor.Value.R, ItemColor.Value.G, ItemColor.Value.B);
+                NotifyPropertyChanged();
             }
         }
 
