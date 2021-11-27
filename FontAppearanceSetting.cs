@@ -74,39 +74,8 @@ namespace AdvancedWindowsAppearence
 
         public void ChangeFontName(string name)
         {
-            this.Font = FindFontFromString(name);
+            this.Font = FontManager.FindFontFromString(name);
             IsEdited = true;
-        }
-
-        public List<Font> GetSystemFonts()
-        {
-            List<Font> fonts = new List<Font>();
-
-            foreach (FontFamily fontfamily in FontFamily.Families)
-            {
-                try
-                {
-                    Font f = new Font(fontfamily, 9);
-                    fonts.Add(f);
-                }
-                catch { }
-
-            }
-            return fonts;
-        }
-
-        Font FindFontFromString(string stringname)
-        {
-            List<Font> fonts = GetSystemFonts();
-            foreach (var f in fonts)
-            {
-                if (stringname.Contains(f.Name))
-                {
-                    return f;
-                }
-            }
-            Console.WriteLine("Font not found!");
-            return null;
         }
 
         internal Font GetFontFromRegistry(string registrypath)
@@ -130,7 +99,7 @@ namespace AdvancedWindowsAppearence
             string fontstring = Encoding.ASCII.GetString(fontNametemp.ToArray());
             registryKey.Close();
 
-            regeditFont = FindFontFromString(fontstring);
+            regeditFont = FontManager.FindFontFromString(fontstring);
 
             if (fonttemp[17] == 02)
             {

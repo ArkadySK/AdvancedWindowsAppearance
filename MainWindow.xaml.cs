@@ -62,7 +62,7 @@ namespace AdvancedWindowsAppearence
         void UpdateFontList()
         {
             comboBoxFont.Items.Clear();
-            List<System.Drawing.Font> fonts = (new FontAppearanceSetting()).GetSystemFonts();
+            List<System.Drawing.Font> fonts = FontManager.GetSystemFonts();
             foreach (var f in fonts)
             {
                 comboBoxFont.Items.Add(f.Name);
