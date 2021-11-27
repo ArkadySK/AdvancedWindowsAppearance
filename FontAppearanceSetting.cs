@@ -55,6 +55,7 @@ namespace AdvancedWindowsAppearence
         }
         const int fontNameStartIndex = 28; //odtialto zacina string (nazov fontu) vramci jedneko keyu v registri
 
+        public FontAppearanceSetting() { }
 
         public FontAppearanceSetting(string _name, string _regeditPath, string _colorRegistryPath)
         {
@@ -77,14 +78,18 @@ namespace AdvancedWindowsAppearence
             IsEdited = true;
         }
 
-        List<Font> GetSystemFonts()
+        public List<Font> GetSystemFonts()
         {
             List<Font> fonts = new List<Font>();
 
             foreach (FontFamily fontfamily in FontFamily.Families)
             {
-                Font f = new Font(fontfamily, 9);
-                fonts.Add(f);
+                try
+                {
+                    Font f = new Font(fontfamily, 9);
+                    fonts.Add(f);
+                }
+                catch { }
 
             }
             return fonts;

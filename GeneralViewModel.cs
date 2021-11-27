@@ -13,6 +13,7 @@ namespace AdvancedWindowsAppearence
     {
         public ColorAppearanceSetting[] ColorSettings { get; set; }
         public FontAppearanceSetting[] FontSettings { get; set; }
+
         public WallpaperAppearanceSetting Wallpaper { get; set; } = new WallpaperAppearanceSetting();
 
         public AeroColorRegistrySetting ThemeColor { get; set; } = new AeroColorRegistrySetting("Theme Color", "", "ColorizationColor");

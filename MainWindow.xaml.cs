@@ -58,25 +58,11 @@ namespace AdvancedWindowsAppearence
             //title colors
             //theme settings
         }
-
-        List<System.Drawing.Font> GetSystemFonts()
-        {
-            List<System.Drawing.Font> fonts = new List<System.Drawing.Font>();
-
-            foreach (System.Drawing.FontFamily font in System.Drawing.FontFamily.Families)
-            {
-                System.Drawing.Font f = new System.Drawing.Font(font, 11);
-                fonts.Add(f);
-
-            }
-            return fonts;
-        }
-
         
         void UpdateFontList()
         {
             comboBoxFont.Items.Clear();
-            List<System.Drawing.Font> fonts = GetSystemFonts();
+            List<System.Drawing.Font> fonts = (new FontAppearanceSetting()).GetSystemFonts();
             foreach (var f in fonts)
             {
                 comboBoxFont.Items.Add(f.Name);
