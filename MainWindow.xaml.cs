@@ -129,15 +129,15 @@ namespace AdvancedWindowsAppearence
         {
             var selSetting = GetSelFontSetting();
             if (selSetting == null) return;
-            UpdateFontPreview(selSetting.Font, selSetting.Size.GetValueOrDefault(0), selSetting.IsBold, selSetting.IsItalic, selSetting.FontColor);
+            UpdateFontPreview(selSetting.Font, selSetting.Size.GetValueOrDefault(0), selSetting.IsBold, selSetting.IsItalic, selSetting.ItemColor);
         }
 
         private void buttonEditFontColor_Click(object sender, RoutedEventArgs e)
         {
             var selSetting = GetSelFontSetting();
-            selSetting.FontColor = OpenColorDialog(selSetting.FontColor);
+            selSetting.ItemColor = OpenColorDialog(selSetting.ItemColor);
             selSetting.IsEdited = true;
-            UpdateFontPreview(selSetting.FontColor.Value);
+            UpdateFontPreview(selSetting.ItemColor.Value);
         }
 
         private void comboBoxFont_TextInput(object sender, TextCompositionEventArgs e)
