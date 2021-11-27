@@ -13,7 +13,24 @@ namespace AdvancedWindowsAppearence
         {
             get { return Size != null; }
         }
+        public string ColorRegistryPath;
 
+        public Color? ItemColor { get; set; }
+        public string ItemColorValue
+        {
+            get
+            {
+                return ConvertColorValuesToRegistry(ItemColor);
+            }
+        }
+
+        public bool HasColor
+        {
+            get
+            {
+                return ItemColor.HasValue;
+            }
+        }
 
         string Color_ToRegistryFormat(Color color)
         {

@@ -44,15 +44,6 @@ namespace AdvancedWindowsAppearence
         }
 
         readonly string FontRegistryPath;
-        public readonly string FontColorRegistryPath;
-        public Color? FontColor { get; set; }
-        public string FontColorValue 
-        { 
-            get
-            {
-                return ConvertColorValuesToRegistry(FontColor);
-            } 
-        }
         const int fontNameStartIndex = 28; //odtialto zacina string (nazov fontu) vramci jedneko keyu v registri
 
         public FontAppearanceSetting() { }
@@ -61,7 +52,7 @@ namespace AdvancedWindowsAppearence
         {
             Name = _name;
             FontRegistryPath = _regeditPath;
-            FontColorRegistryPath = _colorRegistryPath;
+            ColorRegistryPath = _colorRegistryPath;
             LoadValues();
         }
 
@@ -69,7 +60,7 @@ namespace AdvancedWindowsAppearence
         void LoadValues()
         {
             Font = GetFontFromRegistry(FontRegistryPath);
-            FontColor = GetColorFromRegistry(FontColorRegistryPath);
+            ItemColor = GetColorFromRegistry(ColorRegistryPath);
         }
 
         public void ChangeFontName(string name)
@@ -158,9 +149,9 @@ namespace AdvancedWindowsAppearence
             {
                 Registry.CurrentUser.CreateSubKey(@"Control Panel\Colors");
             }
-            if (FontColor.HasValue)
+            if (ItemColor.HasValue)
             {
-                key.SetValue(FontColorRegistryPath, FontColorValue, RegistryValueKind.String);
+                key.SetValue(ColorRegistryPath, ItemColorValue, RegistryValueKind.String);
             }
 
             key.Close();
