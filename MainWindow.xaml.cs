@@ -140,19 +140,11 @@ namespace AdvancedWindowsAppearence
             UpdateFontPreview(selSetting.ItemColor.Value);
         }
 
-        private void comboBoxFont_TextInput(object sender, TextCompositionEventArgs e)
+        private void comboBoxFont_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /*if (comboBoxFonts.SelectedIndex == -1) return;
+            if (string.IsNullOrWhiteSpace(comboBoxFont.Text)) return;
             var selSetting = GetSelFontSetting();
             selSetting.ChangeFontName(comboBoxFont.Text);
-            Console.WriteLine(comboBoxFont.Text);*/
-        }
-
-        private void comboBoxFont_DropDownClosed(object sender, EventArgs e)
-        {
-            if(comboBoxFonts.SelectedIndex == -1) return;
-            var selSetting = GetSelFontSetting();
-            selSetting.ChangeFontName(comboBoxFont.Text);          
             UpdateFontPreview(selSetting.Font, selSetting.Size.GetValueOrDefault(0));
         }
 
@@ -298,6 +290,5 @@ namespace AdvancedWindowsAppearence
             await Settings.SaveChanges();
         }
         #endregion
-
     }
 }
