@@ -186,11 +186,10 @@ namespace AdvancedWindowsAppearence
 
         void UpdateFontPreview(System.Drawing.Font f, float size)
         {
-            textBlockPreview.Content = "The quick brown fox jumps over the lazy dog";
+            textBlockPreview.Text = "The quick brown fox jumps over the lazy dog";
             textBlockPreview.FontFamily = new System.Windows.Media.FontFamily(f.FontFamily.Name);
             textBlockPreview.FontSize = size * Settings.DPI;
         }
-
 
         #endregion
 
