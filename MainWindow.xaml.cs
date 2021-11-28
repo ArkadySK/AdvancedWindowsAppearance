@@ -191,6 +191,12 @@ namespace AdvancedWindowsAppearence
             textBlockPreview.FontSize = size * Settings.DPI;
         }
 
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
         #endregion
 
 
@@ -234,12 +240,6 @@ namespace AdvancedWindowsAppearence
         private void buttonThemeColor_Click(object sender, RoutedEventArgs e)
         {
             Settings.ThemeColor.ItemColor = OpenColorDialog(Settings.ThemeColor.ItemColor);           
-        }
-
-        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);           
         }
 
         private void textBoxColorOpacity_TextChanged(object sender, TextChangedEventArgs e)
