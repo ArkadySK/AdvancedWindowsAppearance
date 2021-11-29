@@ -98,13 +98,13 @@ namespace AdvancedWindowsAppearence
             {
                 if (s == null) continue;
                 if (!s.IsEdited) continue;
-                if (s.FontColor == null) continue;
+                if (s.ItemColor == null) continue;
 
                 ColorRegistrySetting cs = new ColorRegistrySetting();
                 cs.IsFoundInTheme = false;
-                s.ConvertColorValuesToRegistry(s.FontColor);
-                cs.Value = s.FontColorRegistryPath + "=" + s.FontColorValue;
-                cs.RegistryName = s.FontColorRegistryPath;
+                s.ConvertColorValuesToRegistry(s.ItemColor);
+                cs.Value = s.ColorRegistryPath + "=" + s.ItemColorValue;
+                cs.RegistryName = s.ColorRegistryPath;
                 changedColorSettings.Add(cs);
                 
             }

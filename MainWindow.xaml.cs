@@ -58,25 +58,11 @@ namespace AdvancedWindowsAppearence
             //title colors
             //theme settings
         }
-
-        List<System.Drawing.Font> GetSystemFonts()
-        {
-            List<System.Drawing.Font> fonts = new List<System.Drawing.Font>();
-
-            foreach (System.Drawing.FontFamily font in System.Drawing.FontFamily.Families)
-            {
-                System.Drawing.Font f = new System.Drawing.Font(font, 11);
-                fonts.Add(f);
-
-            }
-            return fonts;
-        }
-
         
         void UpdateFontList()
         {
             comboBoxFont.Items.Clear();
-            List<System.Drawing.Font> fonts = GetSystemFonts();
+            List<System.Drawing.Font> fonts = FontManager.GetSystemFonts();
             foreach (var f in fonts)
             {
                 comboBoxFont.Items.Add(f.Name);
@@ -143,30 +129,22 @@ namespace AdvancedWindowsAppearence
         {
             var selSetting = GetSelFontSetting();
             if (selSetting == null) return;
-            UpdateFontPreview(selSetting.Font, selSetting.Size.GetValueOrDefault(0), selSetting.IsBold, selSetting.IsItalic, selSetting.FontColor);
+            UpdateFontPreview(selSetting.Font, selSetting.Size.GetValueOrDefault(0), selSetting.IsBold, selSetting.IsItalic, selSetting.ItemColor);
         }
 
         private void buttonEditFontColor_Click(object sender, RoutedEventArgs e)
         {
             var selSetting = GetSelFontSetting();
-            selSetting.FontColor = OpenColorDialog(selSetting.FontColor);
+            selSetting.ItemColor = OpenColorDialog(selSetting.ItemColor);
             selSetting.IsEdited = true;
-            UpdateFontPreview(selSetting.FontColor.Value);
+            UpdateFontPreview(selSetting.ItemColor.Value);
         }
 
-        private void comboBoxFont_TextInput(object sender, TextCompositionEventArgs e)
+        private void comboBoxFont_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /*if (comboBoxFonts.SelectedIndex == -1) return;
+            if (string.IsNullOrWhiteSpace(comboBoxFont.Text)) return;
             var selSetting = GetSelFontSetting();
             selSetting.ChangeFontName(comboBoxFont.Text);
-            Console.WriteLine(comboBoxFont.Text);*/
-        }
-
-        private void comboBoxFont_DropDownClosed(object sender, EventArgs e)
-        {
-            if(comboBoxFonts.SelectedIndex == -1) return;
-            var selSetting = GetSelFontSetting();
-            selSetting.ChangeFontName(comboBoxFont.Text);          
             UpdateFontPreview(selSetting.Font, selSetting.Size.GetValueOrDefault(0));
         }
 
@@ -208,11 +186,16 @@ namespace AdvancedWindowsAppearence
 
         void UpdateFontPreview(System.Drawing.Font f, float size)
         {
-            textBlockPreview.Content = "The quick brown fox jumps over the lazy dog";
+            textBlockPreview.Text = "The quick brown fox jumps over the lazy dog";
             textBlockPreview.FontFamily = new System.Windows.Media.FontFamily(f.FontFamily.Name);
             textBlockPreview.FontSize = size * Settings.DPI;
         }
 
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
 
         #endregion
 
@@ -254,21 +237,9 @@ namespace AdvancedWindowsAppearence
 
 
         #region Aero Tab
-
         private void buttonThemeColor_Click(object sender, RoutedEventArgs e)
         {
             Settings.ThemeColor.ItemColor = OpenColorDialog(Settings.ThemeColor.ItemColor);           
-        }
-
-        private void buttonAeroColor_Click(object sender, RoutedEventArgs e)
-        {
-            ((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor = OpenColorDialog(((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor);
-        }
-
-        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);           
         }
 
         private void textBoxColorOpacity_TextChanged(object sender, TextChangedEventArgs e)
@@ -302,6 +273,13 @@ namespace AdvancedWindowsAppearence
             MessageBox.Show("Colors, sizes and fonts were restored. \n\nPlease restart the computer.\nProgram will now close.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);         
         }
 
+        //check if this works
+        private void buttonAeroColor_Click(object sender, RoutedEventArgs e)
+        {
+            Settings.AeroColorsViewModel.ChangeColorCurrent((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem);
+            ((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor = OpenColorDialog(((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor);
+        }
+
         private async void ButtonApply_Click(object sender, RoutedEventArgs e)
         {
             if (saveChangesComboBox.Text == "Apply as theme") 
@@ -311,6 +289,5 @@ namespace AdvancedWindowsAppearence
             await Settings.SaveChanges();
         }
         #endregion
-
     }
 }

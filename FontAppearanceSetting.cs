@@ -44,23 +44,15 @@ namespace AdvancedWindowsAppearence
         }
 
         readonly string FontRegistryPath;
-        public readonly string FontColorRegistryPath;
-        public Color? FontColor { get; set; }
-        public string FontColorValue 
-        { 
-            get
-            {
-                return ConvertColorValuesToRegistry(FontColor);
-            } 
-        }
         const int fontNameStartIndex = 28; //odtialto zacina string (nazov fontu) vramci jedneko keyu v registri
 
+        public FontAppearanceSetting() { }
 
         public FontAppearanceSetting(string _name, string _regeditPath, string _colorRegistryPath)
         {
             Name = _name;
             FontRegistryPath = _regeditPath;
-            FontColorRegistryPath = _colorRegistryPath;
+            ColorRegistryPath = _colorRegistryPath;
             LoadValues();
         }
 
@@ -68,40 +60,13 @@ namespace AdvancedWindowsAppearence
         void LoadValues()
         {
             Font = GetFontFromRegistry(FontRegistryPath);
-            FontColor = GetColorFromRegistry(FontColorRegistryPath);
+            ItemColor = GetColorFromRegistry(ColorRegistryPath);
         }
 
         public void ChangeFontName(string name)
         {
-            this.Font = FindFontFromString(name);
+            this.Font = FontManager.FindFontFromString(name);
             IsEdited = true;
-        }
-
-        List<Font> GetSystemFonts()
-        {
-            List<Font> fonts = new List<Font>();
-
-            foreach (FontFamily fontfamily in FontFamily.Families)
-            {
-                Font f = new Font(fontfamily, 9);
-                fonts.Add(f);
-
-            }
-            return fonts;
-        }
-
-        Font FindFontFromString(string stringname)
-        {
-            List<Font> fonts = GetSystemFonts();
-            foreach (var f in fonts)
-            {
-                if (stringname.Contains(f.Name))
-                {
-                    return f;
-                }
-            }
-            Console.WriteLine("Font not found!");
-            return null;
         }
 
         internal Font GetFontFromRegistry(string registrypath)
@@ -125,7 +90,7 @@ namespace AdvancedWindowsAppearence
             string fontstring = Encoding.ASCII.GetString(fontNametemp.ToArray());
             registryKey.Close();
 
-            regeditFont = FindFontFromString(fontstring);
+            regeditFont = FontManager.FindFontFromString(fontstring);
 
             if (fonttemp[17] == 02)
             {
@@ -184,9 +149,9 @@ namespace AdvancedWindowsAppearence
             {
                 Registry.CurrentUser.CreateSubKey(@"Control Panel\Colors");
             }
-            if (FontColor.HasValue)
+            if (ItemColor.HasValue)
             {
-                key.SetValue(FontColorRegistryPath, FontColorValue, RegistryValueKind.String);
+                key.SetValue(ColorRegistryPath, ItemColorValue, RegistryValueKind.String);
             }
 
             key.Close();
