@@ -13,9 +13,19 @@ namespace AdvancedWindowsAppearence
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         public bool IsEdited { get; set; }
-
         public string Name { get; set; }
-        public float? Size { get; set; }
+
+        private float? _size;
+        public float? Size { get => _size;
+            set
+            {
+                if (_size == value)
+                    return;
+                IsEdited = true;
+                _size = value;
+                NotifyPropertyChanged();
+            }
+        }
         public bool HasSize
         {
             get { return Size != null; }
@@ -78,13 +88,6 @@ namespace AdvancedWindowsAppearence
             color = Color.FromArgb(int.Parse(colorRegString[0]), int.Parse(colorRegString[1]), int.Parse(colorRegString[2]));
 
             return color;
-        }
-        public void ChangeSize(float size)
-        {
-            if (Size == size) return;
-            Size = size;
-            IsEdited = true;
-            NotifyPropertyChanged();
         }
 
     }
