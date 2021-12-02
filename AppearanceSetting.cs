@@ -8,21 +8,11 @@ namespace AdvancedWindowsAppearence
 {
     public class AppearanceSetting : INotifyPropertyChanged
     {
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        internal void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        private bool _isEdited = false;
-        public bool IsEdited 
-        { 
-            get => _isEdited;
-            set
-            {
-                _isEdited = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public bool IsEdited { get; set; }
 
         public string Name { get; set; }
         public float? Size { get; set; }
@@ -31,10 +21,20 @@ namespace AdvancedWindowsAppearence
             get { return Size != null; }
         }
         public string ColorRegistryPath;
+        private Color? itemColor;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Color? ItemColor { get; set; }
+        public Color? ItemColor
+        {
+            get => itemColor;
+            set
+            {
+                itemColor = value;
+                IsEdited = true;
+                NotifyPropertyChanged();
+            }
+        }
         public string ItemColorValue
         {
             get
@@ -84,6 +84,7 @@ namespace AdvancedWindowsAppearence
             if (Size == size) return;
             Size = size;
             IsEdited = true;
+            NotifyPropertyChanged();
         }
 
     }

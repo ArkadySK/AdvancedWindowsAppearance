@@ -26,6 +26,7 @@ namespace AdvancedWindowsAppearence
             {
                 isBold = value;
                 IsEdited = true;
+                base.NotifyPropertyChanged();
             }
         }
 
@@ -40,6 +41,7 @@ namespace AdvancedWindowsAppearence
             {
                 isItalic = value;
                 IsEdited = true;
+                base.NotifyPropertyChanged();
             }
         }
 
@@ -63,10 +65,11 @@ namespace AdvancedWindowsAppearence
             ItemColor = GetColorFromRegistry(ColorRegistryPath);
         }
 
-        public void ChangeFontName(string name)
+        public void ChangeFontName(string name) // verify the way how this works
         {
             this.Font = FontManager.FindFontFromString(name);
             IsEdited = true;
+            base.NotifyPropertyChanged();
         }
 
         internal Font GetFontFromRegistry(string registrypath)
@@ -139,6 +142,7 @@ namespace AdvancedWindowsAppearence
             RegistryKey newKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics", true);
             newKey.SetValue(FontRegistryPath, newRegistryValBytes.ToArray(), RegistryValueKind.Binary);
             newKey.Close();
+            this.IsEdited = false;
         }
 
         private void SaveColorsToRegistry()
