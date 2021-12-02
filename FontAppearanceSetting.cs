@@ -63,6 +63,7 @@ namespace AdvancedWindowsAppearence
         {
             Font = GetFontFromRegistry(FontRegistryPath);
             ItemColor = GetColorFromRegistry(ColorRegistryPath);
+            IsEdited = false;
         }
 
         public void ChangeFontName(string name) // verify the way how this works

@@ -24,6 +24,7 @@ namespace AdvancedWindowsAppearence
         {
             Size = GetSizeFromRegistry(SizeRegistryPath);
             ItemColor = GetColorFromRegistry(ColorRegistryPath);
+            IsEdited = false;
         }
 
         int? GetSizeFromRegistry(string registrypath)
