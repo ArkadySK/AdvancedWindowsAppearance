@@ -27,30 +27,25 @@ namespace AdvancedWindowsAppearence
             set 
             {
                 _itemColor = value;
+                _opacity = _itemColor.GetValueOrDefault().A;
                 NotifyPropertyChanged();
             } 
         }
+        private byte _opacity;
         public byte Opacity 
         {
             get 
             {
-                return ItemColor.GetValueOrDefault(Color.Transparent).A;
+                return _opacity;
             }
             set
             {
-                ItemColor = Color.FromArgb(value, ItemColor.Value.R, ItemColor.Value.G, ItemColor.Value.B);
+                _opacity = value;
                 NotifyPropertyChanged();
             }
         }
 
         public bool Enabled { get; set; }
-        public System.Windows.Media.Brush ItemBrush { 
-            get 
-            {
-                var col = ItemColor;
-                return new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(col.Value.A, col.Value.R, col.Value.G, col.Value.B));
-            } 
-        }
 
         public AeroColorRegistrySetting(string name, string registrypath, string registrykey)
         {

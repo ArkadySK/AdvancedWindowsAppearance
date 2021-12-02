@@ -244,6 +244,8 @@ namespace AdvancedWindowsAppearence
 
         private void textBoxColorOpacity_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (!textBoxColorOpacity.IsFocused)
+                return;
             string opacityText = textBoxColorOpacity.Text;
             if (opacityText == null || opacityText=="")
                 return;
