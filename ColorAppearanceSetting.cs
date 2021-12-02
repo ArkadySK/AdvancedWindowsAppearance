@@ -57,7 +57,6 @@ namespace AdvancedWindowsAppearence
 
             key.SetValue(SizeRegistryPath, sizeTemp, RegistryValueKind.String);
             key.Close();
-            IsEdited = false;
         }
 
         public void SaveToRegistry()
@@ -65,6 +64,7 @@ namespace AdvancedWindowsAppearence
 
             base.SaveColorToRegistry();
             SaveSizeToRegistry();
+            IsEdited = false;
         }
     }
 }
