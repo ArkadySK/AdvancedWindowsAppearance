@@ -1,19 +1,38 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using Microsoft.Win32;
 
 namespace AdvancedWindowsAppearence
 {
-    public class AppearanceSetting
+    public class AppearanceSetting : INotifyPropertyChanged
     {
-        public bool IsEdited { get; set; } = false;
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool _isEdited = false;
+        public bool IsEdited 
+        { 
+            get => _isEdited;
+            set
+            {
+                _isEdited = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public string Name { get; set; }
         public float? Size { get; set; }
-        public bool HasSize 
+        public bool HasSize
         {
             get { return Size != null; }
         }
         public string ColorRegistryPath;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Color? ItemColor { get; set; }
         public string ItemColorValue
