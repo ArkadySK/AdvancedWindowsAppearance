@@ -101,6 +101,18 @@ namespace AdvancedWindowsAppearence
 
         #region Fonts Tab
 
+        private void comboBoxFontSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selSetting = GetSelFontSetting();
+            if (selSetting == null) return;
+            try
+            {
+                string text = (comboBoxFontSize.SelectedItem as ComboBoxItem).Content.ToString();
+                UpdateFontPreview(selSetting.Font, float.Parse(text));
+            }
+            catch { }
+        }
+
         private void buttonFont_Click(object sender, RoutedEventArgs e)
         {
             UpdateFontPreview(buttonFontBold.IsChecked.Value, buttonFontItalic.IsChecked.Value);
@@ -117,7 +129,6 @@ namespace AdvancedWindowsAppearence
         {
             var selSetting = GetSelFontSetting();
             selSetting.ItemColor = OpenColorDialog(selSetting.ItemColor);
-            selSetting.IsEdited = true;
             UpdateFontPreview(selSetting.ItemColor.Value);
         }
 
@@ -127,15 +138,6 @@ namespace AdvancedWindowsAppearence
             var selSetting = GetSelFontSetting();
             selSetting.ChangeFontName(comboBoxFont.Text);
             UpdateFontPreview(selSetting.Font, selSetting.Size.GetValueOrDefault(0));
-        }
-
-        private void comboBoxFontSize_DropDownClosed(object sender, EventArgs e)
-        {
-            if (comboBoxFonts.SelectedIndex == -1) return;
-            var s = GetSelFontSetting();
-            int size = int.Parse(comboBoxFontSize.Text);
-            s.Size = size;
-            UpdateFontPreview(s.Font, size);
         }
 
         void UpdateFontPreview(System.Drawing.Font f, float size, bool isBold, bool isItalic, System.Drawing.Color? textCol)
@@ -273,16 +275,5 @@ namespace AdvancedWindowsAppearence
         }
         #endregion
 
-        private void comboBoxFontSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selSetting = GetSelFontSetting();
-            if (selSetting == null) return;
-            try
-            {
-                string text =(comboBoxFontSize.SelectedItem as ComboBoxItem).Content.ToString();
-                UpdateFontPreview(selSetting.Font, float.Parse(text));
-            }
-            catch { }
-        }
     }
 }
