@@ -170,7 +170,7 @@
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
-                            <TextBox x:Name="textBoxItemSize" Text="{Binding SelectedItem.Size, ElementName=comboBoxItems}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxItems}" Grid.Column="2" Grid.Row="1" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" InputScope="Number" MaxLines="1" MaxLength="2" TextChanged="textBoxItemSize_TextChanged" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+                            <TextBox x:Name="textBoxItemSize" Text="{Binding SelectedItem.Size, ElementName=comboBoxItems}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxItems}" Grid.Column="2" Grid.Row="1" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" InputScope="Number" MaxLines="1" MaxLength="2" PreviewTextInput="NumberValidationTextBox" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
                             <Button x:Name="buttonItemColor" Grid.Row="1" Padding="0" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonEditItemColor_Click" IsEnabled="{Binding SelectedItem.HasColor, ElementName=comboBoxItems}">
                                 <Button x:Name="imageItemColor" Padding="15 5" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxItems, Converter={StaticResource brushToColor}, Mode=OneWay}" />
                             </Button>

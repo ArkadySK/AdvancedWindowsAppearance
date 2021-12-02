@@ -110,15 +110,6 @@ namespace AdvancedWindowsAppearence
         {
             var selSetting = GetSelItemSetting();
             selSetting.ItemColor = OpenColorDialog(selSetting.ItemColor);
-            selSetting.IsEdited = true;
-        }
-
-        private void textBoxItemSize_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (textBoxItemSize.Text == "" || comboBoxItems.SelectedIndex == -1) return;
-
-            var selSetting = GetSelItemSetting();
-            selSetting.ChangeSize(int.Parse(textBoxItemSize.Text, System.Globalization.NumberStyles.Integer));
         }
         #endregion
 
