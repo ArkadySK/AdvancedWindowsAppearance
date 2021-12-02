@@ -17,7 +17,7 @@
     <StackPanel>
         <Border Margin="5">
             <StackPanel>
-                <Grid IsEnabled="False" Height="220" Background="{DynamicResource {x:Static SystemColors.DesktopBrushKey}}" Margin="0 0 0 10" Style="{x:Null}" OverridesDefaultStyle="True" FocusVisualStyle="{x:Null}">
+                <Grid IsEnabled="False" Background="{Binding Fill, ElementName=desktopColor}" Height="220" Margin="0 0 0 10" Style="{x:Null}" OverridesDefaultStyle="True" FocusVisualStyle="{x:Null}">
                     <Grid.Resources>
                         <ResourceDictionary>
                             <ResourceDictionary.MergedDictionaries>
@@ -25,8 +25,8 @@
                             </ResourceDictionary.MergedDictionaries>
                         </ResourceDictionary >
                     </Grid.Resources>
-                    <Image x:Name="ImageWallpaper"></Image>
-                    <Polygon Points="100,100 0,100 100,0" Fill="{DynamicResource {x:Static SystemColors.DesktopBrushKey}}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,0"/>
+                    <Image Source="{Binding Wallpaper.Path}" Stretch="UniformToFill"></Image>
+                    <Polygon x:Name="desktopColor" Points="100,100 0,100 100,0" Fill="{DynamicResource {x:Static SystemColors.DesktopBrushKey}}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,0"/>
 
 
                     <!-- Inactive Window -->

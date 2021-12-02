@@ -9,7 +9,7 @@ namespace AdvancedWindowsAppearence
 {
     public class WallpaperAppearanceSetting: AppearanceSetting
     {
-        public string Path;
+        public string Path { get; }
         public WallpaperAppearanceSetting()
         {
             Path = GetWallpaperPath();

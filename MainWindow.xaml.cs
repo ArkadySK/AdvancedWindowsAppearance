@@ -30,9 +30,8 @@ namespace AdvancedWindowsAppearence
         public MainWindow()
         {
             InitializeComponent();
-            AssignDataContexts();
+            this.DataContext = Settings;
             UpdateFontList();
-            UpdateWallpaperInfo();
             LoadThemeName();
         }
 
@@ -50,14 +49,6 @@ namespace AdvancedWindowsAppearence
                 textBoxThemeName.Text = themeName;
 
         }
-
-        void AssignDataContexts()
-        {
-            this.DataContext = Settings;
-            //to do:
-            //title colors
-            //theme settings
-        }
         
         void UpdateFontList()
         {
@@ -67,12 +58,6 @@ namespace AdvancedWindowsAppearence
             {
                 comboBoxFont.Items.Add(f.Name);
             }
-        }
-
-        void UpdateWallpaperInfo()
-        {
-            ImageWallpaper.Source = (ImageSource)new ImageSourceConverter().ConvertFromString(Settings.Wallpaper.Path);
-            ImageWallpaper.Stretch = Stretch.UniformToFill;
         }
 
         ColorAppearanceSetting GetSelItemSetting()
