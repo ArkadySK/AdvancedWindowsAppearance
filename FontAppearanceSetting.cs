@@ -68,6 +68,7 @@ namespace AdvancedWindowsAppearence
 
         public void ChangeFontName(string name) // verify the way how this works
         {
+            if (FontName == name) return;
             this.Font = FontManager.FindFontFromString(name);
             IsEdited = true;
             base.NotifyPropertyChanged();

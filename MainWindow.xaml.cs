@@ -116,6 +116,18 @@ namespace AdvancedWindowsAppearence
 
         #region Fonts Tab
 
+        private void buttonFont_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateFontPreview(buttonFontBold.IsChecked.Value, buttonFontItalic.IsChecked.Value);
+        }
+
+        private void comboBoxFontSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selSetting = GetSelFontSetting();
+            if (selSetting == null) return;
+            UpdateFontPreview(selSetting.Font, float.Parse(comboBoxFontSize.Text));
+        }
+
         private void comboBoxFonts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selSetting = GetSelFontSetting();
@@ -282,5 +294,6 @@ namespace AdvancedWindowsAppearence
             await Settings.SaveChanges();
         }
         #endregion
+
     }
 }
