@@ -19,7 +19,7 @@ namespace AdvancedWindowsAppearence
         public float? Size { get => _size;
             set
             {
-                if (_size == value)
+                if (_size == value || value == null)
                     return;
                 IsEdited = true;
                 _size = value;
@@ -90,5 +90,20 @@ namespace AdvancedWindowsAppearence
             return color;
         }
 
+        internal void SaveColorToRegistry()
+        {
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Colors", true);
+            if (key == null)
+            {
+                Registry.CurrentUser.CreateSubKey(@"Control Panel\Colors");
+            }
+
+            if (ItemColor.HasValue)
+            {
+                key.SetValue(ColorRegistryPath, ItemColorValue, RegistryValueKind.String);
+            }
+
+            key.Close();
+        }
     }
 }

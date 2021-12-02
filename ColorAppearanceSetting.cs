@@ -42,25 +42,12 @@ namespace AdvancedWindowsAppearence
 
             return intsize;
         }
-        public void SaveToRegistry()
+
+        void SaveSizeToRegistry()
         {
-
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Colors", true);
-            if (key == null)
-            {
-                Registry.CurrentUser.CreateSubKey(@"Control Panel\Colors");
-            }
-
-            if (ItemColor.HasValue)
-            {
-                key.SetValue(ColorRegistryPath, ItemColorValue, RegistryValueKind.String);
-            }
-
-            key.Close();
-
             if (!Size.HasValue) return;
 
-            key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics", true);
+            var key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics", true);
             float sizeTemp = -15;
 
             if (SizeRegistryPath == "Shell Icon Size")
@@ -70,6 +57,14 @@ namespace AdvancedWindowsAppearence
 
             key.SetValue(SizeRegistryPath, sizeTemp, RegistryValueKind.String);
             key.Close();
+            IsEdited = false;
+        }
+
+        public void SaveToRegistry()
+        {
+
+            base.SaveColorToRegistry();
+            SaveSizeToRegistry();
         }
     }
 }

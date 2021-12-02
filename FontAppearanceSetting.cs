@@ -142,9 +142,8 @@ namespace AdvancedWindowsAppearence
             RegistryKey newKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics", true);
             newKey.SetValue(FontRegistryPath, newRegistryValBytes.ToArray(), RegistryValueKind.Binary);
             newKey.Close();
-            this.IsEdited = false;
+            IsEdited = false;
         }
-
         private void SaveColorsToRegistry()
         {
 
@@ -163,7 +162,7 @@ namespace AdvancedWindowsAppearence
 
         public void SaveToRegistry()
         {
-            SaveColorsToRegistry();
+            base.SaveColorToRegistry();
             SaveFontToRegistry();
         }
     }
