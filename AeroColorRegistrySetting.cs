@@ -41,6 +41,7 @@ namespace AdvancedWindowsAppearence
             set
             {
                 _opacity = value;
+                ItemColor = Color.FromArgb(value, ItemColor.GetValueOrDefault(Color.Transparent));
                 NotifyPropertyChanged();
             }
         }
