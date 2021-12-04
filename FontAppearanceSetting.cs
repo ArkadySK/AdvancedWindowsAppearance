@@ -145,21 +145,6 @@ namespace AdvancedWindowsAppearence
             newKey.SetValue(FontRegistryPath, newRegistryValBytes.ToArray(), RegistryValueKind.Binary);
             newKey.Close();
         }
-        private void SaveColorsToRegistry()
-        {
-
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Colors", true);
-            if (key == null)
-            {
-                Registry.CurrentUser.CreateSubKey(@"Control Panel\Colors");
-            }
-            if (ItemColor.HasValue)
-            {
-                key.SetValue(ColorRegistryPath, ItemColorValue, RegistryValueKind.String);
-            }
-
-            key.Close();
-        }
 
         public void SaveToRegistry()
         {
