@@ -1,16 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
 namespace AdvancedWindowsAppearence
 {
-    public class GeneralViewModel
+    public class GeneralViewModel: INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged; // to do: implement this to refresh the preview
+
+        internal void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public ColorAppearanceSetting[] ColorSettings { get; set; }
         public FontAppearanceSetting[] FontSettings { get; set; }
 
@@ -25,6 +34,7 @@ namespace AdvancedWindowsAppearence
 
         public string ThemeName = "";
         public string ThemeStyle = "";
+
 
         public GeneralViewModel()
         {
