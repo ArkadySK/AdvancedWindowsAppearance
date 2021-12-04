@@ -216,6 +216,7 @@ namespace AdvancedWindowsAppearence
         {
             RunRegFile("Colors fix.reg");
             RunRegFile("Window Metrics fix");
+            RunRegFile("DWM fix");
             await Task.Delay(200);
         }
     }
