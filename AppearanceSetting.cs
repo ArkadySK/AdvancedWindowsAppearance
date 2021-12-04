@@ -12,11 +12,21 @@ namespace AdvancedWindowsAppearence
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public bool IsEdited { get; set; }
+
+        private bool _isEdited;
+        public bool IsEdited { get => _isEdited; set
+            {
+                if (_isEdited == value) return;
+                _isEdited = value;
+                NotifyPropertyChanged();
+            } 
+        }
         public string Name { get; set; }
 
         private float? _size;
-        public float? Size { get => _size;
+        public float? Size
+        {
+            get => _size;
             set
             {
                 if (_size == value || value == null)
