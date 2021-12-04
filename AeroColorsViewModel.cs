@@ -50,9 +50,5 @@ namespace AdvancedWindowsAppearence
             }
             await Task.WhenAll(tasks);
         }
-        public void ChangeColorCurrent(AeroColorRegistrySetting aerocolor)
-        {
-
-        }
     }
 }

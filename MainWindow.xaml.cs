@@ -222,9 +222,22 @@ namespace AdvancedWindowsAppearence
 
 
         #region Aero Tab
+
+        void UpdateAeroColors() //make a method for UI that implements changes and creates live preview
+        {
+
+        }
+
+        private void buttonAeroColor_Click(object sender, RoutedEventArgs e)
+        {
+            ((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor = OpenColorDialog(((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor);
+            UpdateAeroColors();
+        }
+
         private void buttonThemeColor_Click(object sender, RoutedEventArgs e)
         {
-            Settings.ThemeColor.ItemColor = OpenColorDialog(Settings.ThemeColor.ItemColor);           
+            Settings.ThemeColor.ItemColor = OpenColorDialog(Settings.ThemeColor.ItemColor);
+            UpdateAeroColors();
         }
 
         private void textBoxColorOpacity_TextChanged(object sender, TextChangedEventArgs e)
@@ -235,10 +248,8 @@ namespace AdvancedWindowsAppearence
             if (opacityText == null || opacityText=="")
                 return;
             int alpha = int.Parse(opacityText);
-            byte a = new byte();
             if (alpha > byte.MaxValue || alpha < byte.MinValue) return;
-            a = byte.Parse(alpha.ToString());
-            Settings.ThemeColor.ItemColor = System.Drawing.Color.FromArgb(alpha , Settings.ThemeColor.ItemColor.Value.R, Settings.ThemeColor.ItemColor.Value.G, Settings.ThemeColor.ItemColor.Value.B);
+            Settings.ThemeColor.ItemColor = System.Drawing.Color.FromArgb(alpha, Settings.ThemeColor.ItemColor.Value.R, Settings.ThemeColor.ItemColor.Value.G, Settings.ThemeColor.ItemColor.Value.B);
         }
         #endregion
 
@@ -258,13 +269,6 @@ namespace AdvancedWindowsAppearence
             
             await Settings.ResetToDefaults();
             MessageBox.Show("Colors, sizes and fonts were restored. \n\nPlease restart the computer.\nProgram will now close.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);         
-        }
-
-        //check if this works
-        private void buttonAeroColor_Click(object sender, RoutedEventArgs e)
-        {
-            Settings.AeroColorsViewModel.ChangeColorCurrent((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem);
-            ((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor = OpenColorDialog(((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor);
         }
 
         private async void ButtonApply_Click(object sender, RoutedEventArgs e)
