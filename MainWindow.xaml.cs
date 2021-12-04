@@ -134,10 +134,12 @@ namespace AdvancedWindowsAppearence
 
         private void comboBoxFont_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(comboBoxFont.Text)) return;
-            var selSetting = GetSelFontSetting();
-            selSetting.ChangeFontName(comboBoxFont.Text);
-            UpdateFontPreview(selSetting.Font, selSetting.Size.GetValueOrDefault(0));
+            if(comboBoxFont.SelectedItem is string selection)
+            {
+                var selSetting = GetSelFontSetting();
+                selSetting.ChangeFontName(selection);
+                UpdateFontPreview(selSetting.Font, selSetting.Size.GetValueOrDefault(0));
+            }
         }
 
         void UpdateFontPreview(System.Drawing.Font f, float size, bool isBold, bool isItalic, System.Drawing.Color? textCol)
