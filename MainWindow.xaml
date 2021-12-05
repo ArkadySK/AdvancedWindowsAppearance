@@ -308,6 +308,7 @@
                                 <RadioButton Content="Aero Lite (alternative, has window border, available in Windows 10 and 8.1)" Margin="2" Click="ToggleButtonAeroLite_Click"/>
                                 <RadioButton Content="High Contrast (more color options)" Margin="2" Click="ToggleButtonHighContrast_Click" Visibility="Collapsed"/>
                             </StackPanel>
+                            <Button x:Name="buttonOpenControlPanel" Content="Open themes control panel" Padding="10 0" Style="{StaticResource SystemButton}" HorizontalAlignment="Right" Margin="5" Click="buttonOpenControlPanel_Click"/>
                         </StackPanel>
                     </TabItem>
 

@@ -205,6 +205,14 @@ namespace AdvancedWindowsAppearence
         {
             
             stackPanelAeroSettingsButtons.IsEnabled = checkBoxOverwriteThemeStyle.IsChecked.Value;
+            if (checkBoxOverwriteThemeStyle.IsChecked.Value == false)
+            {
+                Settings.UpdateThemeStyle("");
+                foreach(RadioButton rb in stackPanelAeroSettingsButtons.Children)
+                {
+                    rb.IsChecked = false;
+                }
+            }
         }
 
         private void checkBoxOverwriteThemeStyle_Checked(object sender, RoutedEventArgs e)
@@ -278,5 +286,9 @@ namespace AdvancedWindowsAppearence
         }
         #endregion
 
+        private void buttonOpenControlPanel_Click(object sender, RoutedEventArgs e)
+        {
+            Settings.ShowThemesControlPanel();
+        }
     }
 }
