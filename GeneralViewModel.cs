@@ -144,12 +144,17 @@ namespace AdvancedWindowsAppearence
 
         public void UpdateThemeStyle(string style)
         {
-            if (string.IsNullOrEmpty(style))
+            if (string.IsNullOrWhiteSpace(style))
             {
                 ThemeStyle = "";
                 return;
             }
             ThemeStyle = @"%SystemRoot%\resources\Themes\" + style + ".msstyles";
+        }
+
+        public void ShowThemesControlPanel()
+        {
+            Process.Start("explorer", "shell:::{ED834ED6-4B5A-4bfe-8F11-A626DCB6A921}");
         }
 
         #region Save
@@ -165,6 +170,8 @@ namespace AdvancedWindowsAppearence
             }
             await RegistrySettingsViewModel.SaveAll();
             await AeroColorsViewModel.SaveAll();
+            KillDWM();
+            MessageBox.Show("You need to restart to apply these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         async Task SaveToRegistry()
@@ -183,7 +190,6 @@ namespace AdvancedWindowsAppearence
                 f.IsEdited = false;
             }
             await Task.WhenAll(tasks);
-            Debug.WriteLine("Values saved to registry successfully.");
         }
 
         async Task SaveToTheme()
@@ -201,10 +207,7 @@ namespace AdvancedWindowsAppearence
                 setting.SaveToRegistry();
                 setting.IsEdited = false;
             }
-
             await Task.Delay(2000);
-            KillDWM();
-            MessageBox.Show("You need to restart to apply these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         #endregion
 
@@ -250,5 +253,6 @@ namespace AdvancedWindowsAppearence
             await Task.Delay(1000);
         }
         #endregion
+
     }
 }
