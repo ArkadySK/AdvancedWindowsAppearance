@@ -244,8 +244,8 @@ namespace AdvancedWindowsAppearence
             taskList.Add(ResetFonts());
             taskList.Add(ResetColors());
             taskList.Add(ResetDWM());
-            taskList.Add(ResetTheme());
             await Task.WhenAll(taskList);
+            await ResetTheme();
         }
         internal async Task ResetTheme()
         {
