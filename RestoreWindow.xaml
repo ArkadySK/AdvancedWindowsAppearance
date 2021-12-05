@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdvancedWindowsAppearence"
         mc:Ignorable="d"
-        Title="Restore..." SizeToContent="WidthAndHeight">
+        Title="Restore..." SizeToContent="Manual" WindowStartupLocation="CenterOwner" Height="255" Width="469" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="bulletStyle" TargetType="RadioButton">
             <Setter Property="Margin" Value="5"/>
@@ -31,13 +31,14 @@
         </StackPanel>
         
         <Label x:Name="labelInfo" Padding="5" Content="Clicking 'Restore' will restore according your selection" HorizontalAlignment="Stretch" Grid.Row="2" Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" />
-        <Grid Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Right">
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="buttonConfirm" Content="Confirm" Style="{StaticResource SystemButton}" Margin="5" Padding="10 0" Click="buttonConfirm_Click"/>
-            <Button x:Name="buttonClose" Grid.Column="1" Content="Close" Style="{StaticResource SystemButton}" Margin="5" Padding="10 0" Width="60" Click="buttonClose_Click"/>
+            <Button x:Name="buttonConfirm" Grid.Column="1" Content="Confirm" Style="{StaticResource SystemButton}" Margin="5" Padding="20 2" Click="buttonConfirm_Click"/>
+            <Button x:Name="buttonClose" Grid.Column="2" Content="Close" Style="{StaticResource SystemButton}" Margin="5" Padding="20 2" Click="buttonClose_Click"/>
         </Grid>
     </Grid>
 </Window>
