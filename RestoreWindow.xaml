@@ -5,22 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdvancedWindowsAppearence"
         mc:Ignorable="d"
-        Title="Restore..." Height="200" Width="400">
+        Title="Restore..." SizeToContent="WidthAndHeight">
+    <Window.Resources>
+        <Style x:Key="bulletStyle" TargetType="RadioButton">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Padding="5" Text="Choose a restore option:" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" />
-        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Right">
-            <Button x:Name="buttonClose" Content="Close" Style="{StaticResource SystemButton}" Margin="5" Width="60" Click="buttonClose_Click"/>
-            <Button Content="Save" Style="{StaticResource SystemButton}" Margin="5" Width="60"/>
+        
+        <TextBlock Padding="5" Text="Choose a restore option:" HorizontalAlignment="Stretch" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+
+        <StackPanel x:Name="stackPanelBullets" Grid.Row="1">
+            <RadioButton Style="{StaticResource bulletStyle}" Content="Restore DWM related settings (from 'Modern App Settings' tab)" Click="RadioButton_Click" />
+            <RadioButton Style="{StaticResource bulletStyle}" Content="Restore all theme related settings" Click="RadioButton_Click"/>
+            <RadioButton Style="{StaticResource bulletStyle}" Content="Restore all colors" Click="RadioButton_Click"/>
+            <RadioButton Style="{StaticResource bulletStyle}" Content="Restore fonts and metrics" Click="RadioButton_Click"/>
         </StackPanel>
+        
+        <Label x:Name="labelInfo" Padding="5" Content="This will restore all settings" HorizontalAlignment="Stretch" Grid.Row="2" Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" />
+        <Grid Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Right">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="buttonConfirm" Content="Confirm" Style="{StaticResource SystemButton}" Margin="5" Padding="10 0" Click="buttonConfirm_Click"/>
+            <Button x:Name="buttonClose" Grid.Column="1" Content="Close" Style="{StaticResource SystemButton}" Margin="5" Padding="10 0" Width="60" Click="buttonClose_Click"/>
+        </Grid>
     </Grid>
 </Window>

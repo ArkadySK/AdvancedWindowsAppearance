@@ -212,12 +212,35 @@ namespace AdvancedWindowsAppearence
             Process.Start(startInfo);
         }
 
-        public async Task ResetToDefaults()
+        internal async Task ResetFonts()
+        {
+            RunRegFile("Window Metrics fix");
+            await Task.Delay(100);
+        }
+
+        internal async Task ResetColors()
+        {
+            RunRegFile("Colors fix.reg");
+            RunRegFile("Window Metrics fix");
+            await Task.Delay(200);
+        }
+
+        internal async Task ResetDWM()
+        {
+            RunRegFile("DWM fix");
+            await Task.Delay(100);
+        }
+
+        internal async Task ResetToDefaults()
         {
             RunRegFile("Colors fix.reg");
             RunRegFile("Window Metrics fix");
             RunRegFile("DWM fix");
             await Task.Delay(200);
+        }
+        internal void ResetTheme()
+        {
+            throw new NotImplementedException();
         }
     }
 }
