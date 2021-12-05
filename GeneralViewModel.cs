@@ -35,7 +35,7 @@ namespace AdvancedWindowsAppearence
         public string ThemeName = "";
         public string ThemeStyle = "";
 
-
+        #region Initialization
         public GeneralViewModel()
         {
             InitAeroColors();
@@ -43,16 +43,6 @@ namespace AdvancedWindowsAppearence
             InitColors();
             InitFonts();
             InitDPIScale();
-        }
-
-        public void UpdateThemeStyle(string style)
-        {
-            if (string.IsNullOrEmpty(style))
-            {
-                ThemeStyle = "";
-                return;
-            }
-            ThemeStyle = @"%SystemRoot%\resources\Themes\" + style + ".msstyles";
         }
 
         void InitAeroColors()
@@ -131,6 +121,7 @@ namespace AdvancedWindowsAppearence
                 new FontAppearanceSetting("Window Text Font", "MessageFont", "WindowText")
             };
         }
+        #endregion
 
         void KillDWM()
         {
@@ -151,6 +142,17 @@ namespace AdvancedWindowsAppearence
             }
         }
 
+        public void UpdateThemeStyle(string style)
+        {
+            if (string.IsNullOrEmpty(style))
+            {
+                ThemeStyle = "";
+                return;
+            }
+            ThemeStyle = @"%SystemRoot%\resources\Themes\" + style + ".msstyles";
+        }
+
+        #region Save
         public async Task SaveChanges()
         {
             if (UseThemes)
@@ -204,6 +206,9 @@ namespace AdvancedWindowsAppearence
             KillDWM();
             MessageBox.Show("You need to restart to apply these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+        #endregion
+
+        #region Restore
 
         void RunRegFile(string path) {
             ProcessStartInfo startInfo = new ProcessStartInfo();
@@ -221,8 +226,7 @@ namespace AdvancedWindowsAppearence
         internal async Task ResetColors()
         {
             RunRegFile("Colors fix.reg");
-            RunRegFile("Window Metrics fix");
-            await Task.Delay(200);
+            await Task.Delay(100);
         }
 
         internal async Task ResetDWM()
@@ -233,14 +237,18 @@ namespace AdvancedWindowsAppearence
 
         internal async Task ResetToDefaults()
         {
-            RunRegFile("Colors fix.reg");
-            RunRegFile("Window Metrics fix");
-            RunRegFile("DWM fix");
-            await Task.Delay(200);
+            var taskList = new List<Task>();
+            taskList.Add(ResetFonts());
+            taskList.Add(ResetColors());
+            taskList.Add(ResetDWM());
+            taskList.Add(ResetTheme());
+            await Task.WhenAll(taskList);
         }
-        internal void ResetTheme()
+        internal async Task ResetTheme()
         {
-            throw new NotImplementedException();
+            ThemeSettings.LoadTheme(@"C:\Windows\Resources\Themes\aero.theme");
+            await Task.Delay(1000);
         }
+        #endregion
     }
 }

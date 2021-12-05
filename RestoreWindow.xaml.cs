@@ -40,23 +40,29 @@ namespace AdvancedWindowsAppearence
             MessageBox.Show("Colors, sizes and fonts were restored. \n\nPlease restart the computer.\nProgram will now close.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        int selIndex;
+        int selIndex = -1;
 
-        private void buttonConfirm_Click(object sender, RoutedEventArgs e)
+        private async void buttonConfirm_Click(object sender, RoutedEventArgs e)
         {
             switch (selIndex)
             {
                 case 0:
-                    Settings.ResetDWM();
+                    await Settings.ResetDWM();
                     break;
                 case 1:
-                    Settings.ResetTheme();
+                    await Settings.ResetTheme();
                     break;
                 case 2:
-                    Settings.ResetColors();
+                    await Settings.ResetColors();
                     break;
                 case 3:
-                    Settings.ResetFonts();
+                    await Settings.ResetFonts();
+                    break;
+                case 4:
+                    await Settings.ResetToDefaults();
+                    break;
+                default:
+                    MessageBox.Show("No option selected! \n\nPlease select an option.", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     break;
             }
         }

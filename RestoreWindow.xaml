@@ -27,9 +27,10 @@
             <RadioButton Style="{StaticResource bulletStyle}" Content="Restore all theme related settings" Click="RadioButton_Click"/>
             <RadioButton Style="{StaticResource bulletStyle}" Content="Restore all colors" Click="RadioButton_Click"/>
             <RadioButton Style="{StaticResource bulletStyle}" Content="Restore fonts and metrics" Click="RadioButton_Click"/>
+            <RadioButton Style="{StaticResource bulletStyle}" FontWeight="Bold" Content="Restore all (from these settings)" Click="RadioButton_Click"/>
         </StackPanel>
         
-        <Label x:Name="labelInfo" Padding="5" Content="This will restore all settings" HorizontalAlignment="Stretch" Grid.Row="2" Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" />
+        <Label x:Name="labelInfo" Padding="5" Content="Clicking 'Restore' will restore according your selection" HorizontalAlignment="Stretch" Grid.Row="2" Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" />
         <Grid Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Right">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

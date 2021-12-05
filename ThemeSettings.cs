@@ -169,7 +169,7 @@ namespace AdvancedWindowsAppearence
             ///save theme
             SaveTheme(newThemePath, newTheme);
             ///load the new theme
-            LoadNewTheme(newThemePath);
+            LoadTheme(newThemePath);
         }
 
         private void SaveTheme(string themePath, string newThemeSettingsIni)
@@ -179,7 +179,7 @@ namespace AdvancedWindowsAppearence
             streamWriter.Close();
         }
 
-        private void LoadNewTheme(string themePath)
+        public static void LoadTheme(string themePath)
         {
             Process process = new Process();
             ProcessStartInfo startInfo = new ProcessStartInfo();
