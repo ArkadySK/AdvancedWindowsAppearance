@@ -79,6 +79,9 @@
     <Compile Include="BrushToColor.cs" />
     <Compile Include="FontAppearanceSetting.cs" />
     <Compile Include="FontManager.cs" />
+    <Compile Include="RestoreWindow.xaml.cs">
+      <DependentUpon>RestoreWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WallpaperAppearanceSetting.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -100,6 +103,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RestoreWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
