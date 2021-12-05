@@ -48,23 +48,29 @@ namespace AdvancedWindowsAppearence
             {
                 case 0:
                     await Settings.ResetDWM();
+                    MessageBox.Show("Desktop window manager settings were reseted. \n\nPlease restart the computer.\nProgram will now close.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     break;
                 case 1:
                     await Settings.ResetTheme();
+                    MessageBox.Show("Default theme applied successfully. \n\nProgram will now close.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     break;
                 case 2:
                     await Settings.ResetColors();
+                    MessageBox.Show("Colors settings were restored. \n\nPlease restart the computer.\nProgram will now close.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     break;
                 case 3:
                     await Settings.ResetFonts();
+                    MessageBox.Show("Sizes and fonts were restored. \n\nPlease restart the computer.\nProgram will now close.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     break;
                 case 4:
                     await Settings.ResetToDefaults();
+                    MessageBox.Show("DWM settings, colors, sizes and fonts were restored. \n\nPlease restart the computer.\nProgram will now close.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     break;
                 default:
                     MessageBox.Show("No option selected! \n\nPlease select an option.", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                    break;
+                    return;
             }
+            Application.Current.Shutdown();
         }
 
         private void RadioButton_Click(object sender, RoutedEventArgs e)
