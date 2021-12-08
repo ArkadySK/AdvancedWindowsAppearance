@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace AdvancedWindowsAppearence
 {
-    public class GeneralViewModel: INotifyPropertyChanged
+    public class GeneralViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged; // to do: implement this to refresh the preview
 
@@ -32,7 +32,9 @@ namespace AdvancedWindowsAppearence
 
         public bool UseThemes = true; //when false: it means to not apply theme, only to change registry settings
 
-        public string ThemeName = "";
+        public string ThemeName {get; set;}
+    
+
         public string ThemeStyle = "";
 
         #region Initialization
@@ -176,7 +178,7 @@ namespace AdvancedWindowsAppearence
 
         async Task SaveToRegistry()
         {
-            List<Task> tasks = new List<Task>();      
+            List<Task> tasks = new List<Task>();
             foreach (var c in ColorSettings)
             {
                 if (c != null) continue;
@@ -213,7 +215,8 @@ namespace AdvancedWindowsAppearence
 
         #region Restore
 
-        void RunRegFile(string path) {
+        void RunRegFile(string path)
+        {
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "reg.exe";
             startInfo.Arguments = "IMPORT " + path;

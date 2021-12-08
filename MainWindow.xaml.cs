@@ -44,9 +44,9 @@ namespace AdvancedWindowsAppearence
             themeName = themeName.Replace(".theme", "");
 
             if (!themeName.Contains(" (Edited)"))
-                textBoxThemeName.Text = themeName + " (Edited)";
+                Settings.ThemeName = themeName + " (Edited)";
             else
-                textBoxThemeName.Text = themeName;
+                Settings.ThemeName = themeName;
 
         }
         

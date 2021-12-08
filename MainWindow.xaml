@@ -299,7 +299,7 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Padding="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">Theme Name</Label>
-                                <TextBox Margin="2" x:Name="textBoxThemeName" Grid.Column="1"/>
+                                <TextBox Margin="2" x:Name="textBoxThemeName" Grid.Column="1" Text="{Binding ThemeName}"/>
                             </Grid>
 
                             <CheckBox Margin="5 0 5 -1" x:Name="checkBoxOverwriteThemeStyle" Grid.Row="1" Content="Overwrite theme style" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Click="CheckBoxOverwriteThemeStyle_Click" Checked="checkBoxOverwriteThemeStyle_Checked"/>
@@ -323,7 +323,7 @@
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>
-                            <CheckBox x:Name="checkBoxLiveChanges" Content="Preview changes immediatelly" IsChecked="{Binding Settings.RegistrySettingsViewModel.LivePreview}"/>
+                            <CheckBox Visibility="Collapsed" x:Name="checkBoxLiveChanges" Content="Preview changes immediatelly" IsChecked="{Binding Settings.RegistrySettingsViewModel.LivePreview}"/>
                             <TextBlock Margin="0 5 0 0" Padding="5" TextAlignment="Center" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" TextWrapping="WrapWithOverflow">Some changes made to DWM (Desktop Window Composition) are applied after restart</TextBlock>
                         </StackPanel>
                     </TabItem>
