@@ -25,7 +25,7 @@ namespace AdvancedWindowsAppearence
 
         public WallpaperAppearanceSetting Wallpaper { get; set; } = new WallpaperAppearanceSetting();
 
-        public AeroColorRegistrySetting ThemeColor { get; set; } = new AeroColorRegistrySetting("Theme Color", "", "ColorizationColor");
+        public AeroColorRegistrySetting ThemeColor { get; set; } = new AeroColorRegistrySetting("Theme Color", "ColorizationColor");
         public RegistrySettingsViewModel RegistrySettingsViewModel { get; set; } = new RegistrySettingsViewModel();
         public AeroColorsViewModel AeroColorsViewModel { get; set; } = new AeroColorsViewModel();
         public double DPI = 1;

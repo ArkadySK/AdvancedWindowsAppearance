@@ -48,17 +48,26 @@ namespace AdvancedWindowsAppearence
 
         public bool Enabled { get; set; }
 
+        public AeroColorRegistrySetting(string name, string registrykey)
+        {
+            Name = name;
+            RegistryKey = registrykey;
+            RegistryPath = @"Software\Microsoft\Windows\DWM";
+            ItemColor = GetAeroColorFromRegistry(RegistryKey, false);
+            Console.WriteLine(ItemColor.Value);
+        }
+
         public AeroColorRegistrySetting(string name, string registrypath, string registrykey)
         {
             Name = name;
             RegistryKey = registrykey;
             if (string.IsNullOrEmpty(registrypath)) RegistryPath = @"Software\Microsoft\Windows\DWM";
             else   RegistryPath = registrypath;
-            ItemColor = GetAeroColorFromRegistry(RegistryKey);
+            ItemColor = GetAeroColorFromRegistry(RegistryKey, true);
             Console.WriteLine(ItemColor.Value);
         }
 
-        public Color? GetAeroColorFromRegistry(string registrykey)
+        public Color? GetAeroColorFromRegistry(string registrykey, bool invertRedAndBlue)
         {
             if (registrykey == null || registrykey == "") return null;
 
@@ -73,6 +82,12 @@ namespace AdvancedWindowsAppearence
             try
             {
                 color = (Color)(new ColorConverter()).ConvertFromInvariantString(colorReg.ToString());
+
+                if (invertRedAndBlue)
+                {
+                    color = Color.FromArgb(color.A, color.B, color.G, color.R);
+                }
+
                 this.Enabled = true;
             }
             catch
