@@ -174,6 +174,8 @@ namespace AdvancedWindowsAppearence
 
         private void SaveTheme(string themePath, string newThemeSettingsIni)
         {
+            if (File.Exists(themePath))
+                File.Delete(themePath);
             StreamWriter streamWriter = new StreamWriter(themePath);
             streamWriter.Write(newThemeSettingsIni);
             streamWriter.Close();
