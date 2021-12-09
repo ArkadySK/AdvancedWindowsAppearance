@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace AdvancedWindowsAppearence
+namespace AdvancedWindowsAppearence.Converters
 {
     public class BrushToColorConverter : IValueConverter
     {

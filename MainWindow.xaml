@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdvancedWindowsAppearence"
+        xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters"
         x:Class="AdvancedWindowsAppearence.MainWindow"
         mc:Ignorable="d"
         Title="Advanced Appearance" Width="480" SizeToContent="Height" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="CanMinimize">
@@ -11,8 +12,9 @@
     <Window.Resources>
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-            <local:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter"/>
-            <local:BrushToColorConverter x:Key="brushToColor" />
+            <converters:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter"/>
+            <converters:BrushToColorConverter x:Key="brushToColor" />
+            <converters:DrawingColorToMediaColorConverter x:Key="DrawingColorToMediaColorConverter"/>
         </ResourceDictionary>
     </Window.Resources>
     <StackPanel>
@@ -27,7 +29,7 @@
                         </ResourceDictionary >
                     </Grid.Resources>
                     <Image Source="{Binding Wallpaper.Path}" Stretch="UniformToFill"></Image>
-                    <Polygon x:Name="desktopColor" Points="100,100 0,100 100,0"  Fill="{Binding ColorSettings[12].ItemColor, Converter={StaticResource brushToColor}}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,0"/>
+                    <Polygon x:Name="desktopColor" Points="100,100 0,100 100,0"  Fill="{Binding ColorSettings[12].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,0"/>
 
 
                     <!-- Inactive Window -->
@@ -38,8 +40,8 @@
                             <Grid Height="{DynamicResource {x:Static SystemParameters.CaptionHeightKey}}" VerticalAlignment="Top" >
                                 <Grid.Background>
                                     <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                        <GradientStop Color="{DynamicResource {x:Static SystemColors.InactiveCaptionColorKey}}"/>
-                                        <GradientStop Color="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionColorKey}}" Offset="1"/>
+                                        <GradientStop Color="{Binding ColorSettings[20].ItemColor, Converter={StaticResource DrawingColorToMediaColorConverter}, Mode=OneWay}"/>
+                                        <GradientStop Color="{Binding ColorSettings[21].ItemColor, Converter={StaticResource DrawingColorToMediaColorConverter}, Mode=OneWay}" Offset="1"/>
                                     </LinearGradientBrush>
                                 </Grid.Background>
                                 <Grid.ColumnDefinitions>
@@ -67,8 +69,8 @@
                             <Grid VerticalAlignment="Top" >
                                 <Grid.Background>
                                     <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                        <GradientStop Color="{Binding ColorSettings[0].ItemColor}"/>
-                                        <GradientStop Color="{Binding ColorSettings[1].ItemColor}" Offset="1"/>
+                                        <GradientStop Color="{Binding ColorSettings[0].ItemColor, Converter={StaticResource DrawingColorToMediaColorConverter}, Mode=OneWay}"/>
+                                        <GradientStop Color="{Binding ColorSettings[1].ItemColor, Converter={StaticResource DrawingColorToMediaColorConverter}, Mode=OneWay}" Offset="1"/>
                                     </LinearGradientBrush>
                                 </Grid.Background>
                                 <Grid.ColumnDefinitions>
@@ -121,8 +123,8 @@
                                 <Grid Height="{DynamicResource {x:Static SystemParameters.CaptionHeightKey}}" VerticalAlignment="Top" Grid.ColumnSpan="2" >
                                     <Grid.Background>
                                         <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                            <GradientStop Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
-                                            <GradientStop Color="{DynamicResource {x:Static SystemColors.GradientActiveCaptionColorKey}}" Offset="1"/>
+                                            <GradientStop Color="{Binding ColorSettings[0].ItemColor, Converter={StaticResource DrawingColorToMediaColorConverter}, Mode=OneWay}"/>
+                                            <GradientStop Color="{Binding ColorSettings[1].ItemColor, Converter={StaticResource DrawingColorToMediaColorConverter}, Mode=OneWay}" Offset="1"/>
                                         </LinearGradientBrush>
                                     </Grid.Background>
                                     <Grid.ColumnDefinitions>

@@ -17,6 +17,7 @@ using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using AdvancedWindowsAppearence.Converters;
 
 namespace AdvancedWindowsAppearence
 {
