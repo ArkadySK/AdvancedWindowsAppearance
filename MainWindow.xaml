@@ -11,6 +11,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <local:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter"/>
             <local:BrushToColor x:Key="brushToColor" />
         </ResourceDictionary>
     </Window.Resources>
@@ -292,7 +293,7 @@
                                     <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxAeroColors, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                                 </Button>
                             </StackPanel>
-                            <TextBlock Margin="0 5 0 0" Padding="5" Grid.ColumnSpan="3" Grid.Row="3" TextAlignment="Center" 
+                            <TextBlock Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource InvertedBooleanToVisibilityConverter}, Mode=OneWay}" Margin="0 5 0 0" Padding="5" Grid.ColumnSpan="3" Grid.Row="3" TextAlignment="Center" 
                                        Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" 
                                        TextWrapping="WrapWithOverflow" >To access active / inactive tile color setting, you need to have enabled coloured titlebars</TextBlock>
                         </Grid>

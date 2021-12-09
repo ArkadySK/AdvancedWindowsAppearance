@@ -79,6 +79,7 @@
     <Compile Include="BrushToColor.cs" />
     <Compile Include="FontAppearanceSetting.cs" />
     <Compile Include="FontManager.cs" />
+    <Compile Include="InvertedBooleanToVisibilityConverter.cs" />
     <Compile Include="RestoreWindow.xaml.cs">
       <DependentUpon>RestoreWindow.xaml</DependentUpon>
     </Compile>
