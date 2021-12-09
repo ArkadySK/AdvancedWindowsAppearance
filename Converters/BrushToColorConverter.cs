@@ -9,7 +9,7 @@ using System.Windows.Media;
 
 namespace AdvancedWindowsAppearence
 {
-    public class BrushToColor : IValueConverter
+    public class BrushToColorConverter : IValueConverter
     {
         public object Convert(object brush, Type targetType, object parameter, CultureInfo culture)
         {

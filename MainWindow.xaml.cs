@@ -166,7 +166,7 @@ namespace AdvancedWindowsAppearence
 
         void UpdateFontPreview(System.Drawing.Color? textCol)
         {
-            textBlockPreview.Foreground = BrushToColor.MediaColorToBrush(textCol);
+            textBlockPreview.Foreground = BrushToColorConverter.MediaColorToBrush(textCol);
         }
 
         void UpdateFontPreview(System.Drawing.Font f, float size)
