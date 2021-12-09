@@ -28,7 +28,17 @@
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 <Setter Property="HorizontalAlignment" Value="Right"/>
             </Style>
-            
+
+            <Style x:Key="InfoText"  TargetType="TextBlock" >
+                <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}"/>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}"/>
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.InfoBrushKey}}"/>
+                <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}"/>
+                <Setter Property="Margin" Value="0 5 0 0"/>
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
