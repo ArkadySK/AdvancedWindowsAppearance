@@ -249,7 +249,9 @@
 
                             <ToggleButton x:Name="buttonFontBold" IsChecked="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts}" Content="B" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold" Click="buttonFont_Click"/>
                             <ToggleButton x:Name="buttonFontItalic" IsChecked="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts}" Content="I" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" FontStyle="Italic" Click="buttonFont_Click"/>
-                            <TextBlock Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxFonts, Mode=OneWay, FallbackValue=Collapsed}" Padding="5" TextAlignment="Center" Grid.ColumnSpan="5" Grid.Row="3" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" TextWrapping="WrapWithOverflow" Margin="0 5 0 0" >Changes made to fonts are applied after restart</TextBlock>
+                            <TextBlock Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxFonts, Mode=OneWay, FallbackValue=Collapsed}" Padding="5" TextAlignment="Center" Grid.ColumnSpan="5" Grid.Row="3" 
+                                       Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" TextWrapping="WrapWithOverflow" Margin="0 5 0 0" 
+                                       >Changes made to fonts are applied after restart</TextBlock>
 
                         </Grid>
                     </TabItem>
@@ -290,7 +292,10 @@
                                     <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxAeroColors, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                                 </Button>
                             </StackPanel>
-                            </Grid>
+                            <TextBlock Margin="0 5 0 0" Padding="5" Grid.ColumnSpan="3" Grid.Row="3" TextAlignment="Center" 
+                                       Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" 
+                                       TextWrapping="WrapWithOverflow" >To access active / inactive tile color setting, you need to have enabled coloured titlebars</TextBlock>
+                        </Grid>
                     </TabItem>
 
                     <!-- Nastavenia teemy -->
