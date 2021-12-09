@@ -74,39 +74,39 @@ namespace AdvancedWindowsAppearence
 
         void InitColors()
         {
-            ColorSettings = new ColorAppearanceSetting[] {
-                new ColorAppearanceSetting("Active Title Color 1", "", "ActiveTitle"),
-                new ColorAppearanceSetting("Active Title Color 2", "", "GradientActiveTitle"),
-                new ColorAppearanceSetting("Active Title Text", "", "TitleText"),
-                new ColorAppearanceSetting("Active Window Border", "", "ActiveBorder"),
-                new ColorAppearanceSetting("Application Background", "", "AppWorkspace"),
-                new ColorAppearanceSetting("Button Alternate Face", "", "ButtonAlternateFace"),
-                new ColorAppearanceSetting("Button Dark Shadow (Right & Bottom)", "", "ButtonDkShadow"),
-                new ColorAppearanceSetting("Button Face / 3D Objects", "", "ButtonFace"),
-                new ColorAppearanceSetting("Button Light", "", "ButtonLight"),
-                new ColorAppearanceSetting("Button Shadow Color", "", "ButtonShadow"),
-                new ColorAppearanceSetting("Button Text Color", "", "ButtonText"),
+            ColorSettings = new ColorAppearanceSetting[] { //I -, NI - not implemented (new way how to do so), to do, NU - not used
+                new ColorAppearanceSetting("Active Title Color 1", "", "ActiveTitle"), //I
+                new ColorAppearanceSetting("Active Title Color 2", "", "GradientActiveTitle"), //I
+                new ColorAppearanceSetting("Active Title Text", "", "TitleText"), //I
+                new ColorAppearanceSetting("Active Window Border", "", "ActiveBorder"), //I
+                new ColorAppearanceSetting("Application Background", "", "AppWorkspace"), //NU
+                new ColorAppearanceSetting("Button Alternate Face", "", "ButtonAlternateFace"), // NI
+                new ColorAppearanceSetting("Button Dark Shadow (Right & Bottom)", "", "ButtonDkShadow"),//NI
+                new ColorAppearanceSetting("Button Face / 3D Objects", "", "ButtonFace"),//NI
+                new ColorAppearanceSetting("Button Light", "", "ButtonLight"), 
+                new ColorAppearanceSetting("Button Shadow Color", "", "ButtonShadow"), //NI
+                new ColorAppearanceSetting("Button Text Color", "", "ButtonText"), //I
                 new ColorAppearanceSetting("Caption Buttons Height", "CaptionHeight", ""),
-                new ColorAppearanceSetting("Desktop", "", "Background"),
-                new ColorAppearanceSetting("Gray Text", "", "GrayText"),
-                new ColorAppearanceSetting("Hilight", "", "Hilight"),
+                new ColorAppearanceSetting("Desktop", "", "Background"),//I
+                new ColorAppearanceSetting("Gray Text", "", "GrayText"), //I
+                new ColorAppearanceSetting("Hilight", "", "Hilight"), //I
                 new ColorAppearanceSetting("Hilighted Text", "", "HilightText"),
-                new ColorAppearanceSetting("Hypertext link / Hilight (Fill)", "", "HotTrackingColor"),
+                new ColorAppearanceSetting("Hypertext link / Hilight (Fill)", "", "HotTrackingColor"), //I
                 new ColorAppearanceSetting("Icon Size", "Shell Icon Size", ""),
                 new ColorAppearanceSetting("Icon Horizontal Spacing", "IconSpacing", ""),
                 new ColorAppearanceSetting("Icon Vertical Spacing", "IconVerticalSpacing", ""),
-                new ColorAppearanceSetting("Inactive Title Color 1", "", "InactiveTitle"),
-                new ColorAppearanceSetting("Inactive Title Color 2", "", "GradientInactiveTitle"),
-                new ColorAppearanceSetting("Inactive Title Text", "", "InactiveTitleText"),
+                new ColorAppearanceSetting("Inactive Title Color 1", "", "InactiveTitle"), //I
+                new ColorAppearanceSetting("Inactive Title Color 2", "", "GradientInactiveTitle"), //I
+                new ColorAppearanceSetting("Inactive Title Text", "", "InactiveTitleText"), //I
                 new ColorAppearanceSetting("Inactive Window Border", "", "InactiveBorder"),
-                new ColorAppearanceSetting("Menu", "MenuHeight", "Menu"),
-                new ColorAppearanceSetting("Scrollbar", "ScrollWidth", "Scrollbar"),
-                new ColorAppearanceSetting("Selected Items", "", "MenuHilight"),
-                new ColorAppearanceSetting("Tool Tip", "", "InfoWindow"),
-                new ColorAppearanceSetting("Window", "", "Window"),
+                new ColorAppearanceSetting("Menu", "MenuHeight", "Menu"),//I
+                new ColorAppearanceSetting("Scrollbar", "ScrollWidth", "Scrollbar"), //NI
+                new ColorAppearanceSetting("Selected Items", "", "MenuHilight"), //NI
+                new ColorAppearanceSetting("Tool Tip", "", "InfoWindow"), 
+                new ColorAppearanceSetting("Window", "", "Window"),//I
                 new ColorAppearanceSetting("Window Border Width", "BorderWidth", ""),
                 new ColorAppearanceSetting("Window Padded Border", "PaddedBorderWidth", "WindowFrame"),
-                new ColorAppearanceSetting("Window Text Color", "", "WindowText")
+                //new ColorAppearanceSetting("Window Text Color", "", "WindowText") //duplicate to fontsettins
             };
             /*ActiveWindowBorder.Margin = new Thickness((float)(    [29].Size +     [30].Size)); //Window Border Width + Window Padded Border
             InactiveWindowBorder.Margin = ActiveWindowBorder.Margin;*/
@@ -117,10 +117,10 @@ namespace AdvancedWindowsAppearence
             FontSettings = new FontAppearanceSetting[] {
                 new FontAppearanceSetting("Active / Inactive Title Font", "CaptionFont", ""),
                 new FontAppearanceSetting("Icon Font", "IconFont", ""),
-                new FontAppearanceSetting("Menu Font", "MenuFont", "MenuText"),
+                new FontAppearanceSetting("Menu Font", "MenuFont", "MenuText"), //I
                 new FontAppearanceSetting("Palette Title Font", "SmCaptionFont", ""),
                 new FontAppearanceSetting("Status Font", "StatusFont", "InfoText"),
-                new FontAppearanceSetting("Window Text Font", "MessageFont", "WindowText")
+                new FontAppearanceSetting("Window Text Font", "MessageFont", "WindowText") //I
             };
         }
         #endregion
