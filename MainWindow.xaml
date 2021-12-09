@@ -294,7 +294,7 @@
                                 </Button>
                             </StackPanel>
                             <TextBlock Style="{StaticResource InfoText}" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource InvertedBooleanToVisibilityConverter}, Mode=OneWay}" Grid.ColumnSpan="3" Grid.Row="3"
-                                       >To access active / inactive tile color setting, you need to have enabled coloured titlebars</TextBlock>
+                                       >To access active / inactive title color setting, please enable coloured titlebars</TextBlock>
                         </Grid>
                     </TabItem>
 
