@@ -16,10 +16,13 @@ namespace AdvancedWindowsAppearence
             var registryPath = @"Software\Microsoft\Windows\DWM";
             AddWithPath(name, registryPath, registrykey, winVer);
         }
-        public void AddWithPath(string name, string registrypath, string registrykey, Version winVer)
+        public void AddWithPath(string name, string registrypath, string registrykey, Version minimalWinVer)
         {
-            Console.WriteLine("system is supported: " + (Environment.OSVersion.Version >= winVer) + ", registrysetting: " + name + " //system version: " + Environment.OSVersion.Version);
-            if (winVer.CompareTo(Environment.OSVersion.Version) >= 0) return;
+            if (minimalWinVer.CompareTo(Environment.OSVersion.Version) >= 0)
+            {
+                RegistrySettings.Add(null);
+                return;
+            }
             RegistrySetting registrySetting = new RegistrySetting(name, registrypath, registrykey);
             RegistrySettings.Add(registrySetting);
         }

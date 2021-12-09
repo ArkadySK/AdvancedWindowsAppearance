@@ -261,33 +261,36 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="125"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="45"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
                             <Label VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="1">Theme Color</Label>
                             <Button x:Name="buttonThemeColor" Grid.Row="0" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonThemeColor_Click">
                                 <Button x:Name="imageThemeColor" Padding="10" BorderThickness="2" Background="{Binding ThemeColor.ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                             </Button>
                             <Label VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.Row="1" Margin="1">Theme Color Opacity</Label>
-                            <Slider x:Name="sliderColorOpacity" Value="{Binding ThemeColor.Opacity}" Grid.Row="1" Grid.Column="1" Margin="3" Maximum="255" Grid.ColumnSpan="2"/>
+                            <Slider x:Name="sliderColorOpacity" Value="{Binding ThemeColor.Opacity}" Grid.Row="1" Grid.Column="1" Margin="3" Maximum="255" />
                             <TextBox IsEnabled="False" x:Name="textBoxColorOpacity" Text="{Binding Value, ElementName=sliderColorOpacity}"  Grid.Row="1" Grid.Column="3" Margin="5" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
-                            <ComboBox SelectedIndex="0" x:Name="comboBoxAeroColors" ItemsSource="{Binding AeroColorsViewModel.AeroColors}" Grid.Row="2" Grid.ColumnSpan="2">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Label Content="{Binding Name}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <CheckBox x:Name="checkBoxAeroColorEnabled" Grid.Row="2" Grid.Column="2" Content="Enabled" VerticalAlignment="Center" Margin="5" IsChecked="{Binding SelectedItem.Enabled, ElementName=comboBoxAeroColors}"/>
-                            <Button x:Name="buttonAeroColor" Grid.Row="2" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonAeroColor_Click" IsEnabled="{Binding SelectedItem.Enabled, ElementName=comboBoxAeroColors}">
-                                <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxAeroColors, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                            </Button>
-                        </Grid>
+
+                            <StackPanel Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" IsEnabled="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked}" >
+                                <ComboBox SelectedIndex="0" x:Name="comboBoxAeroColors" ItemsSource="{Binding AeroColorsViewModel.AeroColors}" MinWidth="200">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                                <CheckBox x:Name="checkBoxAeroColorEnabled" Grid.Row="2" Grid.Column="2" Content="Enabled" VerticalAlignment="Center" Margin="5" IsChecked="{Binding SelectedItem.Enabled, ElementName=comboBoxAeroColors}"/>
+                                <Button x:Name="buttonAeroColor" Grid.Row="2" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonAeroColor_Click" IsEnabled="{Binding SelectedItem.Enabled, ElementName=comboBoxAeroColors}">
+                                    <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxAeroColors, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                </Button>
+                            </StackPanel>
+                            </Grid>
                     </TabItem>
 
                     <!-- Nastavenia teemy -->
