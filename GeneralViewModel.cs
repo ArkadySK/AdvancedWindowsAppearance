@@ -81,9 +81,9 @@ namespace AdvancedWindowsAppearence
                 new ColorAppearanceSetting("Active Window Border", "", "ActiveBorder"), //I
                 new ColorAppearanceSetting("Application Background", "", "AppWorkspace"), //NU
                 new ColorAppearanceSetting("Button Alternate Face", "", "ButtonAlternateFace"), // NI
-                new ColorAppearanceSetting("Button Dark Shadow (Right & Bottom)", "", "ButtonDkShadow"),//NI
+                new ColorAppearanceSetting("Button Dark Shadow (Right & Bottom Border)", "", "ButtonDkShadow"),//NI
                 new ColorAppearanceSetting("Button Face / 3D Objects", "", "ButtonFace"),//NI
-                new ColorAppearanceSetting("Button Light", "", "ButtonLight"), 
+                new ColorAppearanceSetting("Button Light (Top & Left Border)", "", "ButtonLight"), 
                 new ColorAppearanceSetting("Button Shadow Color", "", "ButtonShadow"), //NI
                 new ColorAppearanceSetting("Button Text Color", "", "ButtonText"), //I
                 new ColorAppearanceSetting("Caption Buttons Height", "CaptionHeight", ""),
@@ -102,7 +102,7 @@ namespace AdvancedWindowsAppearence
                 new ColorAppearanceSetting("Menu", "MenuHeight", "Menu"),//I
                 new ColorAppearanceSetting("Scrollbar", "ScrollWidth", "Scrollbar"), //NI
                 new ColorAppearanceSetting("Selected Items", "", "MenuHilight"), //NI
-                new ColorAppearanceSetting("Tool Tip", "", "InfoWindow"), 
+                new ColorAppearanceSetting("Tool Tip", "", "InfoWindow"), //I
                 new ColorAppearanceSetting("Window", "", "Window"),//I
                 new ColorAppearanceSetting("Window Border Width", "BorderWidth", ""),
                 new ColorAppearanceSetting("Window Padded Border", "PaddedBorderWidth", "WindowFrame"),
@@ -119,7 +119,7 @@ namespace AdvancedWindowsAppearence
                 new FontAppearanceSetting("Icon Font", "IconFont", ""),
                 new FontAppearanceSetting("Menu Font", "MenuFont", "MenuText"), //I
                 new FontAppearanceSetting("Palette Title Font", "SmCaptionFont", ""),
-                new FontAppearanceSetting("Status Font", "StatusFont", "InfoText"),
+                new FontAppearanceSetting("Status Font", "StatusFont", "InfoText"),//I
                 new FontAppearanceSetting("Window Text Font", "MessageFont", "WindowText") //I
             };
         }
