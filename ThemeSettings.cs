@@ -34,6 +34,10 @@ namespace AdvancedWindowsAppearence
 
         private string[] GetThemeFile(string themename)
         {
+            if (!File.Exists(themename))
+            {
+                themename = @"C:\Windows\Resources\Themes\aero.theme";
+            }
             StreamReader streamReader = new StreamReader(themename);
             string ThemeSettingsIni = streamReader.ReadToEnd();
             streamReader.Close();
