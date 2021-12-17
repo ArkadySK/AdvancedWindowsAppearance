@@ -83,8 +83,9 @@ namespace AdvancedWindowsAppearence
                 new ColorAppearanceSetting("Button Alternate Face", "", "ButtonAlternateFace"), // NI
                 new ColorAppearanceSetting("Button Dark Shadow (Right & Bottom Border)", "", "ButtonDkShadow"),//I
                 new ColorAppearanceSetting("Button Face / 3D Objects", "", "ButtonFace"),//I, not applied on scrollbar
+                new ColorAppearanceSetting("Button Hilight (Edge of Top & Left Border)", "", "ButtonHiLight"), //       
                 new ColorAppearanceSetting("Button Light (Top & Left Border)", "", "ButtonLight"), //I
-                new ColorAppearanceSetting("Button Shadow Color", "", "ButtonShadow"), //NI
+                new ColorAppearanceSetting("Button Shadow (Edge of Right & Bottom Border)", "", "ButtonShadow"), //NI
                 new ColorAppearanceSetting("Button Text Color", "", "ButtonText"), //I
                 new ColorAppearanceSetting("Caption Buttons Height", "CaptionHeight", ""),
                 new ColorAppearanceSetting("Desktop", "", "Background"),//I
