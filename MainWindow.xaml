@@ -138,20 +138,21 @@
                                 <!--MessageBox Message-->
                                 <Label Margin="0 0 0 34" VerticalAlignment="Bottom" Grid.Row="1" Foreground="{Binding ColorSettings[32].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" >Message Text</Label>
 
-                                <Control x:Name="buttonTextColor" OpacityMask="{Binding ColorSettings[11].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                                 <Control x:Name="buttonDarkShadowColor" OpacityMask="{Binding ColorSettings[6].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                                 <Control x:Name="buttonFaceColor" OpacityMask="{Binding ColorSettings[7].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                                 <Control x:Name="buttonHilightColor" OpacityMask="{Binding ColorSettings[8].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                                 <Control x:Name="buttonLightColor" OpacityMask="{Binding ColorSettings[9].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                <Control x:Name="buttonShadowColor" OpacityMask="{Binding ColorSettings[10].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                <Control x:Name="buttonTextColor" OpacityMask="{Binding ColorSettings[11].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
 
                                 <Button x:Name="TempButton" Width="65" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Margin="5 5 80 5" 
                                         >OK</Button>
 
                                 <controls:ClassicButton Width="65" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Margin="5" Text="OK" 
-                                                        ButtonUpTopColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}"
-                                                        ButtonUpTopEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}"
-                                                        ButtonBottomRightColor="{Binding ElementName=TempButton, Path=OpacityMask, Mode=OneWay}"
-                                                        ButtonBottomRightEdgeColor="{Binding ElementName=TempButton, Path=OpacityMask, Mode=OneWay}"
+                                                        TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}"
+                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}"
+                                                        BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}"
+                                                        BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}"
                                                         
                                                         Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}"
                                                         Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>

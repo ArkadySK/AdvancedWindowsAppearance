@@ -28,21 +28,41 @@ namespace AdvancedWindowsAppearence.Controls
             set { SetValue(TextProperty, value); }
         }
 
-        static readonly DependencyProperty ButtonUpTopColorProperty
-            = DependencyProperty.Register(nameof(ButtonUpTopColor), typeof(Brush), typeof(ClassicButton), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(10, 100, 200)) ));
-        public Brush ButtonUpTopColor
+
+
+
+        static readonly DependencyProperty TopLeftEdgeColorProperty
+            = DependencyProperty.Register(nameof(TopLeftEdgeColor), typeof(Brush), typeof(ClassicButton), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(10, 100, 200)) ));
+        public Brush TopLeftEdgeColor
         {
-            get { return (Brush)GetValue(ButtonUpTopColorProperty); }
-            set { SetValue(ButtonUpTopColorProperty, value); }
+            get { return (Brush)GetValue(TopLeftEdgeColorProperty); }
+            set { SetValue(TopLeftEdgeColorProperty, value); }
         }
 
-        static readonly DependencyProperty ButtonBottomRightColorProperty
-            = DependencyProperty.Register(nameof(ButtonBottomRightColor), typeof(Brush), typeof(ClassicButton), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(10, 100, 200))));
-        public Brush ButtonBottomRightColor
+        static readonly DependencyProperty BottomRightEdgeColorProperty
+            = DependencyProperty.Register(nameof(BottomRightEdgeColor), typeof(Brush), typeof(ClassicButton), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(10, 100, 200))));
+        public Brush BottomRightEdgeColor
         {
-            get { return (Brush)GetValue(ButtonBottomRightColorProperty); }
-            set { SetValue(ButtonBottomRightColorProperty, value); }
+            get { return (Brush)GetValue(BottomRightEdgeColorProperty); }
+            set { SetValue(BottomRightEdgeColorProperty, value); }
         }
+
+        static readonly DependencyProperty TopLeftColorProperty
+           = DependencyProperty.Register(nameof(TopLeftColor), typeof(Brush), typeof(ClassicButton), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(10, 100, 200))));
+        public Brush TopLeftColor
+        {
+            get { return (Brush)GetValue(TopLeftColorProperty); }
+            set { SetValue(TopLeftColorProperty, value); }
+        }
+
+        static readonly DependencyProperty BottomRightColorProperty
+            = DependencyProperty.Register(nameof(BottomRightColor), typeof(Brush), typeof(ClassicButton), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(10, 100, 200))));
+        public Brush BottomRightColor
+        {
+            get { return (Brush)GetValue(BottomRightColorProperty); }
+            set { SetValue(BottomRightColorProperty, value); }
+        }
+
 
         public ClassicButton()
         {

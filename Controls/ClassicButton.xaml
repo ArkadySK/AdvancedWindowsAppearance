@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:AdvancedWindowsAppearence.Controls"
              xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters"
              mc:Ignorable="d" 
-             MinHeight="8"
-             MinWidth="8"
+             MinHeight="6"
+             MinWidth="6"
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -16,9 +16,16 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="{Binding ButtonUpTopColor, RelativeSource={RelativeSource AncestorType=UserControl}}">
-        <Label Padding="0" x:Name="title" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding Text}" Panel.ZIndex="2" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-        <Rectangle Fill="{Binding ButtonBottomRightColor, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="1 1 0 0" Panel.ZIndex="0"/>
-        <Rectangle Fill="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="2" Panel.ZIndex="1"/>
+    <Grid Name="BottomRightEdge" Background="{Binding BottomRightEdgeColor, RelativeSource={RelativeSource AncestorType=UserControl},FallbackValue=Gray}">
+        <Label Padding="0" x:Name="Title" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding Text}" Panel.ZIndex="5" 
+               Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+        <!--Button structure-->
+        <Rectangle Name="TopLeft" Fill="{Binding TopLeftColor, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="1 1 2 2" Panel.ZIndex="3"/>
+        <Rectangle Name="TopLeftEdge" Fill="{Binding TopLeftEdgeColor, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="0 0 2 2" Panel.ZIndex="1"/>
+        
+        <Rectangle Name="Face" Fill="{Binding Background, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="2" Panel.ZIndex="4"/>
+
+        <Rectangle Name="BottomRight" Fill="{Binding BottomRightColor, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="1 1 1 1" Panel.ZIndex="2"/>
+
     </Grid>
 </UserControl>
