@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:AdvancedWindowsAppearence.Controls"
              xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters"
              mc:Ignorable="d" 
-             MinHeight="6"
-             MinWidth="6"
+             MinWidth="{DynamicResource {x:Static SystemParameters.SmallCaptionWidthKey}}"
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <UserControl.Resources>
         <ResourceDictionary>

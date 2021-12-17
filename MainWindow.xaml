@@ -17,7 +17,20 @@
             <converters:DrawingColorToMediaColorConverter x:Key="DrawingColorToMediaColorConverter"/>
         </ResourceDictionary>
     </Window.Resources>
+    
     <StackPanel>
+
+        <StackPanel Visibility="Collapsed">
+            <!-- COLOR RESOURCES that autoupdate themselves-->
+            <Control x:Name="buttonDarkShadowColor" OpacityMask="{Binding ColorSettings[6].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+            <Control x:Name="buttonFaceColor" OpacityMask="{Binding ColorSettings[7].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+            <Control x:Name="buttonHilightColor" OpacityMask="{Binding ColorSettings[8].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+            <Control x:Name="buttonLightColor" OpacityMask="{Binding ColorSettings[9].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+            <Control x:Name="buttonShadowColor" OpacityMask="{Binding ColorSettings[10].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+            <Control x:Name="buttonTextColor" OpacityMask="{Binding ColorSettings[11].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+            <!--End of resources-->
+        </StackPanel>
+        
         <Border Margin="5">
             <StackPanel>
                 <Grid IsEnabled="False" Background="{Binding Fill, ElementName=desktopColor}" Height="220" Margin="0 0 0 10" Style="{x:Null}" OverridesDefaultStyle="True" FocusVisualStyle="{x:Null}">
@@ -28,6 +41,7 @@
                             </ResourceDictionary.MergedDictionaries>
                         </ResourceDictionary >
                     </Grid.Resources>
+                    
                     <Image Source="{Binding Wallpaper.Path}" Stretch="UniformToFill"></Image>
                     <Polygon x:Name="desktopColor" Points="100,100 0,100 100,0"  Fill="{Binding ColorSettings[13].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,0"/>
 
@@ -50,9 +64,18 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Button FontFamily="Marlett" Content="r"  Grid.Column="3" Margin="2 1" Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-                                <Button FontFamily="Marlett" Content="1"  Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-                                <Button FontFamily="Marlett" Content="0"  Grid.Column="1" Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                
+                                <!--Classic Caption Buttons-->
+                                <controls:ClassicButton Grid.Column="3" Margin="1 0 0 0" Style="{StaticResource CaptionButton}" Text="r" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
+                                <controls:ClassicButton Grid.Column="2" Style="{StaticResource CaptionButton}" Text="1" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
+                                <controls:ClassicButton Grid.Column="1" Style="{StaticResource CaptionButton}" Text="0" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
+
                                 <Label Padding="1" Content="Inactive Window" FontFamily="{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}" FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" 
                                        Foreground="{Binding ColorSettings[23].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}"/>
                             </Grid>
@@ -87,10 +110,17 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
+                                <!--Classic Caption buttons -->
+                                <controls:ClassicButton Grid.Column="3" Margin="1 0 0 0" Style="{StaticResource CaptionButton}" Text="r" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
+                                <controls:ClassicButton Grid.Column="2" Style="{StaticResource CaptionButton}" Text="1" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
+                                <controls:ClassicButton Grid.Column="1" Style="{StaticResource CaptionButton}" Text="0" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
 
-                                <Button FontFamily="Marlett" Content="r" Grid.Column="3" Margin="2 1" Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-                                <Button FontFamily="Marlett" Content="1" Grid.Column="2" Margin="1" Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-                                <Button FontFamily="Marlett" Content="0" Grid.Column="1" Margin="1" Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
                                 <Label Padding="1" Height="{DynamicResource {x:Static SystemParameters.CaptionHeightKey}}" Content="Active Window" FontFamily="{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}" FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" 
                                        Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}" />
 
@@ -130,30 +160,20 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Button FontFamily="Marlett" HorizontalAlignment="Right" Content="r" Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"  Grid.Column="1" Margin="2"/>
+                                    <controls:ClassicButton Grid.Column="1" Margin="1" Style="{StaticResource CaptionButton}" Text="r" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
                                     <Label Padding="1" Content="Message Box" FontFamily="{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}" FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" 
                                            Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}"/>
 
                                 </Grid>
                                 <!--MessageBox Message-->
                                 <Label Margin="0 0 0 34" VerticalAlignment="Bottom" Grid.Row="1" Foreground="{Binding ColorSettings[32].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" >Message Text</Label>
-
-                                <Control x:Name="buttonDarkShadowColor" OpacityMask="{Binding ColorSettings[6].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                <Control x:Name="buttonFaceColor" OpacityMask="{Binding ColorSettings[7].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                <Control x:Name="buttonHilightColor" OpacityMask="{Binding ColorSettings[8].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                <Control x:Name="buttonLightColor" OpacityMask="{Binding ColorSettings[9].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                <Control x:Name="buttonShadowColor" OpacityMask="{Binding ColorSettings[10].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                <Control x:Name="buttonTextColor" OpacityMask="{Binding ColorSettings[11].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-
-                                <Button x:Name="TempButton" Width="65" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Margin="5 5 80 5" 
-                                        >OK</Button>
-
                                 <controls:ClassicButton Width="65" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Margin="5" Text="OK" 
                                                         TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}"
                                                         TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}"
                                                         BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}"
-                                                        BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}"
-                                                        
+                                                        BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}"                                                   
                                                         Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}"
                                                         Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
                                 <Label Margin="0 -2 0 0" Grid.Column="1" Padding="1" Panel.ZIndex="100" Content="Tool Tip" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="1" FontSize="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}" 
