@@ -30,7 +30,7 @@
             <RadioButton Style="{StaticResource bulletStyle}" FontWeight="Bold" Content="Restore all (from these settings)" Click="RadioButton_Click"/>
         </StackPanel>
 
-        <TextBlock x:Name="labelInfo" Style="{StaticResource InfoText}" Text="Clicking 'Restore' will restore according your selection" Grid.Row="2"/>
+        <TextBlock x:Name="labelInfo" Style="{StaticResource InfoText}" Text="Click on 'Confirm' to restore the settings according your selection" Grid.Row="2"/>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
