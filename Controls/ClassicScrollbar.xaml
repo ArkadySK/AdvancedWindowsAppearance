@@ -1,0 +1,28 @@
+﻿<local:ClassicControl x:Class="AdvancedWindowsAppearence.Controls.ClassicScrollbar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AdvancedWindowsAppearence.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="{DynamicResource {x:Static SystemParameters.ScrollWidth}}">
+    <!--
+    <Grid x:Name="ClassicScrollbar" Background="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" Grid.Column="1" Height="50" Panel.ZIndex="2" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Right" Grid.Row="2" 
+                                      Width="{DynamicResource {x:Static SystemParameters.ScrollWidth}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeight}}"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeight}}"/>
+        </Grid.RowDefinitions>
+        <local:ClassicButton Text="5" Grid.Row="0" FontFamily="Marlett"  TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        Foreground="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
+        <local:ClassicButton Height="10" Grid.Row="1" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        Foreground="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
+        <local:ClassicButton Text="6" Grid.Row="2" FontFamily="Marlett"  TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        Foreground="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
+
+    </Grid>-->
+</local:ClassicControl>

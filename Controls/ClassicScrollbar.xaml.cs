@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace AdvancedWindowsAppearence.Controls
 {
     /// <summary>
-    /// Interaction logic for ClassicButton.xaml
+    /// Interaction logic for ClassicScrollbar.xaml
     /// </summary>
-    public partial class ClassicButton : ClassicControl
-    {     
-        public ClassicButton()
+    public partial class ClassicScrollbar : ClassicControl
+    {
+        public ClassicScrollbar()
         {
             
         }

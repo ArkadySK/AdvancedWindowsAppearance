@@ -134,16 +134,19 @@
                                 <TextBlock TextDecorations="Underline" Padding="2" Text="Hypertext link" Grid.Row="3" Grid.ColumnSpan="4" Panel.ZIndex="1" Foreground="{Binding ColorSettings[17].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=Blue}" Background="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                                 
                                 <!--Classic Scrollbar-->
-                                <Grid x:Name="ClassicScrollbar" Background="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" Grid.Column="1" Height="50" Panel.ZIndex="2" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Right" Grid.Row="2" 
+                                <controls:ClassicScrollbar x:Name="ClassicScrollbar" Grid.Column="1" Height="50" Panel.ZIndex="2" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Right" Grid.Row="2" 
+                                                           TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                        Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
+
+                                <Grid Background="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" Grid.Column="1" Height="50" Panel.ZIndex="2" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Right" Grid.Row="2" 
                                       Width="{DynamicResource {x:Static SystemParameters.ScrollWidth}}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeight}}"/>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeight}}"/>
                                     </Grid.RowDefinitions>
-                                    <controls:ClassicButton Text="5" Grid.Row="0" FontFamily="Marlett"  TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        Foreground="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
+                                    <controls:ClassicButton Text="5" Grid.Row="0" FontFamily="Marlett"  />
                                     <controls:ClassicButton Height="10" Grid.Row="1" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
                                                         TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
                                                         Foreground="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
