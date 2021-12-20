@@ -28,8 +28,6 @@ namespace AdvancedWindowsAppearence
         public AeroColorRegistrySetting ThemeColor { get; set; } = new AeroColorRegistrySetting("Theme Color", "ColorizationColor");
         public RegistrySettingsViewModel RegistrySettingsViewModel { get; set; } = new RegistrySettingsViewModel();
         public AeroColorsViewModel AeroColorsViewModel { get; set; } = new AeroColorsViewModel();
-        public double DPI = 1;
-
         public bool UseThemes = true; //when false: it means to not apply theme, only to change registry settings
 
         public string ThemeName {get; set;}
@@ -55,7 +53,7 @@ namespace AdvancedWindowsAppearence
 
         void InitDPIScale()
         {
-            DPI = System.Windows.SystemFonts.CaptionFontSize / FontSettings[0].Size.GetValueOrDefault(1f);
+            FontManager.GetDPI(FontSettings[0].Size.GetValueOrDefault(1f));
         }
 
         void InitRegistrySettings()

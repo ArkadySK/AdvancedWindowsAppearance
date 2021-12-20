@@ -9,9 +9,14 @@ namespace AdvancedWindowsAppearence
 {
     static class FontManager
     {
-
+        public static double DPI = 1.0f;
         static bool _loaded = false;
         static List<Font> _fonts = new List<Font>();
+
+        public static void GetDPI(float samplefontsize)
+        {
+            FontManager.DPI = System.Windows.SystemFonts.CaptionFontSize / samplefontsize;
+        }
 
         public static List<Font> GetSystemFonts()
         {
