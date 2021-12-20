@@ -9,7 +9,7 @@ namespace AdvancedWindowsAppearence
 {
     static class FontManager
     {
-        public static double DPI = 1.0f;
+        public static double DPI = -1.0f;
         static bool _loaded = false;
         static List<Font> _fonts = new List<Font>();
 

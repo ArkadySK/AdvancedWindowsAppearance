@@ -33,9 +33,22 @@ namespace AdvancedWindowsAppearence
                     return;
                 IsEdited = true;
                 _size = value;
+                if(FontManager.DPI != -1f)              
+                    SizeWithDPI = value * (float)FontManager.DPI;
                 NotifyPropertyChanged();
             }
         }
+
+        private float? _sizeWithDPI;
+        public float? SizeWithDPI {
+            get => _sizeWithDPI;
+            set
+            {
+                _sizeWithDPI = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public bool HasSize
         {
             get { return Size != null; }
