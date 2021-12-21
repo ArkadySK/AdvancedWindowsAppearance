@@ -47,11 +47,11 @@
 
 
                     <!-- Inactive Window -->
-                    <Grid Width="350" Height="100" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Background="{Binding ColorSettings[24].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
+                    <Grid Width="350" Height="110" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Background="{Binding ColorSettings[24].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
                         <Border x:Name="InactiveWindowBorder" Margin="{DynamicResource {x:Static SystemParameters.Border}}" Background="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
 
                             <!--Inactive Header-->
-                            <Grid Height="{DynamicResource {x:Static SystemParameters.CaptionHeightKey}}" VerticalAlignment="Top" >
+                            <Grid VerticalAlignment="Top" >
                                 <Grid.Background>
                                     <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
                                         <GradientStop Color="{Binding ColorSettings[21].ItemColor, Converter={StaticResource DrawingColorToMediaColorConverter}, Mode=OneWay}"/>
@@ -76,8 +76,8 @@
                                                         TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
                                                         Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
 
-                                <Label Padding="1" Content="Inactive Window" FontFamily="{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}" FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" 
-                                       Foreground="{Binding ColorSettings[23].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}"/>
+                                <Label Padding="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Inactive Window" FontFamily="{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}" FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}" 
+                                       FontSize="{Binding FontSettings[0].SizeWithDPI}" Foreground="{Binding ColorSettings[23].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}"/>
                             </Grid>
 
                         </Border>
@@ -121,25 +121,25 @@
                                                         TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
                                                         Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
 
-                                <Label Padding="1" Height="{DynamicResource {x:Static SystemParameters.CaptionHeightKey}}" Content="Active Window" FontFamily="{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}" FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" 
-                                       Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}" />
+                                <Label Padding="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Active Window" FontFamily="{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}" FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}"
+                                       FontSize="{Binding FontSettings[0].SizeWithDPI}" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}" />
 
                                 <!--Content of Active Window-->
-                                <Menu Grid.Row="1" Height="{DynamicResource {x:Static SystemParameters.MenuBarHeightKey}}" Background="{Binding ColorSettings[25].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Grid.ColumnSpan="4">
-                                    <MenuItem Header="Normal" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" Foreground="{Binding FontSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                    <MenuItem Header="Disabled" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" IsEnabled="False" Foreground="{Binding ColorSettings[14].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                    <MenuItem Header="Selected" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" Foreground="{Binding ColorSettings[15].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                <Menu Grid.Row="1" MinHeight="{Binding ColorSettings[25].Size}" FontSize="{Binding FontSettings[2].SizeWithDPI}" Background="{Binding ColorSettings[25].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Grid.ColumnSpan="4" Padding="-1" Margin="0">
+                                    <MenuItem Header="Normal" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" Foreground="{Binding FontSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                    <MenuItem Header="Disabled" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" IsEnabled="False" Foreground="{Binding ColorSettings[14].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                    <MenuItem Header="Selected" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" Foreground="{Binding ColorSettings[15].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                                 </Menu>
-                                <Label Padding="2" Content="Window Text" Grid.Row="2" Grid.ColumnSpan="4" Panel.ZIndex="1" Foreground="{Binding ColorSettings[32].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Background="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                <Label Padding="2" Content="Window Text" Grid.Row="2" Grid.ColumnSpan="4" Panel.ZIndex="1" FontSize="{Binding FontSettings[5].SizeWithDPI}" Foreground="{Binding ColorSettings[32].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Background="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                                 <TextBlock TextDecorations="Underline" Padding="2" Text="Hypertext link" Grid.Row="3" Grid.ColumnSpan="4" Panel.ZIndex="1" Foreground="{Binding ColorSettings[17].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=Blue}" Background="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                                 
                                 <!--Classic Scrollbar-->
                                 <Grid x:Name="ClassicScrollbar" Background="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" Grid.Column="1" Height="50" Panel.ZIndex="2" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Right" Grid.Row="2" 
-                                      Width="{DynamicResource {x:Static SystemParameters.ScrollWidth}}">
+                                      Width="{Binding ColorSettings[26].Size}">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeight}}"/>
+                                        <RowDefinition Height="{Binding ColorSettings[26].Size}"/>
                                         <RowDefinition Height="*"/>
-                                        <RowDefinition Height="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeight}}"/>
+                                        <RowDefinition Height="{Binding ColorSettings[26].Size}"/>
                                     </Grid.RowDefinitions>
                                     <controls:ClassicButton Text="5" Grid.Row="0" FontFamily="Marlett"  TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
                                                         TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
@@ -167,7 +167,7 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <!--MessageBox Header-->
-                                <Grid Height="{DynamicResource {x:Static SystemParameters.CaptionHeightKey}}" VerticalAlignment="Top" Grid.ColumnSpan="2" >
+                                <Grid VerticalAlignment="Top" Grid.ColumnSpan="2" >
                                     <Grid.Background>
                                         <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
                                             <GradientStop Color="{Binding ColorSettings[0].ItemColor, Converter={StaticResource DrawingColorToMediaColorConverter}, Mode=OneWay}"/>
@@ -182,12 +182,13 @@
                                     <controls:ClassicButton Grid.Column="1" Margin="1" Style="{StaticResource CaptionButton}" Text="r" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
                                                         TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
                                                         Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
-                                    <Label Padding="1" Content="Message Box" FontFamily="{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}" FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" 
-                                           Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}"/>
-
+                                    <Label Padding="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Message Box" FontFamily="{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}" FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}"
+                                       FontSize="{Binding FontSettings[0].SizeWithDPI}" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}" />
                                 </Grid>
                                 <!--MessageBox Message-->
-                                <Label Margin="0 0 0 34" VerticalAlignment="Bottom" Grid.Row="1" Foreground="{Binding FontSettings[5].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" >Message Text</Label>
+                                <Label Margin="0 0 0 34" VerticalAlignment="Bottom" Grid.Row="1" 
+                                       Foreground="{Binding FontSettings[5].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" 
+                                       FontSize="{Binding FontSettings[5].SizeWithDPI}">Message Text</Label>
                                 <controls:ClassicButton Width="65" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Margin="5" Text="OK" 
                                                         TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}"
                                                         TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}"

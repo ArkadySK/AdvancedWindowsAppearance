@@ -25,6 +25,8 @@ namespace AdvancedWindowsAppearence
             }
             Console.WriteLine();
             DPI = (int)key.GetValue("AppliedDPI") / 96f;
+            Console.WriteLine(SystemFonts.MenuFont.Size);
+
         }
 
         public static List<Font> GetSystemFonts()
