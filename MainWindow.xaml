@@ -131,13 +131,17 @@
                                        VerticalContentAlignment="Center"/>
 
                                 <!--Content of Active Window-->
-                                <Menu Grid.Row="1" MinHeight="{Binding ColorSettings[25].Size}" FontSize="{Binding FontSettings[2].SizeWithDPI}" Background="{Binding ColorSettings[25].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Grid.ColumnSpan="4" Padding="-1" Margin="0">
-                                    <MenuItem Header="Normal" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" Foreground="{Binding FontSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                    <MenuItem Header="Disabled" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" IsEnabled="False" Foreground="{Binding ColorSettings[14].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                    <MenuItem Header="Selected" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" Foreground="{Binding ColorSettings[15].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                <Menu Grid.Row="1" MinHeight="{Binding ColorSettings[25].Size}" FontSize="{Binding FontSettings[2].SizeWithDPI}" Background="{Binding ColorSettings[25].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Grid.ColumnSpan="4" Padding="-1" Margin="0"
+                                       FontWeight="{Binding FontSettings[2].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[2].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" FontFamily="{Binding FontSettings[2].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}">
+                                    <MenuItem Header="Normal" Foreground="{Binding FontSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                    <MenuItem Header="Disabled" IsEnabled="False" Foreground="{Binding ColorSettings[14].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                    <MenuItem Header="Selected" Foreground="{Binding ColorSettings[15].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                                 </Menu>
-                                <Label Padding="2" Content="Window Text" Grid.Row="2" Grid.ColumnSpan="4" Panel.ZIndex="1" FontSize="{Binding FontSettings[5].SizeWithDPI}" Foreground="{Binding ColorSettings[32].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Background="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                <TextBlock TextDecorations="Underline" Padding="2" Text="Hypertext link" Grid.Row="3" Grid.ColumnSpan="4" Panel.ZIndex="1" Foreground="{Binding ColorSettings[17].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=Blue}" Background="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                <Label Padding="2" Content="Window Text" Grid.Row="2" Grid.ColumnSpan="4" Panel.ZIndex="1" FontSize="{Binding FontSettings[5].SizeWithDPI}" Foreground="{Binding ColorSettings[32].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Background="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" 
+                                       FontWeight="{Binding FontSettings[5].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[5].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" FontFamily="{Binding FontSettings[5].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"/>
+                                <TextBlock TextDecorations="Underline" Padding="2" Text="Hypertext link" Grid.Row="3" Grid.ColumnSpan="4" Panel.ZIndex="1" Foreground="{Binding ColorSettings[17].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=Blue}" Background="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"
+                                       FontWeight="{Binding FontSettings[5].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[5].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" FontFamily="{Binding FontSettings[5].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"
+                                       FontSize="{Binding FontSettings[5].SizeWithDPI}"    />
                                 
                                 <!--Classic Scrollbar-->
                                 <Grid x:Name="ClassicScrollbar" Background="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" Grid.Column="1" Height="50" Panel.ZIndex="2" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Right" Grid.Row="2" 
@@ -196,8 +200,13 @@
                                 <!--MessageBox Message-->
                                 <Label Margin="0 0 0 34" VerticalAlignment="Bottom" Grid.Row="1" 
                                        Foreground="{Binding FontSettings[5].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" 
+                                       FontWeight="{Binding FontSettings[5].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[5].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" 
+                                       FontFamily="{Binding FontSettings[5].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"
                                        FontSize="{Binding FontSettings[5].SizeWithDPI}">Message Text</Label>
                                 <controls:ClassicButton MinWidth="65" MinHeight="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Margin="5" Text="OK" 
+                                                        FontWeight="{Binding FontSettings[5].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" 
+                                                        FontStyle="{Binding FontSettings[5].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" 
+                                                        FontFamily="{Binding FontSettings[5].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"
                                                         TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}"
                                                         TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}"
                                                         BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}"
@@ -206,7 +215,8 @@
                                                         Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
                                 <Label FontSize="{Binding FontSettings[4].SizeWithDPI, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 -2 0 0" Grid.Column="1" Padding="1" Panel.ZIndex="100" Content="Tool Tip" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="1" 
                                        Background="{Binding ColorSettings[28].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Foreground="{Binding FontSettings[4].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" 
-                                       BorderThickness="1" BorderBrush="{Binding ColorSettings[31].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                       FontWeight="{Binding FontSettings[4].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[4].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" 
+                                       FontFamily="{Binding FontSettings[4].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}" BorderThickness="1" BorderBrush="{Binding ColorSettings[31].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                                 <Rectangle Panel.ZIndex="-1" Height="26" VerticalAlignment="Bottom" Fill="{Binding ColorSettings[25].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Grid.Row="1"/>
                             </Grid>
                         </Border>
