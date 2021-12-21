@@ -8,17 +8,26 @@ using System.Threading.Tasks;
 
 namespace AdvancedWindowsAppearence
 {
-    public class FontAppearanceSetting: AppearanceSetting
+    public class FontAppearanceSetting : AppearanceSetting
     {
-        public Font Font { get; set; }
-        public string FontName { 
-            get 
+        public Font Font { get => _font; set
             {
-                return Font.Name;
+                if (_font == value) return;
+                _font = value;
+                base.NotifyPropertyChanged();
             } 
         }
+        public string FontName
+        {
+            get
+            {
+                return Font.Name;
+            }
+        }
         bool isBold;
-        public bool IsBold { get
+        public bool IsBold
+        {
+            get
             {
                 return isBold;
             }
@@ -31,7 +40,9 @@ namespace AdvancedWindowsAppearence
         }
 
         bool isItalic;
-        public bool IsItalic 
+        private Font _font;
+
+        public bool IsItalic
         {
             get
             {
@@ -71,7 +82,6 @@ namespace AdvancedWindowsAppearence
             if (FontName == name) return;
             this.Font = FontManager.FindFontFromString(name);
             IsEdited = true;
-            base.NotifyPropertyChanged();
         }
 
         internal Font GetFontFromRegistry(string registrypath)
@@ -111,7 +121,7 @@ namespace AdvancedWindowsAppearence
             return regeditFont;
         }
 
-        private void SaveFontToRegistry() 
+        private void SaveFontToRegistry()
         {
             RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics");
             List<byte> regeditValBytes = ((byte[])key.GetValue(FontRegistryPath)).ToList();
