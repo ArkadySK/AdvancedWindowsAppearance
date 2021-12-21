@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdvancedWindowsAppearence
 {
@@ -13,11 +11,20 @@ namespace AdvancedWindowsAppearence
         static bool _loaded = false;
         static List<Font> _fonts = new List<Font>();
 
-        public static void GetDPI(float samplefontsize)
+        public static void GetDPI()
         {
-            if (samplefontsize == 0)
+            /*if (samplefontsize == 0)
                 return;
             DPI = System.Windows.SystemFonts.CaptionFontSize / samplefontsize;
+            */
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics");
+            if (key == null)
+            {
+                DPI = 1;
+                return;
+            }
+            Console.WriteLine();
+            DPI = (int)key.GetValue("AppliedDPI") / 96f;
         }
 
         public static List<Font> GetSystemFonts()

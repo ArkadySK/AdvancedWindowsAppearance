@@ -40,9 +40,9 @@ namespace AdvancedWindowsAppearence
         {
             InitAeroColors();
             InitRegistrySettings();
+            InitDPIScale();
             InitColors();
             InitFonts();
-            InitDPIScale();
         }
 
         void InitAeroColors()
@@ -53,7 +53,7 @@ namespace AdvancedWindowsAppearence
 
         void InitDPIScale()
         {
-            FontManager.GetDPI(FontSettings[0].Size.GetValueOrDefault(1f));
+            FontManager.GetDPI();
         }
 
         void InitRegistrySettings()
