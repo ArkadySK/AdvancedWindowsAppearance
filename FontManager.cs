@@ -15,7 +15,9 @@ namespace AdvancedWindowsAppearence
 
         public static void GetDPI(float samplefontsize)
         {
-            FontManager.DPI = System.Windows.SystemFonts.CaptionFontSize / samplefontsize;
+            if (samplefontsize == 0)
+                return;
+            DPI = System.Windows.SystemFonts.CaptionFontSize / samplefontsize;
         }
 
         public static List<Font> GetSystemFonts()
