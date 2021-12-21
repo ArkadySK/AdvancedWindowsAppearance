@@ -10,6 +10,8 @@ namespace AdvancedWindowsAppearence
 {
     public class FontAppearanceSetting : AppearanceSetting
     {
+
+        private bool isItalic;
         public Font Font { get => _font; set
             {
                 if (_font == value) return;
@@ -39,7 +41,6 @@ namespace AdvancedWindowsAppearence
             }
         }
 
-        bool isItalic;
         private Font _font;
 
         public bool IsItalic

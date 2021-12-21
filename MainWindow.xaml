@@ -16,6 +16,8 @@
             <converters:BrushToColorConverter x:Key="brushToColor" />
             <converters:DrawingColorToMediaColorConverter x:Key="DrawingColorToMediaColorConverter"/>
             <converters:FontToFontFamilyConverter x:Key="FontToFontFamily"/>
+            <converters:BooleanToFontWeightConverter x:Key="BooleanToFontWeight"/>
+            <converters:BooleanToFontStyleConverter x:Key="BooleanToFontStyle"/>
         </ResourceDictionary>
     </Window.Resources>
     
@@ -77,8 +79,9 @@
                                                         TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
                                                         Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
 
-                                <Label Padding="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Inactive Window" FontFamily="{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}" FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}" 
-                                       FontSize="{Binding FontSettings[0].SizeWithDPI}" Foreground="{Binding ColorSettings[23].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}"
+                                <Label Padding="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Inactive Window" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"  
+                                       FontSize="{Binding FontSettings[0].SizeWithDPI}" Foreground="{Binding ColorSettings[23].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"
+                                       FontWeight="{Binding FontSettings[0].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[0].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}"
                                        VerticalContentAlignment="Center"/>
                             </Grid>
 
@@ -123,8 +126,8 @@
                                                         TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
                                                         Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
 
-                                <Label Padding="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Active Window" FontFamily="{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}" FontWeight="{DynamicResource {x:Static SystemFonts.CaptionFontWeightKey}}"
-                                       FontSize="{Binding FontSettings[0].SizeWithDPI}" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" FontStyle="{DynamicResource {x:Static SystemFonts.CaptionFontStyleKey}}"
+                                <Label Padding="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Active Window" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}" FontSize="{Binding FontSettings[0].SizeWithDPI}" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"
+                                       FontWeight="{Binding FontSettings[0].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[0].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}"
                                        VerticalContentAlignment="Center"/>
 
                                 <!--Content of Active Window-->
@@ -185,8 +188,9 @@
                                     <controls:ClassicButton Grid.Column="1" Margin="1" Style="{StaticResource CaptionButton}" Text="r" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
                                                         TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
                                                         Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
-                                    <Label Padding="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Message Box" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}" FontWeight="{Binding FontSettings[0].Font.FontWeight}"
-                                            FontSize="{Binding FontSettings[0].SizeWithDPI}" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" FontStyle="{Binding FontSettings[0].Font.FontStyle}"
+                                    <Label Padding="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Message Box" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"
+                                            FontSize="{Binding FontSettings[0].SizeWithDPI}" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" 
+                                            FontWeight="{Binding FontSettings[0].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[0].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}"
                                             VerticalContentAlignment="Center" />
                                 </Grid>
                                 <!--MessageBox Message-->

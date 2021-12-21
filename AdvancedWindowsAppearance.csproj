@@ -81,6 +81,8 @@
     </Compile>
     <Compile Include="Converters\BrushToColorConverter.cs" />
     <Compile Include="Converters\DrawingColorToMediaColorConverter.cs" />
+    <Compile Include="Converters\BooleanToFontStyleConverter.cs" />
+    <Compile Include="Converters\BooleanToFontWeightConverter.cs" />
     <Compile Include="Converters\FontToFontFamilyConverter.cs" />
     <Compile Include="FontAppearanceSetting.cs" />
     <Compile Include="FontManager.cs" />
