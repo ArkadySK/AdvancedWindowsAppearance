@@ -103,16 +103,14 @@ namespace AdvancedWindowsAppearence
                 new ColorAppearanceSetting("Selected Items", "", "MenuHilight"), //
                 new ColorAppearanceSetting("Tool Tip", "", "InfoWindow"), //I
                 new ColorAppearanceSetting("Window", "", "Window"),//I
-                new ColorAppearanceSetting("Window Border Width", "BorderWidth", ""),
-                new ColorAppearanceSetting("Window Padded Border", "PaddedBorderWidth", "WindowFrame"),
-                //new ColorAppearanceSetting("Window Text Color", "", "WindowText") //duplicate to fontsettins
+                new ColorAppearanceSetting("Window Border Width", "BorderWidth", ""), //I
+                new ColorAppearanceSetting("Window Padded Border", "PaddedBorderWidth", "WindowFrame"), //NU, I
             };
-            /*ActiveWindowBorder.Margin = new Thickness((float)(    [29].Size +     [30].Size)); //Window Border Width + Window Padded Border
-            InactiveWindowBorder.Margin = ActiveWindowBorder.Margin;*/
         }
 
         void InitFonts()
         {
+            //TO DO: add font weight and font family bindings
             FontSettings = new FontAppearanceSetting[] {
                 new FontAppearanceSetting("Active / Inactive Title Font", "CaptionFont", ""), //., I
                 new FontAppearanceSetting("Icon Font", "IconFont", ""),
