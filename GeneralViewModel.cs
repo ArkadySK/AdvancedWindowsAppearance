@@ -160,12 +160,13 @@ namespace AdvancedWindowsAppearence
         public async Task SaveChanges()
         {
             if (UseThemes)
-                await SaveToTheme();
-            await SaveToRegistry();
-            
+                await SaveToTheme();  
+            else
+                await SaveToRegistry();
+
             await RegistrySettingsViewModel.SaveAll();
             await AeroColorsViewModel.SaveAll();
-            KillDWM();
+            //KillDWM(); //not needed?
             MessageBox.Show("You need to restart to apply these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
@@ -194,6 +195,21 @@ namespace AdvancedWindowsAppearence
             if (!UseThemes) return; //if user does not want to save changes into theme
 
             ThemeSettings SaveTheme = Task.Run(() => new ThemeSettings(ThemeName, ThemeColor.ItemColor.Value, ThemeStyle, wallpaperPath, ColorSettings, FontSettings)).Result;
+
+            foreach (var setting in ColorSettings)
+            {
+                if (setting == null) continue;
+                if (!setting.IsEdited) continue;
+                setting.SaveToRegistry();
+                setting.IsEdited = false;
+            }
+            foreach (var f in FontSettings)
+            {
+                if (f == null) continue;
+                f.SaveToRegistry();
+                f.IsEdited = false;
+            }
+
 
             await Task.Delay(2000);
         }
