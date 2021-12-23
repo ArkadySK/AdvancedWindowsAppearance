@@ -256,7 +256,7 @@
                             </Button>
 
                             <TextBlock Grid.Row="2" Grid.ColumnSpan="4" Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxItems, Mode=OneWay, FallbackValue=Collapsed}" 
-                                       Style="{StaticResource InfoText}" >New sizes are applied after logoff. Colors are applied immediatelly as a theme.</TextBlock>
+                                       Style="{StaticResource InfoText}" >New sizes are applied after logoff. Some colors are applied immediatelly as a theme, some may apply after logoff.</TextBlock>
                         </Grid>
                     </TabItem>
 
