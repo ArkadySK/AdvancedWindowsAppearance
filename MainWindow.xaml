@@ -406,7 +406,7 @@
                             <ListBox x:Name="listBoxDMW" Margin="5" ItemsSource="{Binding RegistrySettingsViewModel.RegistrySettings}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <CheckBox Content="{Binding Name}" IsChecked="{Binding Checked}"></CheckBox>
+                                        <CheckBox Content="{Binding Name}" IsChecked="{Binding Checked}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"></CheckBox>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>

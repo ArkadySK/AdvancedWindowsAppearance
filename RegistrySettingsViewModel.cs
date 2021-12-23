@@ -40,7 +40,7 @@ namespace AdvancedWindowsAppearence
         {
             if (minimalWinVer.CompareTo(Environment.OSVersion.Version) >= 0)
             {
-                RegistrySettings.Add(null);
+                RegistrySettings.Add(new RegistrySetting());
                 return;
             }
             RegistrySetting registrySetting = new RegistrySetting(name, registrypath, registrykey);

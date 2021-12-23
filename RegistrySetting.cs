@@ -20,7 +20,8 @@ namespace AdvancedWindowsAppearence
 
         public string Name { get; set; }
 
-        
+        public bool IsEnabled { get; set; } = false;
+
         public string RegistryKey;
         public string RegistryPath;
 
@@ -41,7 +42,9 @@ namespace AdvancedWindowsAppearence
             var val = GetBooleanFromRegistry();
             if (val is int)
                 Checked = ((int)val != 0);
-            else if (val is bool) Checked = (bool)val;
+            else if (val is bool) 
+                Checked = (bool)val;
+            IsEnabled = true;
         }
 
         public object GetBooleanFromRegistry()
