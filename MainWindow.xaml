@@ -243,7 +243,7 @@
                             <Label Content="Size:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0,35" Grid.RowSpan="2"/>
                             <Label Content="Color:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="87,0,0,35" Grid.RowSpan="2"/>
 
-                            <ComboBox x:Name="comboBoxItems" ItemsSource="{Binding ColorSettings}" SelectedIndex="12" Grid.Column="0" Grid.Row="1" Margin="5,5.333,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                            <ComboBox x:Name="comboBoxItems" ItemsSource="{Binding ColorSettings}" SelectedIndex="13" Grid.Column="0" Grid.Row="1" Margin="5,5.333,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <Label Padding="0" Content="{Binding Name}"/>
