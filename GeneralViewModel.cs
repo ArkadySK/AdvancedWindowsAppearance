@@ -160,13 +160,9 @@ namespace AdvancedWindowsAppearence
         public async Task SaveChanges()
         {
             if (UseThemes)
-            {
                 await SaveToTheme();
-            }
-            else
-            {
-                await SaveToRegistry();
-            }
+            await SaveToRegistry();
+            
             await RegistrySettingsViewModel.SaveAll();
             await AeroColorsViewModel.SaveAll();
             KillDWM();
@@ -199,13 +195,6 @@ namespace AdvancedWindowsAppearence
 
             ThemeSettings SaveTheme = Task.Run(() => new ThemeSettings(ThemeName, ThemeColor.ItemColor.Value, ThemeStyle, wallpaperPath, ColorSettings, FontSettings)).Result;
 
-            foreach (var setting in ColorSettings)
-            {
-                if (setting == null) continue;
-                if (!setting.IsEdited) continue;
-                setting.SaveToRegistry();
-                setting.IsEdited = false;
-            }
             await Task.Delay(2000);
         }
         #endregion
