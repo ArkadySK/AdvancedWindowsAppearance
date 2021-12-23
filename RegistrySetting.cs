@@ -1,18 +1,35 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace AdvancedWindowsAppearence
 {
-    public class RegistrySetting
+    public class RegistrySetting : INotifyPropertyChanged
     {
-        public bool? Checked { get; set; }
+        private bool? _checked;
+        public bool? Checked { get => _checked; set
+            {
+                _checked = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public string Name { get; set; }
-        public bool IsEdited;
+
+        
         public string RegistryKey;
         public string RegistryPath;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        internal void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public RegistrySetting() { }
 
@@ -59,7 +76,7 @@ namespace AdvancedWindowsAppearence
                 registryKey.DeleteValue(RegistryKey);
             }
             catch { }
-        } 
+        }
 
         public void SaveToRegistry()
         {
@@ -71,7 +88,6 @@ namespace AdvancedWindowsAppearence
             }
             registryKey.SetValue(RegistryKey, Checked, RegistryValueKind.DWord);
             registryKey.Close();
-            IsEdited = false;
         }
 
     }

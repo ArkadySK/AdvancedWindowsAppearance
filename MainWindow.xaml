@@ -411,7 +411,7 @@
                                 </ListBox.ItemTemplate>
                             </ListBox>
                             <CheckBox Visibility="Collapsed" x:Name="checkBoxLiveChanges" Content="Preview changes immediatelly" IsChecked="{Binding Settings.RegistrySettingsViewModel.LivePreview}"/>
-                            <TextBlock Style="{StaticResource InfoText}" >Some changes made to DWM (Desktop Window Composition) are applied after restart</TextBlock>
+                            <TextBlock Visibility="{Binding RegistrySettingsViewModel.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource InfoText}" >Some changes made to DWM (Desktop Window Composition) are applied after restart</TextBlock>
                         </StackPanel>
                     </TabItem>
 
