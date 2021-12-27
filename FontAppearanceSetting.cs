@@ -117,7 +117,7 @@ namespace AdvancedWindowsAppearence
                 IsItalic = true;
             }
             int sizetemp = (int)fonttemp[0];
-            this.Size = (256 - sizetemp) / 2;
+            this.Size = (256 - sizetemp);
 
             return regeditFont;
         }
@@ -139,7 +139,7 @@ namespace AdvancedWindowsAppearence
                 regeditValBytes[20] = 0;
             regeditValBytes.RemoveRange(fontNameStartIndex, regeditValBytes.Count - fontNameStartIndex);
 
-            byte fontsizetemp = (byte)(256 - 2 * this.Size);
+            byte fontsizetemp = (byte)(256 - Size);
             regeditValBytes[0] = fontsizetemp;
 
             List<byte> fontNameBytes = new List<byte>();

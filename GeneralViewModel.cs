@@ -206,6 +206,7 @@ namespace AdvancedWindowsAppearence
             foreach (var f in FontSettings)
             {
                 if (f == null) continue;
+                if (!f.IsEdited) continue;
                 f.SaveToRegistry();
                 f.IsEdited = false;
             }
