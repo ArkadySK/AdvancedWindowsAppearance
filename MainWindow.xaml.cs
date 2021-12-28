@@ -174,7 +174,7 @@ namespace AdvancedWindowsAppearence
         {
             textBlockPreview.Text = "The quick brown fox jumps over the lazy dog";
             textBlockPreview.FontFamily = new System.Windows.Media.FontFamily(f.FontFamily.Name);
-            textBlockPreview.FontSize = size * FontManager.DPI;
+            textBlockPreview.FontSize = size;
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
