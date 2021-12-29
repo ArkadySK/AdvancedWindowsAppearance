@@ -13,7 +13,7 @@ namespace AdvancedWindowsAppearence.Converters
             {
                 return MediaColorToBrush(color);
             }
-            return Brushes.Transparent;
+            return System.Drawing.Color.DarkGray;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
