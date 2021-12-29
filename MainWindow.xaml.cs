@@ -102,35 +102,10 @@ namespace AdvancedWindowsAppearence
 
         #region Fonts Tab
 
-        private void comboBoxFontSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selSetting = GetSelFontSetting();
-            if (selSetting == null) return;
-            try
-            {
-                string text = (comboBoxFontSize.SelectedItem as ComboBoxItem).Content.ToString();
-                UpdateFontPreview(selSetting.Font, float.Parse(text));
-            }
-            catch { }
-        }
-
-        private void buttonFont_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateFontPreview(buttonFontBold.IsChecked.Value, buttonFontItalic.IsChecked.Value);
-        }
-
-        private void comboBoxFonts_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selSetting = GetSelFontSetting();
-            if (selSetting == null) return;
-            UpdateFontPreview(selSetting.Font, selSetting.Size.GetValueOrDefault(0), selSetting.IsBold, selSetting.IsItalic, selSetting.ItemColor);
-        }
-
         private void buttonEditFontColor_Click(object sender, RoutedEventArgs e)
         {
             var selSetting = GetSelFontSetting();
             selSetting.ItemColor = OpenColorDialog(selSetting.ItemColor);
-            UpdateFontPreview(selSetting.ItemColor.Value);
         }
 
         private void comboBoxFont_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -139,44 +114,8 @@ namespace AdvancedWindowsAppearence
             {
                 var selSetting = GetSelFontSetting();
                 selSetting.ChangeFontName(selection);
-                UpdateFontPreview(selSetting.Font, selSetting.Size.GetValueOrDefault(0));
             }
         }
-
-        void UpdateFontPreview(System.Drawing.Font f, float size, bool isBold, bool isItalic, System.Drawing.Color? textCol)
-        {
-            var textColtemp = System.Drawing.Color.Black;
-            if (textCol.HasValue)
-                textColtemp = textCol.Value;
-            UpdateFontPreview(f, size);
-            UpdateFontPreview(isBold, isItalic);
-            UpdateFontPreview(textColtemp);
-        }
-
-        void UpdateFontPreview(bool isBold, bool isItalic)
-        {
-            if (isItalic)
-                textBlockPreview.FontStyle = FontStyles.Italic;
-            else
-                textBlockPreview.FontStyle = FontStyles.Normal;
-            if (isBold)
-                textBlockPreview.FontWeight = FontWeights.Bold;
-            else
-                textBlockPreview.FontWeight = FontWeights.Normal;
-        }
-
-        void UpdateFontPreview(System.Drawing.Color? textCol)
-        {
-            textBlockPreview.Foreground = BrushToColorConverter.MediaColorToBrush(textCol);
-        }
-
-        void UpdateFontPreview(System.Drawing.Font f, float size)
-        {
-            textBlockPreview.Text = "The quick brown fox jumps over the lazy dog";
-            textBlockPreview.FontFamily = new System.Windows.Media.FontFamily(f.FontFamily.Name);
-            textBlockPreview.FontSize = size * FontManager.DPI;
-        }
-
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");

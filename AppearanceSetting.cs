@@ -34,7 +34,7 @@ namespace AdvancedWindowsAppearence
                 IsEdited = true;
                 _size = value;
                 if(FontManager.DPI != -1f)              
-                    SizeWithDPI = value * (float)FontManager.DPI;
+                    SizeWithDPI = value / (float)FontManager.DPI;
                 NotifyPropertyChanged();
             }
         }

@@ -283,7 +283,7 @@
 
                             <Label Content="Color:" Padding="0" Grid.Column="3" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.RowSpan="2"/>
 
-                            <ComboBox x:Name="comboBoxFonts" ItemsSource="{Binding FontSettings}" SelectedIndex="0" Grid.Row="1" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2" SelectionChanged="comboBoxFonts_SelectionChanged">
+                            <ComboBox x:Name="comboBoxFonts" ItemsSource="{Binding FontSettings}" SelectedIndex="0" Grid.Row="1" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <Label Padding="0" Content="{Binding Name}"/>
@@ -292,8 +292,10 @@
                             </ComboBox>
 
                             <ComboBox x:Name="comboBoxFont" Text="{Binding Path=SelectedItem.FontName, ElementName=comboBoxFonts, Mode=OneWay}" Grid.Column="1" Grid.Row="2" Margin="5" Height="25" VerticalAlignment="Center" SelectionChanged="comboBoxFont_SelectionChanged"/>
-                            <TextBox x:Name="textBlockPreview" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="5" Padding="0" FontSize="{Binding Text, ElementName=comboBoxFontSize, Mode=OneWay}" Foreground="{Binding Background, ElementName=imageFontColor, FallbackValue='Black', Mode=OneWay}" Text="The quick brown fox jumps over the lazy dog"/>
-                            <ComboBox x:Name="comboBoxFontSize" Text="{Binding SelectedItem.Size, ElementName=comboBoxFonts}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxFonts}" Grid.Column="2" Grid.Row="1" Margin="5" Height="25" VerticalAlignment="Top" IsEditable="True" SelectionChanged="comboBoxFontSize_SelectionChanged" PreviewTextInput="NumberValidationTextBox">
+                            <TextBox x:Name="textBlockPreview" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="5" Padding="0" FontSize="{Binding Text, ElementName=comboBoxFontSize, Mode=OneWay}" Foreground="{Binding Background, ElementName=imageFontColor, FallbackValue='Black', Mode=OneWay}" Text="The quick brown fox jumps over the lazy dog"
+                                     FontWeight="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" FontFamily="{Binding SelectedItem.Font, ElementName=comboBoxFonts, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"
+                                     />
+                            <ComboBox x:Name="comboBoxFontSize" Text="{Binding SelectedItem.Size, ElementName=comboBoxFonts, UpdateSourceTrigger=LostFocus}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxFonts}" Grid.Column="2" Grid.Row="1" Margin="5" Height="25" VerticalAlignment="Top" IsEditable="True" PreviewTextInput="NumberValidationTextBox">
                                 <ComboBoxItem Content="2"/>
                                 <ComboBoxItem Content="3"/>
                                 <ComboBoxItem Content="4"/>
@@ -328,8 +330,8 @@
                                 <Button x:Name="imageFontColor" Padding="15 5" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxFonts, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                             </Button>
 
-                            <ToggleButton x:Name="buttonFontBold" IsChecked="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts}" Content="B" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold" Click="buttonFont_Click"/>
-                            <ToggleButton x:Name="buttonFontItalic" IsChecked="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts}" Content="I" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" FontStyle="Italic" Click="buttonFont_Click"/>
+                            <ToggleButton x:Name="buttonFontBold" IsChecked="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts}" Content="B" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold"/>
+                            <ToggleButton x:Name="buttonFontItalic" IsChecked="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts}" Content="I" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" FontStyle="Italic"/>
                             <TextBlock Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxFonts, Mode=OneWay, FallbackValue=Collapsed}" Grid.ColumnSpan="5" Grid.Row="3" 
                                        Style="{StaticResource InfoText}" >Changes made to fonts are applied after restart</TextBlock>
 
