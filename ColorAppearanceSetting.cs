@@ -10,7 +10,7 @@ namespace AdvancedWindowsAppearence
 {
     public class ColorAppearanceSetting : AppearanceSetting
     {
-        readonly string SizeRegistryPath;
+        public readonly string SizeRegistryPath;
 
         public ColorAppearanceSetting(string _name, string _regeditPath, string _colorRegistryPath)
         {
