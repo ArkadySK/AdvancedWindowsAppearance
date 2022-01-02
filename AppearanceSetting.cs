@@ -72,7 +72,7 @@ namespace AdvancedWindowsAppearence
         {
             get
             {
-                return ConvertColorValuesToRegistry(ItemColor);
+                return ItemColor.Value.R + " " + ItemColor.Value.G + " " + ItemColor.Value.B;
             }
         }
 
@@ -84,18 +84,14 @@ namespace AdvancedWindowsAppearence
             }
         }
 
-        string Color_ToRegistryFormat(Color color)
-        {
-            return color.R + " " + color.G + " " + color.B;
-        }
-
         public string ConvertColorValuesToRegistry(Color? color)
         {
 
             if (color.HasValue)
-                return Color_ToRegistryFormat(color.Value);
+                return ItemColorValue;
             return "";
         }
+
         internal Color? GetColorFromRegistry(string registrypath)
         {
             if (registrypath == null || registrypath == "") return null;
