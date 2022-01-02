@@ -122,7 +122,7 @@ namespace AdvancedWindowsAppearence
             return regeditFont;
         }
 
-        public byte[] GetFontRegistryFormat()
+        public byte[] GetFontInRegistryFormat()
         {
             RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics");
             List<byte> registryValBytes = ((byte[])key.GetValue(FontRegistryPath)).ToList();
@@ -158,7 +158,7 @@ namespace AdvancedWindowsAppearence
         private void SaveFontToRegistry()
         {
             RegistryKey newKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics", true);
-            newKey.SetValue(FontRegistryPath, GetFontRegistryFormat(), RegistryValueKind.Binary);
+            newKey.SetValue(FontRegistryPath, GetFontInRegistryFormat(), RegistryValueKind.Binary);
             newKey.Close();
         }
 
