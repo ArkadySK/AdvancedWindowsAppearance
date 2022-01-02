@@ -25,7 +25,7 @@
         <StackPanel Grid.Row="1">
             <StackPanel Orientation="Horizontal">
                 <Label Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">Export:</Label>
-                <Button Content="Export all current settings to .reg file" Style="{StaticResource SystemButton}" Padding="10 0" Margin="5"/>
+                <Button x:Name="exportToReg" Content="Export current settings" Style="{StaticResource SystemButton}" Padding="10 0" Margin="5" Click="exportToReg_Click"/>
             </StackPanel>
             <TextBlock Style="{StaticResource InfoText}" Text="Click on this button to save the settings as .reg" Grid.Row="2" Margin="0 0 0 10"/>
 

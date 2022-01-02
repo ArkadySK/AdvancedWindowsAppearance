@@ -86,5 +86,10 @@ namespace AdvancedWindowsAppearence
             }
 
         }
+
+        private async void exportToReg_Click(object sender, RoutedEventArgs e)
+        {
+            await Settings.ExportToReg();
+        }
     }
 }
