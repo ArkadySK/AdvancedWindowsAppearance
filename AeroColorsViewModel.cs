@@ -50,5 +50,15 @@ namespace AdvancedWindowsAppearence
             }
             await Task.WhenAll(tasks);
         }
+
+        public string GetSettingsInReg()
+        {
+            string output = @"[HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM]";
+            foreach (var ac in AeroColors)
+            {
+                output += "\n\"" + ac.RegistryKey + "\"=dword:0000000" + Convert.ToInt32(ac.Checked);
+            }
+            return output;
+        }
     }
 }

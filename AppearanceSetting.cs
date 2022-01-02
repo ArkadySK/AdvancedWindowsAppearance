@@ -72,6 +72,7 @@ namespace AdvancedWindowsAppearence
         {
             get
             {
+                if(!ItemColor.HasValue) return null;
                 return ItemColor.Value.R + " " + ItemColor.Value.G + " " + ItemColor.Value.B;
             }
         }

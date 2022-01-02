@@ -260,5 +260,73 @@ namespace AdvancedWindowsAppearence
         }
         #endregion
 
+        #region Export
+
+        string GetColorsInReg()
+        {
+            string output = @"[HKEY_CURRENT_USER\Control Panel\Colors]";
+
+            foreach(var c in ColorSettings)
+            {
+                if(!c.HasColor)
+                    continue;
+                output += "\n\"" + c.ColorRegistryPath + "\"=\"" + c.ItemColorValue + "\"";
+                }
+
+            output += Environment.NewLine + Environment.NewLine;
+            output += @"[HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics]";
+
+            foreach (var c in ColorSettings)
+            {
+                if (!c.HasSize)
+                    continue;
+                output += "\n\"" + c.SizeRegistryPath + "\"=\"" + (-15 * c.Size) + "\"";
+            }
+
+            return output;
+        }
+        string GetFontsInReg()
+        {
+            string output = "";
+
+            foreach (var f in FontSettings)
+            {
+                if (!f.HasSize)
+                    continue;
+                string valueText = "hex:";
+                foreach(byte b in f.GetFontInRegistryFormat())
+                {
+                    valueText += b.ToString("X") + ",";
+                }
+                valueText = valueText.Remove(valueText.Length - 1, 1);
+                output += "\n\"" + f.FontRegistryPath + "\"=\"" + valueText + "\"";
+            }
+
+            output += Environment.NewLine;
+            output += @"[HKEY_CURRENT_USER\Control Panel\Colors]";
+            foreach (var f in FontSettings)
+            {
+                if (!f.HasColor)
+                    continue;
+                output += "\n\"" + f.ColorRegistryPath + "\"=\"" + f.ItemColorValue + "\"";
+            }
+            return output;
+        }
+
+        public async Task ExportToReg()
+        {
+            string textToSave = "Windows Registry Editor Version 5.00\n\n";
+            textToSave += GetColorsInReg();
+            textToSave += GetFontsInReg();
+            textToSave += Environment.NewLine;
+            textToSave += RegistrySettingsViewModel.GetSettingsInReg();
+            textToSave += Environment.NewLine;
+            textToSave += AeroColorsViewModel.GetSettingsInReg();
+            Console.WriteLine(textToSave); //debugging solution
+
+        }
+
+        #endregion
+
     }
 }
