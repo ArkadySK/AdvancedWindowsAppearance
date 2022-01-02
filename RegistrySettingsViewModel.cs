@@ -79,6 +79,8 @@ namespace AdvancedWindowsAppearence
                 if (rs.Checked.HasValue)
                     output += "\n\"" + rs.RegistryKey + "\"=dword:0000000" + Convert.ToInt32(rs.Checked.Value);
             }
+
+            output += Environment.NewLine + Environment.NewLine;
             return output;
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -302,7 +303,7 @@ namespace AdvancedWindowsAppearence
                 output += "\n\"" + f.FontRegistryPath + "\"=\"" + valueText + "\"";
             }
 
-            output += Environment.NewLine;
+            output += Environment.NewLine + Environment.NewLine;
             output += @"[HKEY_CURRENT_USER\Control Panel\Colors]";
             foreach (var f in FontSettings)
             {
@@ -310,6 +311,8 @@ namespace AdvancedWindowsAppearence
                     continue;
                 output += "\n\"" + f.ColorRegistryPath + "\"=\"" + f.ItemColorValue + "\"";
             }
+
+            output += Environment.NewLine + Environment.NewLine;
             return output;
         }
 
@@ -318,12 +321,17 @@ namespace AdvancedWindowsAppearence
             string textToSave = "Windows Registry Editor Version 5.00\n\n";
             textToSave += GetColorsInReg();
             textToSave += GetFontsInReg();
-            textToSave += Environment.NewLine;
             textToSave += RegistrySettingsViewModel.GetSettingsInReg();
-            textToSave += Environment.NewLine;
             textToSave += AeroColorsViewModel.GetSettingsInReg();
             Console.WriteLine(textToSave); //debugging solution
 
+            string path = Environment.CurrentDirectory + "\\Exported Settings";
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            var sw = new StreamWriter(path + "\\Export01.reg");
+            await sw.WriteAsync(textToSave);
+            sw.Close();
         }
 
         #endregion
