@@ -56,7 +56,7 @@ namespace AdvancedWindowsAppearence
             string output = @"[HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM]";
             foreach (var ac in AeroColors)
             {
-                output += "\n\"" + ac.RegistryKey + "\"=dword:0000000" + Convert.ToInt32(ac.Checked);
+                output += "\n\"" + ac.RegistryKey + "\"=dword:0000000" + Convert.ToInt32(ac.ItemColorValue);
             }
             return output;
         }

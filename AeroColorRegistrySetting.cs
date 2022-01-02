@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AdvancedWindowsAppearence
 {
-    public class AeroColorRegistrySetting: RegistrySetting , INotifyPropertyChanged
+    public class AeroColorRegistrySetting : RegistrySetting, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -22,15 +22,26 @@ namespace AdvancedWindowsAppearence
         private Color? _itemColor;
         public Color? ItemColor { get
             {
-                return _itemColor; 
+                return _itemColor;
             }
-            set 
+            set
             {
                 _itemColor = value;
                 _opacity = _itemColor.GetValueOrDefault().A;
                 NotifyPropertyChanged();
-            } 
+            }
         }
+
+        public string ItemColorValue {
+            get
+            {
+                if(!ItemColor.HasValue) 
+                    return null;
+                return Color_ConvertToRegistryFormat(ItemColor.Value);
+            }
+        }
+
+
         private byte _opacity;
         public byte Opacity 
         {
