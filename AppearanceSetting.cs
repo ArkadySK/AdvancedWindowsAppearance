@@ -73,7 +73,7 @@ namespace AdvancedWindowsAppearence
             get
             {
                 if(!ItemColor.HasValue) return null;
-                return ItemColor.Value.R + " " + ItemColor.Value.G + " " + ItemColor.Value.B;
+                return ConvertColorValuesToRegistry(ItemColor.Value);
             }
         }
 
@@ -85,12 +85,9 @@ namespace AdvancedWindowsAppearence
             }
         }
 
-        public string ConvertColorValuesToRegistry(Color? color)
+        public string ConvertColorValuesToRegistry(Color color)
         {
-
-            if (color.HasValue)
-                return ItemColorValue;
-            return "";
+            return color.R + " " + color.G + " " + color.B;
         }
 
         internal Color? GetColorFromRegistry(string registrypath)
