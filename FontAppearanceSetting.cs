@@ -57,7 +57,7 @@ namespace AdvancedWindowsAppearence
             }
         }
 
-        readonly string FontRegistryPath;
+        public readonly string FontRegistryPath;
         const int fontNameStartIndex = 28; //odtialto zacina string (nazov fontu) vramci jedneko keyu v registri
 
         public FontAppearanceSetting() { }
@@ -122,25 +122,25 @@ namespace AdvancedWindowsAppearence
             return regeditFont;
         }
 
-        private void SaveFontToRegistry()
+        public byte[] GetFontRegistryFormat()
         {
             RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics");
-            List<byte> regeditValBytes = ((byte[])key.GetValue(FontRegistryPath)).ToList();
+            List<byte> registryValBytes = ((byte[])key.GetValue(FontRegistryPath)).ToList();
             key.Close();
 
             if (IsBold)
-                regeditValBytes[17] = 2;
+                registryValBytes[17] = 2;
             else
-                regeditValBytes[17] = 1;
+                registryValBytes[17] = 1;
 
             if (IsItalic)
-                regeditValBytes[20] = 1;
+                registryValBytes[20] = 1;
             else
-                regeditValBytes[20] = 0;
-            regeditValBytes.RemoveRange(fontNameStartIndex, regeditValBytes.Count - fontNameStartIndex);
+                registryValBytes[20] = 0;
+            registryValBytes.RemoveRange(fontNameStartIndex, registryValBytes.Count - fontNameStartIndex);
 
             byte fontsizetemp = (byte)((256 - Size * FontManager.DPI));
-            regeditValBytes[0] = fontsizetemp;
+            registryValBytes[0] = fontsizetemp;
 
             List<byte> fontNameBytes = new List<byte>();
             foreach (char c in this.Font.Name)
@@ -150,10 +150,15 @@ namespace AdvancedWindowsAppearence
                 fontNameBytes.Add(0);
             }
 
-            List<byte> newRegistryValBytes = regeditValBytes;
+            List<byte> newRegistryValBytes = registryValBytes;
             newRegistryValBytes.AddRange(fontNameBytes);
+            return newRegistryValBytes.ToArray();
+        }
+
+        private void SaveFontToRegistry()
+        {
             RegistryKey newKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics", true);
-            newKey.SetValue(FontRegistryPath, newRegistryValBytes.ToArray(), RegistryValueKind.Binary);
+            newKey.SetValue(FontRegistryPath, GetFontRegistryFormat(), RegistryValueKind.Binary);
             newKey.Close();
         }
 
