@@ -91,7 +91,7 @@ namespace AdvancedWindowsAppearence
                 
                 ColorRegistrySetting cs = new ColorRegistrySetting();
                 cs.IsFoundInTheme = false;
-                s.ConvertColorValuesToRegistry(s.ItemColor);
+                s.ConvertColorValuesToRegistry(s.ItemColor.Value);
                 cs.Value = s.ColorRegistryPath + "=" + s.ItemColorValue;
                 cs.RegistryName = s.ColorRegistryPath;
                 changedColorSettings.Add(cs);
@@ -106,7 +106,7 @@ namespace AdvancedWindowsAppearence
 
                 ColorRegistrySetting cs = new ColorRegistrySetting();
                 cs.IsFoundInTheme = false;
-                s.ConvertColorValuesToRegistry(s.ItemColor);
+                s.ConvertColorValuesToRegistry(s.ItemColor.Value);
                 cs.Value = s.ColorRegistryPath + "=" + s.ItemColorValue;
                 cs.RegistryName = s.ColorRegistryPath;
                 changedColorSettings.Add(cs);
