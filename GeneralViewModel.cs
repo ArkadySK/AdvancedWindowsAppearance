@@ -329,7 +329,9 @@ namespace AdvancedWindowsAppearence
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
 
-            var sw = new StreamWriter(path + "\\Export01.reg");
+            string fileName = "Export" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".reg";
+
+            var sw = new StreamWriter(path + "\\" + fileName);
             await sw.WriteAsync(textToSave);
             sw.Close();
         }
