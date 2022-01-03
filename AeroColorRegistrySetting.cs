@@ -12,12 +12,6 @@ namespace AdvancedWindowsAppearence
 {
     public class AeroColorRegistrySetting : RegistrySetting, INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         private Color? _itemColor;
         public Color? ItemColor { get
