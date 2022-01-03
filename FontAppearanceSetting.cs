@@ -87,38 +87,44 @@ namespace AdvancedWindowsAppearence
 
         internal Font GetFontFromRegistry(string registrypath)
         {
-            Font regeditFont;
+            Font regeditFont = new Font(FontFamily.GenericSansSerif, 11);
             if (registrypath == null || registrypath == "") return null;
 
             RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(@"Control Panel\Desktop\WindowMetrics");
 
-            byte[] fonttemp = (byte[])registryKey.GetValue(registrypath);
-            List<byte> fontNametemp = new List<byte>();
-            int i = 0;
-            foreach (byte b in fonttemp)
-            {
-                if (i >= fontNameStartIndex && b != 0)
+            try { 
+
+                byte[] fonttemp = (byte[])registryKey.GetValue(registrypath);
+                List<byte> fontNametemp = new List<byte>();
+                int i = 0;
+                foreach (byte b in fonttemp)
                 {
-                    fontNametemp.Add(b);
+                    if (i >= fontNameStartIndex && b != 0)
+                    {
+                        fontNametemp.Add(b);
+                    }
+                    i++;
                 }
-                i++;
+                string fontstring = Encoding.ASCII.GetString(fontNametemp.ToArray());
+                registryKey.Close();
+
+                regeditFont = FontManager.FindFontFromString(fontstring);
+
+                if (fonttemp[17] == 02)
+                {
+                    IsBold = true;
+                }
+                if (fonttemp[20] == 01)
+                {
+                    IsItalic = true;
+                }
+                int sizetemp = (int)fonttemp[0];
+                this.Size = (256 - sizetemp) / (float)FontManager.DPI;
             }
-            string fontstring = Encoding.ASCII.GetString(fontNametemp.ToArray());
-            registryKey.Close();
-
-            regeditFont = FontManager.FindFontFromString(fontstring);
-
-            if (fonttemp[17] == 02)
+            catch
             {
-                IsBold = true;
+                Console.WriteLine("Unable to load font '{0}'", Name);
             }
-            if (fonttemp[20] == 01)
-            {
-                IsItalic = true;
-            }
-            int sizetemp = (int)fonttemp[0];
-            this.Size = (256 - sizetemp) / (float)FontManager.DPI;
-
             return regeditFont;
         }
 

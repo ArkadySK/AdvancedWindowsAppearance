@@ -70,12 +70,18 @@ namespace AdvancedWindowsAppearence
 
         public string GetSettingsInReg()
         {
-            string output = @"[HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM]";
+            string output = "";
+            string prevPath = "";
             foreach (var rs in RegistrySettings)
             {
                 if (!rs.IsEnabled)
                     continue;
-
+                string curPath = rs.RegistryPath.Replace(rs.RegistryKey + "\\", "");
+                if (prevPath != curPath)
+                {
+                    output += "\n[HKEY_CURRENT_USER\\" + curPath + "]";
+                    prevPath = curPath;
+                }
                 if (rs.Checked.HasValue)
                     output += "\n\"" + rs.RegistryKey + "\"=dword:0000000" + Convert.ToInt32(rs.Checked.Value);
             }
