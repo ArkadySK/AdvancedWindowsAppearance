@@ -223,13 +223,13 @@ namespace AdvancedWindowsAppearence
         {
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "reg.exe";
-            startInfo.Arguments = "IMPORT " + path;
+            startInfo.Arguments = "IMPORT \"" + path + "\"";
             Process.Start(startInfo);
         }
 
         internal async Task ResetFonts()
         {
-            RunRegFile("Window Metrics fix");
+            RunRegFile("Window Metrics fix.reg");
             await Task.Delay(100);
         }
 
@@ -241,7 +241,7 @@ namespace AdvancedWindowsAppearence
 
         internal async Task ResetDWM()
         {
-            RunRegFile("DWM fix");
+            RunRegFile("DWM fix.reg");
             await Task.Delay(100);
         }
 

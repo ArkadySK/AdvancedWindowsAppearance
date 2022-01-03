@@ -118,11 +118,11 @@ namespace AdvancedWindowsAppearence
             return;
             
             string fileName = dialog.SafeFileName;
-            Settings.RunRegFile(savePath + "\\" + fileName);
             
             var confirmResult = MessageBox.Show("Are you sure to load settings from this file?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (confirmResult == MessageBoxResult.No)
                 return;
+            Settings.RunRegFile(savePath + "\\" + fileName);
 
             MessageBox.Show("Settings restored successfully. \n\nThe program will now close. You should restart the device to apply changes.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             App.Current.Shutdown();
