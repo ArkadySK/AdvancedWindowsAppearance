@@ -91,7 +91,7 @@ namespace AdvancedWindowsAppearence
         {
             await Settings.ExportToReg();
             string savedPath = Environment.CurrentDirectory + @"\Exported Settings";
-            MessageBox.Show(("Export was successful!\nThe exported file is saved in: " + savedPath), "Export Finished", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(("Export was successful!\nThe exported file is saved in: " + savedPath + Environment.NewLine + "You can restore the settings just by opening the settings-export file."), "Export Finished", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

@@ -20,7 +20,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         
-        <TextBlock Padding="5" Text="Choose an option:" HorizontalAlignment="Stretch" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <TextBlock Padding="5" Text="Choose an option:" HorizontalAlignment="Stretch" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSize}}" />
 
         <StackPanel Grid.Row="1">
             <StackPanel Orientation="Horizontal">
