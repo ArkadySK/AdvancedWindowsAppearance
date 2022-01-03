@@ -445,7 +445,7 @@
                     <Label Content="Apply (to registry)" Padding="1"/>
                 </ComboBox>
             </StackPanel>
-            <Button Style="{StaticResource SystemButton}" Grid.Column="0" Margin="5" Content="Restore or backup" Click="ButtonRestore_Click" />
+            <Button Style="{StaticResource SystemButton}" Grid.Column="0" Margin="5" Content="Backup and restore" Click="ButtonRestore_Click" />
 
         </Grid>
     </StackPanel>
