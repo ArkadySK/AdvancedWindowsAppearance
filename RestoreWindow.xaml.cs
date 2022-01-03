@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +22,8 @@ namespace AdvancedWindowsAppearence
     public partial class RestoreWindow : Window
     {
         GeneralViewModel Settings;
+        readonly string savePath = Environment.CurrentDirectory + @"\Exported Settings";
+
         public RestoreWindow(GeneralViewModel generalViewModel)
         {
             InitializeComponent();
@@ -90,8 +94,38 @@ namespace AdvancedWindowsAppearence
         private async void exportToReg_Click(object sender, RoutedEventArgs e)
         {
             await Settings.ExportToReg();
-            string savedPath = Environment.CurrentDirectory + @"\Exported Settings";
-            MessageBox.Show(("Export was successful!\nThe exported file is saved in: " + savedPath + Environment.NewLine + "You can restore the settings just by opening the settings-export file."), "Export Finished", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(("Export was successful!\nThe exported file is saved in: " + savePath + Environment.NewLine + "You can restore the settings just by opening the settings-export file."), "Export Finished", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void openRestoreFolder_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = "explorer";
+            startInfo.Arguments = savePath;
+            Process.Start(startInfo);
+        }
+
+        private void importReg_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "registry files|*.reg";
+            dialog.Title = "Choose a restore file";
+            dialog.InitialDirectory = savePath;
+
+            var result = dialog.ShowDialog();
+            
+            if (result.Value == false)
+            return;
+            
+            string fileName = dialog.SafeFileName;
+            Settings.RunRegFile(savePath + "\\" + fileName);
+            
+            var confirmResult = MessageBox.Show("Are you sure to load settings from this file?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (confirmResult == MessageBoxResult.No)
+                return;
+
+            MessageBox.Show("Settings restored successfully. \n\nThe program will now close. You should restart the device to apply changes.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            App.Current.Shutdown();
         }
     }
 }

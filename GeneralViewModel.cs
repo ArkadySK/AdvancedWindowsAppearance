@@ -219,7 +219,7 @@ namespace AdvancedWindowsAppearence
 
         #region Restore
 
-        void RunRegFile(string path)
+        public void RunRegFile(string path)
         {
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "reg.exe";
