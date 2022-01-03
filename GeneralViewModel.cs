@@ -300,7 +300,7 @@ namespace AdvancedWindowsAppearence
                     valueText += b.ToString("X") + ",";
                 }
                 valueText = valueText.Remove(valueText.Length - 1, 1);
-                output += "\n\"" + f.FontRegistryPath + "\"=\"" + valueText + "\"";
+                output += "\n\"" + f.FontRegistryPath + "\"=" + valueText;
             }
 
             output += Environment.NewLine + Environment.NewLine;

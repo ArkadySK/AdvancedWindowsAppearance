@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdvancedWindowsAppearence"
         mc:Ignorable="d"
-        Title="Restore and backup" SizeToContent="Manual" WindowStartupLocation="CenterOwner" Height="295" Width="469" ResizeMode="NoResize">
+        Title="Restore and backup" SizeToContent="Manual" WindowStartupLocation="CenterOwner" Height="405" Width="469" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="bulletStyle" TargetType="RadioButton">
             <Setter Property="Margin" Value="5"/>
@@ -29,27 +29,25 @@
             </StackPanel>
             <TextBlock Style="{StaticResource InfoText}" Text="Click on this button to save the settings as .reg" Grid.Row="2" Margin="0 0 0 10"/>
 
+            <Label Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">Restore:</Label>
             <StackPanel x:Name="stackPanelBullets" >
-                <Label Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">Restore:</Label>
                 <RadioButton Style="{StaticResource bulletStyle}" Content="Restore DWM related settings (from 'Modern App Settings' tab)" Click="RadioButton_Click" />
                 <RadioButton Style="{StaticResource bulletStyle}" Content="Restore all theme related settings" Click="RadioButton_Click"/>
                 <RadioButton Style="{StaticResource bulletStyle}" Content="Restore all colors" Click="RadioButton_Click"/>
                 <RadioButton Style="{StaticResource bulletStyle}" Content="Restore fonts and metrics" Click="RadioButton_Click"/>
                 <RadioButton Style="{StaticResource bulletStyle}" FontWeight="Bold" Content="Restore all (from these settings)" Click="RadioButton_Click"/>
             </StackPanel>
+            <Button x:Name="buttonConfirm" Grid.Column="1" Content="Confirm" Style="{StaticResource SystemButton}" Margin="5" Padding="20 2" Click="buttonConfirm_Click"/>
+            <TextBlock x:Name="labelInfo" Style="{StaticResource InfoText}" Text="Click on 'Confirm' to restore the settings according your selection" Grid.Row="2"/>
         </StackPanel>
         
-        <TextBlock x:Name="labelInfo" Style="{StaticResource InfoText}" Text="Click on 'Confirm' to restore the settings according your selection" Grid.Row="2"/>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="buttonConfirm" Grid.Column="1" Content="Confirm" Style="{StaticResource SystemButton}" Margin="5" Padding="20 2" Click="buttonConfirm_Click"/>
             <Button x:Name="buttonClose" Grid.Column="2" Content="Close" Style="{StaticResource SystemButton}" Margin="5" Padding="20 2" Click="buttonClose_Click"/>
         </Grid>
-
-        
     </Grid>
 </Window>
