@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdvancedWindowsAppearence"
-        xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters" xmlns:controls="clr-namespace:AdvancedWindowsAppearence.Controls"
+        xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters" xmlns:controls="clr-namespace:AdvancedWindowsAppearence.Controls" x:Name="window"
     x:Class="AdvancedWindowsAppearence.MainWindow"
         mc:Ignorable="d"
         Title="Advanced Appearance" Width="480" SizeToContent="Height" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="CanMinimize">
@@ -20,7 +20,7 @@
             <converters:BooleanToFontStyleConverter x:Key="BooleanToFontStyle"/>
         </ResourceDictionary>
     </Window.Resources>
-    
+
     <StackPanel>
 
         <StackPanel Visibility="Collapsed">
@@ -33,7 +33,7 @@
             <Control x:Name="buttonTextColor" OpacityMask="{Binding ColorSettings[11].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
             <!--End of resources-->
         </StackPanel>
-        
+
         <Border Margin="5">
             <StackPanel>
                 <Grid IsEnabled="False" Background="{Binding Fill, ElementName=desktopColor}" Height="220" Margin="0 0 0 10" Style="{x:Null}" OverridesDefaultStyle="True" FocusVisualStyle="{x:Null}">
@@ -44,8 +44,12 @@
                             </ResourceDictionary.MergedDictionaries>
                         </ResourceDictionary >
                     </Grid.Resources>
-                    
+
                     <Image Source="{Binding Wallpaper.Path}" Stretch="UniformToFill"></Image>
+                    <StackPanel Panel.ZIndex="20" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        <Image x:Name="iconImage" Source="Icon.ico" Height="{Binding ColorSettings[18].Size}" />
+                        <Label>Icon</Label>
+                    </StackPanel>
                     <Polygon x:Name="desktopColor" Points="100,100 0,100 100,0"  Fill="{Binding ColorSettings[13].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,0"/>
 
 
@@ -148,7 +152,7 @@
                                 <TextBlock TextDecorations="Underline" Padding="2" Text="Hypertext link" Grid.Row="3" Grid.ColumnSpan="4" Panel.ZIndex="1" Foreground="{Binding ColorSettings[17].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=Blue}" Background="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"
                                        FontWeight="{Binding FontSettings[5].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[5].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" FontFamily="{Binding FontSettings[5].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"
                                        FontSize="{Binding FontSettings[5].Size}"    />
-                                
+
                                 <!--Classic Scrollbar-->
                                 <Grid x:Name="ClassicScrollbar" Background="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" Grid.Column="1" Panel.ZIndex="2" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Right" Grid.Row="2" 
                                       Width="{Binding ColorSettings[26].Size}">

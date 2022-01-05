@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using AdvancedWindowsAppearence.Converters;
+using System.Drawing;
 
 namespace AdvancedWindowsAppearence
 {
