@@ -9,6 +9,7 @@
         mc:Ignorable="d"
         Title="Advanced Appearance" Width="480" SizeToContent="Height" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="CanMinimize">
 
+    
     <Window.Resources>
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -23,433 +24,207 @@
     </Window.Resources>
 
     <StackPanel>
+        <Frame Source="Preview.xaml">
+        </Frame>
 
-        <StackPanel Visibility="Collapsed">
-            <!-- COLOR RESOURCES that autoupdate themselves-->
-            <Control x:Name="buttonDarkShadowColor" OpacityMask="{Binding ColorSettings[6].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-            <Control x:Name="buttonFaceColor" OpacityMask="{Binding ColorSettings[7].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-            <Control x:Name="buttonHilightColor" OpacityMask="{Binding ColorSettings[8].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-            <Control x:Name="buttonLightColor" OpacityMask="{Binding ColorSettings[9].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-            <Control x:Name="buttonShadowColor" OpacityMask="{Binding ColorSettings[10].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-            <Control x:Name="buttonTextColor" OpacityMask="{Binding ColorSettings[11].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-            <!--End of resources-->
-        </StackPanel>
-
-        <Border Margin="5">
-            <StackPanel>
-                <Grid IsEnabled="False" Background="{Binding Fill, ElementName=desktopColor}" Height="220" Margin="0 0 0 10" Style="{x:Null}" OverridesDefaultStyle="True" FocusVisualStyle="{x:Null}">
-                    <Grid.Resources>
-                        <ResourceDictionary>
-                            <ResourceDictionary.MergedDictionaries>
-                                <ResourceDictionary Source="/PresentationFramework.Classic;component/themes/Classic.xaml"/>
-                            </ResourceDictionary.MergedDictionaries>
-                        </ResourceDictionary >
-                    </Grid.Resources>
-
-                    <!--Sample Icon-->
-                    <Image Source="{Binding Wallpaper.Path}" Stretch="UniformToFill"></Image>
-                    <Grid Margin="0 0 100 0" Panel.ZIndex="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
-                        <Rectangle Stroke="Gray" Opacity=".5"/>
-                        <Image x:Name="iconImage" Source="Icon.ico" Height="{Binding ColorSettings[18].Size, FallbackValue=42}" Width="{Binding ColorSettings[18].Size}" >
-                            <Image.Margin>
-                                <MultiBinding Converter="{StaticResource multiMargin}">
-                                    <Binding Path="ColorSettings[19].Size" FallbackValue="10"></Binding>
-                                    <Binding Path="ColorSettings[20].Size" FallbackValue="10"></Binding>
-                                </MultiBinding>
-                            </Image.Margin>
-                        </Image>
-                        <Label Padding="1" Content="Icon" FontFamily="{Binding FontSettings[1].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}" FontSize="{Binding FontSettings[1].Size}" Foreground="White"
-                                       FontWeight="{Binding FontSettings[1].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[1].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}"
-                                       HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom">
-                            <Label.Effect>
-                                <DropShadowEffect BlurRadius="1" Direction="1" ShadowDepth="1" Opacity="1"/>
-                            </Label.Effect>
-                        </Label>
-                    </Grid>
-                    <Polygon x:Name="desktopColor" Points="100,100 0,100 100,0"  Fill="{Binding ColorSettings[13].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,0"/>
+        <!--Main TabControl-->
+        <TabControl x:Name="colorsTab" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
 
 
-                    <!-- Inactive Window -->
-                    <Grid Width="350" Height="110" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Background="{Binding ColorSettings[24].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
-                        <Border x:Name="InactiveWindowBorder" Padding="{Binding ColorSettings[31].Size}" Margin="{Binding ColorSettings[30].Size}"  Background="{Binding ColorSettings[24].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <!--Inactive Header-->
-                                <Grid Grid.Row="0" VerticalAlignment="Top" >
-                                    <Grid.Background>
-                                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                            <GradientStop Color="{Binding ColorSettings[21].ItemColor, Converter={StaticResource DrawingColorToMediaColorConverter}, Mode=OneWay}"/>
-                                            <GradientStop Color="{Binding ColorSettings[22].ItemColor, Converter={StaticResource DrawingColorToMediaColorConverter}, Mode=OneWay}" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </Grid.Background>
+            <!-- Aero settings -->
+            <TabItem Header="Title Colors" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="125"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="45"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Label VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="1">Theme Color</Label>
+                    <Button x:Name="buttonThemeColor" Grid.Row="0" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonThemeColor_Click">
+                        <Button x:Name="imageThemeColor" Padding="10" BorderThickness="2" Background="{Binding ThemeColor.ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                    </Button>
+                    <Label VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.Row="1" Margin="1">Theme Color Opacity</Label>
+                    <Slider x:Name="sliderColorOpacity" Value="{Binding ThemeColor.Opacity}" Grid.Row="1" Grid.Column="1" Margin="3" Maximum="255" />
+                    <TextBox IsEnabled="False" x:Name="textBoxColorOpacity" Text="{Binding Value, ElementName=sliderColorOpacity}"  Grid.Row="1" Grid.Column="3" Margin="5" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
 
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="2*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <!--Classic Caption Buttons-->
-                                    <controls:ClassicButton Grid.Column="3" Margin="1 0 0 0" Style="{StaticResource CaptionButton}" Text="r" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                            TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                            Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
-                                    <controls:ClassicButton Grid.Column="2" Style="{StaticResource CaptionButton}" Text="1" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                            TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                            Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
-                                    <controls:ClassicButton Grid.Column="1" Style="{StaticResource CaptionButton}" Text="0" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                            TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                            Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
-
-                                    <Label Padding="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Inactive Window" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"  
-                                           FontSize="{Binding FontSettings[0].Size}" Foreground="{Binding ColorSettings[23].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"
-                                           FontWeight="{Binding FontSettings[0].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[0].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}"
-                                           VerticalContentAlignment="Center"/>
-                                </Grid>
-                                <Rectangle Grid.Row="1" Fill="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                <controls:ClassicButton Grid.Row="1" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                            TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                            Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
-                            </Grid>
-                        </Border>
-                    </Grid>
-
-
-
-                    <!-- Active Window -->
-                    <Grid Width="370" HorizontalAlignment="Center" Margin="5 35" VerticalAlignment="Top" Background="{Binding ColorSettings[3].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
-                        <Border x:Name="ActiveWindowBorder" Padding="{Binding ColorSettings[31].Size}" Margin="{Binding ColorSettings[30].Size}" Background="{Binding ColorSettings[3].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
-
-                            <!--Active Header-->
-                            <Grid VerticalAlignment="Top" >
-                                <Grid.Background>
-                                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                        <GradientStop Color="{Binding ColorSettings[0].ItemColor, Converter={StaticResource DrawingColorToMediaColorConverter}, Mode=OneWay}"/>
-                                        <GradientStop Color="{Binding ColorSettings[1].ItemColor, Converter={StaticResource DrawingColorToMediaColorConverter}, Mode=OneWay}" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Grid.Background>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <!--Classic Caption buttons -->
-                                <controls:ClassicButton Grid.Column="3" Margin="1 0 0 0" Style="{StaticResource CaptionButton}" Text="r" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
-                                <controls:ClassicButton Grid.Column="2" Style="{StaticResource CaptionButton}" Text="1" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
-                                <controls:ClassicButton Grid.Column="1" Style="{StaticResource CaptionButton}" Text="0" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
-
-                                <Label Padding="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Active Window" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}" FontSize="{Binding FontSettings[0].Size}" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"
-                                       FontWeight="{Binding FontSettings[0].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[0].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}"
-                                       VerticalContentAlignment="Center"/>
-
-                                <!--Content of Active Window-->
-                                <Menu Grid.Row="1" MinHeight="{Binding ColorSettings[25].Size}" FontSize="{Binding FontSettings[2].Size}" Background="{Binding ColorSettings[25].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Grid.ColumnSpan="4" Padding="-1" Margin="0 -2"
-                                       FontWeight="{Binding FontSettings[2].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[2].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" FontFamily="{Binding FontSettings[2].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}">
-                                    <MenuItem Header="Normal" Foreground="{Binding FontSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                    <MenuItem Header="Disabled" IsEnabled="False" Foreground="{Binding ColorSettings[14].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                    <MenuItem Header="Selected" Foreground="{Binding ColorSettings[15].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                </Menu>
-                                <Label Padding="2" Content="Window Text" Grid.Row="2" Grid.ColumnSpan="4" Panel.ZIndex="1" FontSize="{Binding FontSettings[5].Size}" Foreground="{Binding ColorSettings[32].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Background="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" 
-                                       FontWeight="{Binding FontSettings[5].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[5].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" FontFamily="{Binding FontSettings[5].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"/>
-                                <TextBlock TextDecorations="Underline" Padding="2" Text="Hypertext link" Grid.Row="3" Grid.ColumnSpan="4" Panel.ZIndex="1" Foreground="{Binding ColorSettings[17].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=Blue}" Background="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"
-                                       FontWeight="{Binding FontSettings[5].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[5].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" FontFamily="{Binding FontSettings[5].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"
-                                       FontSize="{Binding FontSettings[5].Size}"    />
-
-                                <!--Classic Scrollbar-->
-                                <Grid x:Name="ClassicScrollbar" Background="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" Grid.Column="1" Panel.ZIndex="2" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Right" Grid.Row="2" 
-                                      Width="{Binding ColorSettings[26].Size}">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="{Binding ColorSettings[26].Size}"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="{Binding ColorSettings[26].Size}"/>
-                                    </Grid.RowDefinitions>
-                                    <controls:ClassicButton Text="5" Grid.Row="0" FontFamily="Marlett" Width="{Binding ColorSettings[26].Size}" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        Foreground="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
-                                    <controls:ClassicButton Height="10" Grid.Row="1" Width="{Binding ColorSettings[26].Size}" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        Foreground="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
-                                    <controls:ClassicButton Text="6" Grid.Row="2" FontFamily="Marlett" Width="{Binding ColorSettings[26].Size}" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        Foreground="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
-
-                                </Grid>
-                            </Grid>
-                        </Border>
-                    </Grid>
-
-
-
-                    <!-- MessageBox -->
-                    <Grid Width="250" Height="Auto" HorizontalAlignment="Left" Margin="22 5" VerticalAlignment="Bottom" Background="{Binding ColorSettings[5].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
-                        <Border Margin="{Binding ColorSettings[30].Size}" Background="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <!--MessageBox Header-->
-                                <Grid VerticalAlignment="Top" Grid.ColumnSpan="2" >
-                                    <Grid.Background>
-                                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                            <GradientStop Color="{Binding ColorSettings[0].ItemColor, Converter={StaticResource DrawingColorToMediaColorConverter}, Mode=OneWay}"/>
-                                            <GradientStop Color="{Binding ColorSettings[1].ItemColor, Converter={StaticResource DrawingColorToMediaColorConverter}, Mode=OneWay}" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </Grid.Background>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="2*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <controls:ClassicButton Grid.Column="1" Margin="1" Style="{StaticResource CaptionButton}" Text="r" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
-                                    <Label Padding="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Message Box" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"
-                                            FontSize="{Binding FontSettings[0].Size}" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" 
-                                            FontWeight="{Binding FontSettings[0].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[0].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}"
-                                            VerticalContentAlignment="Center" />
-                                </Grid>
-                                <!--MessageBox Message-->
-                                <Label Margin="0 0 0 34" VerticalAlignment="Bottom" Grid.Row="1" 
-                                       Foreground="{Binding FontSettings[5].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" 
-                                       FontWeight="{Binding FontSettings[5].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[5].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" 
-                                       FontFamily="{Binding FontSettings[5].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"
-                                       FontSize="{Binding FontSettings[5].Size}">Message Text</Label>
-                                <controls:ClassicButton MinWidth="65" MinHeight="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Margin="5" Text="OK" 
-                                                        FontWeight="{Binding FontSettings[5].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" 
-                                                        FontStyle="{Binding FontSettings[5].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" 
-                                                        FontFamily="{Binding FontSettings[5].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"
-                                                        TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}"
-                                                        TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}"
-                                                        BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}"
-                                                        BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}"                                                   
-                                                        Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}"
-                                                        Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
-                                <Label FontSize="{Binding FontSettings[4].Size, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 -2 0 0" Grid.Column="1" Padding="1" Panel.ZIndex="100" Content="Tool Tip" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="1" 
-                                       Background="{Binding ColorSettings[28].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Foreground="{Binding FontSettings[4].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" 
-                                       FontWeight="{Binding FontSettings[4].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[4].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" 
-                                       FontFamily="{Binding FontSettings[4].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}" BorderThickness="1" BorderBrush="{Binding ColorSettings[31].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                <Rectangle Panel.ZIndex="-1" Height="26" VerticalAlignment="Bottom" Fill="{Binding ColorSettings[25].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Grid.Row="1"/>
-                            </Grid>
-                        </Border>
-                    </Grid>
+                    <StackPanel Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" IsEnabled="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked}" >
+                        <ComboBox SelectedIndex="0" x:Name="comboBoxAeroColors" ItemsSource="{Binding AeroColorsViewModel.AeroColors}" MinWidth="200">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Name}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <CheckBox x:Name="checkBoxAeroColorEnabled" Grid.Row="2" Grid.Column="2" Content="Enabled" VerticalAlignment="Center" Margin="5" IsChecked="{Binding SelectedItem.Enabled, ElementName=comboBoxAeroColors}"/>
+                        <Button x:Name="buttonAeroColor" Grid.Row="2" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonAeroColor_Click" IsEnabled="{Binding SelectedItem.Enabled, ElementName=comboBoxAeroColors}">
+                            <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxAeroColors, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                        </Button>
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource InfoText}" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource InvertedBooleanToVisibilityConverter}, Mode=OneWay}" Grid.ColumnSpan="3" Grid.Row="3"
+                                       >To access active / inactive title color setting, please enable coloured titlebars</TextBlock>
                 </Grid>
+            </TabItem>
 
-                <!-- Colors a Metrics  -->
-                <TabControl x:Name="colorsTab" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
 
-                    <TabItem Header="Colors and Metrics" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
-                        <Grid Margin="5" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="127*"/>
-                                <ColumnDefinition Width="77*"/>
-                                <ColumnDefinition Width="87*"/>
-                                <ColumnDefinition Width="59*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="15"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Label Content="Item:" Padding="5 0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="0,0,0,35" Grid.RowSpan="2"/>
-                            <Label Content="Size:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0,35" Grid.RowSpan="2"/>
-                            <Label Content="Color:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="87,0,0,35" Grid.RowSpan="2"/>
+            <!-- Colors a Metrics  -->
+            <TabItem Header="Colors and Metrics" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
+                <Grid Margin="5" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="127*"/>
+                        <ColumnDefinition Width="77*"/>
+                        <ColumnDefinition Width="87*"/>
+                        <ColumnDefinition Width="59*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Item:" Padding="5 0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="0,0,0,35" Grid.RowSpan="2"/>
+                    <Label Content="Size:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0,35" Grid.RowSpan="2"/>
+                    <Label Content="Color:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="87,0,0,35" Grid.RowSpan="2"/>
 
-                            <ComboBox x:Name="comboBoxItems" ItemsSource="{Binding ColorSettings}" SelectedIndex="13" Grid.Column="0" Grid.Row="1" Margin="5,5.333,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Label Padding="0" Content="{Binding Name}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <TextBox x:Name="textBoxItemSize" Text="{Binding SelectedItem.Size, ElementName=comboBoxItems}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxItems}" Grid.Column="2" Grid.Row="1" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" InputScope="Number" MaxLines="1" MaxLength="2" PreviewTextInput="NumberValidationTextBox" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
-                            <Button x:Name="buttonItemColor" Grid.Row="1" Padding="0" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonEditItemColor_Click" IsEnabled="{Binding SelectedItem.HasColor, ElementName=comboBoxItems}">
-                                <Button x:Name="imageItemColor" Padding="15 5" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxItems, Converter={StaticResource brushToColor}, Mode=OneWay}" />
-                            </Button>
+                    <ComboBox x:Name="comboBoxItems" ItemsSource="{Binding ColorSettings}" SelectedIndex="13" Grid.Column="0" Grid.Row="1" Margin="5,5.333,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Padding="0" Content="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBox x:Name="textBoxItemSize" Text="{Binding SelectedItem.Size, ElementName=comboBoxItems}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxItems}" Grid.Column="2" Grid.Row="1" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" InputScope="Number" MaxLines="1" MaxLength="2" PreviewTextInput="NumberValidationTextBox" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+                    <Button x:Name="buttonItemColor" Grid.Row="1" Padding="0" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonEditItemColor_Click" IsEnabled="{Binding SelectedItem.HasColor, ElementName=comboBoxItems}">
+                        <Button x:Name="imageItemColor" Padding="15 5" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxItems, Converter={StaticResource brushToColor}, Mode=OneWay}" />
+                    </Button>
 
-                            <TextBlock Grid.Row="2" Grid.ColumnSpan="4" Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxItems, Mode=OneWay, FallbackValue=Collapsed}" 
+                    <TextBlock Grid.Row="2" Grid.ColumnSpan="4" Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxItems, Mode=OneWay, FallbackValue=Collapsed}" 
                                        Style="{StaticResource InfoText}" >New sizes are applied after logoff. Some colors are applied immediatelly as a theme, some may apply after logoff.</TextBlock>
-                        </Grid>
-                    </TabItem>
+                </Grid>
+            </TabItem>
 
 
-                    <!-- Font Tab-->
-                    <TabItem x:Name="fontsTab" Header="Fonts" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
-                        <Grid Margin="5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="4*"/>
-                                <ColumnDefinition Width="14*"/>
-                                <ColumnDefinition Width="9*"/>
-                                <ColumnDefinition Width="6*"/>
-                                <ColumnDefinition Width="4*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="15"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Label Content="Item:" Padding="5 0" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0,35" Grid.RowSpan="2"/>
-                            <Label Content="Font:" Grid.Row="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.Column="0" HorizontalContentAlignment="Right" Margin="5"/>
-                            <Label Content="Size:" Padding="0" Grid.Column="2" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0.333,35" Grid.RowSpan="2"/>
+            <!-- Font Tab-->
+            <TabItem x:Name="fontsTab" Header="Fonts" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="14*"/>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Item:" Padding="5 0" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0,35" Grid.RowSpan="2"/>
+                    <Label Content="Font:" Grid.Row="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.Column="0" HorizontalContentAlignment="Right" Margin="5"/>
+                    <Label Content="Size:" Padding="0" Grid.Column="2" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0.333,35" Grid.RowSpan="2"/>
 
-                            <Label Content="Color:" Padding="0" Grid.Column="3" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.RowSpan="2"/>
+                    <Label Content="Color:" Padding="0" Grid.Column="3" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.RowSpan="2"/>
 
-                            <ComboBox x:Name="comboBoxFonts" ItemsSource="{Binding FontSettings}" SelectedIndex="0" Grid.Row="1" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Label Padding="0" Content="{Binding Name}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
+                    <ComboBox x:Name="comboBoxFonts" ItemsSource="{Binding FontSettings}" SelectedIndex="0" Grid.Row="1" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Padding="0" Content="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
 
-                            <ComboBox x:Name="comboBoxFont" Text="{Binding Path=SelectedItem.FontName, ElementName=comboBoxFonts, Mode=OneWay}" Grid.Column="1" Grid.Row="2" Margin="5" Height="25" VerticalAlignment="Center" SelectionChanged="comboBoxFont_SelectionChanged"/>
-                            <TextBox x:Name="textBlockPreview" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="5" Padding="0" FontSize="{Binding Text, ElementName=comboBoxFontSize, Mode=OneWay}" Foreground="{Binding SelectedItem.ItemColor, ElementName=comboBoxFonts, Converter={StaticResource brushToColor}, Mode=OneWay}" Text="The quick brown fox jumps over the lazy dog"
+                    <ComboBox x:Name="comboBoxFont" Text="{Binding Path=SelectedItem.FontName, ElementName=comboBoxFonts, Mode=OneWay}" Grid.Column="1" Grid.Row="2" Margin="5" Height="25" VerticalAlignment="Center" SelectionChanged="comboBoxFont_SelectionChanged"/>
+                    <TextBox x:Name="textBlockPreview" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="5" Padding="0" FontSize="{Binding Text, ElementName=comboBoxFontSize, Mode=OneWay}" Foreground="{Binding SelectedItem.ItemColor, ElementName=comboBoxFonts, Converter={StaticResource brushToColor}, Mode=OneWay}" Text="The quick brown fox jumps over the lazy dog"
                                      FontWeight="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" FontFamily="{Binding SelectedItem.Font, ElementName=comboBoxFonts, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"
                                      />
-                            <ComboBox x:Name="comboBoxFontSize" Text="{Binding SelectedItem.Size, ElementName=comboBoxFonts, UpdateSourceTrigger=LostFocus}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxFonts}" Grid.Column="2" Grid.Row="1" Margin="5" Height="25" VerticalAlignment="Top" IsEditable="True" PreviewTextInput="NumberValidationTextBox">
-                                <ComboBoxItem Content="2"/>
-                                <ComboBoxItem Content="3"/>
-                                <ComboBoxItem Content="4"/>
-                                <ComboBoxItem Content="5"/>
-                                <ComboBoxItem Content="6"/>
-                                <ComboBoxItem Content="7"/>
-                                <ComboBoxItem Content="8"/>
-                                <ComboBoxItem Content="9"/>
-                                <ComboBoxItem Content="10"/>
-                                <ComboBoxItem Content="11"/>
-                                <ComboBoxItem Content="12"/>
-                                <ComboBoxItem Content="13"/>
-                                <ComboBoxItem Content="14"/>
-                                <ComboBoxItem Content="15"/>
-                                <ComboBoxItem Content="16"/>
-                                <ComboBoxItem Content="17"/>
-                                <ComboBoxItem Content="18"/>
-                                <ComboBoxItem Content="20"/>
-                                <ComboBoxItem Content="22"/>
-                                <ComboBoxItem Content="24"/>
-                                <ComboBoxItem Content="26"/>
-                                <ComboBoxItem Content="28"/>
-                                <ComboBoxItem Content="30"/>
-                                <ComboBoxItem Content="32"/>
-                                <ComboBoxItem Content="34"/>
-                                <ComboBoxItem Content="38"/>
-                                <ComboBoxItem Content="42"/>
-                                <ComboBoxItem Content="46"/>
-                                <ComboBoxItem Content="50"/>
-                            </ComboBox>
-                            <Button x:Name="buttonFontColor" IsEnabled="{Binding SelectedItem.HasColor, ElementName=comboBoxFonts}" Padding="2" Grid.Row="1" Margin="5" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonEditFontColor_Click">
-                                <Button x:Name="imageFontColor" Padding="15 5" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxFonts, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                            </Button>
+                    <ComboBox x:Name="comboBoxFontSize" Text="{Binding SelectedItem.Size, ElementName=comboBoxFonts, UpdateSourceTrigger=LostFocus}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxFonts}" Grid.Column="2" Grid.Row="1" Margin="5" Height="25" VerticalAlignment="Top" IsEditable="True" PreviewTextInput="NumberValidationTextBox">
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="5"/>
+                        <ComboBoxItem Content="6"/>
+                        <ComboBoxItem Content="7"/>
+                        <ComboBoxItem Content="8"/>
+                        <ComboBoxItem Content="9"/>
+                        <ComboBoxItem Content="10"/>
+                        <ComboBoxItem Content="11"/>
+                        <ComboBoxItem Content="12"/>
+                        <ComboBoxItem Content="13"/>
+                        <ComboBoxItem Content="14"/>
+                        <ComboBoxItem Content="15"/>
+                        <ComboBoxItem Content="16"/>
+                        <ComboBoxItem Content="17"/>
+                        <ComboBoxItem Content="18"/>
+                        <ComboBoxItem Content="20"/>
+                        <ComboBoxItem Content="22"/>
+                        <ComboBoxItem Content="24"/>
+                        <ComboBoxItem Content="26"/>
+                        <ComboBoxItem Content="28"/>
+                        <ComboBoxItem Content="30"/>
+                        <ComboBoxItem Content="32"/>
+                        <ComboBoxItem Content="34"/>
+                        <ComboBoxItem Content="38"/>
+                        <ComboBoxItem Content="42"/>
+                        <ComboBoxItem Content="46"/>
+                        <ComboBoxItem Content="50"/>
+                    </ComboBox>
+                    <Button x:Name="buttonFontColor" IsEnabled="{Binding SelectedItem.HasColor, ElementName=comboBoxFonts}" Padding="2" Grid.Row="1" Margin="5" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonEditFontColor_Click">
+                        <Button x:Name="imageFontColor" Padding="15 5" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxFonts, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                    </Button>
 
-                            <ToggleButton x:Name="buttonFontBold" IsChecked="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts}" Content="B" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold"/>
-                            <ToggleButton x:Name="buttonFontItalic" IsChecked="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts}" Content="I" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" FontStyle="Italic"/>
-                            <TextBlock Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxFonts, Mode=OneWay, FallbackValue=Collapsed}" Grid.ColumnSpan="5" Grid.Row="3" 
+                    <ToggleButton x:Name="buttonFontBold" IsChecked="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts}" Content="B" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold"/>
+                    <ToggleButton x:Name="buttonFontItalic" IsChecked="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts}" Content="I" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" FontStyle="Italic"/>
+                    <TextBlock Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxFonts, Mode=OneWay, FallbackValue=Collapsed}" Grid.ColumnSpan="5" Grid.Row="3" 
                                        Style="{StaticResource InfoText}" >Changes made to fonts are applied after restart</TextBlock>
 
-                        </Grid>
-                    </TabItem>
+                </Grid>
+            </TabItem>
 
 
-                    <!-- Aero nastavenia -->
-                    <TabItem Header="Title Colors" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
-                        <Grid Margin="5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="125"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="45"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-                            <Label VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="1">Theme Color</Label>
-                            <Button x:Name="buttonThemeColor" Grid.Row="0" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonThemeColor_Click">
-                                <Button x:Name="imageThemeColor" Padding="10" BorderThickness="2" Background="{Binding ThemeColor.ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                            </Button>
-                            <Label VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.Row="1" Margin="1">Theme Color Opacity</Label>
-                            <Slider x:Name="sliderColorOpacity" Value="{Binding ThemeColor.Opacity}" Grid.Row="1" Grid.Column="1" Margin="3" Maximum="255" />
-                            <TextBox IsEnabled="False" x:Name="textBoxColorOpacity" Text="{Binding Value, ElementName=sliderColorOpacity}"  Grid.Row="1" Grid.Column="3" Margin="5" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
+            <!-- Theme Tab -->
+            <TabItem Header="Theme Settings" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
+                <StackPanel>
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Padding="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">Theme Name</Label>
+                        <TextBox Margin="2" x:Name="textBoxThemeName" Grid.Column="1" Text="{Binding ThemeName}"/>
+                    </Grid>
 
-                            <StackPanel Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" IsEnabled="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked}" >
-                                <ComboBox SelectedIndex="0" x:Name="comboBoxAeroColors" ItemsSource="{Binding AeroColorsViewModel.AeroColors}" MinWidth="200">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Label Content="{Binding Name}"/>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-                                <CheckBox x:Name="checkBoxAeroColorEnabled" Grid.Row="2" Grid.Column="2" Content="Enabled" VerticalAlignment="Center" Margin="5" IsChecked="{Binding SelectedItem.Enabled, ElementName=comboBoxAeroColors}"/>
-                                <Button x:Name="buttonAeroColor" Grid.Row="2" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonAeroColor_Click" IsEnabled="{Binding SelectedItem.Enabled, ElementName=comboBoxAeroColors}">
-                                    <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxAeroColors, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                </Button>
-                            </StackPanel>
-                            <TextBlock Style="{StaticResource InfoText}" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource InvertedBooleanToVisibilityConverter}, Mode=OneWay}" Grid.ColumnSpan="3" Grid.Row="3"
-                                       >To access active / inactive title color setting, please enable coloured titlebars</TextBlock>
-                        </Grid>
-                    </TabItem>
-
-                    <!-- Nastavenia teemy -->
-                    <TabItem Header="Theme Settings" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
-                        <StackPanel>
-                            <Grid Margin="5">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Padding="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">Theme Name</Label>
-                                <TextBox Margin="2" x:Name="textBoxThemeName" Grid.Column="1" Text="{Binding ThemeName}"/>
-                            </Grid>
-
-                            <CheckBox Margin="5 0 5 -1" x:Name="checkBoxOverwriteThemeStyle" Grid.Row="1" Content="Overwrite theme style" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Click="CheckBoxOverwriteThemeStyle_Click" Checked="checkBoxOverwriteThemeStyle_Checked"/>
-                            <StackPanel x:Name="stackPanelAeroSettingsButtons"  Margin="2" HorizontalAlignment="Center" IsEnabled="false">
-                                <RadioButton Content="Aero (Windows default)" Margin="2" Click="ToggleButtonAero_Click"/>
-                                <RadioButton Content="Aero Lite (alternative, has window border, available in Windows 10 and 8.1)" Margin="2" Click="ToggleButtonAeroLite_Click"/>
-                                <RadioButton Content="High Contrast (more color options)" Margin="2" Click="ToggleButtonHighContrast_Click" Visibility="Collapsed"/>
-                            </StackPanel>
-                            <Button x:Name="buttonOpenControlPanel" Content="Open themes control panel" Padding="10 0" Style="{StaticResource SystemButton}" HorizontalAlignment="Right" Margin="5" Click="buttonOpenControlPanel_Click"/>
-                        </StackPanel>
-                    </TabItem>
+                    <CheckBox Margin="5 0 5 -1" x:Name="checkBoxOverwriteThemeStyle" Grid.Row="1" Content="Overwrite theme style" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Click="CheckBoxOverwriteThemeStyle_Click" Checked="checkBoxOverwriteThemeStyle_Checked"/>
+                    <StackPanel x:Name="stackPanelAeroSettingsButtons"  Margin="2" HorizontalAlignment="Center" IsEnabled="false">
+                        <RadioButton Content="Aero (Windows default)" Margin="2" Click="ToggleButtonAero_Click"/>
+                        <RadioButton Content="Aero Lite (alternative, has window border, available in Windows 10 and 8.1)" Margin="2" Click="ToggleButtonAeroLite_Click"/>
+                        <RadioButton Content="High Contrast (more color options)" Margin="2" Click="ToggleButtonHighContrast_Click" Visibility="Collapsed"/>
+                    </StackPanel>
+                    <Button x:Name="buttonOpenControlPanel" Content="Open themes control panel" Padding="10 0" Style="{StaticResource SystemButton}" HorizontalAlignment="Right" Margin="5" Click="buttonOpenControlPanel_Click"/>
+                </StackPanel>
+            </TabItem>
 
 
-                    <!--DWM a regedit nastavenia (win8 a win10)-->
-                    <TabItem x:Name="pageModern" Header="Modern Apps Settings" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
-                        <StackPanel>
-                            <ListBox x:Name="listBoxDMW" Margin="5" ItemsSource="{Binding RegistrySettingsViewModel.RegistrySettings}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <CheckBox Content="{Binding Name}" IsChecked="{Binding Checked}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"></CheckBox>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                            <CheckBox Visibility="Collapsed" x:Name="checkBoxLiveChanges" Content="Preview changes immediatelly" IsChecked="{Binding Settings.RegistrySettingsViewModel.LivePreview}"/>
-                            <TextBlock Visibility="{Binding RegistrySettingsViewModel.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource InfoText}" >Some changes made to DWM (Desktop Window Composition) are applied after restart</TextBlock>
-                        </StackPanel>
-                    </TabItem>
+            <!--DWM and Registry Tab (win8 & win10)-->
+            <TabItem x:Name="pageModern" Header="Modern Apps Settings" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
+                <StackPanel>
+                    <ListBox x:Name="listBoxDMW" Margin="5" ItemsSource="{Binding RegistrySettingsViewModel.RegistrySettings}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding Name}" IsChecked="{Binding Checked}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"></CheckBox>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <CheckBox Visibility="Collapsed" x:Name="checkBoxLiveChanges" Content="Preview changes immediatelly" IsChecked="{Binding Settings.RegistrySettingsViewModel.LivePreview}"/>
+                    <TextBlock Visibility="{Binding RegistrySettingsViewModel.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource InfoText}" >Some changes made to DWM (Desktop Window Composition) are applied after restart</TextBlock>
+                </StackPanel>
+            </TabItem>
 
-                </TabControl>
-
-            </StackPanel>
-        </Border>
+        </TabControl>
 
 
         <!-- buttony-->
