@@ -18,6 +18,7 @@
             <converters:FontToFontFamilyConverter x:Key="FontToFontFamily"/>
             <converters:BooleanToFontWeightConverter x:Key="BooleanToFontWeight"/>
             <converters:BooleanToFontStyleConverter x:Key="BooleanToFontStyle"/>
+            <converters:MultiMarginConverter x:Key="multiMargin"/>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -47,7 +48,14 @@
 
                     <Image Source="{Binding Wallpaper.Path}" Stretch="UniformToFill"></Image>
                     <StackPanel Panel.ZIndex="20" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                        <Image x:Name="iconImage" Source="Icon.ico" Height="{Binding ColorSettings[18].Size}" />
+                        <Image x:Name="iconImage" Source="Icon.ico" Height="{Binding ColorSettings[18].Size}" >
+                            <Image.Margin>
+                                <MultiBinding Converter="{StaticResource multiMargin}">
+                                    <Binding Path="ColorSettings[19].Size"></Binding>
+                                    <Binding Path="ColorSettings[20].Size"></Binding>
+                                </MultiBinding>
+                            </Image.Margin>
+                        </Image>
                         <Label>Icon</Label>
                     </StackPanel>
                     <Polygon x:Name="desktopColor" Points="100,100 0,100 100,0"  Fill="{Binding ColorSettings[13].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,0"/>

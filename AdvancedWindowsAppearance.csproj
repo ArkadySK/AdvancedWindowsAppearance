@@ -104,6 +104,7 @@
     <Compile Include="Converters\BooleanToFontStyleConverter.cs" />
     <Compile Include="Converters\BooleanToFontWeightConverter.cs" />
     <Compile Include="Converters\FontToFontFamilyConverter.cs" />
+    <Compile Include="Converters\MultiMarginConverter.cs" />
     <Compile Include="FontAppearanceSetting.cs" />
     <Compile Include="FontManager.cs" />
     <Compile Include="Converters\InvertedBooleanToVisibilityConverter.cs" />

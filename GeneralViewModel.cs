@@ -176,9 +176,9 @@ namespace AdvancedWindowsAppearence
             List<Task> tasks = new List<Task>();
             foreach (var c in ColorSettings)
             {
-                if (c != null) continue;
-                c.IsEdited = false;
+                if (c == null) continue;
                 tasks.Add(Task.Run(() => c.SaveToRegistry()));
+                c.IsEdited = false;
             }
             foreach (var f in FontSettings)
             {
