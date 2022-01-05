@@ -46,18 +46,26 @@
                         </ResourceDictionary >
                     </Grid.Resources>
 
+                    <!--Sample Icon-->
                     <Image Source="{Binding Wallpaper.Path}" Stretch="UniformToFill"></Image>
-                    <StackPanel Panel.ZIndex="20" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                        <Image x:Name="iconImage" Source="Icon.ico" Height="{Binding ColorSettings[18].Size}" >
+                    <Grid Margin="0 0 100 0" Panel.ZIndex="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
+                        <Rectangle Stroke="Gray" Opacity=".5"/>
+                        <Image x:Name="iconImage" Source="Icon.ico" Height="{Binding ColorSettings[18].Size, FallbackValue=42}" Width="{Binding ColorSettings[18].Size}" >
                             <Image.Margin>
                                 <MultiBinding Converter="{StaticResource multiMargin}">
-                                    <Binding Path="ColorSettings[19].Size"></Binding>
-                                    <Binding Path="ColorSettings[20].Size"></Binding>
+                                    <Binding Path="ColorSettings[19].Size" FallbackValue="10"></Binding>
+                                    <Binding Path="ColorSettings[20].Size" FallbackValue="10"></Binding>
                                 </MultiBinding>
                             </Image.Margin>
                         </Image>
-                        <Label>Icon</Label>
-                    </StackPanel>
+                        <Label Padding="1" Content="Icon" FontFamily="{Binding FontSettings[1].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}" FontSize="{Binding FontSettings[1].Size}" Foreground="White"
+                                       FontWeight="{Binding FontSettings[1].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[1].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}"
+                                       HorizontalAlignment="Center" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom">
+                            <Label.Effect>
+                                <DropShadowEffect BlurRadius="1" Direction="1" ShadowDepth="1" Opacity="1"/>
+                            </Label.Effect>
+                        </Label>
+                    </Grid>
                     <Polygon x:Name="desktopColor" Points="100,100 0,100 100,0"  Fill="{Binding ColorSettings[13].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,0"/>
 
 
@@ -102,6 +110,9 @@
                                            VerticalContentAlignment="Center"/>
                                 </Grid>
                                 <Rectangle Grid.Row="1" Fill="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                <controls:ClassicButton Grid.Row="1" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                            TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
+                                                            Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
                             </Grid>
                         </Border>
                     </Grid>

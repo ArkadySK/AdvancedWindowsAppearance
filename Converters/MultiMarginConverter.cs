@@ -13,8 +13,8 @@ namespace AdvancedWindowsAppearence.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            double x = double.Parse(values[0].ToString()) / 100;
-            double y = double.Parse(values[1].ToString()) / 100;
+            double x = double.Parse(values[0].ToString()) / 5d;
+            double y = double.Parse(values[1].ToString()) / 5d;
             return new Thickness(x, y, x, y);
             
         }
