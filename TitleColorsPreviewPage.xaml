@@ -21,54 +21,75 @@
             <converters:MultiMarginConverter x:Key="multiMargin"/>
         </ResourceDictionary>
     </Page.Resources>
-
-    <!--Active Window-->
     <Grid Background="Blue">
         <Image Source="{Binding Wallpaper.Path}" Stretch="UniformToFill"></Image>
-        <Grid Margin="20" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" MinHeight="50">
-            <!--Active Window Border-->
-            <Border BorderBrush="Black" BorderThickness="1" />
-            
-            <!--Active Window Titlebar-->
-            <Grid Background="Gray" VerticalAlignment="Top">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-
-                <Label Padding="1"  MinHeight="{Binding ColorSettings[12].Size}" Content="Inactive Window" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"  
-                                           FontSize="{Binding FontSettings[0].Size}" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"
-                                           FontWeight="{Binding FontSettings[0].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[0].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}"
-                                           VerticalContentAlignment="Center"/>
-               
-                
-            </Grid>
-        </Grid>
-
-        <Grid Margin="40 50 0 0" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" MinHeight="50">
+        
+        <!--Inactive Window-->
+        <Grid Margin="20 20 0 0" Width="300" HorizontalAlignment="Left" VerticalAlignment="Top" MinHeight="60">
             <!--Inactive Window Border-->
-            <Border BorderBrush="Black" BorderThickness="1" />
+            <Border Background="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" BorderThickness="1"/>
+
 
             <!--Inactive Window Titlebar-->
-            <Grid Background="Gray" VerticalAlignment="Top">
+            <Grid Margin="1" Background="{Binding AeroColorsViewModel.AeroColors[1].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=White}" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Padding="1"  MinHeight="{Binding ColorSettings[12].Size}" Content="Inactive Window" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"  
+                <Label Padding="1" Grid.Column="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Inactive Window" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"  
                                            FontSize="{Binding FontSettings[0].Size}" Foreground="{Binding ColorSettings[23].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"
                                            FontWeight="{Binding FontSettings[0].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[0].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}"
                                            VerticalContentAlignment="Center"/>
-
+                <Viewbox Grid.Column="3" Height="{Binding MinHeight, ElementName=label}">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Grid.Column="2" Margin="18 6" Text="&#xE949;" FontFamily="{StaticResource Segoe MDL2 Assets}" FontSize="10" Foreground="{Binding ColorSettings[23].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                        <TextBlock Grid.Column="3" Margin="18 6" Text="&#xE739;" FontFamily="{StaticResource Segoe MDL2 Assets}" FontSize="10" Foreground="{Binding ColorSettings[23].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                        <TextBlock Grid.Column="4" Margin="18 6" Text="&#xE106;" FontFamily="{StaticResource Segoe MDL2 Assets}" FontSize="10" Foreground="{Binding ColorSettings[23].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                    </StackPanel>
+                </Viewbox>
 
             </Grid>
         </Grid>
+
+
+
+
+        <!--Active Window-->
+
+        <Grid Margin="30 60 0 0" Width="300" HorizontalAlignment="Left" VerticalAlignment="Top" MinHeight="60">
+            <!--Active Window Border-->
+            <Border BorderBrush="{Binding ThemeColor.ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=White}" BorderThickness="1" 
+                    Background="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+
+            <!--Active Window Titlebar-->
+            <Grid Margin="1" Background="{Binding AeroColorsViewModel.AeroColors[0].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=White}" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="label" Padding="4" Grid.Column="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Active Window" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"  
+                                           FontSize="{Binding FontSettings[0].Size}" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"
+                                           FontWeight="{Binding FontSettings[0].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[0].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}"
+                                           VerticalContentAlignment="Center"/>
+                <!--Title Buttons-->
+                <Viewbox Grid.Column="3" Height="{Binding MinHeight, ElementName=label}">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Grid.Column="2" Margin="18 6" Text="&#xE949;" FontFamily="{StaticResource Segoe MDL2 Assets}" FontSize="10" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                        <TextBlock Grid.Column="3" Margin="18 6" Text="&#xE739;" FontFamily="{StaticResource Segoe MDL2 Assets}" FontSize="10" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                        <TextBlock Grid.Column="4" Margin="18 6" Text="&#xE106;" FontFamily="{StaticResource Segoe MDL2 Assets}" FontSize="10" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                    </StackPanel>
+                </Viewbox>
+
+            </Grid>
+
+        </Grid>
+
+
     </Grid>
 </Page>

@@ -6,7 +6,8 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary >
-
+            <FontFamily x:Key="Segoe MDL2 Assets">./Fonts/segoe-mdl2-assets.ttf#Segoe MDL2 Assets</FontFamily>
+            
             <Style x:Key="SystemButton"  TargetType="Button" >
                 <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSize}}"/>
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
