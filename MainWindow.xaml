@@ -77,11 +77,10 @@
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
+                        <!--Aero colors Preview-->
+                        <Frame Source="TitleColorsPreviewPage.xaml"/>
                     </StackPanel>
-                    
-                    <!--Aero colors Preview-->
-                    
-                    
+                   
                     <TextBlock Style="{StaticResource InfoText}" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource InvertedBooleanToVisibilityConverter}, Mode=OneWay}" Grid.ColumnSpan="5" Grid.Row="3"
                                        >To access active / inactive title color setting, please enable coloured titlebars</TextBlock>
                 </Grid>

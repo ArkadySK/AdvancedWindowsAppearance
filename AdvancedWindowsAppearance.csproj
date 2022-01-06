@@ -114,6 +114,9 @@
     <Compile Include="RestoreWindow.xaml.cs">
       <DependentUpon>RestoreWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TitleColorsPreviewPage.xaml.cs">
+      <DependentUpon>TitleColorsPreviewPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WallpaperAppearanceSetting.cs" />
     <Page Include="Controls\ClassicButton.xaml">
       <SubType>Designer</SubType>
@@ -144,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RestoreWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TitleColorsPreviewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
