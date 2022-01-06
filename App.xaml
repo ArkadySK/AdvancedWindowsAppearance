@@ -22,6 +22,14 @@
                 <Setter Property="HorizontalAlignment" Value="Right"/>
             </Style>
 
+            <Style x:Key="DefaultTabStyle" TargetType="TabItem">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}" />
+                <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MenuFontSize}}" />
+                <Setter Property="Padding" Value="15" />
+                <Setter Property="BorderBrush" Value="{x:Null}" />
+                <Setter Property="Background" Value="{x:Null}" />
+            </Style>
+
             <Style x:Key="InfoText"  TargetType="TextBlock" >
                 <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}"/>
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}"/>
