@@ -35,47 +35,53 @@
 
             <!-- Aero settings -->
             <TabItem Header="Title Colors" Style="{StaticResource DefaultTabStyle}">
-                <Grid Margin="5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="125"/>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="70"/>
-                        <ColumnDefinition Width="45"/>
-                    </Grid.ColumnDefinitions>
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
-                    
-                    <Label Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="1">Theme Color</Label>
-                    <Button x:Name="buttonThemeColor" Grid.Row="0" Grid.Column="4" Height="25" VerticalAlignment="Top" Click="buttonThemeColor_Click">
-                        <Button x:Name="imageThemeColor" Padding="10" BorderThickness="2" Background="{Binding ThemeColor.ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                    </Button>
-                    <Label VerticalAlignment="Top" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="1">Opacity</Label>
-                    <Slider x:Name="sliderColorOpacity" Grid.Column="1" Value="{Binding ThemeColor.Opacity}"  Margin="3" Maximum="255" />
-                    <TextBox IsEnabled="False" Grid.Column="3" x:Name="textBoxColorOpacity" VerticalAlignment="Top" Margin="5" Text="{Binding Value, ElementName=sliderColorOpacity}" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
+                    <StackPanel Grid.ColumnSpan="5">
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="45"/>
+                            </Grid.ColumnDefinitions>
 
-                    <!--Active and Inactive color-->
-                    <ListView x:Name="titleColorsListView" Grid.ColumnSpan="5" Grid.Row="2" IsEnabled="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding AeroColorsViewModel.AeroColors}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid HorizontalAlignment="Stretch">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="45"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="1" Content="{Binding Name}"/>
-                                    <CheckBox x:Name="checkBoxAeroColorEnabled" Grid.Column="0" VerticalAlignment="Center"  Content="" IsChecked="{Binding Enabled}"/>
-                                    <Button x:Name="buttonAeroColor" Grid.Column="2" Height="25" Click="buttonAeroColor_Click" IsEnabled="{Binding Enabled}">
-                                        <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2" Background="{Binding ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                    </Button>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                            <Label Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="1">Theme Color (Window Border)</Label>
+                            <Button x:Name="buttonThemeColor" Grid.Row="0" Grid.Column="4" Height="25" VerticalAlignment="Top" Click="buttonThemeColor_Click">
+                                <Button x:Name="imageThemeColor" Padding="10" BorderThickness="2" Background="{Binding ThemeColor.ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                            </Button>
+                            <Label VerticalAlignment="Top" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="1">Opacity</Label>
+                            <Slider x:Name="sliderColorOpacity" Grid.Column="1" Value="{Binding ThemeColor.Opacity}"  Margin="3" Maximum="255" />
+                            <TextBox IsEnabled="False" Grid.Column="3" x:Name="textBoxColorOpacity" VerticalAlignment="Top" Margin="5" Text="{Binding Value, ElementName=sliderColorOpacity}" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
+                        </Grid>
+                        <!--Active and Inactive color-->
+                            <ItemsControl Margin="5 0" x:Name="titleColorsItemsControl" Grid.ColumnSpan="5" Grid.Row="2" Focusable="False"  IsEnabled="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding AeroColorsViewModel.AeroColors}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid HorizontalAlignment="Stretch">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="45"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Column="1" Content="{Binding Name}"/>
+                                            <CheckBox x:Name="checkBoxAeroColorEnabled" Grid.Column="0" VerticalAlignment="Center"  Content="" IsChecked="{Binding Enabled}"/>
+                                            <Button x:Name="buttonAeroColor" Grid.Column="2" Height="25" Click="buttonAeroColor_Click" IsEnabled="{Binding Enabled}">
+                                                <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2" Background="{Binding ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                            </Button>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                    </StackPanel>
+                    
+                    <!--Aero colors Preview-->
+                    
+                    
                     <TextBlock Style="{StaticResource InfoText}" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource InvertedBooleanToVisibilityConverter}, Mode=OneWay}" Grid.ColumnSpan="5" Grid.Row="3"
                                        >To access active / inactive title color setting, please enable coloured titlebars</TextBlock>
                 </Grid>

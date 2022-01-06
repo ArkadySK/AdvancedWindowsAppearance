@@ -172,23 +172,17 @@ namespace AdvancedWindowsAppearence
 
         #region Aero Tab
 
-        void UpdateAeroColors() //make a method for UI that implements changes and creates live preview
-        {
-
-        }
-
         private void buttonAeroColor_Click(object sender, RoutedEventArgs e)
         {
-            var selItem = titleColorsListView.SelectedItem;
+            Button btn = sender as Button;
+            var selItem = (AeroColorRegistrySetting)btn.DataContext;
             if (selItem == null) return;
             ((AeroColorRegistrySetting)selItem).ItemColor = OpenColorDialog(((AeroColorRegistrySetting)selItem).ItemColor);
-            UpdateAeroColors();
         }
 
         private void buttonThemeColor_Click(object sender, RoutedEventArgs e)
         {
             Settings.ThemeColor.ItemColor = OpenColorDialog(Settings.ThemeColor.ItemColor);
-            UpdateAeroColors();
         }
 
         private void textBoxColorOpacity_TextChanged(object sender, TextChangedEventArgs e)
@@ -234,5 +228,6 @@ namespace AdvancedWindowsAppearence
         {
             Settings.ShowThemesControlPanel();
         }
+
     }
 }
