@@ -179,7 +179,9 @@ namespace AdvancedWindowsAppearence
 
         private void buttonAeroColor_Click(object sender, RoutedEventArgs e)
         {
-            ((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor = OpenColorDialog(((AeroColorRegistrySetting)comboBoxAeroColors.SelectedItem).ItemColor);
+            var selItem = titleColorsListView.SelectedItem;
+            if (selItem == null) return;
+            ((AeroColorRegistrySetting)selItem).ItemColor = OpenColorDialog(((AeroColorRegistrySetting)selItem).ItemColor);
             UpdateAeroColors();
         }
 

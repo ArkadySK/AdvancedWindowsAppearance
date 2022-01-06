@@ -34,48 +34,56 @@
 
 
             <!-- Aero settings -->
-            <TabItem Header="Title Colors" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
+            <TabItem Header="Title Colors" Style="{StaticResource DefaultTabStyle}">
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="125"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="70"/>
                         <ColumnDefinition Width="45"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
-                    <Label VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="1">Theme Color</Label>
-                    <Button x:Name="buttonThemeColor" Grid.Row="0" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonThemeColor_Click">
+                    
+                    <Label Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="1">Theme Color</Label>
+                    <Button x:Name="buttonThemeColor" Grid.Row="0" Grid.Column="4" Height="25" VerticalAlignment="Top" Click="buttonThemeColor_Click">
                         <Button x:Name="imageThemeColor" Padding="10" BorderThickness="2" Background="{Binding ThemeColor.ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                     </Button>
-                    <Label VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.Row="1" Margin="1">Theme Color Opacity</Label>
-                    <Slider x:Name="sliderColorOpacity" Value="{Binding ThemeColor.Opacity}" Grid.Row="1" Grid.Column="1" Margin="3" Maximum="255" />
-                    <TextBox IsEnabled="False" x:Name="textBoxColorOpacity" Text="{Binding Value, ElementName=sliderColorOpacity}"  Grid.Row="1" Grid.Column="3" Margin="5" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
+                    <Label VerticalAlignment="Top" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="1">Opacity</Label>
+                    <Slider x:Name="sliderColorOpacity" Grid.Column="1" Value="{Binding ThemeColor.Opacity}"  Margin="3" Maximum="255" />
+                    <TextBox IsEnabled="False" Grid.Column="3" x:Name="textBoxColorOpacity" VerticalAlignment="Top" Margin="5" Text="{Binding Value, ElementName=sliderColorOpacity}" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
 
-                    <StackPanel Grid.ColumnSpan="3" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" IsEnabled="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked}" >
-                        <ComboBox SelectedIndex="0" x:Name="comboBoxAeroColors" ItemsSource="{Binding AeroColorsViewModel.AeroColors}" MinWidth="200">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Label Content="{Binding Name}"/>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                        <CheckBox x:Name="checkBoxAeroColorEnabled" Grid.Row="2" Grid.Column="2" Content="Enabled" VerticalAlignment="Center" Margin="5" IsChecked="{Binding SelectedItem.Enabled, ElementName=comboBoxAeroColors}"/>
-                        <Button x:Name="buttonAeroColor" Grid.Row="2" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonAeroColor_Click" IsEnabled="{Binding SelectedItem.Enabled, ElementName=comboBoxAeroColors}">
-                            <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxAeroColors, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                        </Button>
-                    </StackPanel>
-                    <TextBlock Style="{StaticResource InfoText}" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource InvertedBooleanToVisibilityConverter}, Mode=OneWay}" Grid.ColumnSpan="3" Grid.Row="3"
+                    <!--Active and Inactive color-->
+                    <ListView x:Name="titleColorsListView" Grid.ColumnSpan="5" Grid.Row="2" IsEnabled="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding AeroColorsViewModel.AeroColors}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="45"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="1" Content="{Binding Name}"/>
+                                    <CheckBox x:Name="checkBoxAeroColorEnabled" Grid.Column="0" VerticalAlignment="Center"  Content="" IsChecked="{Binding Enabled}"/>
+                                    <Button x:Name="buttonAeroColor" Grid.Column="2" Height="25" Click="buttonAeroColor_Click" IsEnabled="{Binding Enabled}">
+                                        <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2" Background="{Binding ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <TextBlock Style="{StaticResource InfoText}" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource InvertedBooleanToVisibilityConverter}, Mode=OneWay}" Grid.ColumnSpan="5" Grid.Row="3"
                                        >To access active / inactive title color setting, please enable coloured titlebars</TextBlock>
                 </Grid>
             </TabItem>
 
 
             <!-- Colors a Metrics  -->
-            <TabItem Header="Colors and Metrics" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
+            <TabItem Header="Colors and Metrics" Style="{StaticResource DefaultTabStyle}">
                 <StackPanel>
                     <Grid Margin="5" >
                         <Grid.ColumnDefinitions>
@@ -115,7 +123,7 @@
 
 
             <!-- Font Tab-->
-            <TabItem x:Name="fontsTab" Header="Fonts" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
+            <TabItem x:Name="fontsTab" Header="Fonts" Style="{StaticResource DefaultTabStyle}">
                 <StackPanel>
                     <Grid Margin="5">
                     <Grid.ColumnDefinitions>
@@ -196,7 +204,7 @@
 
 
             <!-- Theme Tab -->
-            <TabItem Header="Theme Settings" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
+            <TabItem Header="Theme Settings" Style="{StaticResource DefaultTabStyle}">
                 <StackPanel>
                     <Grid Margin="5">
                         <Grid.ColumnDefinitions>
@@ -219,7 +227,7 @@
 
 
             <!--DWM and Registry Tab (win8 & win10)-->
-            <TabItem x:Name="pageModern" Header="Modern Apps Settings" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}">
+            <TabItem x:Name="pageModern" Header="Modern Apps Settings" Style="{StaticResource DefaultTabStyle}">
                 <StackPanel>
                     <ListBox x:Name="listBoxDMW" Margin="5" ItemsSource="{Binding RegistrySettingsViewModel.RegistrySettings}">
                         <ListBox.ItemTemplate>
