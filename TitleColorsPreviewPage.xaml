@@ -39,7 +39,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Padding="1" Grid.Column="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Inactive Window" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"  
+                <Label Padding="4" Grid.Column="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Inactive Window" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"  
                                            FontSize="{Binding FontSettings[0].Size}" Foreground="{Binding ColorSettings[23].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"
                                            FontWeight="{Binding FontSettings[0].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[0].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}"
                                            VerticalContentAlignment="Center"/>
