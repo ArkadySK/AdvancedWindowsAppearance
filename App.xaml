@@ -11,6 +11,8 @@
             <Style x:Key="SystemButton"  TargetType="Button" >
                 <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSize}}"/>
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="MinHeight" Value="35"/>
             </Style>
 
             <Style x:Key="CaptionButton" TargetType="controls:ClassicButton" >
