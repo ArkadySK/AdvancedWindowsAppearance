@@ -15,6 +15,15 @@
                 <Setter Property="MinHeight" Value="35"/>
             </Style>
 
+            <!--button used for properties and settings-->
+            <Style x:Key="SystemSmallButton"  TargetType="Button" >
+                <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSize}}"/>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="MinHeight" Value="35"/>
+                <Setter Property="Margin" Value="2"/>
+            </Style>
+
             <Style x:Key="CaptionButton" TargetType="controls:ClassicButton" >
                 <Setter Property="FontFamily" Value="Marlett"/>
                 <Setter Property="Width" Value="{DynamicResource {x:Static SystemParameters.SmallWindowCaptionButtonWidth}}"/>
