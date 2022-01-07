@@ -42,7 +42,7 @@
 
     <Border Margin="5">
         <StackPanel>
-            <Grid IsEnabled="False" Background="{Binding Fill, ElementName=desktopColor}" Height="220" Margin="0 0 0 10" Style="{x:Null}" OverridesDefaultStyle="True" FocusVisualStyle="{x:Null}">
+            <Grid IsEnabled="False" Background="{Binding Fill, ElementName=desktopColor}" MinHeight="220" Margin="0 0 0 10" Style="{x:Null}" OverridesDefaultStyle="True" FocusVisualStyle="{x:Null}">
                 <Grid.Resources>
                     <ResourceDictionary>
                         <ResourceDictionary.MergedDictionaries>
@@ -53,7 +53,7 @@
 
                 <!--Sample Icon-->
                 <Image Source="{Binding Wallpaper.Path}" Stretch="UniformToFill"></Image>
-                <Grid Margin="0 0 100 0" Panel.ZIndex="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
+                <Grid Margin="0 0 100 0" Panel.ZIndex="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
                     <Rectangle Stroke="Gray" Opacity=".5"/>
                     <Image x:Name="iconImage" Source="Icon.ico" Height="{Binding ColorSettings[18].Size, FallbackValue=42}" Width="{Binding ColorSettings[18].Size}" >
                         <Image.Margin>
@@ -203,7 +203,7 @@
 
 
                 <!-- MessageBox -->
-                <Grid Width="250" Height="Auto" HorizontalAlignment="Left" Margin="22 5" VerticalAlignment="Bottom" Background="{Binding ColorSettings[5].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
+                <Grid Width="250" Height="Auto" HorizontalAlignment="Left" Margin="22 100 0 0" VerticalAlignment="Center" Background="{Binding ColorSettings[5].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
                     <Border Margin="{Binding ColorSettings[30].Size}" Background="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
                         <Grid>
                             <Grid.RowDefinitions>
