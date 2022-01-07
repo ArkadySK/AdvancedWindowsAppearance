@@ -89,48 +89,42 @@
 
             <!-- Colors a Metrics  -->
             <TabItem Header="Colors and Metrics" Style="{StaticResource DefaultTabStyle}">
-                <StackPanel>
-                    <Grid Margin="5" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="127*"/>
-                            <ColumnDefinition Width="77*"/>
-                            <ColumnDefinition Width="87*"/>
-                            <ColumnDefinition Width="59*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="15"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Label Content="Item:" Padding="5 0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="0,0,0,35" Grid.RowSpan="2"/>
-                        <Label Content="Size:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0,35" Grid.RowSpan="2"/>
-                        <Label Content="Color:" Padding="0" Grid.Column="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.ColumnSpan="2" Margin="87,0,0,35" Grid.RowSpan="2"/>
+                <Grid Margin="5" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="127*"/>
+                        <ColumnDefinition Width="77*"/>
+                        <ColumnDefinition Width="87*"/>
+                        <ColumnDefinition Width="59*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ComboBox x:Name="comboBoxItems" ItemsSource="{Binding ColorSettings}" SelectedIndex="13" Grid.Column="0" Margin="5,5.333,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Padding="0" Content="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBox x:Name="textBoxItemSize" Text="{Binding SelectedItem.Size, ElementName=comboBoxItems}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxItems}" Grid.Column="2" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" InputScope="Number" MaxLines="1" MaxLength="2" PreviewTextInput="NumberValidationTextBox" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+                    <Button x:Name="buttonItemColor" Padding="0" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonEditItemColor_Click" IsEnabled="{Binding SelectedItem.HasColor, ElementName=comboBoxItems}">
+                        <Button x:Name="imageItemColor" Padding="15 5" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxItems, Converter={StaticResource brushToColor}, Mode=OneWay}" />
+                    </Button>
 
-                        <ComboBox x:Name="comboBoxItems" ItemsSource="{Binding ColorSettings}" SelectedIndex="13" Grid.Column="0" Grid.Row="1" Margin="5,5.333,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Label Padding="0" Content="{Binding Name}"/>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                        <TextBox x:Name="textBoxItemSize" Text="{Binding SelectedItem.Size, ElementName=comboBoxItems}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxItems}" Grid.Column="2" Grid.Row="1" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" InputScope="Number" MaxLines="1" MaxLength="2" PreviewTextInput="NumberValidationTextBox" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
-                        <Button x:Name="buttonItemColor" Grid.Row="1" Padding="0" Margin="5,5,5,0" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonEditItemColor_Click" IsEnabled="{Binding SelectedItem.HasColor, ElementName=comboBoxItems}">
-                            <Button x:Name="imageItemColor" Padding="15 5" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxItems, Converter={StaticResource brushToColor}, Mode=OneWay}" />
-                        </Button>
-
-                        <TextBlock Grid.Row="2" Grid.ColumnSpan="4" Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxItems, Mode=OneWay, FallbackValue=Collapsed}" 
+                    <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxItems, Mode=OneWay, FallbackValue=Collapsed}" 
                                            Style="{StaticResource InfoText}" >New sizes are applied after logoff. Some colors are applied immediatelly as a theme, some may apply after logoff.</TextBlock>
-                    </Grid>
 
-                    <Frame Source="Preview.xaml"/>
-                </StackPanel>
+                    <!--Classic Colors preview page-->
+                    <Frame Source="Preview.xaml" Grid.Row="2" Grid.ColumnSpan="4"/>
+                </Grid>
             </TabItem>
 
 
             <!-- Font Tab-->
             <TabItem x:Name="fontsTab" Header="Fonts" Style="{StaticResource DefaultTabStyle}">
-                <StackPanel>
-                    <Grid Margin="5">
+                <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="4*"/>
                         <ColumnDefinition Width="14*"/>
@@ -139,18 +133,14 @@
                         <ColumnDefinition Width="4*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="15"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Label Content="Item:" Padding="5 0" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0,35" Grid.RowSpan="2"/>
-                    <Label Content="Font:" Grid.Row="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.Column="0" HorizontalContentAlignment="Right" Margin="5"/>
-                    <Label Content="Size:" Padding="0" Grid.Column="2" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Margin="0,0,0.333,35" Grid.RowSpan="2"/>
-
-                    <Label Content="Color:" Padding="0" Grid.Column="3" Grid.Row="0" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.RowSpan="2"/>
-
-                    <ComboBox x:Name="comboBoxFonts" ItemsSource="{Binding FontSettings}" SelectedIndex="0" Grid.Row="1" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                    <Label Content="Font:" Grid.Row="1" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" Grid.Column="0" HorizontalContentAlignment="Right" Margin="5"/>
+                    
+                    <ComboBox x:Name="comboBoxFonts" ItemsSource="{Binding FontSettings}" SelectedIndex="0" Margin="5,5,5,0" Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <Label Padding="0" Content="{Binding Name}"/>
@@ -158,11 +148,11 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
 
-                    <ComboBox x:Name="comboBoxFont" Text="{Binding Path=SelectedItem.FontName, ElementName=comboBoxFonts, Mode=OneWay}" Grid.Column="1" Grid.Row="2" Margin="5" Height="25" VerticalAlignment="Center" SelectionChanged="comboBoxFont_SelectionChanged"/>
-                    <TextBox x:Name="textBlockPreview" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="5" Padding="0" FontSize="{Binding Text, ElementName=comboBoxFontSize, Mode=OneWay}" Foreground="{Binding SelectedItem.ItemColor, ElementName=comboBoxFonts, Converter={StaticResource brushToColor}, Mode=OneWay}" Text="The quick brown fox jumps over the lazy dog"
+                    <ComboBox x:Name="comboBoxFont" Text="{Binding Path=SelectedItem.FontName, ElementName=comboBoxFonts, Mode=OneWay}" Grid.Column="1" Grid.Row="1" Margin="5" Height="25" VerticalAlignment="Center" SelectionChanged="comboBoxFont_SelectionChanged"/>
+                    <TextBox x:Name="textBlockPreview" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="5" Padding="0" FontSize="{Binding Text, ElementName=comboBoxFontSize, Mode=OneWay}" Foreground="{Binding SelectedItem.ItemColor, ElementName=comboBoxFonts, Converter={StaticResource brushToColor}, Mode=OneWay}" Text="The quick brown fox jumps over the lazy dog"
                                      FontWeight="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" FontFamily="{Binding SelectedItem.Font, ElementName=comboBoxFonts, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"
                                      />
-                    <ComboBox x:Name="comboBoxFontSize" Text="{Binding SelectedItem.Size, ElementName=comboBoxFonts, UpdateSourceTrigger=LostFocus}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxFonts}" Grid.Column="2" Grid.Row="1" Margin="5" Height="25" VerticalAlignment="Top" IsEditable="True" PreviewTextInput="NumberValidationTextBox">
+                    <ComboBox x:Name="comboBoxFontSize" Text="{Binding SelectedItem.Size, ElementName=comboBoxFonts, UpdateSourceTrigger=LostFocus}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxFonts}" Grid.Column="2" Margin="5" Height="25" VerticalAlignment="Top" IsEditable="True" PreviewTextInput="NumberValidationTextBox">
                         <ComboBoxItem Content="2"/>
                         <ComboBoxItem Content="3"/>
                         <ComboBoxItem Content="4"/>
@@ -193,18 +183,19 @@
                         <ComboBoxItem Content="46"/>
                         <ComboBoxItem Content="50"/>
                     </ComboBox>
-                    <Button x:Name="buttonFontColor" IsEnabled="{Binding SelectedItem.HasColor, ElementName=comboBoxFonts}" Padding="2" Grid.Row="1" Margin="5" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonEditFontColor_Click">
+                    <Button x:Name="buttonFontColor" IsEnabled="{Binding SelectedItem.HasColor, ElementName=comboBoxFonts}" Padding="2" Margin="5" Grid.Column="3" Height="25" VerticalAlignment="Top" Click="buttonEditFontColor_Click">
                         <Button x:Name="imageFontColor" Padding="15 5" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxFonts, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                     </Button>
 
-                    <ToggleButton x:Name="buttonFontBold" IsChecked="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts}" Content="B" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold"/>
-                    <ToggleButton x:Name="buttonFontItalic" IsChecked="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts}" Content="I" Grid.Row="1" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" FontStyle="Italic"/>
-                    <TextBlock Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxFonts, Mode=OneWay, FallbackValue=Collapsed}" Grid.ColumnSpan="5" Grid.Row="3" 
+                    <ToggleButton x:Name="buttonFontBold" IsChecked="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts}" Content="B" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="Bold"/>
+                    <ToggleButton x:Name="buttonFontItalic" IsChecked="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts}" Content="I" Width="22" Margin="0 5" Grid.Column="4" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" FontStyle="Italic"/>
+                    <TextBlock Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxFonts, Mode=OneWay, FallbackValue=Collapsed}" Grid.ColumnSpan="5" Grid.Row="2" 
                                        Style="{StaticResource InfoText}" >Changes made to fonts are applied after restart</TextBlock>
 
+
+                    <!--Fonts Preview (Classic colors) -->
+                    <Frame Grid.Row="3" Grid.ColumnSpan="5" Source="Preview.xaml"/>
                 </Grid>
-                    <Frame Source="Preview.xaml"/>
-                </StackPanel>
             </TabItem>
 
 
@@ -234,13 +225,13 @@
             <!--DWM and Registry Tab (win8 & win10)-->
             <TabItem x:Name="pageModern" Header="Modern Apps Settings" Style="{StaticResource DefaultTabStyle}">
                 <StackPanel>
-                    <ListBox x:Name="listBoxDMW" Margin="5" ItemsSource="{Binding RegistrySettingsViewModel.RegistrySettings}">
-                        <ListBox.ItemTemplate>
+                    <ItemsControl x:Name="listBoxDMW" Margin="5" ItemsSource="{Binding RegistrySettingsViewModel.RegistrySettings}">
+                        <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <CheckBox Content="{Binding Name}" IsChecked="{Binding Checked}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"></CheckBox>
+                                <CheckBox Content="{Binding Name}" Margin="5" IsChecked="{Binding Checked}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"></CheckBox>
                             </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                     <CheckBox Visibility="Collapsed" x:Name="checkBoxLiveChanges" Content="Preview changes immediatelly" IsChecked="{Binding Settings.RegistrySettingsViewModel.LivePreview}"/>
                     <TextBlock Visibility="{Binding RegistrySettingsViewModel.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource InfoText}" >Some changes made to DWM (Desktop Window Composition) are applied after restart</TextBlock>
                 </StackPanel>
