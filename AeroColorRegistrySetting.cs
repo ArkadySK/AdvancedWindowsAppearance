@@ -51,7 +51,16 @@ namespace AdvancedWindowsAppearence
             }
         }
 
-        public bool Enabled { get; set; }
+        private bool _edited;
+        public bool Enabled 
+        {
+            get { return _edited; }
+            set 
+            { 
+                _edited = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public AeroColorRegistrySetting(string name, string registrykey)
         {
@@ -82,7 +91,10 @@ namespace AdvancedWindowsAppearence
             if (colorReg == null)
             {
                 this.Enabled = false; 
-                return Color.Silver;
+                if(registrykey == "")
+                    return Color.Silver;
+                else
+                    return Color.DodgerBlue;
             }
             try
             {
