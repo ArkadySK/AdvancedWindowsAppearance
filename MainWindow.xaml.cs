@@ -172,12 +172,22 @@ namespace AdvancedWindowsAppearence
 
         #region Aero Tab
 
+
+        private void ButtonColorSync_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            var selItem = (AeroColorRegistrySetting)btn.DataContext;
+            if (selItem == null) return;
+            selItem.ItemColor = Settings.ThemeColor.ItemColor;
+
+        }
+
         private void buttonAeroColor_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
             var selItem = (AeroColorRegistrySetting)btn.DataContext;
             if (selItem == null) return;
-            ((AeroColorRegistrySetting)selItem).ItemColor = OpenColorDialog(((AeroColorRegistrySetting)selItem).ItemColor);
+            selItem.ItemColor = OpenColorDialog(selItem.ItemColor);
         }
 
         private void buttonThemeColor_Click(object sender, RoutedEventArgs e)
@@ -228,6 +238,5 @@ namespace AdvancedWindowsAppearence
         {
             Settings.ShowThemesControlPanel();
         }
-
     }
 }
