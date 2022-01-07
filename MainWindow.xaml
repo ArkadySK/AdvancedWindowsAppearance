@@ -152,11 +152,12 @@
                     </ComboBox>
 
                     <ComboBox x:Name="comboBoxFont" Text="{Binding Path=SelectedItem.FontName, ElementName=comboBoxFonts, Mode=OneWay}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Grid.Column="1" Grid.Row="1" MinWidth="100" Margin="2" SelectionChanged="comboBoxFont_SelectionChanged" VerticalContentAlignment="Center"/>
-                    <TextBox x:Name="textBlockPreview" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="2" Padding="0" FontSize="{Binding Text, ElementName=comboBoxFontSize, Mode=OneWay}" 
-                             Foreground="{Binding SelectedItem.ItemColor, ElementName=comboBoxFonts, Converter={StaticResource brushToColor}, Mode=OneWay}" Text="The quick brown fox jumps over the lazy dog"
-                                     FontWeight="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" 
-FontFamily="{Binding SelectedItem.Font, ElementName=comboBoxFonts, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"/>
-                    <ComboBox x:Name="comboBoxFontSize" MinWidth="100" Text="{Binding SelectedItem.Size, ElementName=comboBoxFonts, UpdateSourceTrigger=LostFocus}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxFonts}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Grid.Column="2" Margin="2" IsEditable="True" PreviewTextInput="NumberValidationTextBox">
+                    <TextBox x:Name="textBlockPreview" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="2" Padding="0" FontSize="{Binding Text, ElementName=comboBoxFontSize, Mode=OneWay}" VerticalContentAlignment="Center"
+                             Foreground="{Binding SelectedItem.ItemColor, ElementName=comboBoxFonts, Converter={StaticResource brushToColor}, Mode=OneWay}" Text="The quick brown fox jumps over the lazy dog" FontWeight="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" 
+                             FontStyle="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" FontFamily="{Binding SelectedItem.Font, ElementName=comboBoxFonts, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"/>
+                    
+                    <ComboBox x:Name="comboBoxFontSize" MinWidth="100" Text="{Binding SelectedItem.Size, ElementName=comboBoxFonts, UpdateSourceTrigger=LostFocus}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxFonts}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Grid.Column="2" Margin="2" IsEditable="True" 
+                              PreviewTextInput="NumberValidationTextBox" VerticalContentAlignment="Center">
                         <ComboBoxItem Content="2"/>
                         <ComboBoxItem Content="3"/>
                         <ComboBoxItem Content="4"/>
@@ -191,9 +192,9 @@ FontFamily="{Binding SelectedItem.Font, ElementName=comboBoxFonts, Converter={St
                         <Button x:Name="imageFontColor" Padding="10" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxFonts, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                     </Button>
 
-                    <ToggleButton x:Name="buttonFontBold" Content="B" IsChecked="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts}" Margin="1" Grid.Column="4" FontWeight="Bold"/>
-
-                    <ToggleButton x:Name="buttonFontItalic" Content="I" IsChecked="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts}" Margin="1" Grid.Column="5" FontStyle="Italic"/>
+                    <ToggleButton x:Name="buttonFontBold" Content="B" Style="{StaticResource SystemSmallToggleButton}" IsChecked="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts}" FontSize="20" Grid.Column="4" FontWeight="Bold"/>
+                    <ToggleButton x:Name="buttonFontItalic" Content="I" Style="{StaticResource SystemSmallToggleButton}" IsChecked="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts}" FontSize="20"  Grid.Column="5" FontStyle="Italic"/>
+                    
                     <TextBlock Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxFonts, Mode=OneWay, FallbackValue=Collapsed}" Grid.ColumnSpan="5" Grid.Row="2" 
                                        Style="{StaticResource InfoText}" >Changes made to fonts are applied after restart</TextBlock>
 
@@ -213,8 +214,8 @@ FontFamily="{Binding SelectedItem.Font, ElementName=comboBoxFonts, Converter={St
                             <ColumnDefinition Width="270"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Label FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Padding="2" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">Theme Name</Label>
-                        <TextBox FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2" x:Name="textBoxThemeName" Grid.Column="1" Text="{Binding ThemeName}"/>
+                        <Label FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Padding="2" VerticalContentAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">Theme Name</Label>
+                        <TextBox FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2" VerticalContentAlignment="Center" MinHeight="35" x:Name="textBoxThemeName" Grid.Column="1" Text="{Binding ThemeName}"/>
                     </Grid>
 
                     <CheckBox Margin="0 15 5 1" x:Name="checkBoxOverwriteThemeStyle" Grid.Row="1" Content="Overwrite theme style" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" 
@@ -224,7 +225,8 @@ FontFamily="{Binding SelectedItem.Font, ElementName=comboBoxFonts, Converter={St
                         <RadioButton Content="Aero Lite (alternative, has window border, available in Windows 10 and 8.1)" Margin="2" Padding="2" VerticalContentAlignment="Center" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="ToggleButtonAeroLite_Click"/>
                         <RadioButton Content="High Contrast (more color options)" Margin="2" Click="ToggleButtonHighContrast_Click" Visibility="Collapsed"/>
                     </StackPanel>
-                    <Button x:Name="buttonOpenControlPanel" Content="Open themes control panel" Padding="10 0" Style="{StaticResource SystemButton}" HorizontalAlignment="Right" Margin="5" Click="buttonOpenControlPanel_Click"/>
+                    <Button x:Name="buttonOpenControlPanel" Content="Open themes control panel" Padding="10 0" Style="{StaticResource SystemButton}" HorizontalAlignment="Left" Margin="5" Click="buttonOpenControlPanel_Click"/>
+                    <TextBlock Margin="5" Style="{StaticResource HypertextTextBlockStyle}" Text="Open folder with saved themes" TextDecorations="Underline" PreviewMouseDown="TextBlockOpenThemesFolder_PreviewMouseDown"/>
                 </StackPanel>
             </TabItem>
 

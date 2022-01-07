@@ -167,6 +167,17 @@ namespace AdvancedWindowsAppearence
                 checkBoxOverwriteThemeStyle.IsChecked = true;
 
         }
+
+        private void buttonOpenControlPanel_Click(object sender, RoutedEventArgs e)
+        {
+            Settings.ShowThemesControlPanel();
+        }
+
+        private void TextBlockOpenThemesFolder_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Settings.OpenThemesFolder();
+        }
+
         #endregion
 
 
@@ -234,9 +245,5 @@ namespace AdvancedWindowsAppearence
         }
         #endregion
 
-        private void buttonOpenControlPanel_Click(object sender, RoutedEventArgs e)
-        {
-            Settings.ShowThemesControlPanel();
-        }
     }
 }

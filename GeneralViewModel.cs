@@ -157,6 +157,11 @@ namespace AdvancedWindowsAppearence
             Process.Start("explorer", "shell:::{ED834ED6-4B5A-4bfe-8F11-A626DCB6A921}");
         }
 
+        public void OpenThemesFolder()
+        {
+            Process.Start("explorer", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Microsoft\\Windows\\Themes");
+        }
+
         #region Save
         public async Task SaveChanges()
         {
