@@ -30,7 +30,8 @@
 
 
                 <!--Inactive Window Titlebar-->
-                <Grid Margin="1" Background="{Binding AeroColorsViewModel.AeroColors[1].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=White}" VerticalAlignment="Top">
+                <!--the blue background is on purpose, thats how system handles no active color-->
+            <Grid Margin="1" Background="{Binding AeroColorsViewModel.AeroColors[1].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=SteelBlue}" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
