@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:AdvancedWindowsAppearence"
       xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters" 
       xmlns:controls="clr-namespace:AdvancedWindowsAppearence.Controls"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
     Title="Preview">
 
     <Page.Resources>
@@ -22,7 +22,7 @@
         </ResourceDictionary>
     </Page.Resources>
 
-
+    <Grid>
     <StackPanel>
     <StackPanel Visibility="Collapsed">
         <!-- COLOR RESOURCES that autoupdate themselves-->
@@ -40,8 +40,7 @@
 
     <!--Preview-->
 
-        <StackPanel>
-            <Grid IsEnabled="False" Background="{Binding Fill, ElementName=desktopColor}" MinHeight="220" Margin="0 0 0 10" Style="{x:Null}" OverridesDefaultStyle="True" FocusVisualStyle="{x:Null}">
+        <Grid IsEnabled="False" Background="{Binding Fill, ElementName=desktopColor}" MinHeight="220" Margin="0 0 0 10" Style="{x:Null}" OverridesDefaultStyle="True" FocusVisualStyle="{x:Null}">
                 <Grid.Resources>
                     <ResourceDictionary>
                         <ResourceDictionary.MergedDictionaries>
@@ -257,5 +256,5 @@
             </Grid>
 
         </StackPanel>
-    </StackPanel>
+    </Grid>
 </Page>
