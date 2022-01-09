@@ -217,7 +217,7 @@ namespace AdvancedWindowsAppearence
                 f.IsEdited = false;
             }
 
-
+            App.Current.Resources["ThemeColor"] = Converters.BrushToColorConverter.MediaColorToBrush(ThemeColor.ItemColor);
             await Task.Delay(2000);
         }
         #endregion
