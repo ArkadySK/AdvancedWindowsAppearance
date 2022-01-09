@@ -18,10 +18,10 @@
 
 ## Images
 
+![AWA title colors](https://user-images.githubusercontent.com/74670743/148690949-552d76d5-a83e-4421-abdb-a81dd880b057.png)
+
+![AWA colors](https://user-images.githubusercontent.com/74670743/148690951-b649f654-2cfb-455a-b46a-2285fe55bd22.png)
+
+![AWA fonts](https://user-images.githubusercontent.com/74670743/148690952-143a661f-eb97-4363-bb35-dba1dab256c3.png)
+
 ![obrázok](https://user-images.githubusercontent.com/74670743/147246525-3faf5ad9-c6ec-4e75-a938-c44bcad47c97.png)
-
-![awa custom title font](https://user-images.githubusercontent.com/74670743/147246785-d750b1df-75e0-487c-8713-b7a6abc5aaf4.png)
-
-![awa change inactive color](https://user-images.githubusercontent.com/74670743/147247033-cdbf96c9-367f-4532-a8ec-423903a62fed.png)
-
-![obrázok](https://user-images.githubusercontent.com/74670743/147247488-e3e83c9a-8564-4a32-909b-622381b7da9e.png)
