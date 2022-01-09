@@ -7,7 +7,8 @@
     <Application.Resources>
         <ResourceDictionary >
             <FontFamily x:Key="Segoe MDL2 Assets">./Fonts/segoe-mdl2-assets.ttf#Segoe MDL2 Assets</FontFamily>
-            
+            <SolidColorBrush x:Key="ThemeColor"/>
+
             <Style x:Key="SystemButton"  TargetType="Button" >
                 <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSize}}"/>
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
@@ -46,9 +47,32 @@
             <Style x:Key="DefaultTabStyle" TargetType="TabItem">
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}" />
                 <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MenuFontSize}}" />
-                <Setter Property="Padding" Value="15" />
                 <Setter Property="BorderBrush" Value="{x:Null}" />
                 <Setter Property="Background" Value="{x:Null}" />
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TabItem">
+                            <StackPanel Name="Panel" Height="48" VerticalAlignment="Stretch" Orientation="Horizontal" Background="#02FFFFFF" MinWidth="320">
+                                <Rectangle Name="SelRectangle" Width="5" Margin="0 12" HorizontalAlignment="Left"/>
+                                <ContentPresenter Grid.Column="1" x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Stretch"
+                                        ContentSource="Header"
+                                        Margin="10"/>
+                            </StackPanel>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="SelRectangle" Property="Fill" Value="{DynamicResource ThemeColor}" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Panel" Property="Background" Value="LightGray" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
             </Style>
 
             <Style x:Key="InfoText"  TargetType="TextBlock" >

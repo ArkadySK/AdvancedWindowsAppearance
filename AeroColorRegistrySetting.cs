@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using AdvancedWindowsAppearence.Converters;
 
 namespace AdvancedWindowsAppearence
 {
@@ -111,6 +112,12 @@ namespace AdvancedWindowsAppearence
             {
                 return null;
             }
+
+            if(registrykey == "ColorizationColor")
+            {
+                App.Current.Resources["ThemeColor"] = BrushToColorConverter.MediaColorToBrush(color);
+            }
+
             return color;
         }
 
