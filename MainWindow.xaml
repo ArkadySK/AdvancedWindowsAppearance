@@ -258,7 +258,7 @@
                             <RadioButton Content="High Contrast (more color options)" Margin="2" Click="ToggleButtonHighContrast_Click" Visibility="Collapsed"/>
                         </StackPanel>
                         <Button x:Name="buttonOpenControlPanel" Content="Open themes control panel" Padding="10 0" Style="{StaticResource SystemButton}" HorizontalAlignment="Left" Margin="5" Click="buttonOpenControlPanel_Click"/>
-                        <TextBlock Margin="5" Style="{StaticResource HypertextTextBlockStyle}" Text="Open folder with saved themes" TextDecorations="Underline" PreviewMouseDown="TextBlockOpenThemesFolder_PreviewMouseDown"/>
+                        <TextBlock Margin="5" Style="{StaticResource HypertextTextBlockStyle}" Text="Open folder with saved themes" PreviewMouseDown="TextBlockOpenThemesFolder_PreviewMouseDown"/>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>

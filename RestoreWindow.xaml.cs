@@ -97,7 +97,7 @@ namespace AdvancedWindowsAppearence
             MessageBox.Show(("Export was successful!\nThe exported file is saved in: " + savePath + Environment.NewLine + "You can restore the settings just by opening the settings-export file."), "Export Finished", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        private void openRestoreFolder_Click(object sender, RoutedEventArgs e)
+        private void openRestoreFolder_PreviewMouseDown(object sender, RoutedEventArgs e)
         {
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "explorer";

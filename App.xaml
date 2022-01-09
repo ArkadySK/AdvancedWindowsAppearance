@@ -100,6 +100,7 @@
 
             <Style x:Key="HypertextTextBlockStyle" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}"/>
+                <Setter Property="TextDecorations" Value="Underline"/>
                 <Style.Triggers>
                     <Trigger Property="IsMouseDirectlyOver" Value="True">
                         <Trigger.Setters>
