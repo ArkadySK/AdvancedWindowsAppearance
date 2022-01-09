@@ -37,7 +37,7 @@
             <TabItem Style="{StaticResource DefaultTabStyle}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE9F5;"/>
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE737;"/>
                         <Label>Title Colors</Label>
                     </StackPanel>
                 </TabItem.Header>
@@ -101,7 +101,7 @@
             <TabItem Style="{StaticResource DefaultTabStyle}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE9F5;"/>
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE2B1;"/>
                         <Label>Colors and Metrics</Label>
                     </StackPanel>
                 </TabItem.Header>
@@ -145,7 +145,7 @@
             <TabItem x:Name="fontsTab" Style="{StaticResource DefaultTabStyle}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE9F5;"/>
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE1C8;"/>
                         <Label>Fonts</Label>
                     </StackPanel>
                 </TabItem.Header>
@@ -234,7 +234,7 @@
             <TabItem Style="{StaticResource DefaultTabStyle}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE9F5;"/>
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE771;"/>
                         <Label>Theme Settings</Label>
                     </StackPanel>
                 </TabItem.Header>
