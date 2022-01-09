@@ -1,4 +1,4 @@
-# AdvancedWindowsAppearance
+# Advanced Windows Appearance
 
 ## A tool to configure the user interface of Windows
 
