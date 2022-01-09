@@ -34,7 +34,13 @@
 
 
             <!-- Aero settings -->
-            <TabItem Header="Title Colors" Style="{StaticResource DefaultTabStyle}">
+            <TabItem Style="{StaticResource DefaultTabStyle}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE9F5;"/>
+                        <Label>Title Colors</Label>
+                    </StackPanel>
+                </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <Grid Margin="5">
                         <Grid.RowDefinitions>
@@ -92,7 +98,13 @@
 
 
             <!-- Colors a Metrics  -->
-            <TabItem Header="Colors and Metrics" Style="{StaticResource DefaultTabStyle}">
+            <TabItem Style="{StaticResource DefaultTabStyle}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE9F5;"/>
+                        <Label>Colors and Metrics</Label>
+                    </StackPanel>
+                </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
 
                     <Grid Margin="5">
@@ -130,7 +142,13 @@
 
 
             <!-- Font Tab-->
-            <TabItem x:Name="fontsTab" Header="Fonts" Style="{StaticResource DefaultTabStyle}">
+            <TabItem x:Name="fontsTab" Style="{StaticResource DefaultTabStyle}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE9F5;"/>
+                        <Label>Fonts</Label>
+                    </StackPanel>
+                </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <Grid Margin="5">
                         <Grid.ColumnDefinitions>
@@ -213,7 +231,13 @@
 
 
             <!-- Theme Tab -->
-            <TabItem Header="Theme Settings" Style="{StaticResource DefaultTabStyle}">
+            <TabItem Style="{StaticResource DefaultTabStyle}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE9F5;"/>
+                        <Label>Theme Settings</Label>
+                    </StackPanel>
+                </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <StackPanel Margin="5">
                         <Grid>
@@ -241,7 +265,13 @@
 
 
             <!--DWM and Registry Tab (win8 & win10)-->
-            <TabItem x:Name="pageModern" Header="Modern Apps Settings" Style="{StaticResource DefaultTabStyle}">
+            <TabItem x:Name="pageModern" Style="{StaticResource DefaultTabStyle}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE9F5;"/>
+                        <Label>Modern Apps Settings</Label>
+                    </StackPanel>
+                </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <StackPanel Margin="5">
                         <ItemsControl x:Name="listBoxDMW" BorderBrush="{x:Null}" ItemsSource="{Binding RegistrySettingsViewModel.RegistrySettings}">
