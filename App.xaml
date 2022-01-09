@@ -54,13 +54,11 @@
             <Style x:Key="DefaultTabStyle" TargetType="TabItem">
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}" />
                 <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MenuFontSize}}" />
-                <Setter Property="BorderBrush" Value="{x:Null}" />
-                <Setter Property="Background" Value="{x:Null}" />
 
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="TabItem">
-                            <StackPanel Name="Panel" Height="48" VerticalAlignment="Stretch" Orientation="Horizontal" Background="#02FFFFFF" MinWidth="320">
+                            <StackPanel Name="Panel" Height="48" VerticalAlignment="Stretch" Orientation="Horizontal" HorizontalAlignment="Stretch" MinWidth="320">
                                 <Rectangle Name="SelRectangle" Width="5" Margin="0 12" HorizontalAlignment="Left"/>
                                 <ContentPresenter Grid.Column="1" x:Name="ContentSite"
                                         VerticalAlignment="Center"
@@ -68,12 +66,19 @@
                                         ContentSource="Header"
                                         Margin="10"/>
                             </StackPanel>
+                            
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsSelected" Value="True">
                                     <Setter TargetName="SelRectangle" Property="Fill" Value="{DynamicResource ThemeColor}" />
                                 </Trigger>
-                                <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger Property="IsSelected" Value="False">
+                                    <Setter TargetName="SelRectangle" Property="Fill" Value="{x:Null}" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True" SourceName="Panel">
                                     <Setter TargetName="Panel" Property="Background" Value="LightGray" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="False" SourceName="Panel">
+                                    <Setter TargetName="Panel" Property="Background" Value="#02FFFFFF" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
