@@ -7,8 +7,8 @@
 - change sizes of elements
 - change font names and styles
 - support for custom fonts
-- change title colors - active and inactive
-- enable / disable aero lite styke for your theme
+- change titlebar colors - active and inactive
+- enable hidden Aero Lite style for your theme
 - backup and restore your settings
 - export to reg file
 - and much more!
