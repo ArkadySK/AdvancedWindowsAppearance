@@ -9,11 +9,13 @@
 - support for custom fonts
 - change title colors - active and inactive
 - enable / disable aero lite styke for your theme
+- backup and restore your settings
+- export to reg file
 - and much more!
 
 
 ### Supported OSes and requirements:
-- Windows 8.1 and Windows 10
+- Windows 8.1 Windows 10 and Windows 11
 - .NET Framework 4.5, pre-installed on both Win 8.1 and Win 10
 
 ## Images
