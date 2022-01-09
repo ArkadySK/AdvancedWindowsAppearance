@@ -44,6 +44,13 @@
                 <Setter Property="HorizontalAlignment" Value="Right"/>
             </Style>
 
+            <Style x:Key="IconTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource Segoe MDL2 Assets}"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Margin" Value="0 0 5 0"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+
             <Style x:Key="DefaultTabStyle" TargetType="TabItem">
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}" />
                 <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MenuFontSize}}" />
