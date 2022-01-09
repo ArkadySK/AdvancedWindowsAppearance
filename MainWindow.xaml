@@ -7,7 +7,7 @@
         xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters" xmlns:controls="clr-namespace:AdvancedWindowsAppearence.Controls" x:Name="window"
     x:Class="AdvancedWindowsAppearence.MainWindow"
         mc:Ignorable="d"
-        Title="Advanced Appearance" Width="850" Height="500" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="CanResize">
+        Title="Advanced Windows Appearence" Width="850" Height="500" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="CanResize">
 
     
     <Window.Resources>
