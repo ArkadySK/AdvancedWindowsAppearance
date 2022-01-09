@@ -78,7 +78,7 @@
                                                 <ColumnDefinition Width="45"/>
                                             </Grid.ColumnDefinitions>
                                             <CheckBox x:Name="checkBoxAeroColorEnabled" Content="{Binding Name}" Grid.Column="0" VerticalAlignment="Center" IsChecked="{Binding Enabled}"/>
-                                            <Button Content="&#xE78B;" FontFamily="{StaticResource Segoe MDL2 Assets}" FontSize="25" Grid.Column="2" Style="{StaticResource SystemSmallButton}" Click="ButtonColorSync_Click"/>
+                                            <Button Content="&#xE78B;" FontFamily="{StaticResource Segoe MDL2 Assets}" IsEnabled="{Binding Enabled}" FontSize="25" Grid.Column="2" Style="{StaticResource SystemSmallButton}" Click="ButtonColorSync_Click"/>
                                             <Button x:Name="buttonAeroColor" Grid.Column="3" Style="{StaticResource SystemSmallButton}" Click="buttonAeroColor_Click" IsEnabled="{Binding Enabled}">
                                                 <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2" Background="{Binding ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                                             </Button>
@@ -282,7 +282,7 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                         <CheckBox Visibility="Collapsed" x:Name="checkBoxLiveChanges" Content="Preview changes immediatelly" IsChecked="{Binding Settings.RegistrySettingsViewModel.LivePreview}"/>
-                        <TextBlock Visibility="{Binding RegistrySettingsViewModel.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource InfoText}" >Some changes made to DWM (Desktop Window Composition) are applied after restart</TextBlock>
+                        <TextBlock Visibility="{Binding RegistrySettingsViewModel.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource InfoText}" >Some of the changes made to these settings are applied after restart</TextBlock>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
