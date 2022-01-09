@@ -91,7 +91,7 @@
                         </StackPanel>
                    
                         <TextBlock Style="{StaticResource InfoText}" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource InvertedBooleanToVisibilityConverter}, Mode=OneWay}" Grid.ColumnSpan="5" Grid.Row="3"
-                                           >To access active / inactive title color setting, please enable coloured titlebars</TextBlock>
+                                           >To access active / inactive title color setting, please check 'enable colored titlebars' in Modern Apps Settings. If you dont have that setting, your version of Windows is not supported. This works only on Windows 10/11</TextBlock>
                     </Grid>
                 </ScrollViewer>
             </TabItem>
@@ -254,7 +254,7 @@
                               FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="CheckBoxOverwriteThemeStyle_Click" Checked="checkBoxOverwriteThemeStyle_Checked"/>
                         <StackPanel x:Name="stackPanelAeroSettingsButtons"  Margin="2" HorizontalAlignment="Center" IsEnabled="false" >
                             <RadioButton Content="Aero (Windows default)" Margin="2" Padding="2" VerticalContentAlignment="Center" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="ToggleButtonAero_Click"/>
-                            <RadioButton Content="Aero Lite (alternative, has window border, available in Windows 10 and 8.1)" Margin="2" Padding="2" VerticalContentAlignment="Center" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="ToggleButtonAeroLite_Click"/>
+                            <RadioButton Content="Aero Lite (has window border, better support for classic colors)" Margin="2" Padding="2" VerticalContentAlignment="Center" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="ToggleButtonAeroLite_Click"/>
                             <RadioButton Content="High Contrast (more color options)" Margin="2" Click="ToggleButtonHighContrast_Click" Visibility="Collapsed"/>
                         </StackPanel>
                         <Button x:Name="buttonOpenControlPanel" Content="Open themes control panel" Padding="10 0" Style="{StaticResource SystemButton}" HorizontalAlignment="Left" Margin="5" Click="buttonOpenControlPanel_Click"/>

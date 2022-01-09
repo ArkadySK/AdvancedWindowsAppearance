@@ -59,15 +59,14 @@ namespace AdvancedWindowsAppearence
 
         void InitRegistrySettings()
         {
-            RegistrySettingsViewModel.Add("Show accent color on the title bars", "ColorPrevalence", new Version(10, 0));
-            RegistrySettingsViewModel.Add("Enable opaque taskbar (win 8 only)", "ColorizationOpaqueBlend", new Version(6, 2));
-            //RegistrySettingsController.Add("Enable composition", "Composition", new Version(6, 1));           
+            RegistrySettingsViewModel.Add("Enable colored titlebars", "ColorPrevalence", new Version(10, 0));
+            //RegistrySettingsViewModel.Add("Enable opaque taskbar (win 8 only)", "ColorizationOpaqueBlend", new Version(6, 2));  not working?        
             RegistrySettingsViewModel.Add("Enable peek at desktop", "EnableAeroPeek", new Version(6, 1));
-            RegistrySettingsViewModel.Add("Hibernate Thumbnails", "AlwaysHibernateThumbnails", new Version(6, 1));
+            RegistrySettingsViewModel.Add("Hibernate thumbnails in taskbar", "AlwaysHibernateThumbnails", new Version(6, 1));
             RegistrySettingsViewModel.AddWithPath("Enable transparency effects", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "EnableTransparency", new Version(10, 0));
             RegistrySettingsViewModel.AddWithPath("Show accent color on the start and actioncenter", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "ColorPrevalence", new Version(10, 0));
-            RegistrySettingsViewModel.AddWithPath("Apps use light theme", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", new Version(10, 0));
-            RegistrySettingsViewModel.AddWithPath("System uses light theme", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", new Version(10, 0));
+            RegistrySettingsViewModel.AddWithPath("Use light theme for Apps", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", new Version(10, 0));
+            RegistrySettingsViewModel.AddWithPath("Use light theme for System", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", new Version(10, 0));
             RegistrySettingsViewModel.AddWithPath("Always hide scrollbars in modern apps", @"Control Panel\Accessibility", "DynamicScrollbars", new Version(10, 0));
         }
 
