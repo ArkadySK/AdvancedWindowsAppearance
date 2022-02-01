@@ -25,7 +25,7 @@
     </Window.Resources>
 
 
-    <Grid x:Name="bgGrid" Background="#87FFFFFF" Margin="1">
+    <Grid x:Name="bgGrid" Background="#BFFFFFFF" Margin="1">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
@@ -54,7 +54,7 @@
             <StackPanel Grid.Column="3" Orientation="Horizontal">
                 <Button x:Name="minimizeButton" Style="{StaticResource CaptionButtonWin10}"  Grid.Column="2" Content="&#xE949;" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Click="minimizeButton_Click"/>
                 <Button x:Name="maximizeButton" Style="{StaticResource CaptionButtonWin10}"  Grid.Column="3" Content="&#xE739;" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Click="maximizeButton_Click"/>
-                <Button x:Name="closeButton" Style="{StaticResource CaptionButtonWin10}" Grid.Column="4" Content="&#xE106;" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Click="closeButton_Click_1"/>
+                <Button x:Name="closeButton" Style="{StaticResource CaptionButtonCloseWin10}" Grid.Column="4" Content="&#xE106;" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Click="closeButton_Click_1"/>
             </StackPanel>
 
         </Grid>
