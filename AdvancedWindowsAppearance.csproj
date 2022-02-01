@@ -118,6 +118,7 @@
       <DependentUpon>TitleColorsPreviewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="WallpaperAppearanceSetting.cs" />
+    <Compile Include="WindowBlur.cs" />
     <Page Include="Controls\ClassicButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

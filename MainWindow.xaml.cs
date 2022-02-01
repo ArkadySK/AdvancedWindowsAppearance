@@ -32,6 +32,7 @@ namespace AdvancedWindowsAppearence
         public MainWindow()
         {
             InitializeComponent();
+            WindowBlur.SetIsEnabled(this, true);
             this.DataContext = Settings;
             UpdateFontList();
             LoadThemeName();
