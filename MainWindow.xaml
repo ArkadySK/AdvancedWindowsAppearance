@@ -32,11 +32,11 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!--Border-->
+        <!--THE Border-->
         <Border Grid.RowSpan="3" BorderThickness="2" Margin="-1" BorderBrush="{Binding ThemeColor.ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
 
-        <!--Active Window Titlebar-->
-        <Grid Background="{Binding AeroColorsViewModel.AeroColors[0].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=White}" VerticalAlignment="Top">
+        <!--Window Titlebar-->
+        <Grid Background="{Binding AeroColorsViewModel.AeroColors[0].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=White}" VerticalAlignment="Stretch" MouseDown="Grid_MouseDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -48,14 +48,14 @@
                                            FontSize="{Binding FontSettings[0].Size}" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"
                                            FontWeight="{Binding FontSettings[0].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[0].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}"
                                            VerticalContentAlignment="Center"/>
-            <!--Title Buttons-->
-            <Viewbox Grid.Column="3" Height="{Binding MinHeight, ElementName=label}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Grid.Column="2" Padding="18 6" Text="&#xE949;" FontFamily="{StaticResource Segoe MDL2 Assets}" FontSize="10" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                    <TextBlock Grid.Column="3" Padding="18 6" Text="&#xE739;" FontFamily="{StaticResource Segoe MDL2 Assets}" FontSize="10" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                    <TextBlock Grid.Column="4" Padding="18 6" Text="&#xE106;" FontFamily="{StaticResource Segoe MDL2 Assets}" FontSize="10" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Background="Red"/>
-                </StackPanel>
-            </Viewbox>
+            <Button Visibility="Hidden" Grid.Column="2" Margin="5 0" Height="20">VersionName</Button>
+            <!--Title Buttons  Height="{Binding MinHeight, ElementName=label}"       -->
+
+            <StackPanel Grid.Column="3" Orientation="Horizontal">
+                <Button x:Name="minimizeButton" Style="{StaticResource CaptionButtonWin10}"  Grid.Column="2" Content="&#xE949;" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Click="minimizeButton_Click"/>
+                <Button x:Name="maximizeButton" Style="{StaticResource CaptionButtonWin10}"  Grid.Column="3" Content="&#xE739;" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Click="maximizeButton_Click"/>
+                <Button x:Name="closeButton" Style="{StaticResource CaptionButtonWin10}" Grid.Column="4" Content="&#xE106;" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Click="closeButton_Click_1"/>
+            </StackPanel>
 
         </Grid>
 

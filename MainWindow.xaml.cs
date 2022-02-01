@@ -246,5 +246,29 @@ namespace AdvancedWindowsAppearence
         }
         #endregion
 
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.LeftButton == MouseButtonState.Pressed)
+            this.DragMove();
+        }
+
+        private void minimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void maximizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.WindowState != WindowState.Maximized)
+                this.WindowState = WindowState.Maximized;
+            else
+                this.WindowState = WindowState.Normal;
+
+        }
+
+        private void closeButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

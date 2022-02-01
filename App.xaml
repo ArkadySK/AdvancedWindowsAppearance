@@ -44,6 +44,36 @@
                 <Setter Property="HorizontalAlignment" Value="Right"/>
             </Style>
 
+            <!--the main caption buttons-->
+            <Style x:Key="CaptionButtonWin10" TargetType="Button" >
+                <Setter Property="FontFamily" Value="{StaticResource Segoe MDL2 Assets}"/>
+                <Setter Property="FontSize" Value="10"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button" >
+                            <Grid>
+                                <Rectangle Name="Bg" Fill="{TemplateBinding Background}"/>
+                                <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Stretch"
+                                        Margin="18 6"/>
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Gray"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
             <Style x:Key="IconTextBlockStyle" TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="{StaticResource Segoe MDL2 Assets}"/>
                 <Setter Property="FontSize" Value="20"/>
@@ -60,7 +90,7 @@
                         <ControlTemplate TargetType="TabItem">
                             <StackPanel Name="Panel" Height="48" VerticalAlignment="Stretch" Orientation="Horizontal" HorizontalAlignment="Stretch" MinWidth="320">
                                 <Rectangle Name="SelRectangle" Width="5" Margin="0 12" HorizontalAlignment="Left"/>
-                                <ContentPresenter Grid.Column="1" x:Name="ContentSite"
+                                <ContentPresenter x:Name="ContentSite"
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Stretch"
                                         ContentSource="Header"
