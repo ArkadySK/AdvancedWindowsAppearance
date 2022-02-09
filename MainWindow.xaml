@@ -1,14 +1,16 @@
 ﻿<Window
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AdvancedWindowsAppearence"
-        xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters" xmlns:controls="clr-namespace:AdvancedWindowsAppearence.Controls" x:Name="window"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:AdvancedWindowsAppearence"
+    xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters" xmlns:controls="clr-namespace:AdvancedWindowsAppearence.Controls" x:Name="window"
     x:Class="AdvancedWindowsAppearence.MainWindow"
-        mc:Ignorable="d" AllowsTransparency="True"
-        Background="Transparent"
-        Title="Advanced Windows Appearence" Width="850" Height="500" ResizeMode="CanResize" WindowStyle="None">
+    mc:Ignorable="d" AllowsTransparency="True"
+    Background="Transparent"
+    BorderThickness="1" BorderBrush="{DynamicResource ThemeColor}"
+    Activated="window_Activated" Deactivated="window_Deactivated"
+    Title="Advanced Windows Appearence" Width="850" Height="500" ResizeMode="CanResize" WindowStyle="None">
 
 
     <Window.Resources>
@@ -23,20 +25,22 @@
             <converters:MultiMarginConverter x:Key="multiMargin"/>
         </ResourceDictionary>
     </Window.Resources>
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0" UseAeroCaptionButtons="False" ResizeBorderThickness="7">
+        </WindowChrome>
+    </WindowChrome.WindowChrome>
 
-
-    <Grid x:Name="bgGrid" Background="#BFFFFFFF" Margin="1">
+    <Grid x:Name="bgGrid" Background="#BFFFFFFF">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!--THE Border-->
-        <Border Grid.RowSpan="3" BorderThickness="2" Margin="-1" BorderBrush="{Binding ThemeColor.ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+        <Rectangle Fill="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" HorizontalAlignment="Right" Grid.RowSpan="3" Width="{Binding ActualWidth, ElementName=defaultScrollViewer, Mode=OneWay}"/>
 
         <!--Window Titlebar-->
-        <Grid Background="{Binding AeroColorsViewModel.AeroColors[0].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=White}" VerticalAlignment="Stretch" MouseDown="Grid_MouseDown">
+        <Grid x:Name="titlebarGrid" Panel.ZIndex="100" VerticalAlignment="Top" MouseDown="Grid_MouseDown" Background="#02FFFFFF">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -45,24 +49,22 @@
             </Grid.ColumnDefinitions>
 
             <Label x:Name="label" Padding="4" Grid.Column="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Advanced Windows Appearance" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"  
-                                           FontSize="{Binding FontSettings[0].Size}" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"
-                                           FontWeight="{Binding FontSettings[0].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[0].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}"
-                                           VerticalContentAlignment="Center"/>
-            <Button Visibility="Hidden" Grid.Column="2" Margin="5 0" Height="20">VersionName</Button>
+                    FontSize="{Binding FontSettings[0].Size}" FontWeight="{Binding FontSettings[0].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" 
+                    FontStyle="{Binding FontSettings[0].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" VerticalContentAlignment="Center"/>
+            <Button Visibility="Hidden" Background="#01FFFFFF" Grid.Column="2" Margin="5 0" Height="20">VersionName</Button>
             <!--Title Buttons  Height="{Binding MinHeight, ElementName=label}"       -->
 
-            <StackPanel Grid.Column="3" Orientation="Horizontal">
-                <Button x:Name="minimizeButton" Style="{StaticResource CaptionButtonWin10}"  Grid.Column="2" Content="&#xE949;" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Click="minimizeButton_Click"/>
-                <Button x:Name="maximizeButton" Style="{StaticResource CaptionButtonWin10}"  Grid.Column="3" Content="&#xE739;" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Click="maximizeButton_Click"/>
-                <Button x:Name="closeButton" Style="{StaticResource CaptionButtonCloseWin10}" Grid.Column="4" Content="&#xE106;" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Click="closeButton_Click_1"/>
+            <StackPanel Panel.ZIndex="100" Grid.Column="3" Orientation="Horizontal">
+                <Button x:Name="minimizeButton" Style="{StaticResource CaptionButtonWin10}"  Grid.Column="2" Content="&#xE949;" Click="minimizeButton_Click"/>
+                <Button x:Name="maximizeButton" Style="{StaticResource CaptionButtonWin10}"  Grid.Column="3" Content="&#xE739;" Click="maximizeButton_Click"/>
+                <Button x:Name="closeButton" Style="{StaticResource CaptionButtonCloseWin10}" Grid.Column="4" Content="&#xE106;" Click="closeButton_Click_1"/>
             </StackPanel>
 
         </Grid>
 
 
         <!--Main TabControl-->
-        <TabControl TabStripPlacement="Left" Grid.Row="1" Margin="-2 0 0 0" x:Name="colorsTab" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
-
+        <TabControl Grid.Row="1" TabStripPlacement="Left" Margin="-1 0 0 0" x:Name="colorsTab" BorderThickness="0" Background="{x:Null}">
 
             <!-- Aero settings -->
             <TabItem Style="{StaticResource DefaultTabStyle}">
@@ -72,7 +74,7 @@
                         <Label>Title Colors</Label>
                     </StackPanel>
                 </TabItem.Header>
-                <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ScrollViewer x:Name="defaultScrollViewer" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <Grid Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -96,7 +98,7 @@
                                 <Slider VerticalAlignment="Center" x:Name="sliderColorOpacity" Grid.Column="1" Value="{Binding ThemeColor.Opacity}"  Margin="3" Maximum="255" />
                                 <TextBox IsEnabled="False" Grid.Column="3" VerticalContentAlignment="Center" x:Name="textBoxColorOpacity" Margin="2" Text="{Binding Value, ElementName=sliderColorOpacity}" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
                             </Grid>
-                        
+
                             <!--Active and Inactive color-->
                             <ItemsControl x:Name="titleColorsItemsControl" Grid.ColumnSpan="5" Grid.Row="2" Focusable="False"  IsEnabled="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding AeroColorsViewModel.AeroColors}">
                                 <ItemsControl.ItemTemplate>
@@ -120,7 +122,7 @@
                             <!--Aero colors Preview-->
                             <Frame Margin="0 5 0 0" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Source="TitleColorsPreviewPage.xaml"/>
                         </StackPanel>
-                   
+
                         <TextBlock Style="{StaticResource InfoText}" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource InvertedBooleanToVisibilityConverter}, Mode=OneWay}" Grid.ColumnSpan="5" Grid.Row="3"
                                            >To access active / inactive title color setting, please check 'enable colored titlebars' in Modern Apps Settings. If you dont have that setting, your version of Windows is not supported. This works only on Windows 10/11</TextBlock>
                     </Grid>
@@ -262,7 +264,7 @@
 
 
             <!-- Theme Tab -->
-            <TabItem Style="{StaticResource DefaultTabStyle}">
+            <TabItem Style="{StaticResource DefaultTabStyle}" >
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE771;"/>

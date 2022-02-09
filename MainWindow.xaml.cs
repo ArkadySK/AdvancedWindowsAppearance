@@ -19,6 +19,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AdvancedWindowsAppearence.Converters;
 using System.Drawing;
+using System.Windows.Threading;
 
 namespace AdvancedWindowsAppearence
 {
@@ -32,10 +33,20 @@ namespace AdvancedWindowsAppearence
         public MainWindow()
         {
             InitializeComponent();
-            WindowBlur.SetIsEnabled(this, true);
             this.DataContext = Settings;
             UpdateFontList();
             LoadThemeName();
+            SetTransparency();
+        }
+
+        void SetTransparency() 
+        {
+            if (Settings.RegistrySettingsViewModel.RegistrySettings[3].Checked == true)
+            {
+                WindowBlur.SetIsEnabled(this, true);
+            }
+            else
+                this.AllowsTransparency = false;
         }
 
         void LoadThemeName()
@@ -246,29 +257,89 @@ namespace AdvancedWindowsAppearence
         }
         #endregion
 
+
+        #region Caption Buttons
+
+        void Minimize()
+        {
+            SystemCommands.MinimizeWindow(this);
+        }
+
+        void Maximize()
+        {
+            bgGrid.Margin = new Thickness(5);
+            SystemCommands.MaximizeWindow(this);
+            maximizeButton.Content = "";
+        }
+
+        void Restore()
+        {
+            bgGrid.Margin = new Thickness(1);
+            SystemCommands.RestoreWindow(this);
+            maximizeButton.Content = "";
+        }
+
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if(e.LeftButton == MouseButtonState.Pressed)
+            if (e.LeftButton != MouseButtonState.Pressed)
+                return;
+            if(this.WindowState != WindowState.Normal)
+            {
+                Restore();
+                return;
+            }
             this.DragMove();
         }
 
         private void minimizeButton_Click(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Minimized;
+            Minimize();
         }
 
         private void maximizeButton_Click(object sender, RoutedEventArgs e)
         {
             if(this.WindowState != WindowState.Maximized)
-                this.WindowState = WindowState.Maximized;
+            {
+                Maximize();
+            }
             else
-                this.WindowState = WindowState.Normal;
+            {
+                Restore();
+            }
+
 
         }
 
         private void closeButton_Click_1(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+        #endregion
+
+        private void window_Activated(object sender, EventArgs e)
+        {
+            //titlebarGrid.Background = BrushToColorConverter.MediaColorToBrush(Settings.AeroColorsViewModel.AeroColors[0].ItemColor);
+            this.Background = System.Windows.Media.Brushes.Transparent;
+        }
+
+        private void window_Deactivated(object sender, EventArgs e)
+        {
+            this.Background = System.Windows.Media.Brushes.Gray;
+            titlebarGrid.Background = System.Windows.Media.Brushes.Transparent;
+            return;
+
+            var inactiveAeroColor = Settings.AeroColorsViewModel.AeroColors[1];
+            if (inactiveAeroColor == null)
+            {
+                titlebarGrid.Background = System.Windows.Media.Brushes.White;
+                return;
+            }
+
+            if(!inactiveAeroColor.Enabled)
+                titlebarGrid.Background = System.Windows.Media.Brushes.White;
+
+            else
+                titlebarGrid.Background = BrushToColorConverter.MediaColorToBrush(inactiveAeroColor.ItemColor);
         }
     }
 }
