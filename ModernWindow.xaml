@@ -1,0 +1,63 @@
+﻿<Window x:Class="AdvancedWindowsAppearence.ModernWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdvancedWindowsAppearence"
+        xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters" xmlns:controls="clr-namespace:AdvancedWindowsAppearence.Controls" x:Name="window"     
+        mc:Ignorable="d"
+        Title="ModernWindow" Height="450" Width="800"
+        Activated="window_Activated" Deactivated="window_Deactivated"
+        AllowsTransparency="True" WindowStyle="None" 
+        Background="Transparent" Loaded="Window_Loaded">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0" ResizeBorderThickness="7">
+        </WindowChrome>
+    </WindowChrome.WindowChrome>
+
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <converters:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter"/>
+            <converters:BrushToColorConverter x:Key="brushToColor" />
+            <converters:DrawingColorToMediaColorConverter x:Key="DrawingColorToMediaColorConverter"/>
+            <converters:FontToFontFamilyConverter x:Key="FontToFontFamily"/>
+            <converters:BooleanToFontWeightConverter x:Key="BooleanToFontWeight"/>
+            <converters:BooleanToFontStyleConverter x:Key="BooleanToFontStyle"/>
+            <converters:MultiMarginConverter x:Key="multiMargin"/>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid x:Name="bgGrid" Background="#BFFFFFFF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--Window Titlebar-->
+        <Grid x:Name="titlebarGrid" Panel.ZIndex="100" VerticalAlignment="Top" MouseDown="Grid_MouseDown" Background="#02FFFFFF">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="label" Padding="4" Grid.Column="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Advanced Windows Appearance" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"  
+                    FontSize="{Binding FontSettings[0].Size}" FontWeight="{Binding FontSettings[0].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" 
+                    FontStyle="{Binding FontSettings[0].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" VerticalContentAlignment="Center"/>
+            <Button Visibility="Hidden" Background="#01FFFFFF" Grid.Column="2" Margin="5 0" Height="20">VersionName</Button>
+            <!--Title Buttons  Height="{Binding MinHeight, ElementName=label}"       -->
+
+            <StackPanel Panel.ZIndex="100" Grid.Column="3" Orientation="Horizontal">
+                <Button x:Name="minimizeButton" Style="{StaticResource CaptionButtonWin10}"  Grid.Column="2" Content="&#xE949;" Click="minimizeButton_Click"/>
+                <Button x:Name="maximizeButton" Style="{StaticResource CaptionButtonWin10}"  Grid.Column="3" Content="&#xE739;" Click="maximizeButton_Click"/>
+                <Button x:Name="closeButton" Style="{StaticResource CaptionButtonCloseWin10}" Grid.Column="4" Content="&#xE106;" Click="closeButton_Click_1"/>
+            </StackPanel>
+
+        </Grid>
+        <Frame x:Name="contentFrame" Grid.Row="1" ContentRendered="contentFrame_ContentRendered"/>
+        <Rectangle x:Name="opaqueRectangle" Fill="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" HorizontalAlignment="Right" Grid.RowSpan="3" />
+    </Grid>
+</Window>
