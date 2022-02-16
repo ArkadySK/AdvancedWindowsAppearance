@@ -50,8 +50,11 @@ namespace AdvancedWindowsAppearence
             
             //Windows 10/11 - create new modern window, close the old one
             ModernWindow modernWindow = new ModernWindow(Settings.RegistrySettingsViewModel.RegistrySettings[5].Checked);
+
+            modernWindow.Owner = this;           
             modernWindow.contentFrame.Content = bgGrid;
             modernWindow.Show();
+            modernWindow.Owner = null;
             Close();
         }
 

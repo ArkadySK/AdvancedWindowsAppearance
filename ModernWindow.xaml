@@ -9,7 +9,7 @@
         Title="ModernWindow" Height="450" Width="800"
         Activated="window_Activated" Deactivated="window_Deactivated"
         AllowsTransparency="True" WindowStyle="None" 
-        Background="Transparent" Loaded="Window_Loaded">
+        Background="Transparent" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0" ResizeBorderThickness="7">
         </WindowChrome>
