@@ -38,6 +38,22 @@ namespace AdvancedWindowsAppearence
             LoadThemeName();
         }
 
+        private void window_Loaded(object sender, RoutedEventArgs e)
+        {
+            UpdateWindowsLayout(Environment.OSVersion.Version);
+        }
+
+        void UpdateWindowsLayout(Version WinVer)
+        {
+            if (WinVer <= new Version(6, 3)) //Windows 8.1 and less, keep standard UI
+                return;
+            
+            //Windows 10/11 - create new modern window, close the old one
+            ModernWindow modernWindow = new ModernWindow(Settings.RegistrySettingsViewModel.RegistrySettings[5].Checked);
+            modernWindow.contentFrame.Content = bgGrid;
+            modernWindow.Show();
+            Close();
+        }
 
         void LoadThemeName()
         {
@@ -226,10 +242,7 @@ namespace AdvancedWindowsAppearence
         //Close Program
         private void CloseButton_Click(object sender, RoutedEventArgs e) 
         {
-            ModernWindow modernWindow = new ModernWindow(Settings.RegistrySettingsViewModel.RegistrySettings[5].Checked);
-            modernWindow.contentFrame.Content = bgGrid;
-            modernWindow.Show();
-            Close();
+            Application.Current.Shutdown();
         }
 
         // restore all changes done to registry (colors, fonts, sizes) 
@@ -252,8 +265,8 @@ namespace AdvancedWindowsAppearence
                 Settings.UseThemes = false;
             await Settings.SaveChanges();
         }
+
         #endregion
 
-        
     }
 }
