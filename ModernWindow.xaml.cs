@@ -78,7 +78,7 @@ namespace AdvancedWindowsAppearence
 
         void Restore()
         {
-            masterGrid.Margin = new Thickness(1);
+            masterGrid.Margin = new Thickness(0);
             SystemCommands.RestoreWindow(this);
             maximizeButton.Content = "";
         }
@@ -122,22 +122,11 @@ namespace AdvancedWindowsAppearence
 
         private void contentFrame_ContentRendered(object sender, EventArgs e)
         {
-            /*object grid = contentFrame.FindName("bgGrid");
-            if (!(grid is Grid))
-                return;
-            object tabControl = ((Grid)grid).FindName("colorsTab");
-            if (!(tabControl is TabControl)) 
-                return;
 
-            object defaultScrollViewer = ((TabItem) ((TabControl)tabControl).Items[0]).FindName("defaultScrollViewer");
-            if(defaultScrollViewer is ScrollViewer sv)
-            {
-                MessageBox.Show("a");
-                opaqueRectangle.Width = sv.ActualWidth;
-
-            }*/
-            var aa = LogicalTreeHelper.FindLogicalNode(this, "defaultScrollViewer");
+            Grid grid = (Grid)contentFrame.Content;
+            var tabControl = (TabControl)grid.Children[1];
             
+                        
         }
     }
 }
