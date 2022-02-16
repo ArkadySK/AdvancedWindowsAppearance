@@ -226,7 +226,7 @@ namespace AdvancedWindowsAppearence
         //Close Program
         private void CloseButton_Click(object sender, RoutedEventArgs e) 
         {
-            ModernWindow modernWindow = new ModernWindow();
+            ModernWindow modernWindow = new ModernWindow(Settings.RegistrySettingsViewModel.RegistrySettings[5].Checked);
             modernWindow.contentFrame.Content = bgGrid;
             modernWindow.Show();
             Close();

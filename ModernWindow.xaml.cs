@@ -19,8 +19,13 @@ namespace AdvancedWindowsAppearence
     /// </summary>
     public partial class ModernWindow : Window
     {
-        public ModernWindow()
+        bool IsLightMode = true;
+
+        public ModernWindow(bool? isLightMode)
         {
+            if(isLightMode != null)
+                IsLightMode = isLightMode.Value;
+
             InitializeComponent();
         }
         void SetTransparency()
@@ -35,29 +40,15 @@ namespace AdvancedWindowsAppearence
 
         private void window_Activated(object sender, EventArgs e)
         {
-            //titlebarGrid.Background = BrushToColorConverter.MediaColorToBrush(Settings.AeroColorsViewModel.AeroColors[0].ItemColor);
             this.Background = System.Windows.Media.Brushes.Transparent;
+            titlebarGrid.Opacity = 1;
+
         }
 
         private void window_Deactivated(object sender, EventArgs e)
         {           
             this.Background = System.Windows.Media.Brushes.Gray;
-            /*
-            titlebarGrid.Background = System.Windows.Media.Brushes.Transparent;
-            
-
-            var inactiveAeroColor = Settings.AeroColorsViewModel.AeroColors[1];
-            if (inactiveAeroColor == null)
-            {
-                titlebarGrid.Background = System.Windows.Media.Brushes.White;
-                return;
-            }
-
-            if(!inactiveAeroColor.Enabled)
-                titlebarGrid.Background = System.Windows.Media.Brushes.White;
-
-            else
-                titlebarGrid.Background = BrushToColorConverter.MediaColorToBrush(inactiveAeroColor.ItemColor);*/
+            titlebarGrid.Opacity = 0.4;
         }
 
 
@@ -122,11 +113,22 @@ namespace AdvancedWindowsAppearence
 
         private void contentFrame_ContentRendered(object sender, EventArgs e)
         {
-
+            /* in case this is used in a usefull situation
             Grid grid = (Grid)contentFrame.Content;
-            var tabControl = (TabControl)grid.Children[1];
+            TabControl tabControl = (TabControl)grid.Children[1]; 
             
-                        
+            //ScrollViewer defaultScrollView = (ScrollViewer) (tabControl.Items[0] as TabItem).Content;
+            Rectangle opaqueRectangle = (Rectangle)grid.Children[0];
+
+            */
+            if (IsLightMode == false) //force dark mode
+            {
+                App.Current.Resources["ButtonFaceColor"] = new BrushConverter().ConvertFromString("#FF404040");
+                App.Current.Resources["BackgroundColor"] = Brushes.Black;
+                App.Current.Resources["BackgroundColorTabItems"] = new BrushConverter().ConvertFromString("#9F202020");
+                App.Current.Resources["ForegroundColor"] = Brushes.White;
+            }
+
         }
     }
 }

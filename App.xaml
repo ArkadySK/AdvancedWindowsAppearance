@@ -8,10 +8,16 @@
         <ResourceDictionary >
             <FontFamily x:Key="Segoe MDL2 Assets">./Fonts/segoe-mdl2-assets.ttf#Segoe MDL2 Assets</FontFamily>
             <SolidColorBrush x:Key="ThemeColor"/>
-
-            <Style x:Key="SystemButton"  TargetType="Button" >
+            <SolidColorBrush x:Key="ButtonFaceColor" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+            <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
+            <SolidColorBrush x:Key="BackgroundColorTabItems" Color="#BFFFFFFF"/>
+            <SolidColorBrush x:Key="ForegroundColor" Color="Black"/>
+  
+            <Style x:Key="SystemButton" TargetType="Button" >
                 <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSize}}"/>
-                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+                <Setter Property="Background" Value="{DynamicResource ButtonFaceColor}"/>
+                <!-- "{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" -->
                 <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="MinHeight" Value="35"/>
             </Style>
@@ -19,7 +25,8 @@
             <!--button used for properties and settings-->
             <Style x:Key="SystemSmallButton"  TargetType="Button" >
                 <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSize}}"/>
-                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+                <Setter Property="Background" Value="{DynamicResource ButtonFaceColor}"/>
                 <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="MinHeight" Value="35"/>
                 <Setter Property="Margin" Value="2"/>
@@ -27,7 +34,8 @@
 
             <Style x:Key="SystemSmallToggleButton"  TargetType="ToggleButton" >
                 <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSize}}"/>
-                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+                <Setter Property="Background" Value="{DynamicResource ButtonFaceColor}"/>
                 <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="MinHeight" Value="35"/>
                 <Setter Property="Margin" Value="2"/>
@@ -104,7 +112,7 @@
             </Style>
 
             <Style x:Key="DefaultTabStyle" TargetType="TabItem">
-                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
                 <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MenuFontSize}}" />
 
                 <Setter Property="Template">

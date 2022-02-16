@@ -29,7 +29,7 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid x:Name="masterGrid" Background="#BFFFFFFF">
+    <Grid x:Name="masterGrid" Background="{DynamicResource BackgroundColorTabItems}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
@@ -46,18 +46,18 @@
 
             <Label x:Name="label" Padding="4" Grid.Column="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Advanced Windows Appearance" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"  
                     FontSize="{Binding FontSettings[0].Size}" FontWeight="{Binding FontSettings[0].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" 
+                    Foreground="{DynamicResource ForegroundColor}"
                     FontStyle="{Binding FontSettings[0].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" VerticalContentAlignment="Center"/>
             <Button Visibility="Hidden" Background="#01FFFFFF" Grid.Column="2" Margin="5 0" Height="20">VersionName</Button>
             <!--Title Buttons  Height="{Binding MinHeight, ElementName=label}"       -->
 
             <StackPanel Panel.ZIndex="100" Grid.Column="3" Orientation="Horizontal">
-                <Button x:Name="minimizeButton" Style="{StaticResource CaptionButtonWin10}"  Grid.Column="2" Content="&#xE949;" Click="minimizeButton_Click"/>
-                <Button x:Name="maximizeButton" Style="{StaticResource CaptionButtonWin10}"  Grid.Column="3" Content="&#xE739;" Click="maximizeButton_Click"/>
-                <Button x:Name="closeButton" Style="{StaticResource CaptionButtonCloseWin10}" Grid.Column="4" Content="&#xE106;" Click="closeButton_Click_1"/>
+                <Button x:Name="minimizeButton" Style="{StaticResource CaptionButtonWin10}" Foreground="{DynamicResource ForegroundColor}" Grid.Column="2" Content="&#xE949;" Click="minimizeButton_Click"/>
+                <Button x:Name="maximizeButton" Style="{StaticResource CaptionButtonWin10}" Foreground="{DynamicResource ForegroundColor}" Grid.Column="3" Content="&#xE739;" Click="maximizeButton_Click"/>
+                <Button x:Name="closeButton" Style="{StaticResource CaptionButtonCloseWin10}" Foreground="{DynamicResource ForegroundColor}" Grid.Column="4" Content="&#xE106;" Click="closeButton_Click_1"/>
             </StackPanel>
 
         </Grid>
         <Frame x:Name="contentFrame" Grid.Row="1" ContentRendered="contentFrame_ContentRendered"/>
-        <Rectangle x:Name="opaqueRectangle" Fill="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" HorizontalAlignment="Right" Grid.RowSpan="3" />
     </Grid>
 </Window>
