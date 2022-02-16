@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdvancedWindowsAppearence"
         mc:Ignorable="d"
+        Background="{DynamicResource BackgroundColor}"
         Title="Backup and restore" SizeToContent="Height" WindowStartupLocation="CenterOwner" Width="469" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="bulletStyle" TargetType="RadioButton">
             <Setter Property="Margin" Value="5"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         </Style>
     </Window.Resources>
     
