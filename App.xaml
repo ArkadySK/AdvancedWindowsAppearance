@@ -135,7 +135,7 @@
                                     <Setter TargetName="SelRectangle" Property="Fill" Value="{x:Null}" />
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="True" SourceName="Panel">
-                                    <Setter TargetName="Panel" Property="Background" Value="LightGray" />
+                                    <Setter TargetName="Panel" Property="Background" Value="#5FAAAAAA" />
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="False" SourceName="Panel">
                                     <Setter TargetName="Panel" Property="Background" Value="#02FFFFFF" />
