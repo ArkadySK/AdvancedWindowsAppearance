@@ -29,7 +29,7 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid x:Name="bgGrid" Background="#BFFFFFFF">
+    <Grid x:Name="masterGrid" Background="#BFFFFFFF">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>

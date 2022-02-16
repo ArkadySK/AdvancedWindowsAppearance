@@ -29,6 +29,7 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Rectangle x:Name="opaqueRectangle" Fill="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Width="{Binding ActualWidth, ElementName=defaultScrollViewer}" HorizontalAlignment="Right" Margin="0 -200" Grid.RowSpan="3" />
 
         <!--Main TabControl-->
         <TabControl TabStripPlacement="Left" Margin="-1 0 0 0" x:Name="colorsTab" BorderThickness="0" Background="{x:Null}">

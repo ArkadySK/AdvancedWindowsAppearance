@@ -71,14 +71,14 @@ namespace AdvancedWindowsAppearence
 
         void Maximize()
         {
-            bgGrid.Margin = new Thickness(5);
+            masterGrid.Margin = new Thickness(5);
             SystemCommands.MaximizeWindow(this);
             maximizeButton.Content = "";
         }
 
         void Restore()
         {
-            bgGrid.Margin = new Thickness(1);
+            masterGrid.Margin = new Thickness(1);
             SystemCommands.RestoreWindow(this);
             maximizeButton.Content = "";
         }
@@ -122,10 +122,22 @@ namespace AdvancedWindowsAppearence
 
         private void contentFrame_ContentRendered(object sender, EventArgs e)
         {
-            MessageBox.Show("a");
-            object defaultScrollViewer = contentFrame.FindName("defaultScrollViewer");
+            /*object grid = contentFrame.FindName("bgGrid");
+            if (!(grid is Grid))
+                return;
+            object tabControl = ((Grid)grid).FindName("colorsTab");
+            if (!(tabControl is TabControl)) 
+                return;
+
+            object defaultScrollViewer = ((TabItem) ((TabControl)tabControl).Items[0]).FindName("defaultScrollViewer");
             if(defaultScrollViewer is ScrollViewer sv)
-            opaqueRectangle.Width = sv.ActualWidth;            
+            {
+                MessageBox.Show("a");
+                opaqueRectangle.Width = sv.ActualWidth;
+
+            }*/
+            var aa = LogicalTreeHelper.FindLogicalNode(this, "defaultScrollViewer");
+            
         }
     }
 }

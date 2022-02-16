@@ -236,7 +236,11 @@ namespace AdvancedWindowsAppearence
         private void ButtonRestore_Click(object sender, RoutedEventArgs e)
         {
             RestoreWindow restoreWindow = new RestoreWindow(Settings);
-            restoreWindow.Owner = this;
+            try
+            {
+                restoreWindow.Owner = this;
+            }
+            catch { }
             restoreWindow.ShowDialog();
         }
 
