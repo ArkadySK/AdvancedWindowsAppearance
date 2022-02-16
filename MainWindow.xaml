@@ -7,7 +7,6 @@
     xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters" xmlns:controls="clr-namespace:AdvancedWindowsAppearence.Controls" x:Name="window"
     x:Class="AdvancedWindowsAppearence.MainWindow"
     mc:Ignorable="d" 
-    BorderThickness="1" BorderBrush="{DynamicResource ThemeColor}"
     Title="Advanced Windows Appearence" Width="850" Height="500" ResizeMode="CanResize">
 
 
@@ -283,7 +282,7 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                         <CheckBox Visibility="Collapsed" x:Name="checkBoxLiveChanges" Content="Preview changes immediatelly" IsChecked="{Binding Settings.RegistrySettingsViewModel.LivePreview}"/>
-                        <TextBlock Foreground="{DynamicResource ForegroundColor}" Visibility="{Binding RegistrySettingsViewModel.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource InfoText}" >Some of the changes made to these settings are applied after restart</TextBlock>
+                        <TextBlock Visibility="{Binding RegistrySettingsViewModel.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}}" Style="{StaticResource InfoText}" >Some of the changes made to these settings are applied after restart</TextBlock>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
