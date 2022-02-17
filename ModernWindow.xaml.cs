@@ -43,13 +43,15 @@ namespace AdvancedWindowsAppearence
         {
             this.Background = System.Windows.Media.Brushes.Transparent;
             titlebarGrid.Opacity = 1;
-
+            windowBorder.BorderBrush = (Brush)App.Current.Resources["ThemeColor"];
         }
 
         private void window_Deactivated(object sender, EventArgs e)
         {           
             this.Background = System.Windows.Media.Brushes.Gray;
             titlebarGrid.Opacity = 0.4;
+            windowBorder.BorderBrush = Brushes.Transparent;
+
         }
 
 
@@ -115,6 +117,7 @@ namespace AdvancedWindowsAppearence
         public void RoundWindow() {
             var windowChrome = WindowChrome.GetWindowChrome(this);
             windowChrome.CornerRadius = new CornerRadius(10);
+            windowBorder.CornerRadius = new CornerRadius(10);
         }
 
         private void contentFrame_ContentRendered(object sender, EventArgs e)
