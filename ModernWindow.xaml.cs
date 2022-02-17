@@ -114,10 +114,10 @@ namespace AdvancedWindowsAppearence
         }
         #endregion
 
-        public void RoundWindow() {
+        public void RoundWindow(double radius) {
             var windowChrome = WindowChrome.GetWindowChrome(this);
-            windowChrome.CornerRadius = new CornerRadius(10);
-            windowBorder.CornerRadius = new CornerRadius(10);
+            windowChrome.CornerRadius = new CornerRadius(radius);
+            windowBorder.CornerRadius = new CornerRadius(radius / 2);
         }
 
         private void contentFrame_ContentRendered(object sender, EventArgs e)
