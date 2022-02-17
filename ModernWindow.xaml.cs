@@ -44,7 +44,7 @@ namespace AdvancedWindowsAppearence
             }
             else
             {
-                App.Current.Resources["ButtonFaceColor"] = SystemColors.ControlColorKey;
+                App.Current.Resources["ButtonFaceColor"] = SystemColors.ControlBrush;
                 App.Current.Resources["BackgroundColor"] = SystemColors.WindowBrush;
                 App.Current.Resources["BackgroundColorTabItems"] = new BrushConverter().ConvertFromString("#BFFFFFFF");
                 App.Current.Resources["ForegroundColor"] = SystemColors.WindowTextBrush;
