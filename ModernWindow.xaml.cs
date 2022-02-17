@@ -29,6 +29,29 @@ namespace AdvancedWindowsAppearence
 
             InitializeComponent();
         }
+
+        /// <summary>
+        /// Update Ui by the selected theme
+        /// </summary>
+        public void UpdateTheme(bool isLightMode)
+        {
+            if (!isLightMode) //force dark mode
+            {
+                App.Current.Resources["ButtonFaceColor"] = new BrushConverter().ConvertFromString("#FF404040");
+                App.Current.Resources["BackgroundColor"] = Brushes.Black;
+                App.Current.Resources["BackgroundColorTabItems"] = new BrushConverter().ConvertFromString("#9F252525");
+                App.Current.Resources["ForegroundColor"] = Brushes.White;
+            }
+            else
+            {
+                App.Current.Resources["ButtonFaceColor"] = SystemColors.ControlColorKey;
+                App.Current.Resources["BackgroundColor"] = SystemColors.WindowBrush;
+                App.Current.Resources["BackgroundColorTabItems"] = new BrushConverter().ConvertFromString("#BFFFFFFF");
+                App.Current.Resources["ForegroundColor"] = SystemColors.WindowTextBrush;
+            }
+            IsLightMode = isLightMode;
+        }
+
         void SetTransparency()
         {
             WindowBlur.SetIsEnabled(this, true);
@@ -131,16 +154,8 @@ namespace AdvancedWindowsAppearence
             
             //ScrollViewer defaultScrollView = (ScrollViewer) (tabControl.Items[0] as TabItem).Content;
             Rectangle opaqueRectangle = (Rectangle)grid.Children[0];
-
             */
-            if (IsLightMode == false) //force dark mode
-            {
-                App.Current.Resources["ButtonFaceColor"] = new BrushConverter().ConvertFromString("#FF404040");
-                App.Current.Resources["BackgroundColor"] = Brushes.Black;
-                App.Current.Resources["BackgroundColorTabItems"] = new BrushConverter().ConvertFromString("#9F252525");
-                App.Current.Resources["ForegroundColor"] = Brushes.White;
-            }
-
+            UpdateTheme(IsLightMode);
         }
     }
 }

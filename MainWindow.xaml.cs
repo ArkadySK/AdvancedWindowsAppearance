@@ -29,7 +29,8 @@ namespace AdvancedWindowsAppearence
     public partial class MainWindow : Window
     {
         GeneralViewModel Settings = new GeneralViewModel();
-        
+        ModernWindow ModernWindow = null;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -49,17 +50,17 @@ namespace AdvancedWindowsAppearence
                 return;
             
             //Windows 10/11 - create new modern window, close the old one
-            ModernWindow modernWindow = new ModernWindow(Settings.RegistrySettingsViewModel.RegistrySettings[5].Checked);
+            ModernWindow = new ModernWindow(Settings.RegistrySettingsViewModel.RegistrySettings[5].Checked);
 
-            modernWindow.Owner = this;
-            modernWindow.Width = this.Width;
-            modernWindow.Height = this.Height;
-            modernWindow.contentFrame.Content = bgGrid;
-            modernWindow.Show();
-            modernWindow.Owner = null;
+            ModernWindow.Owner = this;
+            ModernWindow.Width = this.Width;
+            ModernWindow.Height = this.Height;
+            ModernWindow.contentFrame.Content = bgGrid;
+            ModernWindow.Show();
+            ModernWindow.Owner = null;
 
             if (WinVer >= new Version(10, 0, 22000)) //for Windows 11 - to round corners
-                modernWindow.RoundWindow(14d);
+                ModernWindow.RoundWindow(14d);
             Close();
 
         }
@@ -273,6 +274,13 @@ namespace AdvancedWindowsAppearence
             else
                 Settings.UseThemes = false;
             await Settings.SaveChanges();
+
+            await Task.Delay(200);
+            if(ModernWindow != null)
+            {
+                Dispatcher.Invoke(() => ModernWindow.UpdateTheme(Settings.RegistrySettingsViewModel.RegistrySettings[5].Checked.Value));
+            }
+                       
         }
 
         #endregion
