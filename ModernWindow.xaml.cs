@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Shell;
 
 namespace AdvancedWindowsAppearence
 {
@@ -111,8 +112,9 @@ namespace AdvancedWindowsAppearence
         }
         #endregion
 
-        public void RoundWindow() { 
-            
+        public void RoundWindow() {
+            var windowChrome = WindowChrome.GetWindowChrome(this);
+            windowChrome.CornerRadius = new CornerRadius(10);
         }
 
         private void contentFrame_ContentRendered(object sender, EventArgs e)
