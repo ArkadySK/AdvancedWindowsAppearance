@@ -48,8 +48,11 @@ namespace AdvancedWindowsAppearence
         }
 
         private void window_Deactivated(object sender, EventArgs e)
-        {           
-            this.Background = System.Windows.Media.Brushes.Gray;
+        {
+            if (IsLightMode)
+                this.Background = System.Windows.Media.Brushes.Gray;
+            else
+                this.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF101010");
             titlebarGrid.Opacity = 0.4;
             windowBorder.BorderBrush = Brushes.Gray;
             windowBorder.Opacity = 0.4;
@@ -134,7 +137,7 @@ namespace AdvancedWindowsAppearence
             {
                 App.Current.Resources["ButtonFaceColor"] = new BrushConverter().ConvertFromString("#FF404040");
                 App.Current.Resources["BackgroundColor"] = Brushes.Black;
-                App.Current.Resources["BackgroundColorTabItems"] = new BrushConverter().ConvertFromString("#9F202020");
+                App.Current.Resources["BackgroundColorTabItems"] = new BrushConverter().ConvertFromString("#9F252525");
                 App.Current.Resources["ForegroundColor"] = Brushes.White;
             }
 
