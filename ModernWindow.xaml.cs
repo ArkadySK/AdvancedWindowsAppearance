@@ -44,16 +44,16 @@ namespace AdvancedWindowsAppearence
             this.Background = System.Windows.Media.Brushes.Transparent;
             titlebarGrid.Opacity = 1;
             windowBorder.BorderBrush = (Brush)App.Current.Resources["ThemeColor"];
+            windowBorder.Opacity = 1;
         }
 
         private void window_Deactivated(object sender, EventArgs e)
         {           
             this.Background = System.Windows.Media.Brushes.Gray;
             titlebarGrid.Opacity = 0.4;
-            windowBorder.BorderBrush = Brushes.Transparent;
-
+            windowBorder.BorderBrush = Brushes.Gray;
+            windowBorder.Opacity = 0.4;
         }
-
 
 
         #region Caption Buttons
