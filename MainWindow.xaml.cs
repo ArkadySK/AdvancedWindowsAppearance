@@ -58,8 +58,8 @@ namespace AdvancedWindowsAppearence
             modernWindow.Show();
             modernWindow.Owner = null;
 
-            if (WinVer >= new Version(11, 0)) //for Windows 11 - to round corners
-                modernWindow.RoundWindow(10d);
+            if (WinVer >= new Version(10, 0, 22000)) //for Windows 11 - to round corners
+                modernWindow.RoundWindow(14d);
             Close();
 
         }
