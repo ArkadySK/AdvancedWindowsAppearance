@@ -111,6 +111,10 @@ namespace AdvancedWindowsAppearence
         }
         #endregion
 
+        public void RoundWindow() { 
+            
+        }
+
         private void contentFrame_ContentRendered(object sender, EventArgs e)
         {
             /* in case this is used in a usefull situation

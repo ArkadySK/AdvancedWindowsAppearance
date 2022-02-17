@@ -51,11 +51,17 @@ namespace AdvancedWindowsAppearence
             //Windows 10/11 - create new modern window, close the old one
             ModernWindow modernWindow = new ModernWindow(Settings.RegistrySettingsViewModel.RegistrySettings[5].Checked);
 
-            modernWindow.Owner = this;           
+            modernWindow.Owner = this;
+            modernWindow.Width = this.Width;
+            modernWindow.Height = this.Height;
             modernWindow.contentFrame.Content = bgGrid;
             modernWindow.Show();
             modernWindow.Owner = null;
+
+            if (WinVer >= new Version(11, 0)) //for Windows 11 - to round corners
+                modernWindow.RoundWindow();
             Close();
+
         }
 
         void LoadThemeName()
