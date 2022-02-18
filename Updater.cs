@@ -33,26 +33,35 @@ namespace AdvancedWindowsAppearence
         }
         public async Task<bool> IsUpToDate()
         {
-            Version newVersion = await GetNewVersionName();
+            Version newVersion = await GetNewVersionInfo();
 
             return (newVersion == CurrentVersion);
         }
 
         #region get new version name
-        private Version RemoveV(string version)
+        private Version StringToVersion(string versionString)
         {
-            return new Version(version.Replace("v", ""));
+            versionString = versionString.Replace("v", string.Empty);
+            try
+            {
+                return new Version(versionString);
+
+            }
+            catch {
+                versionString = versionString.Replace("-beta", string.Empty);
+                versionString = versionString.Replace("-alpha", string.Empty);
+                return new Version(versionString);
+            }
         }
 
-        private async Task<Version> GetNewVersionName()
+        public async Task<Version> GetNewVersionInfo()
         {
             if (String.IsNullOrWhiteSpace(RepositoryName) || String.IsNullOrWhiteSpace(RepositoryOwner)) return null;
 
             var allReleases = await _releaseClient.GetAll(RepositoryOwner, RepositoryName);
-            var latestRelease = allReleases.FirstOrDefault(release => !release.Prerelease &&
-                                                                    (RemoveV(release.TagName) > CurrentVersion));
+            var latestRelease = allReleases.FirstOrDefault(release => StringToVersion(release.TagName) > CurrentVersion);
             if (latestRelease != null)
-                LatestVersion = RemoveV(latestRelease.TagName);
+                LatestVersion = StringToVersion(latestRelease.TagName);
             else
                 LatestVersion = CurrentVersion;
             return LatestVersion;
