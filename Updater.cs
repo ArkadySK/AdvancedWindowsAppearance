@@ -21,19 +21,19 @@ namespace AdvancedWindowsAppearence
 
         public Updater()
         {           
-            CurrentVersion = GetCurrentVersion();
+            CurrentVersion = GetCurrentVersionInfo();
 
             Github = new GitHubClient(new ProductHeaderValue(RepositoryName + @"-UpdateCheck"));
             _releaseClient = Github.Repository.Release;
         }
 
-        private Version GetCurrentVersion()
+        public Version GetCurrentVersionInfo()
         {
             return Assembly.GetExecutingAssembly().GetName().Version;
         }
         public async Task<bool> IsUpToDate()
         {
-            Version newVersion = await GetNewVersionInfo();
+            Version newVersion = await GetNewVersionInfoAsync();
 
             return (newVersion == CurrentVersion);
         }
@@ -54,7 +54,7 @@ namespace AdvancedWindowsAppearence
             }
         }
 
-        public async Task<Version> GetNewVersionInfo()
+        public async Task<Version> GetNewVersionInfoAsync()
         {
             if (String.IsNullOrWhiteSpace(RepositoryName) || String.IsNullOrWhiteSpace(RepositoryOwner)) return null;
 

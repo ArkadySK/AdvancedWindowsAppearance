@@ -308,7 +308,7 @@
                 </ComboBox>
             </StackPanel>
             <Button Style="{StaticResource SystemButton}" Grid.Column="0" Margin="5" Content="Backup and restore" Click="ButtonRestore_Click" />
-
+            <TextBlock x:Name="versionNameTextBlock" FontSize="11" Style="{DynamicResource HypertextTextBlockStyle}" Grid.Column="1" VerticalAlignment="Bottom" Margin="5" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
         </Grid>
     </Grid>
 </Window>

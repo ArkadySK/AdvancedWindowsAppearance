@@ -41,20 +41,25 @@ namespace AdvancedWindowsAppearence
 
         private async void window_Loaded(object sender, RoutedEventArgs e)
         {
+            UpdateWindowsLayout(Environment.OSVersion.Version);
+
             Updater updater = new Updater();
+            Version curVersion = updater.GetCurrentVersionInfo();
+            versionNameTextBlock.Text = "Version: " + curVersion.ToString(2);
+
             bool isUpToDate = await updater.IsUpToDate();
 
             if (!isUpToDate)
             {
-                var curVersion = await updater.GetNewVersionInfo();
-                MessageBoxResult result = MessageBox.Show($"New update is available ( {curVersion} ). \n\nDownload now?", "Update Available", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                var newVersion = await updater.GetNewVersionInfoAsync();
+                MessageBoxResult result = MessageBox.Show($"New update is available: {newVersion.ToString(2)} (Current verson: {curVersion.ToString(2)}) \n\nDownload now?", "Update Available", MessageBoxButton.YesNo, MessageBoxImage.Information);
                 if (result == MessageBoxResult.Yes)
                 {             
                     updater.DownloadUpdate();
                 }
+                versionNameTextBlock.Text += "\nUpdate available!";
             }
-
-            UpdateWindowsLayout(Environment.OSVersion.Version);
+            
         }
 
         void UpdateWindowsLayout(Version WinVer)
@@ -298,5 +303,11 @@ namespace AdvancedWindowsAppearence
 
         #endregion
 
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var githubProcess = new Process();
+            githubProcess.StartInfo = new ProcessStartInfo("https://github.com/ArkadySK/AdvancedWindowsAppearance");
+            githubProcess.Start();
+        }
     }
 }
