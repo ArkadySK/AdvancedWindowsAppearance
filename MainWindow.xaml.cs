@@ -39,8 +39,20 @@ namespace AdvancedWindowsAppearence
             LoadThemeName();
         }
 
-        private void window_Loaded(object sender, RoutedEventArgs e)
+        private async void window_Loaded(object sender, RoutedEventArgs e)
         {
+            Updater updater = new Updater();
+            bool isUpToDate = await updater.IsUpToDate();
+
+            if (!isUpToDate)
+            {
+                MessageBoxResult result = MessageBox.Show("New update is available. \n\nDownload now?", "Update Available", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                if (result == MessageBoxResult.Yes)
+                {             
+                    updater.DownloadUpdate();
+                }
+            }
+
             UpdateWindowsLayout(Environment.OSVersion.Version);
         }
 

@@ -13,15 +13,14 @@ namespace AdvancedWindowsAppearence
     {
         private IReleasesClient _releaseClient;
         private GitHubClient Github;
-        string RepositoryOwner;
-        string RepositoryName;
+        private readonly string RepositoryOwner = "ArkadySK";
+        private readonly string RepositoryName = "AdvancedWindowsAppearance";
+        private readonly string PackageName = "AWA"; //the downloading package
         Version CurrentVersion;
         Version LatestVersion;
 
         public Updater()
-        {
-            RepositoryOwner = "ArkadySK";
-            RepositoryName = "AdvancedWindowsAppearance";
+        {           
             CurrentVersion = GetCurrentVersion();
 
             Github = new GitHubClient(new ProductHeaderValue(RepositoryName + @"-UpdateCheck"));
@@ -65,11 +64,10 @@ namespace AdvancedWindowsAppearence
         public void DownloadUpdate()
         {
             const string urlTemplate = "https://github.com/{0}/{1}/releases/download/{2}/{3}";
-            var url = string.Format(urlTemplate, RepositoryOwner, RepositoryName, "v" + LatestVersion, "GbxMapBrowser.zip");
+            var url = string.Format(urlTemplate, RepositoryOwner, RepositoryName, "v" + LatestVersion, PackageName+".zip");
 
             url = url.Replace("&", "^&");
             Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
-
         }
         #endregion
     }
