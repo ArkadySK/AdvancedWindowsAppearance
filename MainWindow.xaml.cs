@@ -46,7 +46,7 @@ namespace AdvancedWindowsAppearence
 
         void UpdateWindowsLayout(Version WinVer)
         {
-            if (WinVer <= new Version(6, 3)) //Windows 8.1 and less, keep standard UI
+            if (WinVer < new Version(10, 0)) //Windows 8.1 and less, keep standard UI
                 return;
             
             //Windows 10/11 - create new modern window, close the old one
