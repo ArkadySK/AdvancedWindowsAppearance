@@ -123,6 +123,7 @@
     <Compile Include="TitleColorsPreviewPage.xaml.cs">
       <DependentUpon>TitleColorsPreviewPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Updater.cs" />
     <Compile Include="WallpaperAppearanceSetting.cs" />
     <Compile Include="WindowBlur.cs" />
     <Page Include="Controls\ClassicButton.xaml">
