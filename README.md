@@ -11,19 +11,22 @@
 - enable hidden Aero Lite style for your theme
 - backup and restore your settings
 - export to reg file
+- auto update
+- automatic switch to dark mode when enabled by system
+- modern titlebar with transparency on Windows 10/11, native on the older version(s) of Windows
 - and much more!
 
 
 ### Supported OSes and requirements:
-- Windows 8.1 Windows 10 and Windows 11
-- .NET Framework 4.5, pre-installed on both Win 8.1 and Win 10
+- Windows 8.1, Windows 10 and Windows 11 (also works flawlessly on Windows 7)
+- .NET Framework 4.5, pre-installed on Win 8.1, Win 10 and Win 11
 
 ## Images
 
-![AWA title colors](https://user-images.githubusercontent.com/74670743/148690949-552d76d5-a83e-4421-abdb-a81dd880b057.png)
+![obrázok](https://user-images.githubusercontent.com/74670743/154768557-e3b1c987-eb5d-4377-bb6f-a91dbcf58ab6.png)
 
-![AWA colors](https://user-images.githubusercontent.com/74670743/148690951-b649f654-2cfb-455a-b46a-2285fe55bd22.png)
+![AWA colors](https://user-images.githubusercontent.com/74670743/154767981-cbf717be-37fb-419b-8a73-80ef7de22c57.png)
 
 ![AWA fonts](https://user-images.githubusercontent.com/74670743/148690952-143a661f-eb97-4363-bb35-dba1dab256c3.png)
 
-![obrázok](https://user-images.githubusercontent.com/74670743/147246525-3faf5ad9-c6ec-4e75-a938-c44bcad47c97.png)
+![obrázok](https://user-images.githubusercontent.com/74670743/154768329-6fcdccb1-b89a-4ba6-9771-8115b9959395.png)
