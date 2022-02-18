@@ -168,7 +168,7 @@
                         </Grid.RowDefinitions>
                         <Label Content="Font:" Grid.Row="1" Foreground="{DynamicResource ForegroundColor}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Grid.Column="0" HorizontalContentAlignment="Right" Margin="5"/>
 
-                        <ComboBox x:Name="comboBoxFonts" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" ItemsSource="{Binding FontSettings}" SelectedIndex="0" Margin="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center">
+                        <ComboBox x:Name="comboBoxFonts" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" ItemsSource="{Binding FontSettings}" SelectedIndex="0" Margin="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" BorderBrush="{x:Null}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <Label Padding="0" Content="{Binding Name}"/>
@@ -176,7 +176,7 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
 
-                        <ComboBox x:Name="comboBoxFont" Text="{Binding Path=SelectedItem.FontName, ElementName=comboBoxFonts, Mode=OneWay}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Grid.Column="1" Grid.Row="1" MinWidth="100" Margin="2" SelectionChanged="comboBoxFont_SelectionChanged" VerticalContentAlignment="Center"/>
+                        <ComboBox x:Name="comboBoxFont" Text="{Binding Path=SelectedItem.FontName, ElementName=comboBoxFonts, Mode=OneWay}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Grid.Column="1" Grid.Row="1" MinWidth="100" Margin="2" SelectionChanged="comboBoxFont_SelectionChanged" VerticalContentAlignment="Center" BorderBrush="{x:Null}"/>
                         <TextBox x:Name="textBlockPreview" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Margin="2" Padding="0" FontSize="{Binding Text, ElementName=comboBoxFontSize, Mode=OneWay}" VerticalContentAlignment="Center"
                              Foreground="{Binding SelectedItem.ItemColor, ElementName=comboBoxFonts, Converter={StaticResource brushToColor}, Mode=OneWay}" Text="The quick brown fox jumps over the lazy dog" FontWeight="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" 
                              FontStyle="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" FontFamily="{Binding SelectedItem.Font, ElementName=comboBoxFonts, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"/>

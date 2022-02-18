@@ -8,7 +8,7 @@
         <ResourceDictionary >
             <FontFamily x:Key="Segoe MDL2 Assets">./Fonts/segoe-mdl2-assets.ttf#Segoe MDL2 Assets</FontFamily>
             <SolidColorBrush x:Key="ThemeColor"/>
-            <SolidColorBrush x:Key="ButtonFaceColor"/>
+            <SolidColorBrush x:Key="ButtonFaceColor" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
             <SolidColorBrush x:Key="BackgroundColor" Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}"/>
             <SolidColorBrush x:Key="BackgroundColorTabItems" Color="#BFFFFFFF"/>
             <SolidColorBrush x:Key="ForegroundColor" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
