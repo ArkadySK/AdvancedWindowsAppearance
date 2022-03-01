@@ -64,6 +64,12 @@ namespace AdvancedWindowsAppearence
 
         void UpdateWindowsLayout(Version WinVer)
         {
+            if (WinVer < new Version(6, 2))
+            {
+                LinearGradientBrush buttonBrush = new LinearGradientBrush(System.Windows.SystemColors.ControlColor, System.Windows.SystemColors.ControlLightColor, 90);
+                App.Current.Resources["ButtonFaceColor"] = buttonBrush;
+            }
+
             if (WinVer < new Version(10, 0)) //Windows 8.1 and less, keep standard UI
                 return;
             
