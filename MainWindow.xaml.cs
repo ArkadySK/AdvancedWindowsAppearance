@@ -66,7 +66,6 @@ namespace AdvancedWindowsAppearence
         {
             if (WinVer < new Version(6, 2))
             {
-                //LinearGradientBrush buttonBrush = new LinearGradientBrush(System.Windows.SystemColors.ControlColor, System.Windows.SystemColors.ControlLightColor, 90);
                 LinearGradientBrush buttonBrush = new LinearGradientBrush(
                     new GradientStopCollection(
                         new GradientStop[]
