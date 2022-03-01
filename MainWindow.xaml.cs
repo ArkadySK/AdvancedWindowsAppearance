@@ -66,7 +66,16 @@ namespace AdvancedWindowsAppearence
         {
             if (WinVer < new Version(6, 2))
             {
-                LinearGradientBrush buttonBrush = new LinearGradientBrush(System.Windows.SystemColors.ControlColor, System.Windows.SystemColors.ControlLightColor, 90);
+                //LinearGradientBrush buttonBrush = new LinearGradientBrush(System.Windows.SystemColors.ControlColor, System.Windows.SystemColors.ControlLightColor, 90);
+                LinearGradientBrush buttonBrush = new LinearGradientBrush(
+                    new GradientStopCollection(
+                        new GradientStop[]
+                        {
+                            new GradientStop(System.Windows.SystemColors.ControlColor, 0.5),
+                            new GradientStop(System.Windows.SystemColors.ControlLightColor, 0.5)
+                        }),
+                    90
+                    );
                 App.Current.Resources["ButtonFaceColor"] = buttonBrush;
             }
 
