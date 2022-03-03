@@ -32,7 +32,7 @@
         </Grid.RowDefinitions>
         <Rectangle x:Name="opaqueRectangle" Fill="{DynamicResource BackgroundColor}" Width="{Binding ActualWidth, ElementName=defaultScrollViewer}" HorizontalAlignment="Right" Margin="0 -200" Grid.RowSpan="3" />
 
-        <Grid Panel.ZIndex="1000"  Visibility="{Binding IsSavingInProgress, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Grid Panel.ZIndex="1000"  Visibility="{Binding IsSavingInProgress, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Hidden}">
             <Rectangle Fill="{DynamicResource BackgroundColor}" Opacity=".88"/>
             <TextBlock Text="Saving..." Style="{StaticResource InfoText}" VerticalAlignment="Center"/>
         </Grid>
@@ -276,7 +276,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE9F5;"/>
-                        <Label Foreground="{DynamicResource ForegroundColor}" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}">Modern Apps Settings</Label>
+                        <Label Foreground="{DynamicResource ForegroundColor}" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}">Other Settings</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
