@@ -124,6 +124,7 @@ namespace AdvancedWindowsAppearence
         {
             if (this.WindowState != WindowState.Maximized)
             {
+                this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
                 Maximize();
             }
             else
