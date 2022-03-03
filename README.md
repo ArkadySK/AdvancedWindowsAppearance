@@ -32,6 +32,10 @@
 ![obrázok](https://user-images.githubusercontent.com/74670743/154768329-6fcdccb1-b89a-4ba6-9771-8115b9959395.png)
 
 
-Credits and extras:
+
+
+## Credits and extras:
+
 WindowBlur.cs class - by walterlv: https://gist.github.com/walterlv/752669f389978440d344941a5fcd5b00
+
 Octokit: https://github.com/octokit/octokit.net
