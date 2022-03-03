@@ -102,6 +102,7 @@
     <Compile Include="Controls\ClassicButton.xaml.cs">
       <DependentUpon>ClassicButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BooleanToBlurEffectConverter.cs" />
     <Compile Include="Converters\BrushToColorConverter.cs" />
     <Compile Include="Converters\DrawingColorToMediaColorConverter.cs" />
     <Compile Include="Converters\BooleanToFontStyleConverter.cs" />

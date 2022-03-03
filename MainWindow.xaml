@@ -21,6 +21,7 @@
             <converters:BooleanToFontWeightConverter x:Key="BooleanToFontWeight"/>
             <converters:BooleanToFontStyleConverter x:Key="BooleanToFontStyle"/>
             <converters:MultiMarginConverter x:Key="multiMargin"/>
+            <converters:BooleanToBlurEffectConverter x:Key="BooleanToBlurEffect"/>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -31,8 +32,13 @@
         </Grid.RowDefinitions>
         <Rectangle x:Name="opaqueRectangle" Fill="{DynamicResource BackgroundColor}" Width="{Binding ActualWidth, ElementName=defaultScrollViewer}" HorizontalAlignment="Right" Margin="0 -200" Grid.RowSpan="3" />
 
+        <Grid Panel.ZIndex="1000"  Visibility="{Binding IsSavingInProgress, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Rectangle Fill="{DynamicResource BackgroundColor}" Opacity=".88"/>
+            <TextBlock Text="Saving..." Style="{StaticResource InfoText}" VerticalAlignment="Center"/>
+        </Grid>
+        
         <!--Main TabControl-->
-        <TabControl TabStripPlacement="Left" Margin="-1 0 0 0" x:Name="colorsTab" BorderThickness="0" Background="{x:Null}">
+        <TabControl Effect="{Binding IsSavingInProgress, Converter={StaticResource BooleanToBlurEffect}}" TabStripPlacement="Left" Margin="-1 0 0 0" x:Name="colorsTab" BorderThickness="0" Background="{x:Null}">
 
             <!-- Aero settings -->
             <TabItem Style="{StaticResource DefaultTabStyle}">

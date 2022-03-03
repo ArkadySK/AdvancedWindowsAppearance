@@ -33,6 +33,16 @@ namespace AdvancedWindowsAppearence
 
         public string ThemeName {get; set;}
     
+        bool _isSavingInProgress = false;
+        public bool IsSavingInProgress 
+        { 
+            get => _isSavingInProgress; 
+            set { 
+                _isSavingInProgress = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         public string ThemeStyle = "";
 
@@ -122,7 +132,7 @@ namespace AdvancedWindowsAppearence
         }
         #endregion
 
-        void KillDWM()
+        async Task KillDWM()
         {
             var processes = Process.GetProcesses();
             foreach (Process p in processes)
@@ -131,7 +141,7 @@ namespace AdvancedWindowsAppearence
                 {
                     try
                     {
-                        p.Kill();
+                        await Task.Run(p.Kill);                     
                     }
                     catch
                     {
@@ -164,15 +174,20 @@ namespace AdvancedWindowsAppearence
         #region Save
         public async Task SaveChanges()
         {
-            if (UseThemes)
-                await SaveToTheme();  
+            IsSavingInProgress = true;
+            if (UseThemes) 
+                await SaveToTheme();
             else
+            {
                 await SaveToRegistry();
+                await Task.Delay(2000);
+                await KillDWM();
+            }
 
             await RegistrySettingsViewModel.SaveAll();
             await AeroColorsViewModel.SaveAll();
-            //KillDWM(); //not needed?
             MessageBox.Show("You need to restart to apply these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
+            IsSavingInProgress = false;
         }
 
         async Task SaveToRegistry()
@@ -190,6 +205,8 @@ namespace AdvancedWindowsAppearence
                 tasks.Add(Task.Run(() => f.SaveToRegistry()));
                 f.IsEdited = false;
             }
+
+            ThemeColor.SaveToRegistry();
             await Task.WhenAll(tasks);
         }
 
