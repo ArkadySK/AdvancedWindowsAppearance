@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:AdvancedWindowsAppearence"
         xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters" xmlns:controls="clr-namespace:AdvancedWindowsAppearence.Controls" x:Name="window"     
         mc:Ignorable="d"
+        Title="Advanced Windows Appearance"
         Activated="window_Activated" Deactivated="window_Deactivated"
         AllowsTransparency="False" WindowStyle="None" 
         Background="#33000000" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
