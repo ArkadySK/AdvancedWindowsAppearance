@@ -61,6 +61,6 @@
             </StackPanel>
 
         </Grid>
-        <Frame x:Name="contentFrame" Panel.ZIndex="-10" Margin="1" Grid.Row="1" ContentRendered="contentFrame_ContentRendered"/>
+        <Frame x:Name="contentFrame" Panel.ZIndex="-10" Margin="-1 1 1 1" Grid.Row="1" ContentRendered="contentFrame_ContentRendered"/>
     </Grid>
 </Window>
