@@ -36,8 +36,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Border x:Name="windowBorder" BorderThickness="1" BorderBrush="{DynamicResource ThemeColor}" Grid.RowSpan="2">
+
+        <Border x:Name="windowBorder" BorderThickness="1" Panel.ZIndex="10" BorderBrush="{DynamicResource ThemeColor}" Grid.RowSpan="2">
         </Border>
+
         <!--Window Titlebar-->
         <Grid x:Name="titlebarGrid" Panel.ZIndex="100" VerticalAlignment="Top" Margin="1" MouseDown="Grid_MouseDown" Background="#02FFFFFF">
             <Grid.ColumnDefinitions>
@@ -62,6 +64,6 @@
             </StackPanel>
 
         </Grid>
-        <Frame x:Name="contentFrame" Panel.ZIndex="-10" Margin="-1 1 1 1" Grid.Row="1" ContentRendered="contentFrame_ContentRendered"/>
+        <Frame x:Name="contentFrame" Margin="-1 1 1 1" Grid.Row="1" ContentRendered="contentFrame_ContentRendered"/>
     </Grid>
 </Window>
