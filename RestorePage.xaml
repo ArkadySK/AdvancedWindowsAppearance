@@ -1,4 +1,4 @@
-﻿<Window x:Class="AdvancedWindowsAppearence.RestoreWindow"
+﻿<Page x:Class="AdvancedWindowsAppearence.RestorePage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:AdvancedWindowsAppearence"
         mc:Ignorable="d"
         Background="{DynamicResource BackgroundColor}"
-        Title="Backup and restore" SizeToContent="Height" WindowStartupLocation="CenterOwner" Width="469" ResizeMode="NoResize">
-    <Window.Resources>
+        Title="Backup and restore">
+    <Page.Resources>
         <Style x:Key="bulletStyle" TargetType="RadioButton">
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
         </Style>
-    </Window.Resources>
+    </Page.Resources>
     
     <Grid>
         <Grid.RowDefinitions>
@@ -54,9 +54,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="exportToReg" Content="Export current settings" Style="{StaticResource SystemButton}" Padding="10 0" Margin="5" Click="exportToReg_Click"/>
-                <Button x:Name="buttonClose" Grid.Column="2" Content="Close" VerticalAlignment="Center" Style="{StaticResource SystemButton}" Margin="5" Padding="20 2" Click="buttonClose_Click"/>
             </Grid>
 
         </StackPanel>
     </Grid>
-</Window>
+</Page>

@@ -37,6 +37,9 @@ namespace AdvancedWindowsAppearence
             this.DataContext = Settings;
             UpdateFontList();
             LoadThemeName();
+
+            //add backup & restore page
+            restoreTabFrame.Content = new RestorePage(Settings);
         }
 
         private async void window_Loaded(object sender, RoutedEventArgs e)
@@ -58,8 +61,7 @@ namespace AdvancedWindowsAppearence
                     updater.DownloadUpdate();
                 }
                 versionNameTextBlock.Text += "\nUpdate available!";
-            }
-            
+            }            
         }
 
         void UpdateWindowsLayout(Version WinVer)
@@ -285,18 +287,6 @@ namespace AdvancedWindowsAppearence
         private void CloseButton_Click(object sender, RoutedEventArgs e) 
         {
             Application.Current.Shutdown();
-        }
-
-        // restore all changes done to registry (colors, fonts, sizes) 
-        private void ButtonRestore_Click(object sender, RoutedEventArgs e)
-        {
-            RestoreWindow restoreWindow = new RestoreWindow(Settings);
-            try
-            {
-                restoreWindow.Owner = this;
-            }
-            catch { }
-            restoreWindow.ShowDialog();
         }
 
         private async void ButtonApply_Click(object sender, RoutedEventArgs e)

@@ -19,22 +19,16 @@ namespace AdvancedWindowsAppearence
     /// <summary>
     /// Interaction logic for RestoreWindow.xaml
     /// </summary>
-    public partial class RestoreWindow : Window
+    public partial class RestorePage : Page
     {
         GeneralViewModel Settings;
         readonly string savePath = Environment.CurrentDirectory + @"\Exported Settings";
 
-        public RestoreWindow(GeneralViewModel generalViewModel)
+        public RestorePage(GeneralViewModel generalViewModel)
         {
             InitializeComponent();
             Settings = generalViewModel;
         }
-
-        private void buttonClose_Click(object sender, RoutedEventArgs e)
-        {
-            Close();    
-        }
-
         async Task Restore()
         {
             MessageBoxResult result = MessageBox.Show("Restore all settings related to advanced theming? \n\nA restart will be required.", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);

@@ -118,8 +118,8 @@
     <Compile Include="Preview.xaml.cs">
       <DependentUpon>Preview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RestoreWindow.xaml.cs">
-      <DependentUpon>RestoreWindow.xaml</DependentUpon>
+    <Compile Include="RestorePage.xaml.cs">
+      <DependentUpon>RestorePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="TitleColorsPreviewPage.xaml.cs">
       <DependentUpon>TitleColorsPreviewPage.xaml</DependentUpon>
@@ -159,7 +159,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RestoreWindow.xaml">
+    <Page Include="RestorePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
