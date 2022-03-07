@@ -59,12 +59,13 @@ namespace AdvancedWindowsAppearence
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            SetTransparency();
+            WindowShadow.DropShadowToWindow(this);
+            SetTransparency();         
         }
 
         private void window_Activated(object sender, EventArgs e)
         {
-            this.Background = System.Windows.Media.Brushes.Transparent;
+            this.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#33000000");
             titlebarGrid.Opacity = 1;
             windowBorder.BorderBrush = (Brush)App.Current.Resources["ThemeColor"];
             windowBorder.Opacity = 1;

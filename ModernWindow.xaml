@@ -7,10 +7,10 @@
         xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters" xmlns:controls="clr-namespace:AdvancedWindowsAppearence.Controls" x:Name="window"     
         mc:Ignorable="d"
         Activated="window_Activated" Deactivated="window_Deactivated"
-        AllowsTransparency="True" WindowStyle="None" 
-        Background="Transparent" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+        AllowsTransparency="False" WindowStyle="None" 
+        Background="#33000000" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
     <WindowChrome.WindowChrome>
-        <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0" ResizeBorderThickness="7">
+        <WindowChrome GlassFrameThickness="10" CornerRadius="0" CaptionHeight="0" ResizeBorderThickness="7" UseAeroCaptionButtons="False">
         </WindowChrome>
     </WindowChrome.WindowChrome>
 
@@ -36,16 +36,16 @@
         </Grid.RowDefinitions>
 
         <Border x:Name="windowBorder" BorderThickness="1" BorderBrush="{DynamicResource ThemeColor}" Grid.RowSpan="2">
-            
         </Border>
         <!--Window Titlebar-->
-        <Grid x:Name="titlebarGrid" Panel.ZIndex="100" VerticalAlignment="Top" MouseDown="Grid_MouseDown" Background="#02FFFFFF">
+        <Grid x:Name="titlebarGrid" Panel.ZIndex="100" VerticalAlignment="Top" Margin="1" MouseDown="Grid_MouseDown" Background="#02FFFFFF">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+
 
             <Label x:Name="label" Padding="15 4 0 4" Grid.Column="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Advanced Windows Appearance" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"  
                     FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" 
@@ -61,6 +61,6 @@
             </StackPanel>
 
         </Grid>
-        <Frame x:Name="contentFrame" Panel.ZIndex="-10" Grid.Row="1" ContentRendered="contentFrame_ContentRendered"/>
+        <Frame x:Name="contentFrame" Panel.ZIndex="-10" Margin="1" Grid.Row="1" ContentRendered="contentFrame_ContentRendered"/>
     </Grid>
 </Window>
