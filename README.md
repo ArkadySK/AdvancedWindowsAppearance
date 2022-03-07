@@ -37,5 +37,6 @@
 ## Credits and extras:
 
 WindowBlur.cs class - by walterlv: https://gist.github.com/walterlv/752669f389978440d344941a5fcd5b00
+WindowShadow class: https://stackoverflow.com/questions/3372303/dropshadow-for-wpf-borderless-window
 
 Octokit: https://github.com/octokit/octokit.net
