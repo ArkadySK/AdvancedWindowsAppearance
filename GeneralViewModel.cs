@@ -302,7 +302,7 @@ namespace AdvancedWindowsAppearence
             {
                 if (!c.HasSize)
                     continue;
-                output += "\n\"" + c.SizeRegistryPath + "\"=\"" + (-15 * c.Size) + "\"";
+                output += "\n\"" + c.SizeRegistryKey + "\"=\"" + (-15 * c.Size) + "\"";
             }
 
             return output;

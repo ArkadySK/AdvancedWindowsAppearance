@@ -10,19 +10,19 @@ namespace AdvancedWindowsAppearence
 {
     public class ColorAppearanceSetting : AppearanceSetting
     {
-        public readonly string SizeRegistryPath;
+        public readonly string SizeRegistryKey;
 
         public ColorAppearanceSetting(string _name, string _regeditPath, string _colorRegistryPath)
         {
             Name = _name;
-            SizeRegistryPath = _regeditPath;
+            SizeRegistryKey = _regeditPath;
             ColorRegistryPath = _colorRegistryPath;
             LoadColorValues();
         }
 
         void LoadColorValues()
         {
-            Size = GetSizeFromRegistry(SizeRegistryPath);
+            Size = GetSizeFromRegistry(SizeRegistryKey);
             ItemColor = GetColorFromRegistry(ColorRegistryPath);
             IsEdited = false;
         }
@@ -51,12 +51,12 @@ namespace AdvancedWindowsAppearence
             var key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics", true);
             float sizeTemp = -15;
 
-            if (SizeRegistryPath == "Shell Icon Size")
+            if (SizeRegistryKey == "Shell Icon Size")
                 sizeTemp = Size.Value;
             else
                 sizeTemp = -15 * Size.Value;
 
-            key.SetValue(SizeRegistryPath, sizeTemp, RegistryValueKind.String);
+            key.SetValue(SizeRegistryKey, sizeTemp, RegistryValueKind.String);
             key.Close();
         }
 
