@@ -40,6 +40,40 @@
         <!--Main TabControl-->
         <TabControl Effect="{Binding IsSavingInProgress, Converter={StaticResource BooleanToBlurEffect}}" TabStripPlacement="Left" Margin="-1 0 0 0" x:Name="colorsTab" BorderThickness="0" Background="{x:Null}">
 
+
+            <!-- Theme Tab -->
+            <TabItem Style="{StaticResource DefaultTabStyle}" >
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE771;"/>
+                        <Label Foreground="{DynamicResource ForegroundColor}" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}">Theme Settings</Label>
+                    </StackPanel>
+                </TabItem.Header>
+                <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <StackPanel Margin="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="200"/>
+                                <ColumnDefinition Width="270"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Padding="2" VerticalContentAlignment="Center" Foreground="{DynamicResource ForegroundColor}">Theme Name</Label>
+                            <TextBox FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2" VerticalContentAlignment="Center" MinHeight="35" x:Name="textBoxThemeName" Grid.Column="1" Text="{Binding ThemeName}"/>
+                        </Grid>
+
+                        <CheckBox Margin="0 15 5 1" x:Name="checkBoxOverwriteThemeStyle" Grid.Row="1" Content="Overwrite theme style" Foreground="{DynamicResource ForegroundColor}" 
+                              FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="CheckBoxOverwriteThemeStyle_Click" Checked="checkBoxOverwriteThemeStyle_Checked"/>
+                        <StackPanel x:Name="stackPanelAeroSettingsButtons"  Margin="2" HorizontalAlignment="Center" IsEnabled="false" >
+                            <RadioButton Content="Aero (Windows default)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Padding="2" VerticalContentAlignment="Center" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="ToggleButtonAero_Click"/>
+                            <RadioButton Content="Aero Lite (has window border, better support for classic colors)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Padding="2" VerticalContentAlignment="Center" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="ToggleButtonAeroLite_Click"/>
+                            <RadioButton Content="High Contrast (more color options)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Click="ToggleButtonHighContrast_Click" Visibility="Collapsed"/>
+                        </StackPanel>
+                        <Button x:Name="buttonOpenControlPanel" Content="Open themes control panel" Padding="10 0" Style="{StaticResource SystemButton}" HorizontalAlignment="Left" Margin="5" Click="buttonOpenControlPanel_Click"/>
+                        <TextBlock Margin="5" Style="{StaticResource HypertextTextBlockStyle}" Text="Open folder with saved themes" PreviewMouseDown="TextBlockOpenThemesFolder_PreviewMouseDown"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
             <!-- Aero settings -->
             <TabItem Style="{StaticResource DefaultTabStyle}">
                 <TabItem.Header>
@@ -233,40 +267,6 @@
                         <!--Fonts Preview (Classic colors) -->
                         <Frame Grid.Row="3" Margin="0 5 0 0" Grid.ColumnSpan="6" Source="Preview.xaml"/>
                     </Grid>
-                </ScrollViewer>
-            </TabItem>
-
-
-            <!-- Theme Tab -->
-            <TabItem Style="{StaticResource DefaultTabStyle}" >
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE771;"/>
-                        <Label Foreground="{DynamicResource ForegroundColor}" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}">Theme Settings</Label>
-                    </StackPanel>
-                </TabItem.Header>
-                <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                    <StackPanel Margin="5">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition MinWidth="200"/>
-                                <ColumnDefinition Width="270"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Label FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Padding="2" VerticalContentAlignment="Center" Foreground="{DynamicResource ForegroundColor}">Theme Name</Label>
-                            <TextBox FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2" VerticalContentAlignment="Center" MinHeight="35" x:Name="textBoxThemeName" Grid.Column="1" Text="{Binding ThemeName}"/>
-                        </Grid>
-
-                        <CheckBox Margin="0 15 5 1" x:Name="checkBoxOverwriteThemeStyle" Grid.Row="1" Content="Overwrite theme style" Foreground="{DynamicResource ForegroundColor}" 
-                              FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="CheckBoxOverwriteThemeStyle_Click" Checked="checkBoxOverwriteThemeStyle_Checked"/>
-                        <StackPanel x:Name="stackPanelAeroSettingsButtons"  Margin="2" HorizontalAlignment="Center" IsEnabled="false" >
-                            <RadioButton Content="Aero (Windows default)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Padding="2" VerticalContentAlignment="Center" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="ToggleButtonAero_Click"/>
-                            <RadioButton Content="Aero Lite (has window border, better support for classic colors)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Padding="2" VerticalContentAlignment="Center" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="ToggleButtonAeroLite_Click"/>
-                            <RadioButton Content="High Contrast (more color options)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Click="ToggleButtonHighContrast_Click" Visibility="Collapsed"/>
-                        </StackPanel>
-                        <Button x:Name="buttonOpenControlPanel" Content="Open themes control panel" Padding="10 0" Style="{StaticResource SystemButton}" HorizontalAlignment="Left" Margin="5" Click="buttonOpenControlPanel_Click"/>
-                        <TextBlock Margin="5" Style="{StaticResource HypertextTextBlockStyle}" Text="Open folder with saved themes" PreviewMouseDown="TextBlockOpenThemesFolder_PreviewMouseDown"/>
-                    </StackPanel>
                 </ScrollViewer>
             </TabItem>
 
