@@ -58,9 +58,9 @@
             <!--Title Buttons  Height="{Binding MinHeight, ElementName=label}"       -->
 
             <StackPanel Panel.ZIndex="100" Grid.Column="3" Orientation="Horizontal">
-                <Button x:Name="minimizeButton" Style="{StaticResource CaptionButtonWin10}" Foreground="{DynamicResource ForegroundColor}" Grid.Column="2" Content="&#xE949;" Click="minimizeButton_Click"/>
-                <Button x:Name="maximizeButton" Style="{StaticResource CaptionButtonWin10}" Foreground="{DynamicResource ForegroundColor}" Grid.Column="3" Content="&#xE739;" Click="maximizeButton_Click"/>
-                <Button x:Name="closeButton" Style="{StaticResource CaptionButtonCloseWin10}" Foreground="{DynamicResource ForegroundColor}" Grid.Column="4" Content="&#xE106;" Click="closeButton_Click_1"/>
+                <Button x:Name="minimizeButton" Style="{StaticResource CaptionButtonWin10}" Foreground="{DynamicResource ForegroundColor}" Grid.Column="2" Content="&#xE949;" IsTabStop="False" Click="minimizeButton_Click"/>
+                <Button x:Name="maximizeButton" Style="{StaticResource CaptionButtonWin10}" Foreground="{DynamicResource ForegroundColor}" Grid.Column="3" Content="&#xE739;" IsTabStop="False" Click="maximizeButton_Click"/>
+                <Button x:Name="closeButton" Style="{StaticResource CaptionButtonCloseWin10}" Foreground="{DynamicResource ForegroundColor}" Grid.Column="4" Content="&#xE106;" IsTabStop="False" Click="closeButton_Click_1"/>
             </StackPanel>
 
         </Grid>
