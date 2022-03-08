@@ -24,8 +24,8 @@
             <Style x:Key="SystemComboBox" TargetType="ComboBox">
                 <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
                 <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSize}}"/>
-                <Setter Property="BorderBrush" Value="{x:Null}"/>
-                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Background" Value="{x:Null}"/>
+                <Setter Property="BorderThickness" Value="2"/>
                 <Setter Property="MinHeight" Value="30"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
             </Style>
