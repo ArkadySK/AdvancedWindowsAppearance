@@ -22,6 +22,7 @@
             <converters:BooleanToFontStyleConverter x:Key="BooleanToFontStyle"/>
             <converters:MultiMarginConverter x:Key="multiMargin"/>
             <converters:BooleanToBlurEffectConverter x:Key="BooleanToBlurEffect"/>
+            <converters:BooleanToIntConverter x:Key="BooleanToInt"/>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -61,12 +62,18 @@
                             <TextBox FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2" VerticalContentAlignment="Center" MinHeight="35" x:Name="textBoxThemeName" Grid.Column="1" Text="{Binding ThemeName}"/>
                         </Grid>
 
+                        <!--Dark / Light modes selection-->
                         <StackPanel Margin="0 10 0 0">
                             <TextBlock Margin="2" Foreground="{DynamicResource ForegroundColor}" Text="Apps color mode: "/>
-                            <ComboBox Style="{StaticResource SystemComboBox}" Margin="2" Width="300" HorizontalAlignment="Left"/>
+                            <ComboBox Style="{StaticResource SystemComboBox}" Margin="2" Width="300" HorizontalAlignment="Left" SelectedIndex="{Binding RegistrySettingsViewModel.RegistrySettings[5].Checked, Converter={StaticResource BooleanToInt}, Mode=TwoWay}">
+                                <ComboBoxItem>Dark</ComboBoxItem>
+                                <ComboBoxItem>Light</ComboBoxItem>
+                            </ComboBox>
                             <TextBlock Margin="2" Foreground="{DynamicResource ForegroundColor}" Text="Windows color mode: "/>
-                            <ComboBox Style="{StaticResource SystemComboBox}" Margin="2" Width="300" HorizontalAlignment="Left"/>
-                        </StackPanel>
+                            <ComboBox Style="{StaticResource SystemComboBox}" Margin="2" Width="300" HorizontalAlignment="Left" SelectedIndex="{Binding RegistrySettingsViewModel.RegistrySettings[6].Checked, Converter={StaticResource BooleanToInt}, Mode=TwoWay}">
+                                <ComboBoxItem>Dark</ComboBoxItem>
+                                <ComboBoxItem>Light</ComboBoxItem>
+                            </ComboBox></StackPanel>
                         
                         <CheckBox Margin="0 10 5 1" x:Name="checkBoxOverwriteThemeStyle" Grid.Row="1" Content="Overwrite theme style" Foreground="{DynamicResource ForegroundColor}" 
                               FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="CheckBoxOverwriteThemeStyle_Click" Checked="checkBoxOverwriteThemeStyle_Checked"/>
