@@ -50,7 +50,7 @@
                         <Label Foreground="{DynamicResource ForegroundColor}" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}">Theme Settings</Label>
                     </StackPanel>
                 </TabItem.Header>
-                <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ScrollViewer x:Name="defaultScrollViewer" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <StackPanel Margin="5">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -96,7 +96,7 @@
                         <Label Foreground="{DynamicResource ForegroundColor}" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}">Title Colors</Label>
                     </StackPanel>
                 </TabItem.Header>
-                <ScrollViewer x:Name="defaultScrollViewer" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <Grid Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -320,7 +320,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xF61E;"/>
-                        <Label Foreground="{DynamicResource ForegroundColor}" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}">Backup and restore</Label>
+                        <Label Foreground="{DynamicResource ForegroundColor}" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}">Backup and Restore</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <Frame x:Name="restoreTabFrame" Margin="5"/>
