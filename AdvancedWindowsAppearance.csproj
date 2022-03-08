@@ -99,6 +99,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClassicWindowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClassicWindowForm.Designer.cs">
+      <DependentUpon>ClassicWindowForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ClassicButton.xaml.cs">
       <DependentUpon>ClassicButton.xaml</DependentUpon>
     </Compile>
@@ -183,6 +189,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="ClassicWindowForm.resx">
+      <DependentUpon>ClassicWindowForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
