@@ -95,7 +95,7 @@ namespace AdvancedWindowsAppearence
                 new ColorAppearanceSetting("Button Light (Top & Left Border)", "", "ButtonLight"), //I
                 new ColorAppearanceSetting("Button Shadow (Edge of Right & Bottom Border)", "", "ButtonShadow"), //I
                 new ColorAppearanceSetting("Button Text Color", "", "ButtonText"), //I
-                new ColorAppearanceSetting("Caption Buttons Height", "CaptionHeight", ""), //., I
+                new ColorAppearanceSetting("Caption Buttons Width", "CaptionWidth", ""), //., I
                 new ColorAppearanceSetting("Desktop", "", "Background"),//I
                 new ColorAppearanceSetting("Gray Text", "", "GrayText"), //I
                 new ColorAppearanceSetting("Hilight", "", "Hilight"), //I
@@ -115,6 +115,7 @@ namespace AdvancedWindowsAppearence
                 new ColorAppearanceSetting("Window", "", "Window"),//I
                 new ColorAppearanceSetting("Window Border Width", "BorderWidth", ""), //I
                 new ColorAppearanceSetting("Window Padded Border", "PaddedBorderWidth", "WindowFrame"), //NU, I
+                new ColorAppearanceSetting("WidthWindows Title Height", "CaptionHeight", "") //., I
             };
         }
 
