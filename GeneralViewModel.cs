@@ -115,7 +115,7 @@ namespace AdvancedWindowsAppearence
                 new ColorAppearanceSetting("Window", "", "Window"),//I
                 new ColorAppearanceSetting("Window Border Width", "BorderWidth", ""), //I
                 new ColorAppearanceSetting("Window Padded Border", "PaddedBorderWidth", "WindowFrame"), //NU, I
-                new ColorAppearanceSetting("WidthWindows Title Height", "CaptionHeight", "") //., I
+                new ColorAppearanceSetting("Windows Title Height", "CaptionHeight", "") //., I
             };
         }
 
