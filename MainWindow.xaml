@@ -343,7 +343,7 @@
                 <Button Style="{StaticResource SystemButton}" Width="220" Grid.Column="2" Margin="5" Content="Close" Click="CloseButton_Click"/>
             </StackPanel>
 
-            <TextBlock x:Name="versionNameTextBlock" FontSize="11" Style="{DynamicResource HypertextTextBlockStyle}" VerticalAlignment="Bottom" Margin="5" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+            <TextBlock HorizontalAlignment="Left" x:Name="versionNameTextBlock" FontSize="11" Style="{DynamicResource HypertextTextBlockStyle}" VerticalAlignment="Bottom" Margin="5" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
         </Grid>
     </Grid>
 </Window>
