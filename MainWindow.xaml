@@ -172,6 +172,8 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <ComboBox x:Name="comboBoxItems" Style="{StaticResource SystemComboBox}" MinWidth="300" ItemsSource="{Binding ColorSettings}" SelectedIndex="13" Grid.Column="0" Margin="2">
                             <ComboBox.ItemTemplate>
@@ -191,6 +193,10 @@
 
                         <!--Classic Colors preview page-->
                         <Frame Source="Preview.xaml" Margin="0 5 0 0" Grid.Row="2" Grid.ColumnSpan="4"/>
+                        <TextBlock x:Name="openClassicWindowTextBlock" Style="{DynamicResource HypertextTextBlockStyle}" Text="Open sample classic window" MouseDown="openClassicWindowTextBlock_MouseDown" Grid.Row="3"/>
+                        <TextBlock Grid.Row="4" Grid.ColumnSpan="4" Style="{StaticResource InfoText}" 
+                                   >The most of these colors and sizes are not applied on modern UWP apps, because each of them uses their own settings.</TextBlock>
+
                     </Grid>
                 </ScrollViewer>
             </TabItem>

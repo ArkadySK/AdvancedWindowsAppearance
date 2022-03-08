@@ -305,13 +305,19 @@ namespace AdvancedWindowsAppearence
                        
         }
 
-        #endregion
-
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var githubProcess = new Process();
             githubProcess.StartInfo = new ProcessStartInfo("https://github.com/ArkadySK/AdvancedWindowsAppearance");
             githubProcess.Start();
+        }
+
+        #endregion
+
+        private void openClassicWindowTextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ClassicWindowForm classicWindowForm = new ClassicWindowForm();
+            classicWindowForm.ShowDialog();
         }
     }
 }
