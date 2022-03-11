@@ -26,7 +26,6 @@ namespace AdvancedWindowsAppearence
         {
             if(isLightMode != null)
                 IsLightMode = isLightMode.Value;
-
             InitializeComponent();
         }
 
@@ -59,6 +58,7 @@ namespace AdvancedWindowsAppearence
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            UpdateTheme(IsLightMode);
             WindowShadow.DropShadowToWindow(this);
             SetTransparency();         
         }
@@ -141,23 +141,5 @@ namespace AdvancedWindowsAppearence
             this.Close();
         }
         #endregion
-
-        public void RoundWindow(double radius) {
-            var windowChrome = WindowChrome.GetWindowChrome(this);
-            windowChrome.CornerRadius = new CornerRadius(radius);
-            windowBorder.CornerRadius = new CornerRadius(radius / 2);
-        }
-
-        private void contentFrame_ContentRendered(object sender, EventArgs e)
-        {
-            /* in case this is used in a usefull situation
-            Grid grid = (Grid)contentFrame.Content;
-            TabControl tabControl = (TabControl)grid.Children[1]; 
-            
-            //ScrollViewer defaultScrollView = (ScrollViewer) (tabControl.Items[0] as TabItem).Content;
-            Rectangle opaqueRectangle = (Rectangle)grid.Children[0];
-            */
-            UpdateTheme(IsLightMode);
-        }
     }
 }

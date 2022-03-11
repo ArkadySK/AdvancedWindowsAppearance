@@ -50,18 +50,26 @@ namespace AdvancedWindowsAppearence
             Version curVersion = updater.GetCurrentVersionInfo();
             versionNameTextBlock.Text = "Version: " + curVersion.ToString(2);
 
-            bool isUpToDate = await updater.IsUpToDate();
-
-            if (!isUpToDate)
+            try
             {
-                var newVersion = await updater.GetNewVersionInfoAsync();
-                MessageBoxResult result = MessageBox.Show($"New update is available: {newVersion.ToString(2)} (Current verson: {curVersion.ToString(2)}) \n\nDownload now?", "Update Available", MessageBoxButton.YesNo, MessageBoxImage.Information);
-                if (result == MessageBoxResult.Yes)
-                {             
-                    updater.DownloadUpdate();
+                bool isUpToDate = await updater.IsUpToDate();
+
+                if (!isUpToDate)
+                {
+                    var newVersion = await updater.GetNewVersionInfoAsync();
+                    MessageBoxResult result = MessageBox.Show($"New update is available: {newVersion.ToString(2)} (Current verson: {curVersion.ToString(2)}) \n\nDownload now?", "Update Available", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        updater.DownloadUpdate();
+                    }
+                    versionNameTextBlock.Text += "\nUpdate available!";
                 }
-                versionNameTextBlock.Text += "\nUpdate available!";
-            }            
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error checking for update: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+                    
         }
 
         void UpdateWindowsLayout(Version WinVer)
