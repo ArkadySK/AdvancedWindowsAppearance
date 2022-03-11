@@ -7,6 +7,23 @@ using System.Windows.Interop;
 
 namespace AdvancedWindowsAppearence
 {
+    public class WindowRounding
+    {
+        // Import dwmapi.dll and define DwmSetWindowAttribute in C# corresponding to the native function.
+        [DllImport("dwmapi.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern long DwmSetWindowAttribute(IntPtr hwnd,
+                                                         DWMWINDOWATTRIBUTE attribute,
+                                                         ref DWM_WINDOW_CORNER_PREFERENCE pvAttribute,
+                                                         uint cbAttribute);
+        public static void RoundWindow(Window window)
+        {
+            IntPtr handle = new WindowInteropHelper(window).EnsureHandle();
+            var preference = DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUND;
+            DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE, ref preference, sizeof(uint));
+                
+        }
+    }
+
     public class WindowShadow
     {
         [DllImport("dwmapi.dll", PreserveSig = true)]
@@ -191,6 +208,23 @@ namespace AdvancedWindowsAppearence
 
     namespace Native
     {
+        // The enum flag for DwmSetWindowAttribute's second parameter, which tells the function what attribute to set.
+        public enum DWMWINDOWATTRIBUTE
+        {
+            DWMWA_WINDOW_CORNER_PREFERENCE = 33
+        }
+
+        // The DWM_WINDOW_CORNER_PREFERENCE enum for DwmSetWindowAttribute's third parameter, which tells the function
+        // what value of the enum to set.
+        public enum DWM_WINDOW_CORNER_PREFERENCE
+        {
+            DWMWCP_DEFAULT = 0,
+            DWMWCP_DONOTROUND = 1,
+            DWMWCP_ROUND = 2,
+            DWMWCP_ROUNDSMALL = 3
+        }
+
+        //type of window style
         internal enum AccentState
         {
             ACCENT_DISABLED,
