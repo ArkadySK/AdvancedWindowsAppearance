@@ -327,12 +327,16 @@ namespace AdvancedWindowsAppearence
 
         private void bgGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            opaqueRectangle.Width = bgGrid.ActualWidth - 320;
-
             if (bgGrid.RenderSize.Width < 700)
+            {
+                opaqueRectangle.Width = bgGrid.ActualWidth;
                 MainTabControl.TabStripPlacement = Dock.Top;
+            }
             else
+            {
+                opaqueRectangle.Width = bgGrid.ActualWidth - 320;
                 MainTabControl.TabStripPlacement = Dock.Left;
+            }
         }
     }
 }
