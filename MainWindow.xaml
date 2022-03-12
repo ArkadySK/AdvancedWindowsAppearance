@@ -26,12 +26,12 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid x:Name="bgGrid">
+    <Grid x:Name="bgGrid" SizeChanged="bgGrid_SizeChanged">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Rectangle x:Name="opaqueRectangle" Fill="{DynamicResource BackgroundColor}" Width="{Binding ActualWidth, ElementName=defaultScrollViewer}" HorizontalAlignment="Right" Margin="0 -200" Grid.RowSpan="3" />
+        <Rectangle x:Name="opaqueRectangle" Fill="{DynamicResource BackgroundColor}" Width="{Binding ActualWidth, ElementName=defaultScrollViewer}" Margin="0 -100" HorizontalAlignment="Right" Grid.RowSpan="3" />
 
         <Grid Panel.ZIndex="1000"  Visibility="{Binding IsSavingInProgress, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Hidden}">
             <Rectangle Fill="{DynamicResource BackgroundColor}" Opacity=".88"/>
@@ -39,7 +39,7 @@
         </Grid>
         
         <!--Main TabControl-->
-        <TabControl Effect="{Binding IsSavingInProgress, Converter={StaticResource BooleanToBlurEffect}}" TabStripPlacement="Left" Margin="-1 0 0 0" x:Name="colorsTab" BorderThickness="0" Background="{x:Null}">
+        <TabControl Effect="{Binding IsSavingInProgress, Converter={StaticResource BooleanToBlurEffect}}" TabStripPlacement="Left" Margin="-1 0 0 0" x:Name="MainTabControl" BorderThickness="0" Background="{x:Null}">
 
 
             <!-- Theme Tab -->
@@ -50,7 +50,7 @@
                         <Label Foreground="{DynamicResource ForegroundColor}" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}">Theme Settings</Label>
                     </StackPanel>
                 </TabItem.Header>
-                <ScrollViewer x:Name="defaultScrollViewer" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <StackPanel Margin="5">
                         <Grid>
                             <Grid.ColumnDefinitions>

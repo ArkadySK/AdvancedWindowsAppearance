@@ -324,5 +324,15 @@ namespace AdvancedWindowsAppearence
             ClassicWindowForm classicWindowForm = new ClassicWindowForm();
             classicWindowForm.ShowDialog();
         }
+
+        private void bgGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            opaqueRectangle.Width = bgGrid.ActualWidth - 320;
+
+            if (bgGrid.RenderSize.Width < 700)
+                MainTabControl.TabStripPlacement = Dock.Top;
+            else
+                MainTabControl.TabStripPlacement = Dock.Left;
+        }
     }
 }
