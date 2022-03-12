@@ -43,7 +43,7 @@
                                            FontSize="{Binding FontSettings[0].Size}" Foreground="{Binding ColorSettings[23].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"
                                            FontWeight="{Binding FontSettings[0].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[0].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}"
                                            VerticalContentAlignment="Center"/>
-                    <Viewbox Grid.Column="3" Height="{Binding MinHeight, ElementName=label}">
+                    <Viewbox Grid.Column="3" MinHeight="{Binding MinHeight, ElementName=label}">
                         <StackPanel Orientation="Horizontal" >
                             <TextBlock Grid.Column="2" Margin="18 6" Text="&#xE949;" FontFamily="{StaticResource Segoe MDL2 Assets}" FontSize="10" Foreground="{Binding ColorSettings[23].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                             <TextBlock Grid.Column="3" Margin="18 6" Text="&#xE739;" FontFamily="{StaticResource Segoe MDL2 Assets}" FontSize="10" Foreground="{Binding ColorSettings[23].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
@@ -78,7 +78,7 @@
                                            FontWeight="{Binding FontSettings[0].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[0].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}"
                                            VerticalContentAlignment="Center"/>
                     <!--Title Buttons-->
-                    <Viewbox Grid.Column="3" Height="{Binding MinHeight, ElementName=label}">
+                    <Viewbox Grid.Column="3" MinHeight="{Binding MinHeight, ElementName=label}">
                         <StackPanel Orientation="Horizontal" >
                             <TextBlock Grid.Column="2" Margin="18 6" Text="&#xE949;" FontFamily="{StaticResource Segoe MDL2 Assets}" FontSize="10" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                             <TextBlock Grid.Column="3" Margin="18 6" Text="&#xE739;" FontFamily="{StaticResource Segoe MDL2 Assets}" FontSize="10" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
