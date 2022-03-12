@@ -61,10 +61,15 @@ namespace AdvancedWindowsAppearence
             AdjustBorder();
         }
 
-        private void AdjustBorder()
+        /// <summary>
+        /// if the window rounding is enabled, adjust the border to it
+        /// </summary>
+        private void AdjustBorder() 
         {
-            if (Environment.OSVersion.Version.Build < 22000)
+            if (!WindowRounding.IsRoundingEnabled()) //if is rounding disabled
                 return;
+            WindowChrome windowChrome = WindowChrome.GetWindowChrome(this);
+            windowChrome.CornerRadius = new CornerRadius(8.0);
             windowBorder.BorderThickness = new Thickness(2);
             MaximizeOffset = 4;
         }
