@@ -21,11 +21,13 @@ namespace AdvancedWindowsAppearence
     public partial class ModernWindow : Window
     {
         bool IsLightMode = true;
+        int MaximizeOffset = 5;
 
         public ModernWindow(bool? isLightMode)
         {
             if(isLightMode != null)
                 IsLightMode = isLightMode.Value;
+            UpdateTheme(IsLightMode);
             InitializeComponent();
         }
 
@@ -51,16 +53,20 @@ namespace AdvancedWindowsAppearence
             IsLightMode = isLightMode;
         }
 
-        void SetTransparency()
-        {
-            WindowBlur.SetIsEnabled(this, true);
-        }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            UpdateTheme(IsLightMode);
+            WindowRounding.RoundWindow(this);
             WindowShadow.DropShadowToWindow(this);
-            SetTransparency();         
+            WindowBlur.SetIsEnabled(this, true);
+            AdjustBorder();
+        }
+
+        private void AdjustBorder()
+        {
+            if (Environment.OSVersion.Version.Build < 22000)
+                return;
+            windowBorder.BorderThickness = new Thickness(2);
+            MaximizeOffset = 4;
         }
 
         private void window_Activated(object sender, EventArgs e)
@@ -83,7 +89,7 @@ namespace AdvancedWindowsAppearence
         }
 
 
-        #region Caption Buttons
+        #region Caption Buttons and actions
 
         void Minimize()
         {
@@ -92,7 +98,7 @@ namespace AdvancedWindowsAppearence
 
         void Maximize()
         {
-            masterGrid.Margin = new Thickness(5);
+            masterGrid.Margin = new Thickness(MaximizeOffset);
             SystemCommands.MaximizeWindow(this);
             maximizeButton.Content = "";
         }
@@ -132,8 +138,6 @@ namespace AdvancedWindowsAppearence
             {
                 Restore();
             }
-
-
         }
 
         private void closeButton_Click_1(object sender, RoutedEventArgs e)

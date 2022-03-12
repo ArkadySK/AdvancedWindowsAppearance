@@ -100,8 +100,6 @@ namespace AdvancedWindowsAppearence
             ModernWindow.contentFrame.Content = bgGrid;
             ModernWindow.Show();
             ModernWindow.Owner = null;
-
-            WindowRounding.RoundWindow(ModernWindow);
             Close();
 
         }
