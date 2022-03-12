@@ -8,7 +8,7 @@
     x:Class="AdvancedWindowsAppearence.MainWindow"
     mc:Ignorable="d" 
     Loaded="window_Loaded"
-    Title="Advanced Windows Appearence" Width="850" Height="500" ResizeMode="CanResize">
+    Title="Advanced Windows Appearence" Width="900" Height="550" ResizeMode="CanResize">
 
 
     <Window.Resources>
@@ -193,7 +193,7 @@
 
                         <!--Classic Colors preview page-->
                         <Frame Source="Preview.xaml" Margin="0 5 0 0" Grid.Row="2" Grid.ColumnSpan="4"/>
-                        <TextBlock x:Name="openClassicWindowTextBlock" Style="{DynamicResource HypertextTextBlockStyle}" Text="Open sample classic window" MouseDown="openClassicWindowTextBlock_MouseDown" Grid.Row="3"/>
+                        <TextBlock Style="{DynamicResource HypertextTextBlockStyle}" Text="Launch sample window with Classic theme" MouseDown="openClassicWindowTextBlock_MouseDown" Grid.Row="3" Grid.ColumnSpan="3"/>
                         <TextBlock Grid.Row="4" Grid.ColumnSpan="4" Style="{StaticResource InfoText}" 
                                    >The most of these colors and sizes are not applied on modern UWP apps, because each of them uses their own settings.</TextBlock>
 
@@ -225,6 +225,8 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Label Content="Font:" Grid.Row="1" Foreground="{DynamicResource ForegroundColor}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Grid.Column="0" HorizontalContentAlignment="Right" Margin="5"/>
 
@@ -286,6 +288,9 @@
 
                         <!--Fonts Preview (Classic colors) -->
                         <Frame Grid.Row="3" Margin="0 5 0 0" Grid.ColumnSpan="6" Source="Preview.xaml"/>
+                        <TextBlock Style="{DynamicResource HypertextTextBlockStyle}" Text="Launch sample window with Classic theme" MouseDown="openClassicWindowTextBlock_MouseDown" Grid.Row="4" Grid.ColumnSpan="6"/>
+                        <TextBlock Grid.Row="5" Grid.ColumnSpan="6" Style="{StaticResource InfoText}" 
+                                   >The most of these font styles are not applied on modern UWP apps, because each of them uses their own settings.</TextBlock>
                     </Grid>
                 </ScrollViewer>
             </TabItem>
