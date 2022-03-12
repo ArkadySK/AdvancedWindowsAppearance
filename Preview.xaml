@@ -91,23 +91,23 @@
 
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="{Binding ColorSettings[12].Size}" />
+                                    <ColumnDefinition Width="{Binding ColorSettings[12].Size}" />
+                                    <ColumnDefinition Width="{Binding ColorSettings[12].Size}" />
                                 </Grid.ColumnDefinitions>
 
                                 <!--Classic Caption Buttons-->
                                 <controls:ClassicButton Grid.Column="3" Margin="1 0 0 0" Style="{StaticResource CaptionButton}" Text="r" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
                                                             TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                                                                                    Width="{Binding ColorSettings[12].Size}" Height="{Binding ColorSettings[32].Size}"
+                                                            Height="{Binding ColorSettings[32].Size}" HorizontalAlignment="Stretch"
                                                             Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
                                 <controls:ClassicButton Grid.Column="2" Style="{StaticResource CaptionButton}" Text="1" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
                                                             TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                                                                                    Width="{Binding ColorSettings[12].Size}" Height="{Binding ColorSettings[32].Size}"                                                 
+                                                            Height="{Binding ColorSettings[32].Size}" HorizontalAlignment="Stretch"
                                                             Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
                                 <controls:ClassicButton Grid.Column="1" Style="{StaticResource CaptionButton}" Text="0" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
                                                             TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                                                                                    Width="{Binding ColorSettings[12].Size}" Height="{Binding ColorSettings[32].Size}"
+                                                            Height="{Binding ColorSettings[32].Size}" HorizontalAlignment="Stretch"
                                                             Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
 
                                 <Label Padding="1" MinHeight="{Binding ColorSettings[32].Size}" Content="Inactive Window" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"  
@@ -130,7 +130,7 @@
                     <Border x:Name="ActiveWindowBorder" Padding="{Binding ColorSettings[31].Size}" Margin="{Binding ColorSettings[30].Size}" Background="{Binding ColorSettings[3].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
 
                         <!--Active Header-->
-                        <Grid VerticalAlignment="Top" >
+                        <Grid VerticalAlignment="Top">
                             <Grid.Background>
                                 <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
                                     <GradientStop Color="{Binding ColorSettings[0].ItemColor, Converter={StaticResource DrawingColorToMediaColorConverter}, Mode=OneWay}"/>
@@ -139,11 +139,10 @@
                             </Grid.Background>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="{Binding ColorSettings[12].Size}" />
+                                <ColumnDefinition Width="{Binding ColorSettings[12].Size}" />
+                                <ColumnDefinition Width="{Binding ColorSettings[12].Size}" />
                             </Grid.ColumnDefinitions>
-
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -153,15 +152,15 @@
                             <!--Classic Caption buttons -->
                             <controls:ClassicButton Grid.Column="3" Margin="1 0 0 1" Style="{StaticResource CaptionButton}" Text="r" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
                                                         TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        Width="{Binding ColorSettings[12].Size}" Height="{Binding ColorSettings[32].Size}"
+                                                        Height="{Binding ColorSettings[32].Size}" HorizontalAlignment="Stretch"
                                                         Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
                             <controls:ClassicButton Grid.Column="2" Style="{StaticResource CaptionButton}" Text="1" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
                                                         TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        Width="{Binding ColorSettings[12].Size}" Height="{Binding ColorSettings[32].Size}"
+                                                        Height="{Binding ColorSettings[32].Size}" HorizontalAlignment="Stretch"
                                                         Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
                             <controls:ClassicButton Grid.Column="1" Style="{StaticResource CaptionButton}" Text="0" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
                                                         TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                                                                                Width="{Binding ColorSettings[12].Size}" Height="{Binding ColorSettings[32].Size}"
+                                                        Height="{Binding ColorSettings[32].Size}" HorizontalAlignment="Stretch"
                                                         Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
 
                             <Label Padding="1" MinHeight="{Binding ColorSettings[32].Size}" Content="Active Window" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}" FontSize="{Binding FontSettings[0].Size}" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"
@@ -223,13 +222,13 @@
                                     </LinearGradientBrush>
                                 </Grid.Background>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="{Binding ColorSettings[12].Size}" />
                                 </Grid.ColumnDefinitions>
 
                                 <controls:ClassicButton Grid.Column="1" Margin="1" Style="{StaticResource CaptionButton}" Text="r" TopLeftColor="{Binding ElementName=buttonLightColor, Path=OpacityMask, Mode=OneWay}" BottomRightEdgeColor="{Binding ElementName=buttonDarkShadowColor, Path=OpacityMask, Mode=OneWay}" 
                                                         TopLeftEdgeColor="{Binding ElementName=buttonHilightColor, Path=OpacityMask, Mode=OneWay}" BottomRightColor="{Binding ElementName=buttonShadowColor, Path=OpacityMask, Mode=OneWay}" 
-                                                        Width="{Binding ColorSettings[12].Size}" Height="{Binding ColorSettings[32].Size}"
+                                                        Height="{Binding ColorSettings[32].Size}" HorizontalAlignment="Stretch"
                                                         Foreground="{Binding ElementName=buttonTextColor, Path=OpacityMask, Mode=OneWay}" Background="{Binding ElementName=buttonFaceColor, Path=OpacityMask, Mode=OneWay}"/>
                                 <Label Padding="1" MinHeight="{Binding ColorSettings[32].Size}" Content="Message Box" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"
                                             FontSize="{Binding FontSettings[0].Size}" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" 
