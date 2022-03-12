@@ -27,10 +27,9 @@
 
 ![AWA colors](https://user-images.githubusercontent.com/74670743/154767981-cbf717be-37fb-419b-8a73-80ef7de22c57.png)
 
-![AWA fonts](https://user-images.githubusercontent.com/74670743/148690952-143a661f-eb97-4363-bb35-dba1dab256c3.png)
+![obrázok](https://user-images.githubusercontent.com/74670743/158037633-b3dfe3fb-73db-471a-9d45-7b362ffb72c3.png)
 
-![obrázok](https://user-images.githubusercontent.com/74670743/154768329-6fcdccb1-b89a-4ba6-9771-8115b9959395.png)
-
+![obrázok](https://user-images.githubusercontent.com/74670743/158037661-87cc94bd-df9c-4a64-b38c-c1422d8c02ee.png)
 
 
 
