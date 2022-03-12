@@ -15,12 +15,17 @@ namespace AdvancedWindowsAppearence
                                                          DWMWINDOWATTRIBUTE attribute,
                                                          ref DWM_WINDOW_CORNER_PREFERENCE pvAttribute,
                                                          uint cbAttribute);
+        public static bool? IsRoundingEnabled;
+
         public static void RoundWindow(Window window)
         {
             IntPtr handle = new WindowInteropHelper(window).EnsureHandle();
             var preference = DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUND;
-            DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE, ref preference, sizeof(uint));
-                
+            long res = DwmSetWindowAttribute(handle, DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE, ref preference, sizeof(uint));
+            if (res == 0)
+                IsRoundingEnabled = true;
+            else
+                IsRoundingEnabled = false;
         }
     }
 
