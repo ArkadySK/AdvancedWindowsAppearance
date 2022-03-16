@@ -325,9 +325,14 @@ namespace AdvancedWindowsAppearence
             classicWindowForm.ShowDialog();
         }
 
+        /// <summary>
+        /// change size and adjust layout if needed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bgGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (bgGrid.RenderSize.Width < 700)
+            if (bgGrid.RenderSize.Width < 750)
             {
                 opaqueRectangle.Width = bgGrid.ActualWidth;
                 MainTabControl.TabStripPlacement = Dock.Top;
