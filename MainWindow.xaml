@@ -201,7 +201,7 @@
                 </ScrollViewer>
             </TabItem>
 
-
+            
             <!-- Font Tab-->
             <TabItem x:Name="fontsTab" Style="{StaticResource DefaultTabStyle}">
                 <TabItem.Header>
@@ -296,6 +296,46 @@
             </TabItem>
 
 
+            <!--Wallpaper-->
+            <TabItem x:Name="wallpaperTab" Style="{StaticResource DefaultTabStyle}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE1C8;"/>
+                        <Label Foreground="{DynamicResource ForegroundColor}" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}">Wallpaper</Label>
+                    </StackPanel>
+                </TabItem.Header>
+                
+                <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
+
+                    <Grid Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!--Wallpaper background preview-->
+                        <Viewbox IsEnabled="False" Margin="0 5">
+                            <Grid Width="160" Height="90" Background="{Binding ColorSettings[13].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
+                                <Image Source="{Binding Wallpaper.Path}" Stretch="Uniform"></Image>
+                            </Grid>
+                        </Viewbox>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Path: " Grid.Column="0" Padding="0" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundColor}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" />
+                            <Label Content="{Binding Wallpaper.Path}" Grid.Column="1" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource ForegroundColor}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" />
+                            <Button Grid.Column="2" MinWidth="100" Style="{DynamicResource SystemButton}">Change</Button>
+                        </Grid>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+
+            
             <!--DWM and Registry Tab (win8 & win10)-->
             <TabItem x:Name="pageModern" Style="{StaticResource DefaultTabStyle}">
                 <TabItem.Header>
@@ -320,7 +360,7 @@
             </TabItem>
 
 
-
+            <!--Restore-->
             <TabItem x:Name="restoreTab" Style="{StaticResource DefaultTabStyle}" >
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
