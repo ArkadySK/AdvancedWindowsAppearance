@@ -333,9 +333,8 @@
                         </Grid>
 
                         <StackPanel Orientation="Vertical" Grid.Row="2">
-                            <TextBlock Text="{Binding Wallpaper.WallpaperStyleRegistrySetting.StyleText}"/>
-                            <ComboBox Style="{StaticResource SystemComboBox}" ItemsSource="{Binding Wallpaper.WallpaperStyleRegistrySetting.WallpaperStyles}" SelectedValue="{Binding Wallpaper.WallpaperStyleRegistrySetting.SelectedWallpaperStyle}"  />
-                            <Label Content="{Binding Wallpaper.WallpaperStyleRegistrySetting.SelectedWallpaperStyle, Mode=OneWay}"/>
+                            <Label Style="{StaticResource SystemLabel}" Content="Wallpaper style: "/>
+                            <ComboBox Style="{StaticResource SystemComboBox}" MinWidth="200" HorizontalAlignment="Left" ItemsSource="{Binding Wallpaper.WallpaperStyleRegistrySetting.WallpaperStyles}" Text="{Binding Wallpaper.WallpaperStyleRegistrySetting.SelectedWallpaperStyle}"/>
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
