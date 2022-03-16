@@ -151,7 +151,7 @@
     <Compile Include="AppearanceSetting.cs" />
     <Compile Include="ColorAppearanceSetting.cs" />
     <Compile Include="GeneralViewModel.cs" />
-    <Compile Include="RegistrySetting.cs" />
+    <Compile Include="BoolRegistrySetting.cs" />
     <Compile Include="RegistrySettingsViewModel.cs" />
     <Compile Include="ThemeSettings.cs" />
     <Compile Include="MainWindow.xaml.cs">

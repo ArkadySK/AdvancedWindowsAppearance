@@ -331,6 +331,12 @@
                             <Label Content="{Binding Wallpaper.Path}" Grid.Column="1" Padding="0" Style="{StaticResource SystemLabel}" />
                             <Button x:Name="changeWallpaper" Grid.Column="2" MinWidth="100" Style="{DynamicResource SystemButton}" Click="changeWallpaper_Click">Change</Button>
                         </Grid>
+
+                        <StackPanel Orientation="Vertical" Grid.Row="2">
+                            <TextBlock Text="{Binding Wallpaper.WallpaperStyleRegistrySetting.StyleText}"/>
+                            <ComboBox Style="{StaticResource SystemComboBox}" ItemsSource="{Binding Wallpaper.WallpaperStyleRegistrySetting.WallpaperStyles}" SelectedValue="{Binding Wallpaper.WallpaperStyleRegistrySetting.SelectedWallpaperStyle}"  />
+                            <Label Content="{Binding Wallpaper.WallpaperStyleRegistrySetting.SelectedWallpaperStyle, Mode=OneWay}"/>
+                        </StackPanel>
                     </Grid>
                 </ScrollViewer>
             </TabItem>
