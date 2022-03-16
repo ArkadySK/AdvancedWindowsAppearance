@@ -15,13 +15,15 @@
 
             <!--default label-->
             <Style x:Key="SystemLabel" TargetType="Label">
-                <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
                 <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MenuFontTextDecorations}}"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="3 5"/>
             </Style>
 
             <Style x:Key="SystemMenuLabel" TargetType="Label" BasedOn="{StaticResource SystemLabel}" >
                 <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MenuFontFamily}}"/>
+                <Setter Property="Padding" Value="5 2"/>
             </Style>
 
             <Style x:Key="SystemButton" TargetType="Button" >

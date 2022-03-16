@@ -47,7 +47,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE771;"/>
-                        <Label Style="{StaticResource SystemMenuLabel}">Theme Settings</Label>
+                        <Label Style="{DynamicResource SystemMenuLabel}">Theme Settings</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
@@ -64,12 +64,12 @@
 
                         <!--Dark / Light modes selection-->
                         <StackPanel Margin="0 10 0 0">
-                            <TextBlock Margin="2" Foreground="{DynamicResource ForegroundColor}" Text="Apps color mode: "/>
+                            <Label Style="{StaticResource SystemLabel}" Content="Apps color mode: "/>
                             <ComboBox Style="{StaticResource SystemComboBox}" Margin="2" Width="300" HorizontalAlignment="Left" SelectedIndex="{Binding RegistrySettingsViewModel.RegistrySettings[5].Checked, Converter={StaticResource BooleanToInt}, Mode=TwoWay}">
                                 <ComboBoxItem>Dark</ComboBoxItem>
                                 <ComboBoxItem>Light</ComboBoxItem>
                             </ComboBox>
-                            <TextBlock Margin="2" Foreground="{DynamicResource ForegroundColor}" Text="Windows color mode: "/>
+                            <Label Style="{StaticResource SystemLabel}" Content="Windows color mode: "/>
                             <ComboBox Style="{StaticResource SystemComboBox}" Margin="2" Width="300" HorizontalAlignment="Left" SelectedIndex="{Binding RegistrySettingsViewModel.RegistrySettings[6].Checked, Converter={StaticResource BooleanToInt}, Mode=TwoWay}">
                                 <ComboBoxItem>Dark</ComboBoxItem>
                                 <ComboBoxItem>Light</ComboBoxItem>
@@ -93,7 +93,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE737;"/>
-                        <Label Style="{StaticResource SystemMenuLabel}">Title Colors</Label>
+                        <Label Style="{DynamicResource SystemMenuLabel}">Title Colors</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
@@ -157,7 +157,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE2B1;"/>
-                        <Label Style="{StaticResource SystemMenuLabel}">Colors and Metrics</Label>
+                        <Label Style="{DynamicResource SystemMenuLabel}">Colors and Metrics</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
@@ -207,7 +207,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE1C8;"/>
-                        <Label Style="{StaticResource SystemMenuLabel}">Fonts</Label>
+                        <Label Style="{DynamicResource SystemMenuLabel}">Fonts</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
@@ -301,7 +301,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xEB9F;"/>
-                        <Label Style="{StaticResource SystemMenuLabel}">Wallpaper</Label>
+                        <Label Style="{DynamicResource SystemMenuLabel}">Wallpaper</Label>
                     </StackPanel>
                 </TabItem.Header>
                 
@@ -328,7 +328,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Label Content="Path: " Grid.Column="0" Padding="0" Style="{StaticResource SystemLabel}" />
-                            <Label Content="{Binding Wallpaper.Path}" Grid.Column="1" Padding="0" Style="{StaticResource SystemLabel}" />
+                            <Label Grid.Column="1" Margin="5 0" Content="{Binding Wallpaper.Path}" Padding="0" Style="{StaticResource SystemLabel}" ToolTip="{Binding Wallpaper.Path}" />
                             <Button x:Name="changeWallpaper" Grid.Column="2" MinWidth="100" Style="{DynamicResource SystemButton}" Click="changeWallpaper_Click">Change</Button>
                         </Grid>
 
@@ -346,7 +346,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE9F5;"/>
-                        <Label Style="{StaticResource SystemMenuLabel}">Other Settings</Label>
+                        <Label Style="{DynamicResource SystemMenuLabel}">Other Settings</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
@@ -370,7 +370,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xF61E;"/>
-                        <Label Style="{StaticResource SystemMenuLabel}">Backup and Restore</Label>
+                        <Label Style="{DynamicResource SystemMenuLabel}">Backup and Restore</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
