@@ -8,7 +8,7 @@ using System.Text;
 
 namespace AdvancedWindowsAppearence
 {
-    public class RegistrySetting : INotifyPropertyChanged
+    public class BoolRegistrySetting : INotifyPropertyChanged
     {
         private bool? _checked;
         public bool? Checked { get => _checked; set
@@ -32,9 +32,9 @@ namespace AdvancedWindowsAppearence
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public RegistrySetting() { }
+        public BoolRegistrySetting() { }
 
-        public RegistrySetting(string name, string registrypath, string registrykey)
+        public BoolRegistrySetting(string name, string registrypath, string registrykey)
         {
             Name = name;
             RegistryKey = registrykey;

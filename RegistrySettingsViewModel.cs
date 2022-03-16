@@ -12,7 +12,7 @@ namespace AdvancedWindowsAppearence
     public class RegistrySettingsViewModel: INotifyPropertyChanged
     {
 
-        public ObservableCollection<RegistrySetting> RegistrySettings { get; set; } = new ObservableCollection<RegistrySetting>();
+        public ObservableCollection<BoolRegistrySetting> RegistrySettings { get; set; } = new ObservableCollection<BoolRegistrySetting>();
 
         private bool _isEdited;
 
@@ -40,10 +40,10 @@ namespace AdvancedWindowsAppearence
         {
             if (minimalWinVer.CompareTo(Environment.OSVersion.Version) >= 0)
             {
-                RegistrySettings.Add(new RegistrySetting());
+                RegistrySettings.Add(new BoolRegistrySetting());
                 return;
             }
-            RegistrySetting registrySetting = new RegistrySetting(name, registrypath, registrykey);
+            BoolRegistrySetting registrySetting = new BoolRegistrySetting(name, registrypath, registrykey);
             registrySetting.PropertyChanged += RegistrySetting_PropertyChanged;
             RegistrySettings.Add(registrySetting);
 
@@ -57,7 +57,7 @@ namespace AdvancedWindowsAppearence
         public async Task SaveAll()
         {
             List<Task> tasks = new List<Task>();
-            foreach (RegistrySetting registrySetting in RegistrySettings)
+            foreach (BoolRegistrySetting registrySetting in RegistrySettings)
             {
                 if (registrySetting == null) continue;
                 if (!registrySetting.Checked.HasValue) continue;

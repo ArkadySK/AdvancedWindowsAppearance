@@ -11,9 +11,12 @@ namespace AdvancedWindowsAppearence
     public class WallpaperAppearanceSetting: AppearanceSetting
     {
         public string Path { get; private set; }
+        public BoolRegistrySetting WallpaperStyleRegistrySetting { get; private set; }
+
         public WallpaperAppearanceSetting()
         {
             Path = GetWallpaperPath();
+            WallpaperStyleRegistrySetting = new BoolRegistrySetting("Wallpaper Style", @"Control Panel\Desktop", "WallpaperStyle");
         }
 
         string GetWallpaperPath()

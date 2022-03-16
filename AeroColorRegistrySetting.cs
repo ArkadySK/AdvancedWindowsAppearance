@@ -11,7 +11,7 @@ using AdvancedWindowsAppearence.Converters;
 
 namespace AdvancedWindowsAppearence
 {
-    public class AeroColorRegistrySetting : RegistrySetting, INotifyPropertyChanged
+    public class AeroColorRegistrySetting : BoolRegistrySetting, INotifyPropertyChanged
     {
 
         private Color? _itemColor;
