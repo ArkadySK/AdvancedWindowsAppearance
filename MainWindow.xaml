@@ -329,7 +329,7 @@
                             </Grid.ColumnDefinitions>
                             <Label Content="Path: " Grid.Column="0" Padding="0" Style="{StaticResource SystemLabel}" />
                             <Label Content="{Binding Wallpaper.Path}" Grid.Column="1" Padding="0" Style="{StaticResource SystemLabel}" />
-                            <Button Grid.Column="2" MinWidth="100" Style="{DynamicResource SystemButton}">Change</Button>
+                            <Button x:Name="changeWallpaper" Grid.Column="2" MinWidth="100" Style="{DynamicResource SystemButton}" Click="changeWallpaper_Click">Change</Button>
                         </Grid>
                     </Grid>
                 </ScrollViewer>
@@ -368,7 +368,9 @@
                         <Label Style="{StaticResource SystemMenuLabel}">Backup and Restore</Label>
                     </StackPanel>
                 </TabItem.Header>
-                <Frame x:Name="restoreTabFrame" Margin="5"/>
+                <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <Frame x:Name="restoreTabFrame" Margin="5"/>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
 

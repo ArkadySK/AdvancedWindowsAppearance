@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace AdvancedWindowsAppearence
 {
     public class WallpaperAppearanceSetting: AppearanceSetting
     {
-        public string Path { get; }
+        public string Path { get; private set; }
         public WallpaperAppearanceSetting()
         {
             Path = GetWallpaperPath();
@@ -25,6 +26,14 @@ namespace AdvancedWindowsAppearence
             {
                 return "";
             }
+        }
+
+        public void SetWallpaper(string path)
+        {
+            if (!File.Exists(path))
+                throw new FileNotFoundException("Wallpaper \"" + path + "\" not found!");
+            Path = path;
+            NotifyPropertyChanged(nameof(Path));
         }
     }
 }

@@ -69,9 +69,11 @@ namespace AdvancedWindowsAppearence
             
             foreach (string line in themeSettingsIni)
             {
-                if (line.Contains("DisplayName=") && !string.IsNullOrEmpty(displayName))
+                if (line.Contains("DisplayName=") && !string.IsNullOrWhiteSpace(displayName))
                     newThemeSettingsIni[i] = "DisplayName=" + displayName;
-                else if (line.Contains("Path=") && !string.IsNullOrEmpty(aeroStyle))
+                else if (line.Contains("Wallpaper=") && !string.IsNullOrWhiteSpace(wallpaperPath))
+                    newThemeSettingsIni[i] = "Wallpaper=" + wallpaperPath;
+                else if (line.Contains("Path=") && !string.IsNullOrWhiteSpace(aeroStyle))
                     newThemeSettingsIni[i] = "Path=" + aeroStyle;
                 else if (line.Contains("ColorizationColor=") && colorizationColor!=null)
                 {
