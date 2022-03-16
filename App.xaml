@@ -12,7 +12,18 @@
             <SolidColorBrush x:Key="BackgroundColor" Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}"/>
             <SolidColorBrush x:Key="BackgroundColorTabItems" Color="#BFFFFFFF"/>
             <SolidColorBrush x:Key="ForegroundColor" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
-  
+
+            <!--default label-->
+            <Style x:Key="SystemLabel" TargetType="Label">
+                <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+                <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MenuFontTextDecorations}}"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="SystemMenuLabel" TargetType="Label" BasedOn="{StaticResource SystemLabel}" >
+                <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MenuFontFamily}}"/>
+            </Style>
+
             <Style x:Key="SystemButton" TargetType="Button" >
                 <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSize}}"/>
                 <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>

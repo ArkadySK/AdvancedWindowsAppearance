@@ -47,7 +47,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE771;"/>
-                        <Label Foreground="{DynamicResource ForegroundColor}" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}">Theme Settings</Label>
+                        <Label Style="{StaticResource SystemMenuLabel}">Theme Settings</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
@@ -58,7 +58,7 @@
                                 <ColumnDefinition Width="270"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Label FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Padding="2" VerticalContentAlignment="Center" Foreground="{DynamicResource ForegroundColor}">Theme Name</Label>
+                            <Label Padding="2" Style="{StaticResource SystemLabel}">Theme Name</Label>
                             <TextBox FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2" VerticalContentAlignment="Center" MinHeight="35" x:Name="textBoxThemeName" Grid.Column="1" Text="{Binding ThemeName}"/>
                         </Grid>
 
@@ -93,7 +93,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE737;"/>
-                        <Label Foreground="{DynamicResource ForegroundColor}" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}">Title Colors</Label>
+                        <Label Style="{StaticResource SystemMenuLabel}">Title Colors</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
@@ -112,11 +112,11 @@
                                     <ColumnDefinition Width="45"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label VerticalContentAlignment="Center" Foreground="{DynamicResource ForegroundColor}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="1">Theme Color (Window Border)</Label>
+                                <Label Style="{StaticResource SystemLabel}" Margin="1">Theme Color (Window Border)</Label>
                                 <Button x:Name="buttonThemeColor" Grid.Column="4" Style="{StaticResource SystemSmallButton}" Click="buttonThemeColor_Click">
                                     <Button x:Name="imageThemeColor" Padding="10" BorderThickness="2" Background="{Binding ThemeColor.ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                                 </Button>
-                                <Label VerticalContentAlignment="Center" Grid.Column="2" Foreground="{DynamicResource ForegroundColor}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="1">Opacity</Label>
+                                <Label Style="{StaticResource SystemLabel}" Grid.Column="2" Margin="1">Opacity</Label>
                                 <Slider VerticalAlignment="Center" x:Name="sliderColorOpacity" Grid.Column="1" Value="{Binding ThemeColor.Opacity}"  Margin="3" Maximum="255" />
                                 <TextBox IsEnabled="False" Grid.Column="3" VerticalContentAlignment="Center" x:Name="textBoxColorOpacity" Margin="2" Text="{Binding Value, ElementName=sliderColorOpacity}" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
                             </Grid>
@@ -157,7 +157,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE2B1;"/>
-                        <Label Foreground="{DynamicResource ForegroundColor}" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}">Colors and Metrics</Label>
+                        <Label Style="{StaticResource SystemMenuLabel}">Colors and Metrics</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
@@ -207,7 +207,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE1C8;"/>
-                        <Label Foreground="{DynamicResource ForegroundColor}" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}">Fonts</Label>
+                        <Label Style="{StaticResource SystemMenuLabel}">Fonts</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
@@ -228,7 +228,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Label Content="Font:" Grid.Row="1" Foreground="{DynamicResource ForegroundColor}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Grid.Column="0" HorizontalContentAlignment="Right" Margin="5"/>
+                        <Label Content="Font:" Grid.Row="1" Style="{StaticResource SystemLabel}" Grid.Column="0" HorizontalContentAlignment="Right" Margin="5"/>
 
                         <ComboBox x:Name="comboBoxFonts" Style="{StaticResource SystemComboBox}" ItemsSource="{Binding FontSettings}" SelectedIndex="0" Margin="2" Grid.ColumnSpan="2">
                             <ComboBox.ItemTemplate>
@@ -300,8 +300,8 @@
             <TabItem x:Name="wallpaperTab" Style="{StaticResource DefaultTabStyle}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE1C8;"/>
-                        <Label Foreground="{DynamicResource ForegroundColor}" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}">Wallpaper</Label>
+                        <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xEB9F;"/>
+                        <Label Style="{StaticResource SystemMenuLabel}">Wallpaper</Label>
                     </StackPanel>
                 </TabItem.Header>
                 
@@ -327,8 +327,8 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Label Content="Path: " Grid.Column="0" Padding="0" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundColor}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" />
-                            <Label Content="{Binding Wallpaper.Path}" Grid.Column="1" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource ForegroundColor}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" />
+                            <Label Content="Path: " Grid.Column="0" Padding="0" Style="{StaticResource SystemLabel}" />
+                            <Label Content="{Binding Wallpaper.Path}" Grid.Column="1" Padding="0" Style="{StaticResource SystemLabel}" />
                             <Button Grid.Column="2" MinWidth="100" Style="{DynamicResource SystemButton}">Change</Button>
                         </Grid>
                     </Grid>
@@ -341,7 +341,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE9F5;"/>
-                        <Label Foreground="{DynamicResource ForegroundColor}" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}">Other Settings</Label>
+                        <Label Style="{StaticResource SystemMenuLabel}">Other Settings</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
@@ -365,7 +365,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xF61E;"/>
-                        <Label Foreground="{DynamicResource ForegroundColor}" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}">Backup and Restore</Label>
+                        <Label Style="{StaticResource SystemMenuLabel}">Backup and Restore</Label>
                     </StackPanel>
                 </TabItem.Header>
                 <Frame x:Name="restoreTabFrame" Margin="5"/>
