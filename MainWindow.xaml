@@ -318,7 +318,7 @@
                         <!--Wallpaper background preview-->
                         <Viewbox IsEnabled="False" Margin="0 5">
                             <Grid Width="160" Height="90" Background="{Binding ColorSettings[13].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
-                                <Image Source="{Binding Wallpaper.Path}" Stretch="{Binding Wallpaper.WallpaperStyleRegistrySetting.SelectedWallpaperStyle, Converter={StaticResource WallpaperStyleToImageStretch}}"></Image>
+                                <Image Source="{Binding Wallpaper.Path}" Stretch="{Binding Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle, Converter={StaticResource WallpaperStyleToImageStretch}}"></Image>
                             </Grid>
                         </Viewbox>
 
@@ -335,7 +335,7 @@
 
                         <StackPanel Orientation="Vertical" Grid.Row="2">
                             <Label Style="{StaticResource SystemLabel}" Content="Wallpaper style: "/>
-                            <ComboBox x:Name="ImageStretchComboBox"  Style="{StaticResource SystemComboBox}" MinWidth="200" HorizontalAlignment="Left" ItemsSource="{Binding Wallpaper.WallpaperStyleRegistrySetting.WallpaperStyles}" Text="{Binding Wallpaper.WallpaperStyleRegistrySetting.SelectedWallpaperStyle}"/>
+                            <ComboBox x:Name="ImageStretchComboBox"  Style="{StaticResource SystemComboBox}" MinWidth="200" HorizontalAlignment="Left" ItemsSource="{Binding Wallpaper.WallpaperStyleSettings.WallpaperStyles}" Text="{Binding Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle}"/>
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>

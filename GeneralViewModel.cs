@@ -216,7 +216,7 @@ namespace AdvancedWindowsAppearence
 
             if (!UseThemes) return; //if user does not want to save changes into theme
 
-            ThemeSettings SaveTheme = Task.Run(() => new ThemeSettings(ThemeName, ThemeColor.ItemColor.Value, ThemeStyle, Wallpaper.Path, ColorSettings, FontSettings)).Result;
+            ThemeSettings SaveTheme = Task.Run(() => new ThemeSettings(ThemeName, ThemeColor.ItemColor.Value, ThemeStyle, Wallpaper, ColorSettings, FontSettings)).Result;
 
             foreach (var setting in ColorSettings)
             {

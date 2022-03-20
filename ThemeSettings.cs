@@ -49,7 +49,7 @@ namespace AdvancedWindowsAppearence
 
         }
 
-        public ThemeSettings(string displayName, Color colorizationColor, string aeroStyle, string wallpaperPath, ColorAppearanceSetting[] colorAppearanceSettings, FontAppearanceSetting[] fontAppearanceSettings)
+        public ThemeSettings(string displayName, Color colorizationColor, string aeroStyle, WallpaperAppearanceSetting wallpaper, ColorAppearanceSetting[] colorAppearanceSettings, FontAppearanceSetting[] fontAppearanceSettings)
         {
 
             List<ColorRegistrySetting> changedColorSettings = new List<ColorRegistrySetting>();
@@ -61,18 +61,35 @@ namespace AdvancedWindowsAppearence
             int i = 0;
             int ColorIdIndex = -1;
             string colorsId = @"[Control Panel\Colors]";
-            if (!themeSettingsIni.Contains(colorsId))
-            {
-                newThemeSettingsIni.Add(colorsId);
-            }
-
+            string desktopId = @"[Control Panel\Desktop]";
             
+            if(!themeSettingsIni.Contains(desktopId))
+                newThemeSettingsIni.Add(desktopId);
+
             foreach (string line in themeSettingsIni)
             {
                 if (line.Contains("DisplayName=") && !string.IsNullOrWhiteSpace(displayName))
                     newThemeSettingsIni[i] = "DisplayName=" + displayName;
-                else if (line.Contains("Wallpaper=") && !string.IsNullOrWhiteSpace(wallpaperPath))
-                    newThemeSettingsIni[i] = "Wallpaper=" + wallpaperPath;
+                //remove all wallpaper lines to avoid mess in the theme
+                else if (line.Contains("Wallpaper=") || line.Contains("TileWallpaper=") || line.Contains("WallpaperStyle="))
+                    newThemeSettingsIni.Remove(line);
+                
+                else if(line.Contains(desktopId))
+                {
+                    int dektopIdIndex = newThemeSettingsIni.IndexOf(desktopId);
+                    newThemeSettingsIni.Insert(dektopIdIndex + 1, "Wallpaper=" + wallpaper.Path);
+
+                    if (wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle == WallpaperStyleRegistrySetting.WallpaperStyle.Tile)
+                        newThemeSettingsIni.Insert(
+                            dektopIdIndex + 2, 
+                            "TileWallpaper=1\n" +
+                            "WallpaperStyle=0");
+                    else
+                        newThemeSettingsIni.Insert(
+                            dektopIdIndex + 2,
+                            "TileWallpaper=0\n" +
+                            "WallpaperStyle=" + (int)wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle);
+                }
                 else if (line.Contains("Path=") && !string.IsNullOrWhiteSpace(aeroStyle))
                     newThemeSettingsIni[i] = "Path=" + aeroStyle;
                 else if (line.Contains("ColorizationColor=") && colorizationColor!=null)
@@ -84,6 +101,9 @@ namespace AdvancedWindowsAppearence
             }
 
             #region ColorSettings
+
+            if (!themeSettingsIni.Contains(colorsId))
+                newThemeSettingsIni.Add(colorsId);
 
             foreach (ColorAppearanceSetting s in colorAppearanceSettings)
             {
