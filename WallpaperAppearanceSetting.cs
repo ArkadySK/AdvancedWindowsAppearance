@@ -85,6 +85,8 @@ namespace AdvancedWindowsAppearence
             {
                 RegistryKey regKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", false);
                 int value = int.Parse(regKey.GetValue(registryKey, 0).ToString());
+                if (value == 10) 
+                    value = 4;
                 SelectedWallpaperStyle = (WallpaperStyle)value;
             }
             catch (Exception ex)
