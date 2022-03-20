@@ -47,18 +47,16 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
 
-            <Label x:Name="label" Padding="15 4 0 4" Grid.Column="1" MinHeight="{Binding ColorSettings[12].Size}" Content="Advanced Windows Appearance" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"  
+            <Label x:Name="label" Padding="15 4 0 4" Grid.Column="1" MinHeight="30" Content="Advanced Windows Appearance" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"  
                     FontSize="{DynamicResource {x:Static SystemFonts.CaptionFontSizeKey}}" 
                     Foreground="{DynamicResource ForegroundColor}"
                     FontStyle="{Binding FontSettings[0].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" VerticalContentAlignment="Center"/>
-            <Button Visibility="Hidden" Background="#01FFFFFF" Grid.Column="2" Margin="5 0" Height="20">VersionName</Button>
-            <!--Title Buttons  Height="{Binding MinHeight, ElementName=label}"       -->
-
-            <StackPanel Panel.ZIndex="100" Grid.Column="3" Orientation="Horizontal">
+            
+            <!--Title Buttons-->
+            <StackPanel Panel.ZIndex="100" Grid.Column="2" Orientation="Horizontal">
                 <Button x:Name="minimizeButton" Style="{StaticResource CaptionButtonWin10}" Foreground="{DynamicResource ForegroundColor}" Grid.Column="2" Content="&#xE949;" IsTabStop="False" Click="minimizeButton_Click"/>
                 <Button x:Name="maximizeButton" Style="{StaticResource CaptionButtonWin10}" Foreground="{DynamicResource ForegroundColor}" Grid.Column="3" Content="&#xE739;" IsTabStop="False" Click="maximizeButton_Click"/>
                 <Button x:Name="closeButton" Style="{StaticResource CaptionButtonCloseWin10}" Foreground="{DynamicResource ForegroundColor}" Grid.Column="4" Content="&#xE106;" IsTabStop="False" Click="closeButton_Click_1"/>
