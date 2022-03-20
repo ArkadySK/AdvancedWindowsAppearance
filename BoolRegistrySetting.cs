@@ -40,6 +40,8 @@ namespace AdvancedWindowsAppearence
             RegistryKey = registrykey;
             RegistryPath = registrypath;
             var val = GetBooleanFromRegistry();
+            if (val is string)
+                Checked = (int.Parse(val.ToString()) != 0);
             if (val is int)
                 Checked = ((int)val != 0);
             else if (val is bool) 
