@@ -287,6 +287,23 @@ namespace AdvancedWindowsAppearence
         #endregion
 
 
+        #region Wallpaper Tab
+        private void changeWallpaper_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
+            dialog.Filter = "Supported Image Files (*.png, *.jpg, *.bmp)|*.png;*.jpg;*.bmp|All files (*.*)|*.*";
+            dialog.Title = "Select new wallpaper image";
+            var result = dialog.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                string path = dialog.FileName;
+                Settings.Wallpaper.SetWallpaper(path);
+            }
+
+        }
+        #endregion
+
+
         #region Buttons Panel
         //Close Program
         private void CloseButton_Click(object sender, RoutedEventArgs e) 
@@ -319,6 +336,8 @@ namespace AdvancedWindowsAppearence
 
         #endregion
 
+
+        #region Window properties
         private void openClassicWindowTextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ClassicWindowForm classicWindowForm = new ClassicWindowForm();
@@ -343,19 +362,7 @@ namespace AdvancedWindowsAppearence
                 MainTabControl.TabStripPlacement = Dock.Left;
             }
         }
+        #endregion
 
-        private void changeWallpaper_Click(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
-            dialog.Filter = "Supported Image Files (*.png, *.jpg, *.bmp)|*.png;*.jpg;*.bmp|All files (*.*)|*.*";
-            dialog.Title = "Select new wallpaper image";
-            var result = dialog.ShowDialog();
-            if(result == System.Windows.Forms.DialogResult.OK)
-            {
-                string path = dialog.FileName;
-                Settings.Wallpaper.SetWallpaper(path);
-            }
-
-        }
     }
 }
