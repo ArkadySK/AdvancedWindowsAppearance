@@ -58,52 +58,94 @@ namespace AdvancedWindowsAppearence
             string[] themeSettingsIni = GetThemeFile(themePath);
             List<string> newThemeSettingsIni = themeSettingsIni.ToList();
 
-            int i = 0;
-            int ColorIdIndex = -1;
+            int themeIdIndex = -1;
+            int colorsIdIndex = -1;
+            int desktopIdIndex = -1;
+            int visualStylesIdIndex = -1;
             string colorsId = @"[Control Panel\Colors]";
+            string visualStylesId = @"[VisualStyles]";
             string desktopId = @"[Control Panel\Desktop]";
+            string themeId = @"[Theme]";
             
-            if(!themeSettingsIni.Contains(desktopId))
-                newThemeSettingsIni.Add(desktopId);
+            //all lines to that contain these will be removed
+            string[] headersToRemove = new string[]{
+                "Pattern=", "Wallpaper=", "TileWallpaper=", "WallpaperStyle=", "PicturePosition=", "WallpaperWriteTime=",
+                "Path=", "ColorizationColor=", "AutoColorization=", "Size=", "ColorStyle",
+                "DisplayName=", "ThemeId="};
 
             foreach (string line in themeSettingsIni)
             {
-                if (line.Contains("DisplayName=") && !string.IsNullOrWhiteSpace(displayName))
-                    newThemeSettingsIni[i] = "DisplayName=" + displayName;
-                //remove all wallpaper lines to avoid mess in the theme
-                else if (line.Contains("Wallpaper=") || line.Contains("TileWallpaper=") || line.Contains("WallpaperStyle="))
-                    newThemeSettingsIni.Remove(line);
-                
-                else if(line.Contains(desktopId))
-                {
-                    int dektopIdIndex = newThemeSettingsIni.IndexOf(desktopId);
-                    newThemeSettingsIni.Insert(dektopIdIndex + 1, "Wallpaper=" + wallpaper.Path);
+                //ignore all comments
+                if (line.StartsWith(";")) continue;
 
-                    if (wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle == WallpaperStyleRegistrySetting.WallpaperStyle.Tile)
-                        newThemeSettingsIni.Insert(
-                            dektopIdIndex + 2, 
-                            "TileWallpaper=1\n" +
-                            "WallpaperStyle=0");
-                    else
-                        newThemeSettingsIni.Insert(
-                            dektopIdIndex + 2,
-                            "TileWallpaper=0\n" +
-                            "WallpaperStyle=" + (int)wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle);
-                }
-                else if (line.Contains("Path=") && !string.IsNullOrWhiteSpace(aeroStyle))
-                    newThemeSettingsIni[i] = "Path=" + aeroStyle;
-                else if (line.Contains("ColorizationColor=") && colorizationColor!=null)
-                {
-                    string colorstring = (colorizationColor.B | (colorizationColor.G << 8) | (colorizationColor.R << 16) | (colorizationColor.A << 24)).ToString();
-                    newThemeSettingsIni[i] = "ColorizationColor=" + colorstring;
-                }
-                i++;
+                //remove all wallpaper lines to avoid mess in the theme
+                foreach (string header in headersToRemove)
+                    if (line.Contains(header))
+                        newThemeSettingsIni.Remove(line);
             }
 
+            //Set theme name
+            themeIdIndex = newThemeSettingsIni.IndexOf(themeId);
+            if (themeIdIndex == -1)
+            {
+                newThemeSettingsIni.Add(themeId);
+                themeIdIndex = newThemeSettingsIni.Count - 1;
+            }
+            newThemeSettingsIni.Insert(themeIdIndex + 1, "DisplayName=" + displayName);
+
+
+            //Set wallpaper
+            desktopIdIndex = newThemeSettingsIni.IndexOf(desktopId);
+            if (desktopIdIndex == -1)
+            {
+                newThemeSettingsIni.Add(desktopId);
+                desktopIdIndex = newThemeSettingsIni.Count - 1;
+            }
+            newThemeSettingsIni.Insert(desktopIdIndex + 1, "Wallpaper=" + wallpaper.Path);
+            if (wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle == WallpaperStyleRegistrySetting.WallpaperStyle.Tile)
+                newThemeSettingsIni.Insert(
+                    desktopIdIndex + 2,
+                    "TileWallpaper=1\n" +
+                    "WallpaperStyle=0");
+            else
+                newThemeSettingsIni.Insert(
+                    desktopIdIndex + 2,
+                    "TileWallpaper=0\n" +
+                    "WallpaperStyle=" + (int)wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle);
+          
+
+
+            //Set visual styles
+            visualStylesIdIndex = newThemeSettingsIni.IndexOf(visualStylesId);
+            if (visualStylesIdIndex == -1) {
+                newThemeSettingsIni.Add(visualStylesId);
+                visualStylesIdIndex = newThemeSettingsIni.Count - 1;
+            }
+            string visualStylesText =
+                "ColorStyle=NormalColor\n" +
+                "Size=NormalSize\n" +
+                "AutoColorization=0\n";
+            if (!string.IsNullOrWhiteSpace(aeroStyle))
+                visualStylesText += "Path=" + aeroStyle + "\n";
+            if(colorizationColor != null)
+            {
+                string colorstring = (colorizationColor.B | (colorizationColor.G << 8) | (colorizationColor.R << 16) | (colorizationColor.A << 24)).ToString();
+                visualStylesText += "ColorizationColor=" + colorstring + "\n";
+            }
+            newThemeSettingsIni.Insert(visualStylesIdIndex + 1 ,visualStylesText);
+            
+
+
+
+            //Set custom colors
             #region ColorSettings
 
-            if (!themeSettingsIni.Contains(colorsId))
+            colorsIdIndex = newThemeSettingsIni.IndexOf(colorsId);
+            if (colorsIdIndex == -1)
+            {
                 newThemeSettingsIni.Add(colorsId);
+                colorsIdIndex = newThemeSettingsIni.Count - 1;
+            }
 
             foreach (ColorAppearanceSetting s in colorAppearanceSettings)
             {
@@ -135,7 +177,7 @@ namespace AdvancedWindowsAppearence
                 
             }
 
-            ColorIdIndex = Array.IndexOf(themeSettingsIni, colorsId);
+            colorsIdIndex = Array.IndexOf(themeSettingsIni, colorsId);
 
             ///skontroluj ci je tam dany item
             ///output by mal byt true false
@@ -164,7 +206,7 @@ namespace AdvancedWindowsAppearence
                     ///find infex of colorId and insert the rest after it
                     try
                     {
-                        newThemeSettingsIni.Insert(ColorIdIndex - 1, cs.Value);
+                        newThemeSettingsIni.Insert(colorsIdIndex - 1, cs.Value);
 
                     }
                     catch
