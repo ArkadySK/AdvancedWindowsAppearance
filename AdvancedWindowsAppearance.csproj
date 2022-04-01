@@ -123,13 +123,16 @@
     <Compile Include="ModernWindow.xaml.cs">
       <DependentUpon>ModernWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Preview.xaml.cs">
+    <Compile Include="Previews\Preview.xaml.cs">
       <DependentUpon>Preview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Previews\WallpaperSelectionPage.xaml.cs">
+      <DependentUpon>WallpaperSelectionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="RestorePage.xaml.cs">
       <DependentUpon>RestorePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TitleColorsPreviewPage.xaml.cs">
+    <Compile Include="Previews\TitleColorsPreviewPage.xaml.cs">
       <DependentUpon>TitleColorsPreviewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Updater.cs" />
@@ -163,7 +166,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Preview.xaml">
+    <Page Include="Previews\Preview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Previews\WallpaperSelectionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,7 +178,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TitleColorsPreviewPage.xaml">
+    <Page Include="Previews\TitleColorsPreviewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
