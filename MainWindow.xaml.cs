@@ -294,32 +294,21 @@ namespace AdvancedWindowsAppearence
 
 
         #region Wallpaper Tab
-        
+
         #endregion
 
-
-        #region Buttons Panel
-        //Close Program
-        private void CloseButton_Click(object sender, RoutedEventArgs e) 
+        async void SaveAsTheme() //Sample of updating the theme
         {
-            Application.Current.Shutdown();
-        }
-
-        private async void ButtonApply_Click(object sender, RoutedEventArgs e)
-        {
-            if (saveChangesComboBox.Text == "Apply as theme") 
-                Settings.UseThemes = true;
-            else
-                Settings.UseThemes = false;
             await Settings.SaveChanges();
-
             await Task.Delay(200);
-            if(ModernWindow != null)
+            if (ModernWindow != null)
             {
                 Dispatcher.Invoke(() => ModernWindow.UpdateTheme(Settings.RegistrySettingsViewModel.RegistrySettings[5].Checked.Value));
             }
-                       
         }
+
+    #region Buttons Panel
+    //Close Program
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -358,5 +347,54 @@ namespace AdvancedWindowsAppearence
         }
         #endregion
 
+        private void SaveColorsMetricsAsTheme_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveColorsMetricsToRegistry_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveFontsAsTheme_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveFontsToRegistry_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveWallpaperAsTheme_Click(object sender, RoutedEventArgs e)
+        {
+            //Settings.SaveWallpaperAsTheme();
+        }
+
+        private void SaveWallpaperToRegistry_Click(object sender, RoutedEventArgs e)
+        {
+            //Settings.SaveWallpaperToRegistry();
+        }
+
+        private void SaveTitleColorsAsTheme_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveTitleColorsToRegistry_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveRegistrySettingsRegistry_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveThemeAsTheme_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

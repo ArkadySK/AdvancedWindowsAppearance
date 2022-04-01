@@ -53,7 +53,7 @@
                 <Image Source="{Binding Wallpaper.Path}" Stretch="UniformToFill"></Image>
                 <Grid Margin="0 0 100 0" Panel.ZIndex="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
                     <Rectangle Stroke="Gray" Opacity=".5"/>
-                    <Image x:Name="iconImage" Source="Icon.ico" Height="{Binding ColorSettings[18].Size, FallbackValue=42}" Width="{Binding ColorSettings[18].Size}" >
+                    <Image x:Name="iconImage" Source="/Previews/icon.ico" Height="{Binding ColorSettings[18].Size, FallbackValue=42}" Width="{Binding ColorSettings[18].Size}" >
                         <Image.Margin>
                             <MultiBinding Converter="{StaticResource multiMargin}">
                                 <Binding Path="ColorSettings[19].Size" FallbackValue="10"></Binding>
