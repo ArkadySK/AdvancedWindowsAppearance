@@ -238,6 +238,60 @@ namespace AdvancedWindowsAppearence
         }
         #endregion
 
+
+        #region SaveNew
+
+        internal async Task SaveThemeAsTheme()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal async Task SaveTitleColorsAsTheme()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal async Task SaveTitleColorsToRegistry()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        internal async Task SaveColorsMetricsAsTheme()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal async Task SaveColorsMetricsToRegistry()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        internal async Task SaveFontsAsTheme()
+        {
+            throw new NotImplementedException();
+        }
+        internal async Task SaveFontsToRegistry()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        internal async Task SaveWallpaperAsTheme()
+        {
+            throw new NotImplementedException();
+        }
+        internal async Task SaveWallpaperToRegistry()
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+        #endregion
+
+
         #region Restore
 
         public void RunRegFile(string path)
@@ -275,12 +329,15 @@ namespace AdvancedWindowsAppearence
             await Task.WhenAll(taskList);
             await ResetTheme();
         }
+
         internal async Task ResetTheme()
         {
             ThemeSettings.LoadTheme(@"C:\Windows\Resources\Themes\aero.theme");
             await Task.Delay(1000);
         }
+        
         #endregion
+
 
         #region Export
 
@@ -307,6 +364,12 @@ namespace AdvancedWindowsAppearence
 
             return output;
         }
+
+        internal async Task SaveRegistrySettingsToRegistry()
+        {
+            throw new NotImplementedException();
+        }
+
         string GetFontsInReg()
         {
             string output = "";

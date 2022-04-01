@@ -347,54 +347,54 @@ namespace AdvancedWindowsAppearence
         }
         #endregion
 
-        private void SaveColorsMetricsAsTheme_Click(object sender, RoutedEventArgs e)
+        private async void SaveThemeAsTheme_Click(object sender, RoutedEventArgs e)
         {
-
+            await Settings.SaveThemeAsTheme();
+        }
+        private async void SaveTitleColorsAsTheme_Click(object sender, RoutedEventArgs e)
+        {
+            await Settings.SaveTitleColorsAsTheme();
         }
 
-        private void SaveColorsMetricsToRegistry_Click(object sender, RoutedEventArgs e)
+        private async void SaveTitleColorsToRegistry_Click(object sender, RoutedEventArgs e)
         {
-
+            await Settings.SaveTitleColorsToRegistry();
         }
 
-        private void SaveFontsAsTheme_Click(object sender, RoutedEventArgs e)
+        private async void SaveColorsMetricsAsTheme_Click(object sender, RoutedEventArgs e)
         {
-
+            await Settings.SaveColorsMetricsAsTheme();
         }
 
-        private void SaveFontsToRegistry_Click(object sender, RoutedEventArgs e)
+        private async void SaveColorsMetricsToRegistry_Click(object sender, RoutedEventArgs e)
         {
-
+            await Settings.SaveColorsMetricsToRegistry();
         }
 
-        private void SaveWallpaperAsTheme_Click(object sender, RoutedEventArgs e)
+        private async void SaveFontsAsTheme_Click(object sender, RoutedEventArgs e)
         {
-            //Settings.SaveWallpaperAsTheme();
+            await Settings.SaveFontsAsTheme();
         }
 
-        private void SaveWallpaperToRegistry_Click(object sender, RoutedEventArgs e)
+        private async void SaveFontsToRegistry_Click(object sender, RoutedEventArgs e)
         {
-            //Settings.SaveWallpaperToRegistry();
+            await Settings.SaveFontsToRegistry();
         }
 
-        private void SaveTitleColorsAsTheme_Click(object sender, RoutedEventArgs e)
+        private async void SaveWallpaperAsTheme_Click(object sender, RoutedEventArgs e)
         {
-
+            await Settings.SaveWallpaperAsTheme();
         }
 
-        private void SaveTitleColorsToRegistry_Click(object sender, RoutedEventArgs e)
+        private async void SaveWallpaperToRegistry_Click(object sender, RoutedEventArgs e)
         {
-
+            await Settings.SaveWallpaperToRegistry();
         }
 
-        private void SaveRegistrySettingsRegistry_Click(object sender, RoutedEventArgs e)
+        private async void SaveRegistrySettingsRegistry_Click(object sender, RoutedEventArgs e)
         {
-
+            await Settings.SaveRegistrySettingsToRegistry();
         }
 
-        private void SaveThemeAsTheme_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
