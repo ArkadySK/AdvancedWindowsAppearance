@@ -307,37 +307,8 @@
                 </TabItem.Header>
                 
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <Frame Margin="5" x:Name="WallpaperTabFrame"/>
 
-                    <Grid Margin="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-
-                        <!--Wallpaper background preview-->
-                        <Viewbox IsEnabled="False" Margin="0 5">
-                            <Grid Width="160" Height="90" Background="{Binding ColorSettings[13].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
-                                <Image Source="{Binding Wallpaper.Path}" Stretch="{Binding Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle, Converter={StaticResource WallpaperStyleToImageStretch}}"></Image>
-                            </Grid>
-                        </Viewbox>
-
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Content="Path: " Grid.Column="0" Padding="0" Style="{StaticResource SystemLabel}" />
-                            <Label Grid.Column="1" Margin="5 0" Content="{Binding Wallpaper.Path}" Padding="0" Style="{StaticResource SystemLabel}" ToolTip="{Binding Wallpaper.Path}" />
-                            <Button x:Name="changeWallpaper" Grid.Column="2" MinWidth="100" Style="{DynamicResource SystemButton}" Click="changeWallpaper_Click">Change</Button>
-                        </Grid>
-
-                        <StackPanel Orientation="Vertical" Grid.Row="2">
-                            <Label Style="{StaticResource SystemLabel}" Content="Wallpaper style: "/>
-                            <ComboBox x:Name="ImageStretchComboBox"  Style="{StaticResource SystemComboBox}" MinWidth="200" HorizontalAlignment="Left" ItemsSource="{Binding Wallpaper.WallpaperStyleSettings.WallpaperStyles}" Text="{Binding Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle}"/>
-                        </StackPanel>
-                    </Grid>
                 </ScrollViewer>
             </TabItem>
 

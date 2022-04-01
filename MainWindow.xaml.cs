@@ -20,6 +20,7 @@ using System.Threading.Tasks;
 using AdvancedWindowsAppearence.Converters;
 using System.Drawing;
 using System.Windows.Threading;
+using AdvancedWindowsAppearence.Previews;
 
 namespace AdvancedWindowsAppearence
 {
@@ -30,6 +31,7 @@ namespace AdvancedWindowsAppearence
     {
         GeneralViewModel Settings = new GeneralViewModel();
         ModernWindow ModernWindow = null;
+        WallpaperSelectionPage wallpaperPage;
 
         public MainWindow()
         {
@@ -40,6 +42,7 @@ namespace AdvancedWindowsAppearence
 
             //add backup & restore page
             restoreTabFrame.Content = new RestorePage(Settings);
+            wallpaperPage = new WallpaperSelectionPage(Settings);
         }
 
         private async void window_Loaded(object sender, RoutedEventArgs e)
@@ -288,19 +291,7 @@ namespace AdvancedWindowsAppearence
 
 
         #region Wallpaper Tab
-        private void changeWallpaper_Click(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
-            dialog.Filter = "Supported Image Files (*.png, *.jpg, *.bmp)|*.png;*.jpg;*.bmp|All files (*.*)|*.*";
-            dialog.Title = "Select new wallpaper image";
-            var result = dialog.ShowDialog();
-            if (result == System.Windows.Forms.DialogResult.OK)
-            {
-                string path = dialog.FileName;
-                Settings.Wallpaper.SetWallpaper(path);
-            }
-
-        }
+        
         #endregion
 
 
