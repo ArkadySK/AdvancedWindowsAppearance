@@ -42,7 +42,10 @@ namespace AdvancedWindowsAppearence
 
             //add backup & restore page
             restoreTabFrame.Content = new RestorePage(Settings);
+
+            //add wallpaper or wallpaper selection (slideshow)
             wallpaperPage = new WallpaperSelectionPage(Settings);
+            WallpaperTabFrame.Content = wallpaperPage;
         }
 
         private async void window_Loaded(object sender, RoutedEventArgs e)

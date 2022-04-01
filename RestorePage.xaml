@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Background="{DynamicResource BackgroundColor}"
         Title="Backup and restore">
+    
     <Page.Resources>
         <Style x:Key="bulletStyle" TargetType="RadioButton">
             <Setter Property="Margin" Value="5"/>

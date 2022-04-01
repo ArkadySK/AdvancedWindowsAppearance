@@ -34,7 +34,7 @@
         </Grid.RowDefinitions>
 
         <!--Wallpaper background preview-->
-        <Viewbox IsEnabled="False" Margin="0 5">
+        <Viewbox IsEnabled="False">
             <Grid Width="160" Height="90" Background="{Binding ColorSettings[13].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
                 <Image Source="{Binding Wallpaper.Path}" Stretch="{Binding Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle, Converter={StaticResource WallpaperStyleToImageStretch}}"></Image>
             </Grid>

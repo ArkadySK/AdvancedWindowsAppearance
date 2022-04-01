@@ -143,7 +143,7 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                             <!--Aero colors Preview-->
-                            <Frame Margin="0 5 0 0" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Source="TitleColorsPreviewPage.xaml"/>
+                            <Frame Margin="0 5 0 0" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Source="Previews\TitleColorsPreviewPage.xaml"/>
                         </StackPanel>
 
                         <TextBlock Style="{StaticResource InfoText}" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource InvertedBooleanToVisibilityConverter}, Mode=OneWay}" Grid.ColumnSpan="5" Grid.Row="3"
@@ -193,7 +193,7 @@
                                            Style="{StaticResource InfoText}" >New sizes are applied after logoff. Some colors are applied immediatelly as a theme, some may apply after logoff.</TextBlock>
 
                         <!--Classic Colors preview page-->
-                        <Frame Source="Preview.xaml" Margin="0 5 0 0" Grid.Row="2" Grid.ColumnSpan="4"/>
+                        <Frame Source="Previews\Preview.xaml" Margin="0 5 0 0" Grid.Row="2" Grid.ColumnSpan="4"/>
                         <TextBlock Style="{DynamicResource HypertextTextBlockStyle}" Text="Launch sample window with Classic theme" MouseDown="openClassicWindowTextBlock_MouseDown" Grid.Row="3" Grid.ColumnSpan="3"/>
                         <TextBlock Grid.Row="4" Grid.ColumnSpan="4" Style="{StaticResource InfoText}" 
                                    >The most of these colors and sizes are not applied on modern UWP apps, because each of them uses their own settings.</TextBlock>
@@ -288,7 +288,7 @@
 
 
                         <!--Fonts Preview (Classic colors) -->
-                        <Frame Grid.Row="3" Margin="0 5 0 0" Grid.ColumnSpan="6" Source="Preview.xaml"/>
+                        <Frame Grid.Row="3" Margin="0 5 0 0" Grid.ColumnSpan="6" Source="Previews\Preview.xaml"/>
                         <TextBlock Style="{DynamicResource HypertextTextBlockStyle}" Text="Launch sample window with Classic theme" MouseDown="openClassicWindowTextBlock_MouseDown" Grid.Row="4" Grid.ColumnSpan="6"/>
                         <TextBlock Grid.Row="5" Grid.ColumnSpan="6" Style="{StaticResource InfoText}" 
                                    >The most of these font styles are not applied on modern UWP apps, because each of them uses their own settings.</TextBlock>
@@ -346,7 +346,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                    <Frame x:Name="restoreTabFrame" Margin="5"/>
+                    <Frame x:Name="restoreTabFrame" Content="RestorePage.xaml" Margin="5"/>
                 </ScrollViewer>
             </TabItem>
         </TabControl>

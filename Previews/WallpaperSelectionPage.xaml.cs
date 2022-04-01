@@ -25,6 +25,7 @@ namespace AdvancedWindowsAppearence.Previews
         {
             InitializeComponent();
             Settings = generalViewModel;
+            DataContext = Settings;
         }
 
         private void changeWallpaper_Click(object sender, RoutedEventArgs e)
