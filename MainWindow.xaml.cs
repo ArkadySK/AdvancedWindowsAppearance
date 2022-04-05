@@ -112,8 +112,7 @@ namespace AdvancedWindowsAppearence
 
         void LoadThemeName()
         {
-            ThemeSettings themeSettings = new ThemeSettings();
-            string themeName = themeSettings.GetThemePath();
+            string themeName = ThemeSettings.GetThemePath();
 
             themeName = themeName.Split("\\".ToCharArray()).Last();
             themeName = themeName.Replace(".theme", "");

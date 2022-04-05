@@ -18,7 +18,7 @@ namespace AdvancedWindowsAppearence
             public bool IsFoundInTheme{get; set; }
         }
 
-        public string GetThemePath()
+        public static string GetThemePath()
         {
             
             string RegistryPath = @"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes";
@@ -42,11 +42,6 @@ namespace AdvancedWindowsAppearence
             string ThemeSettingsIni = streamReader.ReadToEnd();
             streamReader.Close();
             return ThemeSettingsIni.Split(Environment.NewLine.ToCharArray());        
-        }
-
-        public ThemeSettings()
-        {
-
         }
 
         public ThemeSettings(string displayName, Color colorizationColor, string aeroStyle, WallpaperAppearanceSetting wallpaper, ColorAppearanceSetting[] colorAppearanceSettings, FontAppearanceSetting[] fontAppearanceSettings)
