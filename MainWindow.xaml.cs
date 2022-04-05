@@ -292,11 +292,6 @@ namespace AdvancedWindowsAppearence
         }
         #endregion
 
-
-        #region Wallpaper Tab
-
-        #endregion
-
         async void SaveAsTheme() //Sample of updating the theme
         {
             await Settings.SaveChanges();
@@ -351,6 +346,8 @@ namespace AdvancedWindowsAppearence
         {
             await Settings.SaveThemeAsTheme();
         }
+
+
         private async void SaveTitleColorsAsTheme_Click(object sender, RoutedEventArgs e)
         {
             await Settings.SaveTitleColorsAsTheme();
@@ -360,6 +357,7 @@ namespace AdvancedWindowsAppearence
         {
             await Settings.SaveTitleColorsToRegistry();
         }
+
 
         private async void SaveColorsMetricsAsTheme_Click(object sender, RoutedEventArgs e)
         {
@@ -371,6 +369,7 @@ namespace AdvancedWindowsAppearence
             await Settings.SaveColorsMetricsToRegistry();
         }
 
+
         private async void SaveFontsAsTheme_Click(object sender, RoutedEventArgs e)
         {
             await Settings.SaveFontsAsTheme();
@@ -381,6 +380,7 @@ namespace AdvancedWindowsAppearence
             await Settings.SaveFontsToRegistry();
         }
 
+
         private async void SaveWallpaperAsTheme_Click(object sender, RoutedEventArgs e)
         {
             await Settings.SaveWallpaperAsTheme();
@@ -390,6 +390,7 @@ namespace AdvancedWindowsAppearence
         {
             await Settings.SaveWallpaperToRegistry();
         }
+
 
         private async void SaveRegistrySettingsRegistry_Click(object sender, RoutedEventArgs e)
         {
