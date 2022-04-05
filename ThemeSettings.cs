@@ -84,7 +84,7 @@ namespace AdvancedWindowsAppearence
                         newThemeSettingsIni.Remove(line);
             }
 
-            //Set visual styles
+            //Set visual styles and aero color
             visualStylesIdIndex = newThemeSettingsIni.IndexOf(visualStylesId);
             if (visualStylesIdIndex == -1)
             {
@@ -105,15 +105,16 @@ namespace AdvancedWindowsAppearence
             newThemeSettingsIni.Insert(visualStylesIdIndex + 1, visualStylesText); 
         }
 
-        //TEST IT PLS
         public async Task SaveTheme()
-        {/*
-            string themePath = GetThemePath();
-            int visualStylesIdIndex = -1;
+        {
+            string themePath = GetThemePath();;
             string[] themeSettingsIni = GetThemeFile(themePath);
             List<string> newThemeSettingsIni = themeSettingsIni.ToList();
             string[] headersToRemove = new string[]{
-                "Path=", "ColorizationColor=", "AutoColorization=", "Size=", "ColorStyle"};
+                "Path=", 
+                "DisplayName=", "ThemeId=",
+                "SystemMode=", "AppMode="
+            };
 
             foreach (string line in themeSettingsIni)
             {
@@ -126,25 +127,27 @@ namespace AdvancedWindowsAppearence
                         newThemeSettingsIni.Remove(line);
             }
 
-            //Set visual styles
-            visualStylesIdIndex = newThemeSettingsIni.IndexOf(visualStylesId);
+            //Set theme name
+            int themeIdIndex = newThemeSettingsIni.IndexOf(themeId);
+            if (themeIdIndex == -1)
+            {
+                newThemeSettingsIni.Add(themeId);
+                themeIdIndex = newThemeSettingsIni.Count - 1;
+            }
+            newThemeSettingsIni.Insert(themeIdIndex + 1, "DisplayName=" + Settings.ThemeName);
+
+            //Set visual style
+            int visualStylesIdIndex = newThemeSettingsIni.IndexOf(visualStylesId);
             if (visualStylesIdIndex == -1)
             {
                 newThemeSettingsIni.Add(visualStylesId);
                 visualStylesIdIndex = newThemeSettingsIni.Count - 1;
             }
-            string visualStylesText =
-                "ColorStyle=NormalColor\n" +
-                "Size=NormalSize\n" +
-                "AutoColorization=0\n";
-            if (!string.IsNullOrWhiteSpace(aeroStyle))
-                visualStylesText += "Path=" + aeroStyle + "\n";
-            if (colorizationColor != null)
-            {
-                string colorstring = (colorizationColor.B | (colorizationColor.G << 8) | (colorizationColor.R << 16) | (colorizationColor.A << 24)).ToString();
-                visualStylesText += "ColorizationColor=" + colorstring + "\n";
-            }
-            newThemeSettingsIni.Insert(visualStylesIdIndex + 1, visualStylesText);*/
+
+            if (string.IsNullOrWhiteSpace(Settings.ThemeStyle))
+                return;
+            var visualStylesText = "Path=" + Settings.ThemeStyle;
+            newThemeSettingsIni.Insert(visualStylesIdIndex + 1, visualStylesText);
         }
 
         public async Task SaveColorsAndMetrics()
@@ -176,7 +179,80 @@ namespace AdvancedWindowsAppearence
                     newThemeSettingsIni.Insert(colorsIdIndex + 1, color.Name + "=" + color.ItemColorValue);
             }
 
-        }   
+        }
+
+        public async Task SaveFonts()
+        {
+            string themePath = GetThemePath();
+            int colorsIdIndex = -1;
+            string[] themeSettingsIni = GetThemeFile(themePath);
+            List<string> newThemeSettingsIni = GetThemeFile(themePath).ToList();
+
+            foreach (string line in themeSettingsIni)
+            {
+                //ignore all comments
+                if (line.StartsWith(";")) continue;
+
+                //avoid mess in the theme
+                foreach (FontAppearanceSetting color in Settings.FontSettings)
+                {
+                    if (!color.IsEdited)
+                        continue;
+                    if (line.Contains(color.Name))
+                        newThemeSettingsIni.Remove(line);
+                }
+            }
+
+            foreach (FontAppearanceSetting color in Settings.FontSettings)
+            {
+                colorsIdIndex = newThemeSettingsIni.IndexOf(colorsId);
+                if (color.HasColor)
+                    newThemeSettingsIni.Insert(colorsIdIndex + 1, color.Name + "=" + color.ItemColorValue);
+            }
+
+        }
+
+        public async Task SaveWallpaper()
+        {
+            //all lines to that contain these will be removed
+            string[] headersToRemove = new string[] {
+                "Pattern=", "Wallpaper=", "TileWallpaper=", "WallpaperStyle=", "PicturePosition=", "WallpaperWriteTime=", "MultimonBackgrounds",
+            };
+
+            string[] themeSettingsIni = GetThemeFile(GetThemePath());
+            List<string> newThemeSettingsIni = themeSettingsIni.ToList();
+
+            foreach (string line in themeSettingsIni)
+            {
+                //ignore all comments
+                if (line.StartsWith(";")) continue;
+
+                //remove all wallpaper lines to avoid mess in the theme
+                foreach (string header in headersToRemove)
+                    if (line.Contains(header))
+                        newThemeSettingsIni.Remove(line);
+            }
+
+            int desktopIdIndex = newThemeSettingsIni.IndexOf(desktopId);
+            if (desktopIdIndex == -1)
+            {
+                newThemeSettingsIni.Add(desktopId);
+                desktopIdIndex = newThemeSettingsIni.Count - 1;
+            }
+            newThemeSettingsIni.Insert(desktopIdIndex + 1, "Wallpaper=" + Settings.Wallpaper.Path);
+            if (Settings.Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle == WallpaperStyleRegistrySetting.WallpaperStyle.Tile)
+                newThemeSettingsIni.Insert(
+                    desktopIdIndex + 2,
+                    "TileWallpaper=1\n" +
+                    "WallpaperStyle=0");
+            else
+                newThemeSettingsIni.Insert(
+                    desktopIdIndex + 2,
+                    "TileWallpaper=0\n" +
+                    "WallpaperStyle=" + (int)Settings.Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle);
+
+        }
+
 
         #endregion
 
@@ -198,7 +274,7 @@ namespace AdvancedWindowsAppearence
             
             //all lines to that contain these will be removed
             string[] headersToRemove = new string[]{
-                "Pattern=", "Wallpaper=", "TileWallpaper=", "WallpaperStyle=", "PicturePosition=", "WallpaperWriteTime=", "MultimonBackgrounds"
+                "Pattern=", "Wallpaper=", "TileWallpaper=", "WallpaperStyle=", "PicturePosition=", "WallpaperWriteTime=", "MultimonBackgrounds",
                 "Path=", "ColorizationColor=", "AutoColorization=", "Size=", "ColorStyle",
                 "DisplayName=", "ThemeId="};
 
