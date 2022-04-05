@@ -40,6 +40,16 @@ namespace AdvancedWindowsAppearence
             Path = path;
             NotifyPropertyChanged(nameof(Path));
         }
+
+        public void SaveToRegistry()
+        {
+            //save the wallpaper
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
+            registryKey.SetValue("Wallpaper", Path, RegistryValueKind.String);
+            registryKey.Close();
+            //save the wallpaper styles
+            WallpaperStyleSettings.SaveToRegistry();
+        }
     }
 
     public class WallpaperStyleRegistrySetting: INotifyPropertyChanged
@@ -55,12 +65,6 @@ namespace AdvancedWindowsAppearence
         public string[] WallpaperStyles { get; private set; }
         public enum WallpaperStyle
         {
-            /*Center = 0,
-            Tile = 1,
-            Stretched = 2,
-            Fit = 3,
-            Fill = 4,
-            Span = 5*/
             Center = 0,
             Tile = 1,
             Stretched = 2,
@@ -106,12 +110,18 @@ namespace AdvancedWindowsAppearence
 
         internal void SaveToRegistry()
         {
+            //save the tile
             BoolRegistrySetting tileWallpaperRegistrySetting = new BoolRegistrySetting("Tile Wallpaper", @"Control Panel\Desktop", "TileWallpaper");
             if (SelectedWallpaperStyle == WallpaperStyle.Tile)
                 tileWallpaperRegistrySetting.Checked = true;
             else
                 tileWallpaperRegistrySetting.Checked = false;
             tileWallpaperRegistrySetting.SaveToRegistry();
+
+            //save the other styles
+            RegistryKey regKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
+            regKey.SetValue("WallpaperStyle", (int)SelectedWallpaperStyle, RegistryValueKind.String);
+            regKey.Close();
         }
     }
 }
