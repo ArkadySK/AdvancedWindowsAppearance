@@ -265,36 +265,44 @@ namespace AdvancedWindowsAppearence
 
         internal async Task SaveThemeAsTheme()
         {
-            throw new NotImplementedException();
+            IsSavingInProgress = true;
+            await ThemeSettings.SaveTheme();
             ShowSavedSuccessfullyDialog();
+            //separate color modes from these settings in future
+            await RegistrySettingsViewModel.SaveAll();
         }
 
-        //Add theme support
+ 
         internal async Task SaveTitleColorsAsTheme()
         {
+            IsSavingInProgress = true;
             await AeroColorsViewModel.SaveAll();       
             await Task.Delay(2000);
             App.Current.Resources["ThemeColor"] = Converters.BrushToColorConverter.MediaColorToBrush(ThemeColor.ItemColor);
+            await ThemeSettings.SaveTitleColors();
             ShowSavedSuccessfullyDialog();
         }
 
         internal async Task SaveTitleColorsToRegistry()
         {
+            IsSavingInProgress = true;
             await AeroColorsViewModel.SaveAll();
             await Task.Run(ThemeColor.SaveToRegistry);
-            ShowSavedSuccessfullyDialog();
+            ShowSavedToRegistryDialog();
         }
 
 
         internal async Task SaveColorsMetricsAsTheme()
         {
-            throw new NotImplementedException();
+            IsSavingInProgress = true;
+            await ThemeSettings.SaveColorsAndMetrics();
             ShowSavedToRegistryDialog();
             
         }
 
         internal async Task SaveColorsMetricsToRegistry()
         {
+            IsSavingInProgress = true;
             List<Task> appliedSettingsTasks = new List<Task>();
             foreach (var setting in ColorSettings)
             {
@@ -310,11 +318,13 @@ namespace AdvancedWindowsAppearence
 
         internal async Task SaveFontsAsTheme()
         {
-            throw new NotImplementedException();
+            IsSavingInProgress = true;
+            await ThemeSettings.SaveFonts();
             ShowSavedAsThemeDialog();
         }
         internal async Task SaveFontsToRegistry()
         {
+            IsSavingInProgress = true;
             List<Task> appliedSettingsTasks = new List<Task>();
             foreach (var font in FontSettings)
             {
@@ -330,7 +340,8 @@ namespace AdvancedWindowsAppearence
 
         internal async Task SaveWallpaperAsTheme()
         {
-            throw new NotImplementedException();
+            IsSavingInProgress = true;
+            await ThemeSettings.SaveWallpaper();
             ShowSavedSuccessfullyDialog();
         }
         internal async Task SaveWallpaperToRegistry()
@@ -343,6 +354,7 @@ namespace AdvancedWindowsAppearence
 
         internal async Task SaveRegistrySettingsToRegistry()
         {
+            IsSavingInProgress = true;
             await RegistrySettingsViewModel.SaveAll();
             ShowSavedToRegistryDialog();
         }
