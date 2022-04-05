@@ -6,16 +6,19 @@ using Microsoft.Win32;
 using System.IO;
 using System.Diagnostics;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AdvancedWindowsAppearence
 {
     class ThemeSettings
     {
+        public GeneralViewModel Settings { get; set; }
+
         public struct ColorRegistrySetting
         {
             public string RegistryName { get; set; }
             public string Value { get; set; }
-            public bool IsFoundInTheme{get; set; }
+            public bool IsFoundInTheme {get; set; }
         }
 
         public static string GetThemePath()
@@ -44,6 +47,140 @@ namespace AdvancedWindowsAppearence
             return ThemeSettingsIni.Split(Environment.NewLine.ToCharArray());        
         }
 
+        /// <summary>
+        /// intialize the ThemeSettings with the viewmodel 
+        /// </summary>
+        /// <param name="settings"></param>
+        public ThemeSettings(GeneralViewModel settings)
+        {
+            Settings = settings;
+        }
+
+        #region Save
+
+        string colorsId = @"[Control Panel\Colors]";
+        string visualStylesId = @"[VisualStyles]";
+        string desktopId = @"[Control Panel\Desktop]";
+        string themeId = @"[Theme]";
+
+        public async Task SaveTitleColors()
+        {
+            string themePath = GetThemePath();
+            int visualStylesIdIndex = -1;
+            string[] themeSettingsIni = GetThemeFile(themePath);
+            List<string> newThemeSettingsIni = themeSettingsIni.ToList();
+
+            string[] headersToRemove = new string[]{
+                "ColorizationColor=", "AutoColorization=", "ColorStyle", "Size="};
+
+            foreach (string line in themeSettingsIni)
+            {
+                //ignore all comments
+                if (line.StartsWith(";")) continue;
+
+                //avoid mess in the theme
+                foreach (string header in headersToRemove)
+                    if (line.Contains(header))
+                        newThemeSettingsIni.Remove(line);
+            }
+
+            //Set visual styles
+            visualStylesIdIndex = newThemeSettingsIni.IndexOf(visualStylesId);
+            if (visualStylesIdIndex == -1)
+            {
+                newThemeSettingsIni.Add(visualStylesId);
+                visualStylesIdIndex = newThemeSettingsIni.Count - 1;
+            }
+            var themeColor = Settings.ThemeColor.ItemColor.GetValueOrDefault(Color.Silver);
+
+            string visualStylesText =
+                "ColorStyle=NormalColor\n" +
+                "Size=NormalSize\n" +
+                "AutoColorization=0\n";
+            if (themeColor != null)
+            {
+                string colorstring = (themeColor.B | (themeColor.G << 8) | (themeColor.R << 16) | (themeColor.A << 24)).ToString();
+                visualStylesText += "ColorizationColor=" + colorstring + "\n";
+            }
+            newThemeSettingsIni.Insert(visualStylesIdIndex + 1, visualStylesText); 
+        }
+
+        //TEST IT PLS
+        public async Task SaveTheme()
+        {/*
+            string themePath = GetThemePath();
+            int visualStylesIdIndex = -1;
+            string[] themeSettingsIni = GetThemeFile(themePath);
+            List<string> newThemeSettingsIni = themeSettingsIni.ToList();
+            string[] headersToRemove = new string[]{
+                "Path=", "ColorizationColor=", "AutoColorization=", "Size=", "ColorStyle"};
+
+            foreach (string line in themeSettingsIni)
+            {
+                //ignore all comments
+                if (line.StartsWith(";")) continue;
+
+                //remove all wallpaper lines to avoid mess in the theme
+                foreach (string header in headersToRemove)
+                    if (line.Contains(header))
+                        newThemeSettingsIni.Remove(line);
+            }
+
+            //Set visual styles
+            visualStylesIdIndex = newThemeSettingsIni.IndexOf(visualStylesId);
+            if (visualStylesIdIndex == -1)
+            {
+                newThemeSettingsIni.Add(visualStylesId);
+                visualStylesIdIndex = newThemeSettingsIni.Count - 1;
+            }
+            string visualStylesText =
+                "ColorStyle=NormalColor\n" +
+                "Size=NormalSize\n" +
+                "AutoColorization=0\n";
+            if (!string.IsNullOrWhiteSpace(aeroStyle))
+                visualStylesText += "Path=" + aeroStyle + "\n";
+            if (colorizationColor != null)
+            {
+                string colorstring = (colorizationColor.B | (colorizationColor.G << 8) | (colorizationColor.R << 16) | (colorizationColor.A << 24)).ToString();
+                visualStylesText += "ColorizationColor=" + colorstring + "\n";
+            }
+            newThemeSettingsIni.Insert(visualStylesIdIndex + 1, visualStylesText);*/
+        }
+
+        public async Task SaveColorsAndMetrics()
+        {
+            string themePath = GetThemePath();
+            int colorsIdIndex = -1;
+            string[] themeSettingsIni = GetThemeFile(themePath);
+            List<string> newThemeSettingsIni = GetThemeFile(themePath).ToList();
+
+            foreach (string line in themeSettingsIni)
+            {
+                //ignore all comments
+                if (line.StartsWith(";")) continue;
+
+                //avoid mess in the theme
+                foreach (ColorAppearanceSetting color in Settings.ColorSettings)
+                {
+                    if (!color.IsEdited)
+                        continue;
+                    if (line.Contains(color.Name))
+                        newThemeSettingsIni.Remove(line);
+                }
+            }
+
+            foreach (ColorAppearanceSetting color in Settings.ColorSettings)
+            {
+                colorsIdIndex = newThemeSettingsIni.IndexOf(colorsId);
+                if(color.HasColor)
+                    newThemeSettingsIni.Insert(colorsIdIndex + 1, color.Name + "=" + color.ItemColorValue);
+            }
+
+        }   
+
+        #endregion
+
+        [Obsolete]
         public ThemeSettings(string displayName, Color colorizationColor, string aeroStyle, WallpaperAppearanceSetting wallpaper, ColorAppearanceSetting[] colorAppearanceSettings, FontAppearanceSetting[] fontAppearanceSettings)
         {
 
@@ -57,14 +194,11 @@ namespace AdvancedWindowsAppearence
             int colorsIdIndex = -1;
             int desktopIdIndex = -1;
             int visualStylesIdIndex = -1;
-            string colorsId = @"[Control Panel\Colors]";
-            string visualStylesId = @"[VisualStyles]";
-            string desktopId = @"[Control Panel\Desktop]";
-            string themeId = @"[Theme]";
+            
             
             //all lines to that contain these will be removed
             string[] headersToRemove = new string[]{
-                "Pattern=", "Wallpaper=", "TileWallpaper=", "WallpaperStyle=", "PicturePosition=", "WallpaperWriteTime=",
+                "Pattern=", "Wallpaper=", "TileWallpaper=", "WallpaperStyle=", "PicturePosition=", "WallpaperWriteTime=", "MultimonBackgrounds"
                 "Path=", "ColorizationColor=", "AutoColorization=", "Size=", "ColorStyle",
                 "DisplayName=", "ThemeId="};
 

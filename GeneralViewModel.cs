@@ -16,6 +16,8 @@ namespace AdvancedWindowsAppearence
     {
         public event PropertyChangedEventHandler PropertyChanged; // to do: implement this to refresh the preview
 
+        ThemeSettings ThemeSettings;
+
         internal void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -54,6 +56,7 @@ namespace AdvancedWindowsAppearence
             InitDPIScale();
             InitColors();
             InitFonts();
+            ThemeSettings = new ThemeSettings(this);
         }
 
         void InitAeroColors()
@@ -240,53 +243,109 @@ namespace AdvancedWindowsAppearence
 
 
         #region SaveNew
+        private void ShowSavedToRegistryDialog()
+        {
+            MessageBox.Show("You need to restart to apply these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
+            IsSavingInProgress = false;
+        }
+
+        private void ShowSavedAsThemeDialog()
+        {
+            MessageBox.Show("You need to restart to apply some of these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
+            IsSavingInProgress = false;
+        }
+
+        private void ShowSavedSuccessfullyDialog()
+        {
+            MessageBox.Show("Theme applied successfully.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+            IsSavingInProgress = false;
+        }
+
+
 
         internal async Task SaveThemeAsTheme()
         {
             throw new NotImplementedException();
+            ShowSavedSuccessfullyDialog();
         }
 
+        //Add theme support
         internal async Task SaveTitleColorsAsTheme()
         {
-            throw new NotImplementedException();
+            await AeroColorsViewModel.SaveAll();       
+            await Task.Delay(2000);
+            App.Current.Resources["ThemeColor"] = Converters.BrushToColorConverter.MediaColorToBrush(ThemeColor.ItemColor);
+            ShowSavedSuccessfullyDialog();
         }
 
         internal async Task SaveTitleColorsToRegistry()
         {
-            throw new NotImplementedException();
+            await AeroColorsViewModel.SaveAll();
+            await Task.Run(ThemeColor.SaveToRegistry);
+            ShowSavedSuccessfullyDialog();
         }
 
 
         internal async Task SaveColorsMetricsAsTheme()
         {
             throw new NotImplementedException();
+            ShowSavedToRegistryDialog();
+            
         }
 
         internal async Task SaveColorsMetricsToRegistry()
         {
-            throw new NotImplementedException();
+            List<Task> appliedSettingsTasks = new List<Task>();
+            foreach (var setting in ColorSettings)
+            {
+                if (setting == null) continue;
+                if (!setting.IsEdited) continue;
+                appliedSettingsTasks.Add(Task.Run(setting.SaveToRegistry));
+                setting.IsEdited = false;
+            }
+            await Task.WhenAll(appliedSettingsTasks);
+            ShowSavedToRegistryDialog();
         }
 
 
         internal async Task SaveFontsAsTheme()
         {
             throw new NotImplementedException();
+            ShowSavedAsThemeDialog();
         }
         internal async Task SaveFontsToRegistry()
         {
-            throw new NotImplementedException();
+            List<Task> appliedSettingsTasks = new List<Task>();
+            foreach (var font in FontSettings)
+            {
+                if (font == null) continue;
+                if (!font.IsEdited) continue;
+                appliedSettingsTasks.Add(Task.Run(font.SaveToRegistry));
+                font.IsEdited = false;
+            }
+            await Task.WhenAll(appliedSettingsTasks);
+            ShowSavedToRegistryDialog();
         }
 
 
         internal async Task SaveWallpaperAsTheme()
         {
             throw new NotImplementedException();
+            ShowSavedSuccessfullyDialog();
         }
         internal async Task SaveWallpaperToRegistry()
         {
-            throw new NotImplementedException();
+            IsSavingInProgress = true;
+            await Task.Run(Wallpaper.SaveToRegistry);
+            ShowSavedToRegistryDialog();
         }
 
+
+        internal async Task SaveRegistrySettingsToRegistry()
+        {
+            await RegistrySettingsViewModel.SaveAll();
+            ShowSavedToRegistryDialog();
+        }
 
 
         #endregion
@@ -363,11 +422,6 @@ namespace AdvancedWindowsAppearence
             }
 
             return output;
-        }
-
-        internal async Task SaveRegistrySettingsToRegistry()
-        {
-            throw new NotImplementedException();
         }
 
         string GetFontsInReg()
