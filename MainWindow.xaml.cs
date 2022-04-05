@@ -33,6 +33,8 @@ namespace AdvancedWindowsAppearence
         ModernWindow ModernWindow = null;
         WallpaperSelectionPage wallpaperPage;
 
+        #region initialization
+
         public MainWindow()
         {
             InitializeComponent();
@@ -110,6 +112,10 @@ namespace AdvancedWindowsAppearence
 
         }
 
+        #endregion
+
+        
+        #region Theme tab
         void LoadThemeName()
         {
             string themeName = ThemeSettings.GetThemePath();
@@ -123,7 +129,11 @@ namespace AdvancedWindowsAppearence
                 Settings.ThemeName = themeName;
 
         }
-        
+        #endregion
+
+
+        #region Colors and Metrics and Fonts commmon functions
+
         void UpdateFontList()
         {
             comboBoxFont.Items.Clear();
@@ -145,6 +155,13 @@ namespace AdvancedWindowsAppearence
 
         }
 
+
+        private void openClassicWindowTextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ClassicWindowForm classicWindowForm = new ClassicWindowForm();
+            classicWindowForm.ShowDialog();
+        }
+
         System.Drawing.Color OpenColorDialog(System.Drawing.Color? defaultCol)
         {
             System.Drawing.Color color = new System.Drawing.Color();
@@ -161,6 +178,7 @@ namespace AdvancedWindowsAppearence
             }
             return color;
         }
+        #endregion
 
 
         #region Colors And Metrics Tab      
@@ -291,18 +309,8 @@ namespace AdvancedWindowsAppearence
         }
         #endregion
 
-        async void SaveAsTheme() //Sample of updating the theme
-        {
-            await Settings.SaveChanges();
-            await Task.Delay(200);
-            if (ModernWindow != null)
-            {
-                Dispatcher.Invoke(() => ModernWindow.UpdateTheme(Settings.RegistrySettingsViewModel.RegistrySettings[5].Checked.Value));
-            }
-        }
 
-    #region Buttons Panel
-    //Close Program
+        #region Buttons Panel
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -315,11 +323,6 @@ namespace AdvancedWindowsAppearence
 
 
         #region Window properties
-        private void openClassicWindowTextBlock_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            ClassicWindowForm classicWindowForm = new ClassicWindowForm();
-            classicWindowForm.ShowDialog();
-        }
 
         /// <summary>
         /// change size and adjust layout if needed
@@ -341,9 +344,23 @@ namespace AdvancedWindowsAppearence
         }
         #endregion
 
+
+        #region Save
+        //updating the theme
+        async Task UpdateTheme() 
+        {
+            await Task.Delay(200);
+            if (ModernWindow != null)
+            {
+                Dispatcher.Invoke(() => ModernWindow.UpdateTheme(Settings.RegistrySettingsViewModel.RegistrySettings[5].Checked.Value));
+            }
+        }
+
+
         private async void SaveThemeAsTheme_Click(object sender, RoutedEventArgs e)
         {
             await Settings.SaveThemeAsTheme();
+            await UpdateTheme();
         }
 
 
@@ -394,7 +411,9 @@ namespace AdvancedWindowsAppearence
         private async void SaveRegistrySettingsRegistry_Click(object sender, RoutedEventArgs e)
         {
             await Settings.SaveRegistrySettingsToRegistry();
+            await UpdateTheme();
         }
 
+        #endregion 
     }
 }
