@@ -3,9 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:AdvancedWindowsAppearence"
              xmlns:controls="clr-namespace:AdvancedWindowsAppearence.Controls"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary >
+            <sys:Double x:Key="PreviewWidth">800</sys:Double>
             <FontFamily x:Key="Segoe MDL2 Assets">./Fonts/segoe-mdl2-assets.ttf#Segoe MDL2 Assets</FontFamily>
             <SolidColorBrush x:Key="ThemeColor"/>
             <SolidColorBrush x:Key="ButtonFaceColor" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>

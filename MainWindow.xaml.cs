@@ -29,6 +29,8 @@ namespace AdvancedWindowsAppearence
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public const int PreviewWidth = 200;
         GeneralViewModel Settings = new GeneralViewModel();
         ModernWindow ModernWindow = null;
         WallpaperSelectionPage wallpaperPage;

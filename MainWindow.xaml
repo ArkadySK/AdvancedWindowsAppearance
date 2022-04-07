@@ -54,7 +54,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                    <Grid Margin="5">
+                    <Grid Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
@@ -116,7 +116,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                    <Grid Margin="5">
+                    <Grid Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="auto"/>
@@ -188,7 +188,7 @@
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
 
-                    <Grid Margin="5">
+                    <Grid Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="*"/>
@@ -244,7 +244,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                    <Grid Margin="5">
+                    <Grid Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
@@ -347,7 +347,7 @@
                 </TabItem.Header>
 
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                    <Grid>
+                    <Grid MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
@@ -375,7 +375,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                    <Grid Margin="5">
+                    <Grid Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -411,7 +411,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                    <Frame x:Name="restoreTabFrame" Content="RestorePage.xaml" Margin="5"/>
+                    <Frame x:Name="restoreTabFrame" Content="RestorePage.xaml" Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left"/>
                 </ScrollViewer>
             </TabItem>
         </TabControl>
