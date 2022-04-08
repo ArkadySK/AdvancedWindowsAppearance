@@ -26,6 +26,7 @@
             <converters:BooleanToBlurEffectConverter x:Key="BooleanToBlurEffect"/>
             <converters:BooleanToIntConverter x:Key="BooleanToInt"/>
             <converters:WallpaperStyleToImageStretchConverter x:Key="WallpaperStyleToImageStretch"/>
+            <converters:EnumToStringConverter x:Key="EnumToString"/>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -358,10 +359,9 @@
                         <!--Wallpaper type-->
                         <StackPanel >
                             <Label Style="{StaticResource SystemLabel}" Content="Wallpaper type: "/>
-                            <ComboBox x:Name="WallpaperTypeComboBox" Style="{StaticResource SystemComboBox}" DropDownClosed="WallpaperTypeComboBox_DropDownClosed" SelectedIndex="0">
-                                <ComboBoxItem>Single Image</ComboBoxItem>
-                                <ComboBoxItem>Slideshow</ComboBoxItem>
-                                <ComboBoxItem>Solid Color</ComboBoxItem>
+                            <ComboBox x:Name="WallpaperTypeComboBox" Style="{StaticResource SystemComboBox}" ItemsSource="{Binding WallpaperSettings.WallpaperTypes}" DropDownClosed="WallpaperTypeComboBox_DropDownClosed" 
+                                      SelectedValue="{Binding WallpaperSettings.WallpaperType}">
+                                <Label Content="{Binding WallpaperSettings.WallpaperType, Converter={StaticResource EnumToString}, Mode=OneWay}"/>
                             </ComboBox>
                         </StackPanel>
                         <!--Wallpaper settings-->

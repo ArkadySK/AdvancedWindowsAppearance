@@ -111,6 +111,7 @@
     <Compile Include="Converters\BooleanToBlurEffectConverter.cs" />
     <Compile Include="Converters\BooleanToIntConverter.cs" />
     <Compile Include="Converters\BrushToColorConverter.cs" />
+    <Compile Include="Converters\EnumToStringConverter.cs" />
     <Compile Include="Converters\WallpaperStyleToImageStretchConverter.cs" />
     <Compile Include="Converters\DrawingColorToMediaColorConverter.cs" />
     <Compile Include="Converters\BooleanToFontStyleConverter.cs" />
@@ -126,6 +127,9 @@
     <Compile Include="Previews\Preview.xaml.cs">
       <DependentUpon>Preview.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Previews\ScreenslideSettingsPage.xaml.cs">
+      <DependentUpon>ScreenslideSettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Previews\WallpaperSelectionPage.xaml.cs">
       <DependentUpon>WallpaperSelectionPage.xaml</DependentUpon>
     </Compile>
@@ -137,6 +141,7 @@
     </Compile>
     <Compile Include="Updater.cs" />
     <Compile Include="WallpaperAppearanceSetting.cs" />
+    <Compile Include="WallpaperSettings.cs" />
     <Compile Include="WindowBlur.cs" />
     <Page Include="Controls\ClassicButton.xaml">
       <SubType>Designer</SubType>
@@ -167,6 +172,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Previews\Preview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Previews\ScreenslideSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
