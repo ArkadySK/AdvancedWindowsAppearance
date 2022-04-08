@@ -359,7 +359,7 @@
                         <!--Wallpaper type-->
                         <StackPanel >
                             <Label Style="{StaticResource SystemLabel}" Content="Wallpaper type: "/>
-                            <ComboBox x:Name="WallpaperTypeComboBox" ItemsSource="{Binding WallpaperSettings.WallpaperTypesStrings}" Style="{StaticResource SystemComboBox}" DropDownClosed="WallpaperTypeComboBox_DropDownClosed" 
+                            <ComboBox x:Name="WallpaperTypeComboBox" ItemsSource="{Binding WallpaperSettings.WallpaperTypesStrings}" Style="{StaticResource SystemComboBox}" SelectionChanged="WallpaperTypeComboBox_SelectionChanged" 
                                        IsEditable="False" Text="{Binding WallpaperSettings.WallpaperType, Converter={StaticResource EnumToString}}">
                             </ComboBox>
                         </StackPanel>

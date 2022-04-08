@@ -417,9 +417,8 @@ namespace AdvancedWindowsAppearence
 
         #endregion
 
-        private void WallpaperTypeComboBox_DropDownClosed(object sender, EventArgs e)
-        {           
-
+        void UpdateWallpaperTypeComboBox()
+        {
             switch (Settings.WallpaperSettings.WallpaperType)
             {
                 case WallpaperSettings.WallpaperTypes.Image:
@@ -440,8 +439,14 @@ namespace AdvancedWindowsAppearence
                         MessageBox.Show("Feature not implementedd");
                         break;
                     }
-
             }
+        }
+
+        private async void WallpaperTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            await Task.Delay(50);
+            //the UI is delayed, so it will display changes correctly
+            UpdateWallpaperTypeComboBox();
         }
     }
 }
