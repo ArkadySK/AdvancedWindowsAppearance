@@ -18,10 +18,10 @@ namespace AdvancedWindowsAppearence.Previews
     /// <summary>
     /// Interaction logic for ScreenslideSettingsPage.xaml
     /// </summary>
-    public partial class ScreenslideSettingsPage : Page
+    public partial class SlideshowSettingsPage : Page
     {
         WallpaperSettings WallpaperSettings;
-        public ScreenslideSettingsPage(WallpaperSettings wallpaperSettings)
+        public SlideshowSettingsPage(WallpaperSettings wallpaperSettings)
         {
             WallpaperSettings = wallpaperSettings;
             InitializeComponent();

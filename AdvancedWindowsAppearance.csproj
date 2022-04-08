@@ -127,8 +127,8 @@
     <Compile Include="Previews\Preview.xaml.cs">
       <DependentUpon>Preview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Previews\ScreenslideSettingsPage.xaml.cs">
-      <DependentUpon>ScreenslideSettingsPage.xaml</DependentUpon>
+    <Compile Include="Previews\SlideshowSettingsPage.xaml.cs">
+      <DependentUpon>SlideshowSettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Previews\WallpaperSelectionPage.xaml.cs">
       <DependentUpon>WallpaperSelectionPage.xaml</DependentUpon>
@@ -175,7 +175,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Previews\ScreenslideSettingsPage.xaml">
+    <Page Include="Previews\SlideshowSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
