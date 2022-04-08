@@ -63,7 +63,6 @@
 
 
         <!--Active Window-->
-
         <Grid Margin="30 50 0 0" VerticalAlignment="Center" Width="400" HorizontalAlignment="Center" MinHeight="100">
             <!--Active Window Border-->
             <Border BorderBrush="{Binding ThemeColor.ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=White}" BorderThickness="1" 
@@ -77,7 +76,10 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-
+                
+                <!--System default background, will be overridden by the rectangle below-->
+                <Rectangle Grid.ColumnSpan="4" Fill="{Binding ThemeColor.ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=SteelBlue}"/>
+                
                 <!--The color of active window-->
                 <!--the blue background is on purpose, thats how system handles no active color-->
                 <Rectangle Grid.ColumnSpan="4" Visibility="{Binding AeroColorsViewModel.AeroColors[0].Enabled, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" 
@@ -99,5 +101,8 @@
             </Grid>
 
         </Grid>
+        
+        
+        
     </Grid>
 </Page>
