@@ -311,6 +311,42 @@ namespace AdvancedWindowsAppearence
         #endregion
 
 
+        #region Wallpaper Tab
+        void UpdateWallpaperTypeComboBox()
+        {
+            switch (Settings.WallpaperSettings.WallpaperType)
+            {
+                case WallpaperSettings.WallpaperTypes.Image:
+                    {
+                        wallpaperPage = new WallpaperSelectionPage(Settings.WallpaperSettings);
+                        WallpaperTabFrame.Content = wallpaperPage;
+                        break;
+                    }
+                case WallpaperSettings.WallpaperTypes.Slideshow:
+                    {
+                        screenslidePage = new ScreenslideSettingsPage(Settings.WallpaperSettings);
+                        WallpaperTabFrame.Content = screenslidePage;
+                        break;
+                    }
+                default:
+                    {
+                        WallpaperTabFrame.Content = null;
+                        MessageBox.Show("Feature not implementedd");
+                        break;
+                    }
+            }
+        }
+
+        private async void WallpaperTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            await Task.Delay(50);
+            //the UI is delayed, so it will display changes correctly
+            UpdateWallpaperTypeComboBox();
+        }
+
+        #endregion
+
+
         #region Buttons Panel
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -405,6 +441,7 @@ namespace AdvancedWindowsAppearence
 
         private async void SaveWallpaperToRegistry_Click(object sender, RoutedEventArgs e)
         {
+            Settings.ColorSettings[13].SaveColorToRegistry();
             await Settings.SaveWallpaperToRegistry();
         }
 
@@ -416,37 +453,5 @@ namespace AdvancedWindowsAppearence
         }
 
         #endregion
-
-        void UpdateWallpaperTypeComboBox()
-        {
-            switch (Settings.WallpaperSettings.WallpaperType)
-            {
-                case WallpaperSettings.WallpaperTypes.Image:
-                    {
-                        wallpaperPage = new WallpaperSelectionPage(Settings.WallpaperSettings);
-                        WallpaperTabFrame.Content = wallpaperPage;
-                        break;
-                    }
-                case WallpaperSettings.WallpaperTypes.Slideshow:
-                    {
-                        screenslidePage = new ScreenslideSettingsPage(Settings.WallpaperSettings);
-                        WallpaperTabFrame.Content = screenslidePage;
-                        break;
-                    }
-                default:
-                    {
-                        WallpaperTabFrame.Content = null;
-                        MessageBox.Show("Feature not implementedd");
-                        break;
-                    }
-            }
-        }
-
-        private async void WallpaperTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            await Task.Delay(50);
-            //the UI is delayed, so it will display changes correctly
-            UpdateWallpaperTypeComboBox();
-        }
     }
 }
