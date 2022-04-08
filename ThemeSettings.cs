@@ -239,8 +239,8 @@ namespace AdvancedWindowsAppearence
                 newThemeSettingsIni.Add(desktopId);
                 desktopIdIndex = newThemeSettingsIni.Count - 1;
             }
-            newThemeSettingsIni.Insert(desktopIdIndex + 1, "Wallpaper=" + Settings.Wallpaper.Path);
-            if (Settings.Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle == WallpaperStyleRegistrySetting.WallpaperStyle.Tile)
+            newThemeSettingsIni.Insert(desktopIdIndex + 1, "Wallpaper=" + Settings.WallpaperSettings.Wallpaper.Path);
+            if (Settings.WallpaperSettings.Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle == WallpaperStyleRegistrySetting.WallpaperStyle.Tile)
                 newThemeSettingsIni.Insert(
                     desktopIdIndex + 2,
                     "TileWallpaper=1\n" +
@@ -249,7 +249,7 @@ namespace AdvancedWindowsAppearence
                 newThemeSettingsIni.Insert(
                     desktopIdIndex + 2,
                     "TileWallpaper=0\n" +
-                    "WallpaperStyle=" + (int)Settings.Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle);
+                    "WallpaperStyle=" + (int)Settings.WallpaperSettings.Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle);
 
         }
 

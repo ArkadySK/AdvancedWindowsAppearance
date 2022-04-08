@@ -18,6 +18,8 @@ namespace AdvancedWindowsAppearence
 
         ThemeSettings ThemeSettings;
 
+        public WallpaperSettings WallpaperSettings { get; } = new WallpaperSettings();
+        
         internal void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -25,8 +27,6 @@ namespace AdvancedWindowsAppearence
 
         public ColorAppearanceSetting[] ColorSettings { get; set; }
         public FontAppearanceSetting[] FontSettings { get; set; }
-
-        public WallpaperAppearanceSetting Wallpaper { get; set; } = new WallpaperAppearanceSetting();
 
         public AeroColorRegistrySetting ThemeColor { get; set; } = new AeroColorRegistrySetting("Theme Color", "ColorizationColor");
         public RegistrySettingsViewModel RegistrySettingsViewModel { get; set; } = new RegistrySettingsViewModel();
@@ -136,6 +136,8 @@ namespace AdvancedWindowsAppearence
         }
         #endregion
 
+        
+
         async Task KillDWM()
         {
             var processes = Process.GetProcesses();
@@ -175,74 +177,7 @@ namespace AdvancedWindowsAppearence
             Process.Start("explorer", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Microsoft\\Windows\\Themes");
         }
 
-        #region Save
-        public async Task SaveChanges()
-        {
-            IsSavingInProgress = true;
-            if (UseThemes) 
-                await SaveToTheme();
-            else
-            {
-                await SaveToRegistry();
-                await Task.Delay(2000);
-                await KillDWM();
-            }
-
-            await RegistrySettingsViewModel.SaveAll();
-            await AeroColorsViewModel.SaveAll();
-            MessageBox.Show("You need to restart to apply these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
-            IsSavingInProgress = false;
-        }
-
-        async Task SaveToRegistry()
-        {
-            List<Task> tasks = new List<Task>();
-            foreach (var c in ColorSettings)
-            {
-                if (c == null) continue;
-                tasks.Add(Task.Run(() => c.SaveToRegistry()));
-                c.IsEdited = false;
-            }
-            foreach (var f in FontSettings)
-            {
-                if (f == null) continue;
-                tasks.Add(Task.Run(() => f.SaveToRegistry()));
-                f.IsEdited = false;
-            }
-
-            ThemeColor.SaveToRegistry();
-            await Task.WhenAll(tasks);
-        }
-
-        async Task SaveToTheme()
-        {
-
-            if (!UseThemes) return; //if user does not want to save changes into theme
-
-            ThemeSettings SaveTheme = Task.Run(() => new ThemeSettings(ThemeName, ThemeColor.ItemColor.Value, ThemeStyle, Wallpaper, ColorSettings, FontSettings)).Result;
-
-            foreach (var setting in ColorSettings)
-            {
-                if (setting == null) continue;
-                if (!setting.IsEdited) continue;
-                setting.SaveToRegistry();
-                setting.IsEdited = false;
-            }
-            foreach (var f in FontSettings)
-            {
-                if (f == null) continue;
-                if (!f.IsEdited) continue;
-                f.SaveToRegistry();
-                f.IsEdited = false;
-            }
-
-            App.Current.Resources["ThemeColor"] = Converters.BrushToColorConverter.MediaColorToBrush(ThemeColor.ItemColor);
-            await Task.Delay(2000);
-        }
-        #endregion
-
-
-        #region SaveNew
+        #region Save (Separate)
         private void ShowSavedToRegistryDialog()
         {
             MessageBox.Show("You need to restart to apply these changes.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -347,7 +282,7 @@ namespace AdvancedWindowsAppearence
         internal async Task SaveWallpaperToRegistry()
         {
             IsSavingInProgress = true;
-            await Task.Run(Wallpaper.SaveToRegistry);
+            await Task.Run(WallpaperSettings.SaveToRegistry);
             ShowSavedToRegistryDialog();
         }
 
