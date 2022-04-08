@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdvancedWindowsAppearence
 {
-    public class WallpaperSettings: INotifyPropertyChanged
+    public class WallpaperSettings : INotifyPropertyChanged
     {
 
         internal void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -17,10 +17,10 @@ namespace AdvancedWindowsAppearence
         }
 
 
-        public WallpaperAppearanceSetting Wallpaper { get;} = new WallpaperAppearanceSetting();
+        public WallpaperAppearanceSetting Wallpaper { get; } = new WallpaperAppearanceSetting();
         public WallpaperTypes WallpaperType
         {
-            get => _wallpaperType; 
+            get => _wallpaperType;
             set
             {
                 _wallpaperType = value;
@@ -28,13 +28,12 @@ namespace AdvancedWindowsAppearence
             }
         }
 
-        public enum WallpaperTypes
+        public string[] WallpaperTypesStrings { get; } = new string[] { "Image", "Slideshow", "Color" };
+
+        public enum WallpaperTypes 
         {
-            [Description("Image")]
             Image = 0,
-            [Description("Slideshow")]
             Slideshow = 1,
-            [Description("Color")]
             Color = 2
         }
         private WallpaperTypes _wallpaperType;

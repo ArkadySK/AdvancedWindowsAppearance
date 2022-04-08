@@ -26,7 +26,20 @@ namespace AdvancedWindowsAppearence.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(value.ToString()))
+                return WallpaperSettings.WallpaperTypes.Color;
+
+            if(value is string wallpaper)
+            {
+                if (wallpaper == "Image")
+                    return WallpaperSettings.WallpaperTypes.Image;
+                else if (wallpaper == "Slideshow")
+                    return WallpaperSettings.WallpaperTypes.Slideshow;
+                else if (wallpaper == "Color")
+                    return WallpaperSettings.WallpaperTypes.Color;
+            }
+
+            return WallpaperSettings.WallpaperTypes.Color;
         }
     }
 }

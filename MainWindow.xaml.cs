@@ -34,6 +34,7 @@ namespace AdvancedWindowsAppearence
         GeneralViewModel Settings = new GeneralViewModel();
         ModernWindow ModernWindow = null;
         WallpaperSelectionPage wallpaperPage;
+        ScreenslideSettingsPage screenslidePage;
 
         #region initialization
 
@@ -46,9 +47,6 @@ namespace AdvancedWindowsAppearence
 
             //add backup & restore page
             restoreTabFrame.Content = new RestorePage(Settings);
-
-            //add wallpaper or wallpaper selection (slideshow)
-            wallpaperPage = new WallpaperSelectionPage(Settings);
             WallpaperTabFrame.Content = wallpaperPage;
         }
 
@@ -79,7 +77,8 @@ namespace AdvancedWindowsAppearence
             {
                 MessageBox.Show("Error checking for update: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-                    
+
+            Settings.WallpaperSettings.UpdateWallpaperStyle();
         }
 
         void UpdateWindowsLayout(Version WinVer)
@@ -416,6 +415,33 @@ namespace AdvancedWindowsAppearence
             await UpdateTheme();
         }
 
-        #endregion 
+        #endregion
+
+        private void WallpaperTypeComboBox_DropDownClosed(object sender, EventArgs e)
+        {           
+
+            switch (Settings.WallpaperSettings.WallpaperType)
+            {
+                case WallpaperSettings.WallpaperTypes.Image:
+                    {
+                        wallpaperPage = new WallpaperSelectionPage(Settings.WallpaperSettings);
+                        WallpaperTabFrame.Content = wallpaperPage;
+                        break;
+                    }
+                case WallpaperSettings.WallpaperTypes.Slideshow:
+                    {
+                        screenslidePage = new ScreenslideSettingsPage(Settings.WallpaperSettings);
+                        WallpaperTabFrame.Content = screenslidePage;
+                        break;
+                    }
+                default:
+                    {
+                        WallpaperTabFrame.Content = null;
+                        MessageBox.Show("Feature not implementedd");
+                        break;
+                    }
+
+            }
+        }
     }
 }
