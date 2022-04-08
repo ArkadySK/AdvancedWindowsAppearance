@@ -350,14 +350,24 @@
                     <Grid MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
+                        <!--Wallpaper type-->
+                        <StackPanel >
+                            <Label Style="{StaticResource SystemLabel}" Content="Wallpaper type: "/>
+                            <ComboBox x:Name="WallpaperTypeComboBox" Style="{StaticResource SystemComboBox}" SelectedIndex="0">
+                                <ComboBoxItem>Single Image</ComboBoxItem>
+                                <ComboBoxItem>Slideshow</ComboBoxItem>
+                                <ComboBoxItem>Solid Color</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
                         <!--Wallpaper settings-->
-                        <Frame x:Name="WallpaperTabFrame"/>
+                        <Frame Grid.Row="1" x:Name="WallpaperTabFrame"/>
                         <!--The Apply buttons-->
-                        <StackPanel Grid.Row="2" Margin="0 5" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <StackPanel Grid.Row="3" Margin="0 5" Orientation="Horizontal" HorizontalAlignment="Left">
                             <Button x:Name="SaveWallpaperAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveWallpaperAsTheme_Click"/>
                             <Button x:Name="SaveWallpaperToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveWallpaperToRegistry_Click"/>
                         </StackPanel>
