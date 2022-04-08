@@ -50,7 +50,7 @@
                 </Grid.Resources>
 
                 <!--Sample Icon-->
-                <Image Source="{Binding Wallpaper.Path}" Stretch="UniformToFill"></Image>
+                <Image Source="{Binding WallpaperSettings.Wallpaper.Path}" Stretch="UniformToFill"></Image>
                 <Grid Margin="0 0 100 0" Panel.ZIndex="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
                     <Rectangle Stroke="Gray" Opacity=".5"/>
                     <Image x:Name="iconImage" Source="/Previews/icon.ico" Height="{Binding ColorSettings[18].Size, FallbackValue=42}" Width="{Binding ColorSettings[18].Size}" >

@@ -37,7 +37,7 @@ namespace AdvancedWindowsAppearence.Previews
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 string path = dialog.FileName;
-                Settings.Wallpaper.SetWallpaper(path);
+                Settings.WallpaperSettings.Wallpaper.SetWallpaper(path);
             }
 
         }

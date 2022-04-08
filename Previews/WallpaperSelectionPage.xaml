@@ -37,7 +37,7 @@
         <!--Wallpaper background preview-->
         <Viewbox IsEnabled="False">
             <Grid Width="160" Height="90" Background="{Binding ColorSettings[13].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
-                <Image Source="{Binding Wallpaper.Path}" Stretch="{Binding Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle, Converter={StaticResource WallpaperStyleToImageStretch}}"></Image>
+                <Image Source="{Binding WallpaperSettings.Wallpaper.Path}" Stretch="{Binding WallpaperSettings.Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle, Converter={StaticResource WallpaperStyleToImageStretch}}"></Image>
             </Grid>
         </Viewbox>
         
@@ -49,14 +49,14 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Label Content="Path: " Grid.Column="0" Padding="0" Style="{StaticResource SystemLabel}" />
-            <Label Grid.Column="1" Margin="5 0" Content="{Binding Wallpaper.Path}" Padding="0" Style="{StaticResource SystemLabel}" ToolTip="{Binding Wallpaper.Path}" />
+            <Label Grid.Column="1" Margin="5 0" Content="{Binding WallpaperSettings.Wallpaper.Path}" Padding="0" Style="{StaticResource SystemLabel}" ToolTip="{Binding WallpaperSettings.Wallpaper.Path}" />
             <Button x:Name="changeWallpaper" Grid.Column="2" MinWidth="100" Style="{DynamicResource SystemButton}" Click="changeWallpaper_Click">Change</Button>
         </Grid>
 
         <!--Apply Buttons-->
         <StackPanel Orientation="Vertical" Grid.Row="2">
             <Label Style="{StaticResource SystemLabel}" Content="Wallpaper style: "/>
-            <ComboBox x:Name="ImageStretchComboBox" Style="{StaticResource SystemComboBox}" MinWidth="200" HorizontalAlignment="Left" ItemsSource="{Binding Wallpaper.WallpaperStyleSettings.WallpaperStyles}" Text="{Binding Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle}"/>
+            <ComboBox x:Name="ImageStretchComboBox" Style="{StaticResource SystemComboBox}" MinWidth="200" HorizontalAlignment="Left" ItemsSource="{Binding WallpaperSettings.Wallpaper.WallpaperStyleSettings.WallpaperStyles}" Text="{Binding WallpaperSettings.Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle}"/>
         </StackPanel>
     </Grid>
 </Page>

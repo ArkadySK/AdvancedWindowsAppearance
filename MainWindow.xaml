@@ -358,7 +358,7 @@
                         <!--Wallpaper type-->
                         <StackPanel >
                             <Label Style="{StaticResource SystemLabel}" Content="Wallpaper type: "/>
-                            <ComboBox x:Name="WallpaperTypeComboBox" Style="{StaticResource SystemComboBox}" SelectedIndex="0">
+                            <ComboBox x:Name="WallpaperTypeComboBox" Style="{StaticResource SystemComboBox}" DropDownClosed="WallpaperTypeComboBox_DropDownClosed" SelectedIndex="0">
                                 <ComboBoxItem>Single Image</ComboBoxItem>
                                 <ComboBoxItem>Slideshow</ComboBoxItem>
                                 <ComboBoxItem>Solid Color</ComboBoxItem>
