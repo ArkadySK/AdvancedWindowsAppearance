@@ -18,20 +18,19 @@ namespace AdvancedWindowsAppearence
 
         ThemeSettings ThemeSettings;
 
-        public WallpaperSettings WallpaperSettings { get; } = new WallpaperSettings();
         
         internal void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
+        public AeroColorRegistrySetting ThemeColor { get; set; } = new AeroColorRegistrySetting("Theme Color", "ColorizationColor");
         public ColorAppearanceSetting[] ColorSettings { get; set; }
         public FontAppearanceSetting[] FontSettings { get; set; }
-
-        public AeroColorRegistrySetting ThemeColor { get; set; } = new AeroColorRegistrySetting("Theme Color", "ColorizationColor");
-        public RegistrySettingsViewModel RegistrySettingsViewModel { get; set; } = new RegistrySettingsViewModel();
+        public WallpaperSettings WallpaperSettings { get; } = new WallpaperSettings();
         public AeroColorsViewModel AeroColorsViewModel { get; set; } = new AeroColorsViewModel();
         public bool UseThemes = true; //when false: it means to not apply theme, only to change registry settings
+        public RegistrySettingsViewModel RegistrySettingsViewModel { get; set; } = new RegistrySettingsViewModel();
+
 
         public string ThemeName {get; set;}
     
