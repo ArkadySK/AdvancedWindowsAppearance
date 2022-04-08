@@ -50,7 +50,7 @@ namespace AdvancedWindowsAppearence
             }
 
             //if it is a slideshow
-            if (Wallpaper.Path.Contains("Transcoded"))
+            if (Wallpaper.Path.Contains("\\TranscodedWallpaper"))
             {
                 WallpaperType = WallpaperTypes.Slideshow;
             }
@@ -73,6 +73,12 @@ namespace AdvancedWindowsAppearence
                 case WallpaperTypes.Slideshow:
                     {
                         throw new NotImplementedException();
+                        //Slideshow.SaveToRegistry();
+                    }
+                case WallpaperTypes.Color:
+                    {
+
+                        break;
                     }
             }
 
