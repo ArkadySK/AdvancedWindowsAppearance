@@ -1,24 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AdvancedWindowsAppearence
 {
-    public class WallpaperSettings
+    public class WallpaperSettings: INotifyPropertyChanged
     {
 
+        internal void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
         public WallpaperAppearanceSetting Wallpaper { get;} = new WallpaperAppearanceSetting();
+        public WallpaperTypes WallpaperType
+        {
+            get => _wallpaperType; 
+            set
+            {
+                _wallpaperType = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public enum WallpaperTypes
         {
-            Image,
-            Slideshow,
-            Color
+            [Description("Image")]
+            Image = 0,
+            [Description("Slideshow")]
+            Slideshow = 1,
+            [Description("Color")]
+            Color = 2
         }
-        public WallpaperTypes WallpaperType;
+        private WallpaperTypes _wallpaperType;
 
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void UpdateWallpaperStyle()
         {
