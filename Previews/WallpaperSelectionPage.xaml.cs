@@ -20,12 +20,12 @@ namespace AdvancedWindowsAppearence.Previews
     /// </summary>
     public partial class WallpaperSelectionPage : Page
     {
-        GeneralViewModel Settings;
-        public WallpaperSelectionPage(GeneralViewModel generalViewModel)
+        WallpaperSettings WallpaperSettings;
+        public WallpaperSelectionPage(WallpaperSettings wallpaper)
         {
             InitializeComponent();
-            Settings = generalViewModel;
-            DataContext = Settings;
+            WallpaperSettings = wallpaper;
+            DataContext = WallpaperSettings;
         }
 
         private void changeWallpaper_Click(object sender, RoutedEventArgs e)
@@ -37,7 +37,7 @@ namespace AdvancedWindowsAppearence.Previews
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 string path = dialog.FileName;
-                Settings.WallpaperSettings.Wallpaper.SetWallpaper(path);
+                WallpaperSettings.Wallpaper.SetWallpaper(path);
             }
 
         }
