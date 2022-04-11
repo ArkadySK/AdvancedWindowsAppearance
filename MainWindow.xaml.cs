@@ -34,7 +34,7 @@ namespace AdvancedWindowsAppearence
         GeneralViewModel Settings = new GeneralViewModel();
         ModernWindow ModernWindow = null;
         WallpaperSelectionPage wallpaperPage;
-        ScreenslideSettingsPage screenslidePage;
+        SlideshowSettingsPage slideshowPage;
 
         #region initialization
 
@@ -47,7 +47,8 @@ namespace AdvancedWindowsAppearence
 
             //add backup & restore page
             restoreTabFrame.Content = new RestorePage(Settings);
-            WallpaperTabFrame.Content = wallpaperPage;
+            wallpaperPage = new WallpaperSelectionPage(Settings.WallpaperSettings);
+            slideshowPage = new SlideshowSettingsPage(Settings.WallpaperSettings);
         }
 
         private async void window_Loaded(object sender, RoutedEventArgs e)
@@ -312,34 +313,41 @@ namespace AdvancedWindowsAppearence
 
 
         #region Wallpaper Tab
+
+        void UpdateWallpaperFrame(Page page) {
+            try {
+                while(WallpaperTabFrame.CanGoBack)
+                    WallpaperTabFrame.RemoveBackEntry();
+            }
+            catch { }
+            WallpaperTabFrame.Navigate(page);
+        }
+
         void UpdateWallpaperTypeComboBox()
         {
             switch (Settings.WallpaperSettings.WallpaperType)
             {
                 case WallpaperSettings.WallpaperTypes.Image:
                     {
-                        wallpaperPage = new WallpaperSelectionPage(Settings.WallpaperSettings);
-                        WallpaperTabFrame.Content = wallpaperPage;
+                        UpdateWallpaperFrame(wallpaperPage);
                         break;
                     }
                 case WallpaperSettings.WallpaperTypes.Slideshow:
                     {
-                        screenslidePage = new ScreenslideSettingsPage(Settings.WallpaperSettings);
-                        WallpaperTabFrame.Content = screenslidePage;
+                        UpdateWallpaperFrame(slideshowPage);
                         break;
                     }
                 default:
                     {
-                        WallpaperTabFrame.Content = null;
+                        UpdateWallpaperFrame(null);
                         MessageBox.Show("Feature not implementedd");
                         break;
                     }
             }
         }
 
-        private async void WallpaperTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void WallpaperTypeComboBox_DropDownClosed(object sender, EventArgs e)
         {
-            await Task.Delay(50);
             //the UI is delayed, so it will display changes correctly
             UpdateWallpaperTypeComboBox();
         }
