@@ -124,6 +124,9 @@
     <Compile Include="ModernWindow.xaml.cs">
       <DependentUpon>ModernWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Previews\ColorBackgroundSelectionPage.xaml.cs">
+      <DependentUpon>ColorBackgroundSelectionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Previews\Preview.xaml.cs">
       <DependentUpon>Preview.xaml</DependentUpon>
     </Compile>
@@ -168,6 +171,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ModernWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Previews\ColorBackgroundSelectionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
