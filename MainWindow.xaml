@@ -364,7 +364,7 @@
                             </ComboBox>
                         </StackPanel>
                         <!--Wallpaper settings-->
-                        <Frame Grid.Row="1" x:Name="WallpaperTabFrame"/>
+                        <Frame Grid.Row="1" x:Name="WallpaperTabFrame" NavigationUIVisibility="Hidden"/>
                         <!--The Apply buttons-->
                         <StackPanel Grid.Row="3" Margin="0 5" Orientation="Horizontal" HorizontalAlignment="Left">
                             <Button x:Name="SaveWallpaperAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveWallpaperAsTheme_Click"/>
