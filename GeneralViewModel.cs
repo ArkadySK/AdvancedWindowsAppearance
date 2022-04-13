@@ -26,7 +26,7 @@ namespace AdvancedWindowsAppearence
         public AeroColorRegistrySetting ThemeColor { get; set; } = new AeroColorRegistrySetting("Theme Color", "ColorizationColor");
         public ColorAppearanceSetting[] ColorSettings { get; set; }
         public FontAppearanceSetting[] FontSettings { get; set; }
-        public WallpaperSettings WallpaperSettings { get; } = new WallpaperSettings();
+        public WallpaperSettings WallpaperSettings { get; private set; }
         public AeroColorsViewModel AeroColorsViewModel { get; set; } = new AeroColorsViewModel();
         public bool UseThemes = true; //when false: it means to not apply theme, only to change registry settings
         public RegistrySettingsViewModel RegistrySettingsViewModel { get; set; } = new RegistrySettingsViewModel();
@@ -55,6 +55,7 @@ namespace AdvancedWindowsAppearence
             InitDPIScale();
             InitColors();
             InitFonts();
+            InitWallpaper();
             ThemeSettings = new ThemeSettings(this);
         }
 
@@ -133,6 +134,17 @@ namespace AdvancedWindowsAppearence
                 new FontAppearanceSetting("Window Text Font", "MessageFont", "WindowText") //I, I
             };
         }
+
+        void InitWallpaper()
+        {
+            var bgColor = ColorSettings[13];
+            if (bgColor == null)
+                throw new Exception("Background color is not loaded");
+            if (!bgColor.HasColor)
+                bgColor.ItemColor = Color.Black;
+            WallpaperSettings = new WallpaperSettings(bgColor);
+        }
+
         #endregion
 
         
