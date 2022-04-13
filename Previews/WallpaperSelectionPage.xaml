@@ -28,7 +28,7 @@
 
         <!--Wallpaper background preview-->
         <Viewbox IsEnabled="False">
-            <Grid Width="160" Height="90">
+            <Grid Width="160" Height="90" Background="{Binding BackgroundColor.ItemColor, Converter={StaticResource brushToColor}}">
                 <Image Source="{Binding Wallpaper.Path}" Stretch="{Binding Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle, Converter={StaticResource WallpaperStyleToImageStretch}}"></Image>
             </Grid>
         </Viewbox>
