@@ -84,15 +84,11 @@ namespace AdvancedWindowsAppearence
                     }
                 case WallpaperTypes.Slideshow:
                     {
-                        throw new NotImplementedException();
-                        //Slideshow.SaveToRegistry();
-                    }
-                case WallpaperTypes.Color:
-                    {
-
-                        break;
+                        throw new Exception("You cannot save slideshow into registry, use save as theme instead");
                     }
             }
+            if(BackgroundColor.IsEdited)
+                BackgroundColor.SaveToRegistry();
 
         }
 
