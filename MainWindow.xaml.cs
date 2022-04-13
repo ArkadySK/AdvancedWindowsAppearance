@@ -164,7 +164,7 @@ namespace AdvancedWindowsAppearence
             classicWindowForm.ShowDialog();
         }
 
-        System.Drawing.Color OpenColorDialog(System.Drawing.Color? defaultCol)
+        public static System.Drawing.Color OpenColorDialog(System.Drawing.Color? defaultCol)
         {
             System.Drawing.Color color = new System.Drawing.Color();
             if (defaultCol.HasValue)
