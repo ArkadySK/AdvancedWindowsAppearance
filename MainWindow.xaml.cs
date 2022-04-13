@@ -33,8 +33,6 @@ namespace AdvancedWindowsAppearence
         public const int PreviewWidth = 200;
         GeneralViewModel Settings = new GeneralViewModel();
         ModernWindow ModernWindow = null;
-        WallpaperSelectionPage wallpaperPage;
-        SlideshowSettingsPage slideshowPage;
 
         #region initialization
 
@@ -47,8 +45,10 @@ namespace AdvancedWindowsAppearence
 
             //add backup & restore page
             restoreTabFrame.Content = new RestorePage(Settings);
-            wallpaperPage = new WallpaperSelectionPage(Settings.WallpaperSettings);
-            slideshowPage = new SlideshowSettingsPage(Settings.WallpaperSettings);
+
+            WallpaperFrame.Content = new WallpaperSelectionPage(Settings.WallpaperSettings);
+            SlideshowFrame.Content = new SlideshowSettingsPage(Settings.WallpaperSettings);
+            ColorFrame.Content = new ColorBackgroundSelectionPage(Settings.WallpaperSettings);
         }
 
         private async void window_Loaded(object sender, RoutedEventArgs e)
@@ -314,33 +314,26 @@ namespace AdvancedWindowsAppearence
 
         #region Wallpaper Tab
 
-        void UpdateWallpaperFrame(Page page) {
-            try {
-                while(WallpaperTabFrame.CanGoBack)
-                    WallpaperTabFrame.RemoveBackEntry();
-            }
-            catch { }
-            WallpaperTabFrame.Navigate(page);
-        }
-
         void UpdateWallpaperTypeComboBox()
         {
+            WallpaperFrame.Visibility = Visibility.Collapsed;
+            SlideshowFrame.Visibility = Visibility.Collapsed;
+            ColorFrame.Visibility = Visibility.Collapsed;
             switch (Settings.WallpaperSettings.WallpaperType)
             {
                 case WallpaperSettings.WallpaperTypes.Image:
                     {
-                        UpdateWallpaperFrame(wallpaperPage);
+                        WallpaperFrame.Visibility = Visibility.Visible;
                         break;
                     }
                 case WallpaperSettings.WallpaperTypes.Slideshow:
                     {
-                        UpdateWallpaperFrame(slideshowPage);
+                        SlideshowFrame.Visibility = Visibility.Visible;
                         break;
                     }
                 default:
                     {
-                        UpdateWallpaperFrame(null);
-                        MessageBox.Show("Feature not implementedd");
+                        ColorFrame.Visibility = Visibility.Visible;
                         break;
                     }
             }
