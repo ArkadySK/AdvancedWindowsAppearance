@@ -20,9 +20,19 @@ namespace AdvancedWindowsAppearence.Previews
     /// </summary>
     public partial class ColorBackgroundSelectionPage : Page
     {
-        public ColorBackgroundSelectionPage()
+        WallpaperSettings WallpaperSettings;
+
+        public ColorBackgroundSelectionPage(WallpaperSettings wallpaperSettings)
         {
+            WallpaperSettings = wallpaperSettings;
             InitializeComponent();
+            this.DataContext = WallpaperSettings;
+        }
+
+        private void ChangeBgColorButton_Click(object sender, RoutedEventArgs e)
+        {
+            //open color picker dialog
+            WallpaperSettings.BackgroundColor.ItemColor = MainWindow.OpenColorDialog(WallpaperSettings.BackgroundColor.ItemColor);
         }
     }
 }
