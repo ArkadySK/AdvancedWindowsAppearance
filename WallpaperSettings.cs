@@ -18,6 +18,9 @@ namespace AdvancedWindowsAppearence
 
 
         public WallpaperAppearanceSetting Wallpaper { get; } = new WallpaperAppearanceSetting();
+
+        public ColorAppearanceSetting BackgroundColor { get; private set; }
+
         public WallpaperTypes WallpaperType
         {
             get => _wallpaperType;
@@ -37,6 +40,15 @@ namespace AdvancedWindowsAppearence
             Color = 2
         }
         private WallpaperTypes _wallpaperType;
+
+        /// <summary>
+        /// Constructor for the Wallpaper settings
+        /// </summary>
+        /// <param name="backgroundColor">color of the wallpaper's background</param>
+        public WallpaperSettings(ColorAppearanceSetting backgroundColor)
+        {
+            BackgroundColor = backgroundColor;
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
