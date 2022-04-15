@@ -35,8 +35,8 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate >
                     <Grid MaxWidth="200" Margin="5">
-                        <Image Source="{Binding Path}" Width="160" Opacity="{Binding Opacity, Mode=OneWay}" Height="90" Stretch="{Binding WallpaperStyleSettings.SelectedWallpaperStyle, Converter={StaticResource WallpaperStyleToImageStretch}}"/>
-                        <CheckBox Content="Selected" IsChecked="{Binding IsSelected}"/>
+                        <Image Source="{Binding Path}" Width="320" Opacity="{Binding Opacity, Mode=OneWay}" Height="180" Stretch="{Binding WallpaperStyleSettings.SelectedWallpaperStyle, Converter={StaticResource WallpaperStyleToImageStretch}}"/>
+                        <CheckBox Content="" IsChecked="{Binding IsSelected}"/>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
