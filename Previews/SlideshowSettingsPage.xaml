@@ -4,11 +4,19 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AdvancedWindowsAppearence.Previews"
+      xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
       Title="ScreenslideSettingsPage">
+    <Page.Resources>
+        <ResourceDictionary>
+            <converters:BrushToColorConverter x:Key="brushToColor"/>
+        </ResourceDictionary>
+    </Page.Resources>
 
-    <Grid>
-        <Label>THIS IS SCREENSLIDE sample texte blabla</Label>
-    </Grid>
+    <StackPanel Margin="5">
+        <StackPanel Orientation="Horizontal">
+            <Label>Folder:</Label>
+            <Label Content="{Binding SlideshowFolder}"/>
+        </StackPanel>
+    </StackPanel>
 </Page>
