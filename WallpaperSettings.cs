@@ -19,6 +19,8 @@ namespace AdvancedWindowsAppearence
 
         public WallpaperAppearanceSetting Wallpaper { get; } = new WallpaperAppearanceSetting();
 
+        public SlideshowSettings Slideshow { get; } = new SlideshowSettings();
+
         public ColorAppearanceSetting BackgroundColor { get; private set; }
 
         public WallpaperTypes WallpaperType

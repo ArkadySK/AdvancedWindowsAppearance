@@ -142,6 +142,7 @@
     <Compile Include="Previews\TitleColorsPreviewPage.xaml.cs">
       <DependentUpon>TitleColorsPreviewPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SlideshowSettings.cs" />
     <Compile Include="Updater.cs" />
     <Compile Include="WallpaperAppearanceSetting.cs" />
     <Compile Include="WallpaperSettings.cs" />
