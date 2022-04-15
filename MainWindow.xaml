@@ -348,7 +348,7 @@
                 </TabItem.Header>
 
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                    <Grid MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left">
+                    <Grid HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -357,9 +357,9 @@
                         </Grid.RowDefinitions>
 
                         <!--Wallpaper type-->
-                        <StackPanel >
+                        <StackPanel MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left" >
                             <Label Style="{StaticResource SystemLabel}" Content="Wallpaper type: "/>
-                            <ComboBox x:Name="WallpaperTypeComboBox" ItemsSource="{Binding WallpaperSettings.WallpaperTypesStrings}" Style="{StaticResource SystemComboBox}"  DropDownClosed="WallpaperTypeComboBox_DropDownClosed"
+                            <ComboBox MinWidth="250" x:Name="WallpaperTypeComboBox" ItemsSource="{Binding WallpaperSettings.WallpaperTypesStrings}" Style="{StaticResource SystemComboBox}"  DropDownClosed="WallpaperTypeComboBox_DropDownClosed"
                                        IsEditable="False" Text="{Binding WallpaperSettings.WallpaperType, Converter={StaticResource EnumToString}}">
                             </ComboBox>
                         </StackPanel>
