@@ -25,6 +25,13 @@ namespace AdvancedWindowsAppearence.Previews
         {
             WallpaperSettings = wallpaperSettings;
             InitializeComponent();
+            DataContext = WallpaperSettings;
+        }
+
+        private void ChangeFolderButton_Click(object sender, RoutedEventArgs e)
+        {
+            WallpaperSettings.Slideshow.ShowFolderDialogSlideshow();
+            ImagesListView.ItemsSource = WallpaperSettings.Slideshow.FolderImages;
         }
     }
 }

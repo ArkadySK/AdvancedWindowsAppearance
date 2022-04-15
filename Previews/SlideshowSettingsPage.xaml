@@ -10,13 +10,38 @@
     <Page.Resources>
         <ResourceDictionary>
             <converters:BrushToColorConverter x:Key="brushToColor"/>
+            <converters:WallpaperStyleToImageStretchConverter x:Key="WallpaperStyleToImageStretch"/>
         </ResourceDictionary>
     </Page.Resources>
 
     <StackPanel Margin="5">
         <StackPanel Orientation="Horizontal">
             <Label>Folder:</Label>
-            <Label Content="{Binding SlideshowFolder}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="{Binding Slideshow.Folder}"/>
+                <Button x:Name="ChangeFolderButton" Grid.Column="1" Style="{DynamicResource SystemButton}" Content="Change" MinWidth="100" Click="ChangeFolderButton_Click" />
+            </Grid>
         </StackPanel>
+        <ItemsControl x:Name="ImagesListView" ItemsSource="{Binding Slideshow.FolderImages}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate >
+                    <Grid MaxWidth="200" Margin="5">
+                        <Image Source="{Binding Path}" Width="160" Opacity="{Binding Opacity, Mode=OneWay}" Height="90" Stretch="{Binding WallpaperStyleSettings.SelectedWallpaperStyle, Converter={StaticResource WallpaperStyleToImageStretch}}"/>
+                        <CheckBox Content="Selected" IsChecked="{Binding IsSelected}"/>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+
+        </ItemsControl>
+            
     </StackPanel>
 </Page>
