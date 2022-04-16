@@ -80,6 +80,7 @@ namespace AdvancedWindowsAppearence
             }
 
             Settings.WallpaperSettings.UpdateWallpaperStyle();
+            UpdateWallpaperTypeComboBox();
         }
 
         void UpdateWindowsLayout(Version WinVer)
