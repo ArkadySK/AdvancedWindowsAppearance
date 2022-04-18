@@ -121,6 +121,7 @@
     <Compile Include="FontAppearanceSetting.cs" />
     <Compile Include="FontManager.cs" />
     <Compile Include="Converters\InvertedBooleanToVisibilityConverter.cs" />
+    <Compile Include="IntRegistrySetting.cs" />
     <Compile Include="ModernWindow.xaml.cs">
       <DependentUpon>ModernWindow.xaml</DependentUpon>
     </Compile>
