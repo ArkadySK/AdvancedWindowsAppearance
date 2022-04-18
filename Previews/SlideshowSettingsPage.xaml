@@ -46,6 +46,14 @@
         <StackPanel Orientation="Vertical" Grid.Row="2">
             <Label Style="{StaticResource SystemLabel}" Content="Wallpaper style: "/>
             <ComboBox x:Name="ImageStretchComboBox" Style="{StaticResource SystemComboBox}" MinWidth="200" HorizontalAlignment="Left" ItemsSource="{Binding Wallpaper.WallpaperStyleSettings.WallpaperStyles}" Text="{Binding Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle}"/>
-        </StackPanel>                   
+        </StackPanel>
+
+        <!--Shuffle-->
+        <CheckBox Content="Shuffle" IsChecked="{Binding Slideshow.Shuffle.IsChecked}" Margin="5"/>
+        <!--Change Interval-->
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Time to change slide (in milliseconds): " Style="{DynamicResource SystemLabel}"/>
+            <TextBox Text="{Binding Interval.Value}" Height="35" Width="100"/>
+        </StackPanel>
     </StackPanel>
 </Page>
