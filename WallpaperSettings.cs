@@ -86,7 +86,15 @@ namespace AdvancedWindowsAppearence
                     }
                 case WallpaperTypes.Slideshow:
                     {
+                        Wallpaper.SetWallpaper(Environment.SpecialFolder.ApplicationData.ToString() + @"\Microsoft\Windows\Themes\TranscodedWallpaper");
+                        Wallpaper.SaveToRegistry();
                         throw new Exception("You cannot save slideshow into registry, use save as theme instead");
+                    }
+                case WallpaperTypes.Color:
+                    {
+                        Wallpaper.SetWallpaper("");
+                        Wallpaper.SaveToRegistry();
+                        break;
                     }
             }
             if(BackgroundColor.IsEdited)
