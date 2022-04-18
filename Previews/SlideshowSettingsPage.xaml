@@ -53,7 +53,7 @@
         <!--Change Interval-->
         <StackPanel Orientation="Horizontal">
             <Label Content="Time to change slide (in milliseconds): " Style="{DynamicResource SystemLabel}"/>
-            <TextBox Text="{Binding Interval.Value}" Height="35" Width="100"/>
+            <TextBox Text="{Binding Slideshow.Interval.Value}" Height="35" Width="100"/>
         </StackPanel>
     </StackPanel>
 </Page>
