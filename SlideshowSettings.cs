@@ -50,15 +50,13 @@ namespace AdvancedWindowsAppearence
         }
     }
 
-
     public class SlideshowSettings : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
-        void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        
+        List<string> SelectedPaths { get; set; } = new List<string>();
+        public IntRegistrySetting Interval { get; }
+        public BoolRegistrySetting Shuffle { get; } 
 
         private string _folder;
         public string Folder { get => _folder; set
@@ -92,7 +90,17 @@ namespace AdvancedWindowsAppearence
                 }
                 return null;
         }
+        void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
+        public SlideshowSettings()
+        {
+            Shuffle = new BoolRegistrySetting("Shuffle", @"Control Panel\Personalization\Desktop Slideshow", "Shuffle");
+            Interval = new IntRegistrySetting("Interval", @"Control Panel\Personalization\Desktop Slideshow", "Interval");
+        }
+        
         internal void SetFolder(string path)
         {
             Folder = path;
@@ -124,6 +132,12 @@ namespace AdvancedWindowsAppearence
                 // Our final value is in path
                 Folder = path;
             }
+        }
+
+        public void DeleteIni()
+        {
+            string iniPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Microsoft\Windows\Themes\slideshow.ini";
+            File.Delete(iniPath);
         }
 
     }

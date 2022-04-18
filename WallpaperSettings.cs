@@ -82,18 +82,21 @@ namespace AdvancedWindowsAppearence
                 case WallpaperTypes.Image:
                     {
                         Wallpaper.SaveToRegistry();
+                        Slideshow.DeleteIni();
                         break;
                     }
                 case WallpaperTypes.Slideshow:
                     {
                         Wallpaper.SetWallpaper(Environment.SpecialFolder.ApplicationData.ToString() + @"\Microsoft\Windows\Themes\TranscodedWallpaper");
                         Wallpaper.SaveToRegistry();
+                        //Slideshow.CreateIni();
                         throw new Exception("You cannot save slideshow into registry, use save as theme instead");
                     }
                 case WallpaperTypes.Color:
                     {
                         Wallpaper.SetWallpaper("");
                         Wallpaper.SaveToRegistry();
+                        Slideshow.DeleteIni();
                         break;
                     }
             }
