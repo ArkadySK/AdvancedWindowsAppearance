@@ -45,7 +45,7 @@
             <Button x:Name="changeWallpaper" Grid.Column="2" MinWidth="100" Style="{DynamicResource SystemButton}" Click="changeWallpaper_Click">Change</Button>
         </Grid>
 
-        <!--Apply Buttons-->
+        <!--Wallpaper style-->
         <StackPanel Orientation="Vertical" Grid.Row="2">
             <Label Style="{StaticResource SystemLabel}" Content="Wallpaper style: "/>
             <ComboBox x:Name="ImageStretchComboBox" Style="{StaticResource SystemComboBox}" MinWidth="200" HorizontalAlignment="Left" ItemsSource="{Binding Wallpaper.WallpaperStyleSettings.WallpaperStyles}" Text="{Binding Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle}"/>

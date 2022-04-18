@@ -42,6 +42,10 @@
             </ItemsControl.ItemTemplate>
 
         </ItemsControl>
-            
+        <!--Wallpaper style-->
+        <StackPanel Orientation="Vertical" Grid.Row="2">
+            <Label Style="{StaticResource SystemLabel}" Content="Wallpaper style: "/>
+            <ComboBox x:Name="ImageStretchComboBox" Style="{StaticResource SystemComboBox}" MinWidth="200" HorizontalAlignment="Left" ItemsSource="{Binding Wallpaper.WallpaperStyleSettings.WallpaperStyles}" Text="{Binding Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle}"/>
+        </StackPanel>                   
     </StackPanel>
 </Page>
