@@ -44,5 +44,18 @@ namespace WindowsInteropServices
         [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
         public static extern IntPtr ILCreateFromPath([In, MarshalAs(UnmanagedType.LPWStr)] string pszPath);
 
+
+        /// <summary>
+        /// encode wallpaper path 
+        /// </summary>
+        /// <param name="pcbBinary"></param>
+        /// <param name="cbBinary"></param>
+        /// <param name="dwFlags"></param>
+        /// <param name="pszString"></param>
+        /// <param name="pcchString"></param>
+        /// <returns></returns>
+        [DllImport("crypt32.dll", CharSet = CharSet.Unicode)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool CryptBinaryToString(IntPtr pcbBinary, int cbBinary, uint dwFlags, StringBuilder pszString, ref int pcchString);
     }
 }
