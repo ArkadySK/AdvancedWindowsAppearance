@@ -147,6 +147,7 @@
     <Compile Include="Updater.cs" />
     <Compile Include="WallpaperAppearanceSetting.cs" />
     <Compile Include="WallpaperSettings.cs" />
+    <Compile Include="Win32Methods.cs" />
     <Compile Include="WindowBlur.cs" />
     <Page Include="Controls\ClassicButton.xaml">
       <SubType>Designer</SubType>
