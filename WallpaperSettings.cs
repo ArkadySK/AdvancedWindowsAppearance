@@ -83,6 +83,7 @@ namespace AdvancedWindowsAppearence
                     {
                         Wallpaper.SaveToRegistry();
                         Slideshow.DeleteIni();
+                        WindowsInteropServices.Win32Methods.UpdateWallpaper(Wallpaper.Path);
                         break;
                     }
                 case WallpaperTypes.Slideshow:
@@ -102,7 +103,6 @@ namespace AdvancedWindowsAppearence
             }
             if(BackgroundColor.IsEdited)
                 BackgroundColor.SaveToRegistry();
-
         }
 
     }
