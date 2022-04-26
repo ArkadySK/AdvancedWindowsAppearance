@@ -6,6 +6,8 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using WindowsInteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -97,10 +99,10 @@ namespace AdvancedWindowsAppearence
 
         public SlideshowSettings()
         {
+
             Shuffle = new BoolRegistrySetting("Shuffle", @"Control Panel\Personalization\Desktop Slideshow", "Shuffle");
             Interval = new IntRegistrySetting("Interval", @"Control Panel\Personalization\Desktop Slideshow", "Interval");
         }
-        
         internal void SetFolder(string path)
         {
             Folder = path;
@@ -140,5 +142,48 @@ namespace AdvancedWindowsAppearence
             File.Delete(iniPath);
         }
 
+        string CryptBinaryToString(string text) 
+        {
+            IntPtr pidl = Win32Methods.ILCreateFromPath(text);
+
+            uint CRYPT_STRING_BASE64 = 0x00000001;
+
+            int k = 0;
+            short cb = 0;
+
+            while ((k = Marshal.ReadInt16(pidl + cb)) > 0)
+            {
+                cb += (short)k;
+            }
+            int size = 0;
+            Win32Methods.CryptBinaryToString(pidl, cb, CRYPT_STRING_BASE64, null, ref size);
+            StringBuilder stringBuilder = new StringBuilder(size);
+            if (Win32Methods.CryptBinaryToString(pidl, cb, CRYPT_STRING_BASE64, stringBuilder, ref size))
+            {
+                return stringBuilder?.ToString();
+            }
+            return null;
+        }
+
+        private void CreateNewIni()
+        {
+            FolderImages = new ObservableCollection<SlideshowImage>() { 
+                new SlideshowImage() { Path = @"F:\gamez\ManiaPlanet\UserData\Worktitles\TM2U_Island@adamkooo\Media\Images\Graphics\LoadscreenCurrent.png", IsSelected = true } 
+            };
+
+            string iniPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Microsoft\Windows\Themes\slideshow.ini";
+            StringBuilder iniContentStringBuilder = new StringBuilder();
+            
+            foreach (var image in FolderImages)
+            {
+                if (image == null)
+                    continue;
+                if (!image.IsSelected)
+                    continue;
+                if (string.IsNullOrWhiteSpace(image.Path))
+                    continue;
+                iniContentStringBuilder.Append(CryptBinaryToString(image.Path));
+            }
+        }
     }
 }
