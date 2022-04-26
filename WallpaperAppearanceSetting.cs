@@ -111,15 +111,14 @@ namespace AdvancedWindowsAppearence
         internal void SaveToRegistry()
         {
             //save the tile
-            BoolRegistrySetting tileWallpaperRegistrySetting = new BoolRegistrySetting("Tile Wallpaper", @"Control Panel\Desktop", "TileWallpaper");
+            RegistryKey regKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
+
             if (SelectedWallpaperStyle == WallpaperStyle.Tile)
-                tileWallpaperRegistrySetting.Checked = true;
+                regKey.SetValue("TileWallpaper", 1, RegistryValueKind.String);
             else
-                tileWallpaperRegistrySetting.Checked = false;
-            tileWallpaperRegistrySetting.SaveToRegistry();
+                regKey.SetValue("TileWallpaper", 0, RegistryValueKind.String);
 
             //save the other styles
-            RegistryKey regKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
             regKey.SetValue("WallpaperStyle", (int)SelectedWallpaperStyle, RegistryValueKind.String);
             regKey.Close();
         }
