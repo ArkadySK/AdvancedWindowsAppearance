@@ -26,7 +26,6 @@ namespace WindowsInteropServices
             SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE);
         }
 
-
         /// <summary>
         /// converts an item identifier list to a file system path
         /// </summary>
@@ -57,5 +56,10 @@ namespace WindowsInteropServices
         [DllImport("crypt32.dll", CharSet = CharSet.Unicode)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool CryptBinaryToString(IntPtr pcbBinary, int cbBinary, uint dwFlags, StringBuilder pszString, ref int pcchString);
+
+        [DllImport("crypt32.dll", CharSet = CharSet.Unicode)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool CryptStringToBinary(string pszString, int cchString, uint dwFlags, IntPtr pbBinary, ref int pcbBinary, ref int pdwSkip, ref int pdwFlags);
+
     }
 }
