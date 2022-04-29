@@ -12,7 +12,7 @@ namespace AdvancedWindowsAppearence
 {
     public class WallpaperAppearanceSetting : AppearanceSetting
     {
-        public string Path { get; private set; }
+        public string Path { get; set; }
         public WallpaperStyleRegistrySetting WallpaperStyleSettings { get; private set; }
 
         public WallpaperAppearanceSetting()
@@ -35,8 +35,6 @@ namespace AdvancedWindowsAppearence
 
         public void SetWallpaper(string path)
         {
-            if (!File.Exists(path))
-                throw new FileNotFoundException("Wallpaper \"" + path + "\" not found!");
             Path = path;
             NotifyPropertyChanged(nameof(Path));
         }
