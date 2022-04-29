@@ -405,46 +405,100 @@ namespace AdvancedWindowsAppearence
 
         private async void SaveTitleColorsAsTheme_Click(object sender, RoutedEventArgs e)
         {
+            try { 
             await Settings.SaveTitleColorsAsTheme();
+            }       
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private async void SaveTitleColorsToRegistry_Click(object sender, RoutedEventArgs e)
         {
-            await Settings.SaveTitleColorsToRegistry();
+            try
+            {
+                await Settings.SaveTitleColorsToRegistry();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
 
         private async void SaveColorsMetricsAsTheme_Click(object sender, RoutedEventArgs e)
         {
-            await Settings.SaveColorsMetricsAsTheme();
+            try
+            {
+                await Settings.SaveColorsMetricsAsTheme();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private async void SaveColorsMetricsToRegistry_Click(object sender, RoutedEventArgs e)
         {
-            await Settings.SaveColorsMetricsToRegistry();
+            try
+            {
+                await Settings.SaveColorsMetricsToRegistry();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
 
         private async void SaveFontsAsTheme_Click(object sender, RoutedEventArgs e)
         {
-            await Settings.SaveFontsAsTheme();
+            try
+            {
+                await Settings.SaveFontsAsTheme();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private async void SaveFontsToRegistry_Click(object sender, RoutedEventArgs e)
         {
-            await Settings.SaveFontsToRegistry();
+            try
+            {
+                await Settings.SaveFontsToRegistry();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
 
         private async void SaveWallpaperAsTheme_Click(object sender, RoutedEventArgs e)
         {
-            await Settings.SaveWallpaperAsTheme();
+            try
+            {
+                await Settings.SaveWallpaperAsTheme();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private async void SaveWallpaperToRegistry_Click(object sender, RoutedEventArgs e)
         {
-            Settings.ColorSettings[13].SaveColorToRegistry();
-            await Settings.SaveWallpaperToRegistry();
+            try
+            {
+                await Settings.SaveWallpaperToRegistry();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
 
