@@ -18,7 +18,7 @@ namespace AdvancedWindowsAppearence
         public WallpaperAppearanceSetting()
         {
             Path = GetWallpaperPath();
-            WallpaperStyleSettings = new WallpaperStyleRegistrySetting("WallpaperStyle");
+            WallpaperStyleSettings = new WallpaperStyleRegistrySetting();
         }
 
         string GetWallpaperPath()
@@ -85,25 +85,16 @@ namespace AdvancedWindowsAppearence
 
         
 
-        internal WallpaperStyleRegistrySetting(string registryKey)
+        internal WallpaperStyleRegistrySetting()
         {
             BoolRegistrySetting tileWallpaperRegistrySetting = new BoolRegistrySetting("Tile Wallpaper", @"Control Panel\Desktop", "TileWallpaper");
             WallpaperStyles = new string[] { "Center", "Tile", "Stretched", "Fit", "Fill", "Span" };
-
-            try
-            {
-                RegistryKey regKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", false);
-                int value = int.Parse(regKey.GetValue(registryKey, 0).ToString());
-                regKey.Close();
-                if(tileWallpaperRegistrySetting.Checked.Value == true)
-                    value = 1;
-
-                SelectedWallpaperStyle = (WallpaperStyle)value;
-            }
-            catch (Exception ex)
-            {
-
-            }
+            RegistryKey regKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", false);
+            int value = int.Parse(regKey.GetValue("WallpaperStyle", 0).ToString());
+            regKey.Close();
+            if(tileWallpaperRegistrySetting.Checked.Value == true)
+                value = 1;
+            SelectedWallpaperStyle = (WallpaperStyle)value;
         }
 
         internal void SaveToRegistry()
