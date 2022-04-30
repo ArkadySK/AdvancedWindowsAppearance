@@ -46,6 +46,7 @@ namespace AdvancedWindowsAppearence
             {
                 Slideshow.Folder = WindowsFolder + @"\Web\Wallpaper\Windows";
             }
+            Slideshow.SelectAll();
         }
 
         public string[] WallpaperTypesStrings { get; } = new string[] { "Image", "Slideshow", "Color" };
