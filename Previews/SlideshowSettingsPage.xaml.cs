@@ -34,6 +34,17 @@ namespace AdvancedWindowsAppearence.Previews
         {
             WallpaperSettings.Slideshow.ShowFolderDialogSlideshow();
             ImagesListView.ItemsSource = WallpaperSettings.Slideshow.FolderImages;
+            WallpaperSettings.Slideshow.SelectAll();
+        }
+
+        private void buttonSelectAll_Click(object sender, RoutedEventArgs e)
+        {
+            WallpaperSettings.Slideshow.SelectAll();
+        }
+
+        private void buttonClear_Click(object sender, RoutedEventArgs e)
+        {
+            WallpaperSettings.Slideshow.ClearSelection();
         }
     }
 }

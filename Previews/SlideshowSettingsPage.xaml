@@ -15,17 +15,16 @@
     </Page.Resources>
 
     <StackPanel Margin="5">
-        <StackPanel Orientation="Horizontal">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
             <Label>Folder:</Label>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Label Content="{Binding Slideshow.Folder}"/>
-                <Button x:Name="ChangeFolderButton" Grid.Column="1" Style="{DynamicResource SystemButton}" Content="Change" MinWidth="100" Click="ChangeFolderButton_Click" />
-            </Grid>
-        </StackPanel>
+            <Label Grid.Column="1" Content="{Binding Slideshow.Folder}"/>
+            <Button x:Name="ChangeFolderButton" Grid.Column="2" Style="{DynamicResource SystemButton}" Content="Change" MinWidth="100" Click="ChangeFolderButton_Click" />
+        </Grid>
         <ItemsControl x:Name="ImagesListView" ItemsSource="{Binding Slideshow.FolderImages}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -42,6 +41,12 @@
             </ItemsControl.ItemTemplate>
 
         </ItemsControl>
+        <!--Buttons for selection-->
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="buttonSelectAll" Content="Select all" Style="{DynamicResource SystemSmallButton}" MinWidth="100" Click="buttonSelectAll_Click"/>
+            <Button x:Name="buttonClear" Content="Clear selection" Style="{DynamicResource SystemSmallButton}" MinWidth="100" Click="buttonClear_Click"/>
+        </StackPanel>
+        
         <!--Wallpaper style-->
         <StackPanel Orientation="Vertical" Grid.Row="2">
             <Label Style="{StaticResource SystemLabel}" Content="Wallpaper style: "/>
