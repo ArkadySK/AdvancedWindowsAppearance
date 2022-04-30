@@ -34,7 +34,7 @@ namespace AdvancedWindowsAppearence
             }
         }
 
-        internal void CreateDeafultSlideshow()
+        internal void CreateDefaultSlideshow()
         {
             Slideshow = new SlideshowSettings();
             string WindowsFolder = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
