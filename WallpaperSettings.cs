@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -17,9 +18,9 @@ namespace AdvancedWindowsAppearence
         }
 
 
-        public WallpaperAppearanceSetting Wallpaper { get; } = new WallpaperAppearanceSetting();
+        public WallpaperAppearanceSetting Wallpaper { get; private set; }
 
-        public SlideshowSettings Slideshow { get; } = new SlideshowSettings();
+        public SlideshowSettings Slideshow { get; private set; }
 
         public ColorAppearanceSetting BackgroundColor { get; private set; }
 
@@ -30,6 +31,20 @@ namespace AdvancedWindowsAppearence
             {
                 _wallpaperType = value;
                 NotifyPropertyChanged();
+            }
+        }
+
+        internal void CreateSlideshow()
+        {
+            Slideshow = new SlideshowSettings();
+            string WindowsFolder = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+            if (Directory.Exists(WindowsFolder + @"\Web\Wallpaper\Theme1"))
+            {
+                Slideshow.Folder = WindowsFolder + @"\Web\Wallpaper\Theme1";
+            }
+            else
+            {
+                Slideshow.Folder = WindowsFolder + @"\Web\Wallpaper\Windows";
             }
         }
 
@@ -50,6 +65,11 @@ namespace AdvancedWindowsAppearence
         public WallpaperSettings(ColorAppearanceSetting backgroundColor)
         {
             BackgroundColor = backgroundColor;
+            Wallpaper = new WallpaperAppearanceSetting();
+            UpdateWallpaperStyle(); 
+
+            if (WallpaperType == WallpaperTypes.Slideshow)
+            Slideshow = new SlideshowSettings();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -82,7 +102,7 @@ namespace AdvancedWindowsAppearence
                 case WallpaperTypes.Image:
                     {
                         Wallpaper.SaveToRegistry();
-                        Slideshow.DeleteIni();
+                        Slideshow?.DeleteIni();
                         WindowsInteropServices.Win32Methods.UpdateWallpaper(Wallpaper.Path);
                         break;
                     }
@@ -105,7 +125,7 @@ namespace AdvancedWindowsAppearence
                     {
                         Wallpaper.SetWallpaper("");
                         Wallpaper.SaveToRegistry();
-                        Slideshow.DeleteIni();
+                        Slideshow?.DeleteIni();
                         break;
                     }
             }
