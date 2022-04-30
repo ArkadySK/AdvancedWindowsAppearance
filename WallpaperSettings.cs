@@ -34,7 +34,7 @@ namespace AdvancedWindowsAppearence
             }
         }
 
-        internal void CreateSlideshow()
+        internal void CreateDeafultSlideshow()
         {
             Slideshow = new SlideshowSettings();
             string WindowsFolder = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
@@ -66,7 +66,7 @@ namespace AdvancedWindowsAppearence
         {
             BackgroundColor = backgroundColor;
             Wallpaper = new WallpaperAppearanceSetting();
-            UpdateWallpaperStyle(); 
+            UpdateWallpaperType(); 
 
             if (WallpaperType == WallpaperTypes.Slideshow)
             Slideshow = new SlideshowSettings();
@@ -74,7 +74,7 @@ namespace AdvancedWindowsAppearence
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void UpdateWallpaperStyle()
+        public void UpdateWallpaperType()
         {
             //if it is solid color
             if (String.IsNullOrWhiteSpace(Wallpaper.Path))

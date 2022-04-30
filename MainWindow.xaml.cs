@@ -79,7 +79,7 @@ namespace AdvancedWindowsAppearence
                 MessageBox.Show("Error checking for update: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            Settings.WallpaperSettings.UpdateWallpaperStyle();
+            Settings.WallpaperSettings.UpdateWallpaperType();
             UpdateWallpaperTypeComboBox();
         }
 

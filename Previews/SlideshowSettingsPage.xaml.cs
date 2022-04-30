@@ -25,7 +25,7 @@ namespace AdvancedWindowsAppearence.Previews
         {
             WallpaperSettings = wallpaperSettings;
             if (WallpaperSettings.Slideshow == null)
-                WallpaperSettings.CreateSlideshow();
+                WallpaperSettings.CreateDeafultSlideshow();
             InitializeComponent();
             DataContext = WallpaperSettings;
         }
