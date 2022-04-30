@@ -123,9 +123,10 @@ namespace AdvancedWindowsAppearence
                     }
                 case WallpaperTypes.Color:
                     {
-                        Wallpaper.SetWallpaper("");
+                        Wallpaper.Path = "";
                         Wallpaper.SaveToRegistry();
                         Slideshow?.DeleteIni();
+                        WindowsInteropServices.Win32Methods.UpdateWallpaper("");
                         break;
                     }
             }
