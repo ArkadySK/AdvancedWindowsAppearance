@@ -72,7 +72,9 @@ namespace AdvancedWindowsAppearence
 
             string[] headersToRemove = new string[]{
                 "ColorizationColor=", "AutoColorization=", "ColorStyle", "Size="};
-
+            
+            //remove lines that will be replaced
+            var removeLinesTasks = new List<Task>();
             foreach (string line in themeSettingsIni)
             {
                 //ignore all comments
@@ -81,28 +83,34 @@ namespace AdvancedWindowsAppearence
                 //avoid mess in the theme
                 foreach (string header in headersToRemove)
                     if (line.Contains(header))
-                        newThemeSettingsIni.Remove(line);
+                        removeLinesTasks.Add(Task.Run(()=>newThemeSettingsIni.Remove(line)));
             }
+            await Task.WhenAll(removeLinesTasks);
 
             //Set visual styles and aero color
             visualStylesIdIndex = newThemeSettingsIni.IndexOf(visualStylesId);
             if (visualStylesIdIndex == -1)
             {
-                newThemeSettingsIni.Add(visualStylesId);
+                await Task.Run(() => newThemeSettingsIni.Add(visualStylesId));
                 visualStylesIdIndex = newThemeSettingsIni.Count - 1;
             }
             var themeColor = Settings.ThemeColor.ItemColor.GetValueOrDefault(Color.Silver);
 
-            string visualStylesText =
+            StringBuilder themeSb = new StringBuilder();
+            themeSb.Append(
                 "ColorStyle=NormalColor\n" +
                 "Size=NormalSize\n" +
-                "AutoColorization=0\n";
+                "AutoColorization=0\n");
             if (themeColor != null)
             {
                 string colorstring = (themeColor.B | (themeColor.G << 8) | (themeColor.R << 16) | (themeColor.A << 24)).ToString();
-                visualStylesText += "ColorizationColor=" + colorstring + "\n";
+                themeSb.AppendLine("ColorizationColor=" + colorstring);
             }
-            newThemeSettingsIni.Insert(visualStylesIdIndex + 1, visualStylesText); 
+            await Task.Run(() => newThemeSettingsIni.Insert(visualStylesIdIndex + 1, themeSb.ToString()));
+            
+            await SaveTheme(newThemeSettingsIni);
+            await LoadTheme();
+
         }
 
         public async Task SaveTheme()
@@ -116,16 +124,19 @@ namespace AdvancedWindowsAppearence
                 "SystemMode=", "AppMode="
             };
 
+            //remove lines that will be replaced
+            var removeLinesTasks = new List<Task>();
             foreach (string line in themeSettingsIni)
             {
                 //ignore all comments
                 if (line.StartsWith(";")) continue;
 
-                //remove all wallpaper lines to avoid mess in the theme
+                //avoid mess in the theme
                 foreach (string header in headersToRemove)
                     if (line.Contains(header))
-                        newThemeSettingsIni.Remove(line);
+                        removeLinesTasks.Add(Task.Run(() => newThemeSettingsIni.Remove(line)));
             }
+            await Task.WhenAll(removeLinesTasks);
 
             //Set theme name
             int themeIdIndex = newThemeSettingsIni.IndexOf(themeId);
@@ -134,7 +145,7 @@ namespace AdvancedWindowsAppearence
                 newThemeSettingsIni.Add(themeId);
                 themeIdIndex = newThemeSettingsIni.Count - 1;
             }
-            newThemeSettingsIni.Insert(themeIdIndex + 1, "DisplayName=" + Settings.ThemeName);
+            await Task.Run(() => newThemeSettingsIni.Insert(themeIdIndex + 1, "DisplayName=" + Settings.ThemeName));
 
             //Set visual style
             int visualStylesIdIndex = newThemeSettingsIni.IndexOf(visualStylesId);
@@ -148,6 +159,9 @@ namespace AdvancedWindowsAppearence
                 return;
             var visualStylesText = "Path=" + Settings.ThemeStyle;
             newThemeSettingsIni.Insert(visualStylesIdIndex + 1, visualStylesText);
+
+            await SaveTheme(newThemeSettingsIni);
+            await LoadTheme();
         }
 
         public async Task SaveColorsAndMetrics()
@@ -157,6 +171,8 @@ namespace AdvancedWindowsAppearence
             string[] themeSettingsIni = GetThemeFile(themePath);
             List<string> newThemeSettingsIni = GetThemeFile(themePath).ToList();
 
+            //remove lines that will be replaced
+            var removeLinesTasks = new List<Task>();
             foreach (string line in themeSettingsIni)
             {
                 //ignore all comments
@@ -168,9 +184,10 @@ namespace AdvancedWindowsAppearence
                     if (!color.IsEdited)
                         continue;
                     if (line.Contains(color.Name))
-                        newThemeSettingsIni.Remove(line);
+                        removeLinesTasks.Add(Task.Run(()=> newThemeSettingsIni.Remove(line)));
                 }
             }
+            await Task.WhenAll(removeLinesTasks);
 
             foreach (ColorAppearanceSetting color in Settings.ColorSettings)
             {
@@ -178,7 +195,8 @@ namespace AdvancedWindowsAppearence
                 if(color.HasColor)
                     newThemeSettingsIni.Insert(colorsIdIndex + 1, color.Name + "=" + color.ItemColorValue);
             }
-
+            await SaveTheme(newThemeSettingsIni);
+            await LoadTheme();
         }
 
         public async Task SaveFonts()
@@ -187,7 +205,9 @@ namespace AdvancedWindowsAppearence
             int colorsIdIndex = -1;
             string[] themeSettingsIni = GetThemeFile(themePath);
             List<string> newThemeSettingsIni = GetThemeFile(themePath).ToList();
-
+            
+            //remove lines that will be replaced
+            var removeLinesTasks = new List<Task>();
             foreach (string line in themeSettingsIni)
             {
                 //ignore all comments
@@ -199,9 +219,10 @@ namespace AdvancedWindowsAppearence
                     if (!color.IsEdited)
                         continue;
                     if (line.Contains(color.Name))
-                        newThemeSettingsIni.Remove(line);
+                        removeLinesTasks.Add(Task.Run(() => newThemeSettingsIni.Remove(line)));
                 }
             }
+            await Task.WhenAll(removeLinesTasks);
 
             foreach (FontAppearanceSetting color in Settings.FontSettings)
             {
@@ -210,6 +231,8 @@ namespace AdvancedWindowsAppearence
                     newThemeSettingsIni.Insert(colorsIdIndex + 1, color.Name + "=" + color.ItemColorValue);
             }
 
+            await SaveTheme(newThemeSettingsIni);
+            await LoadTheme();
         }
 
         public async Task SaveWallpaper()
@@ -222,6 +245,8 @@ namespace AdvancedWindowsAppearence
             string[] themeSettingsIni = GetThemeFile(GetThemePath());
             List<string> newThemeSettingsIni = themeSettingsIni.ToList();
 
+            //remove lines that will be replaced
+            var removeLinesTasks = new List<Task>();
             foreach (string line in themeSettingsIni)
             {
                 //ignore all comments
@@ -230,8 +255,9 @@ namespace AdvancedWindowsAppearence
                 //remove all wallpaper lines to avoid mess in the theme
                 foreach (string header in headersToRemove)
                     if (line.Contains(header))
-                        newThemeSettingsIni.Remove(line);
+                        removeLinesTasks.Add(Task.Run(() => newThemeSettingsIni.Remove(line)));
             }
+            await Task.WhenAll(removeLinesTasks);
 
             int desktopIdIndex = newThemeSettingsIni.IndexOf(desktopId);
             if (desktopIdIndex == -1)
@@ -251,11 +277,13 @@ namespace AdvancedWindowsAppearence
                     "TileWallpaper=0\n" +
                     "WallpaperStyle=" + (int)Settings.WallpaperSettings.Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle);
 
+            await SaveTheme(newThemeSettingsIni);
+            await LoadTheme();
         }
 
 
         #endregion
-
+        /*
         [Obsolete]
         public ThemeSettings(string displayName, Color colorizationColor, string aeroStyle, WallpaperAppearanceSetting wallpaper, ColorAppearanceSetting[] colorAppearanceSettings, FontAppearanceSetting[] fontAppearanceSettings)
         {
@@ -444,17 +472,27 @@ namespace AdvancedWindowsAppearence
             ///load the new theme
             LoadTheme(newThemePath);
         }
-
-        private void SaveTheme(string themePath, string newThemeSettingsIni)
+        */
+        private async Task SaveTheme(List<string> newThemeSettingsIni)
         {
+            string themePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Microsoft\Windows\Themes\" + Settings.ThemeName + ".theme";
             if (File.Exists(themePath))
                 File.Delete(themePath);
+
             StreamWriter streamWriter = new StreamWriter(themePath);
-            streamWriter.Write(newThemeSettingsIni);
+            StringBuilder stringBuilderTheme = new StringBuilder();
+            newThemeSettingsIni.ForEach(x => stringBuilderTheme.AppendLine(x));
+            await streamWriter.WriteAsync(stringBuilderTheme.ToString());
             streamWriter.Close();
         }
 
-        public static void LoadTheme(string themePath)
+        private async Task LoadTheme()
+        {
+            string themePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Microsoft\Windows\Themes\" + Settings.ThemeName + ".theme";
+            await LoadTheme(themePath);
+        }
+
+        public static async Task LoadTheme(string themePath)
         {
             Process process = new Process();
             ProcessStartInfo startInfo = new ProcessStartInfo();
@@ -465,6 +503,7 @@ namespace AdvancedWindowsAppearence
             process.StartInfo = startInfo;
 
             process.Start();
+            await Task.Delay(1000);
             process.Close();
         }
     }
