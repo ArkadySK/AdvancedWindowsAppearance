@@ -212,7 +212,7 @@ namespace AdvancedWindowsAppearence
         internal async Task SaveThemeAsTheme()
         {
             IsSavingInProgress = true;
-            await ThemeSettings.SaveTheme();
+            await ThemeSettings.SaveTheme(ThemeName);
             ShowSavedSuccessfullyDialog();
             //separate color modes from these settings in future
             await RegistrySettingsViewModel.SaveAll();
@@ -225,7 +225,7 @@ namespace AdvancedWindowsAppearence
             await AeroColorsViewModel.SaveAll();       
             await Task.Delay(2000);
             App.Current.Resources["ThemeColor"] = Converters.BrushToColorConverter.MediaColorToBrush(ThemeColor.ItemColor);
-            await ThemeSettings.SaveTitleColors();
+            await ThemeSettings.SaveTitleColors(ThemeName);
             ShowSavedSuccessfullyDialog();
         }
 
@@ -241,7 +241,7 @@ namespace AdvancedWindowsAppearence
         internal async Task SaveColorsMetricsAsTheme()
         {
             IsSavingInProgress = true;
-            await ThemeSettings.SaveColorsAndMetrics();
+            await ThemeSettings.SaveColorsAndMetrics(ThemeName);
             ShowSavedToRegistryDialog();
             
         }
@@ -265,7 +265,7 @@ namespace AdvancedWindowsAppearence
         internal async Task SaveFontsAsTheme()
         {
             IsSavingInProgress = true;
-            await ThemeSettings.SaveFonts();
+            await ThemeSettings.SaveFonts(ThemeName);
             ShowSavedAsThemeDialog();
         }
         internal async Task SaveFontsToRegistry()
@@ -287,7 +287,7 @@ namespace AdvancedWindowsAppearence
         internal async Task SaveWallpaperAsTheme()
         {
             IsSavingInProgress = true;
-            await ThemeSettings.SaveWallpaper();
+            await ThemeSettings.SaveWallpaper(ThemeName);
             ShowSavedSuccessfullyDialog();
         }
         internal async Task SaveWallpaperToRegistry()
