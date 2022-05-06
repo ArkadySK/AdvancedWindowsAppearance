@@ -121,10 +121,10 @@ namespace AdvancedWindowsAppearence
         }
 
         public void SelectAll() 
-            => FolderImages.ToList().ForEach(x => x.IsSelected = true);
+            => FolderImages?.ToList().ForEach(x => x.IsSelected = true);
 
         public void ClearSelection()
-            => FolderImages.ToList().ForEach(x => x.IsSelected = false);
+            => FolderImages?.ToList().ForEach(x => x.IsSelected = false);
 
         string GetIniText()
         {
@@ -182,6 +182,9 @@ namespace AdvancedWindowsAppearence
         private void CreateNewIni()
         {
             DeleteIni();
+            if (FolderImages == null)
+                throw new Exception("Please choose a folder to save.");
+
             if (FolderImages.Count == 0) return;
 
             string iniPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Microsoft\Windows\Themes\slideshow.ini";

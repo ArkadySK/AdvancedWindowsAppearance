@@ -499,6 +499,10 @@ namespace AdvancedWindowsAppearence
             {
                 MessageBox.Show(ex.Message);
             }
+            finally
+            {
+                Settings.IsSavingInProgress = false;
+            }
         }
 
 
