@@ -184,10 +184,14 @@ namespace AdvancedWindowsAppearence
 
             foreach (ColorAppearanceSetting color in Settings.ColorSettings)
             {
+                if (!color.IsEdited)
+                    continue;
+                color.IsEdited = false;
                 colorsIdIndex = newThemeSettingsIni.IndexOf(colorsId);
                 if(color.HasColor)
-                    newThemeSettingsIni.Insert(colorsIdIndex + 1, color.Name + "=" + color.ItemColorValue);
+                    newThemeSettingsIni.Insert(colorsIdIndex + 1, color.ColorRegistryPath + "=" + color.ItemColorValue);
             }
+
             await SaveTheme(newThemeSettingsIni);
             await LoadTheme();
         }
@@ -217,11 +221,14 @@ namespace AdvancedWindowsAppearence
             }
             await Task.WhenAll(removeLinesTasks);
 
-            foreach (FontAppearanceSetting color in Settings.FontSettings)
+            foreach (FontAppearanceSetting font in Settings.FontSettings)
             {
+                if (!font.IsEdited)
+                    continue;
+                font.IsEdited = false;
                 colorsIdIndex = newThemeSettingsIni.IndexOf(colorsId);
-                if (color.HasColor)
-                    newThemeSettingsIni.Insert(colorsIdIndex + 1, color.Name + "=" + color.ItemColorValue);
+                if (font.HasColor)
+                    newThemeSettingsIni.Insert(colorsIdIndex + 1, font.Name + "=" + font.ItemColorValue);
             }
 
             await SaveTheme(newThemeSettingsIni);
