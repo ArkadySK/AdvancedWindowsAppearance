@@ -55,10 +55,9 @@ namespace AdvancedWindowsAppearence
     public class SlideshowSettings : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        
-        List<string> SelectedPaths { get; set; } = new List<string>();
+
         public IntRegistrySetting Interval { get; }
-        public BoolRegistrySetting Shuffle { get; } 
+        public BoolRegistrySetting Shuffle { get; }
 
         private string _folder;
         public string Folder { get => _folder; set
@@ -72,25 +71,25 @@ namespace AdvancedWindowsAppearence
 
         private ObservableCollection<SlideshowImage> GetImagesFromDirectory(string directory)
         {
-                if (Directory.Exists(directory))
-                {
-                    string[] supportedTypes = new string[] { ".png", ".jpg", ".jpeg", ".webp", ".bmp", ".gif", ".tif" };
-                    string[] files = Directory.GetFiles(Folder);
+            if (Directory.Exists(directory))
+            {
+                string[] supportedTypes = new string[] { ".png", ".jpg", ".jpeg", ".webp", ".bmp", ".gif", ".tif" };
+                string[] files = Directory.GetFiles(Folder);
 
-                    var imagePaths = from file in files
-                                     where supportedTypes.Any(type => file.EndsWith(type))
-                                     select file;
-                    List<SlideshowImage> images = new List<SlideshowImage>();
-                    foreach (string image in imagePaths)
-                    {
-                        var slideshowImage = new SlideshowImage();
-                        slideshowImage.Path = image;
-                        slideshowImage.IsSelected = false;
-                        images.Add(slideshowImage);
-                    }
-                    return new ObservableCollection<SlideshowImage>(images);
+                var imagePaths = from file in files
+                                 where supportedTypes.Any(type => file.EndsWith(type))
+                                 select file;
+                List<SlideshowImage> images = new List<SlideshowImage>();
+                foreach (string image in imagePaths)
+                {
+                    var slideshowImage = new SlideshowImage();
+                    slideshowImage.Path = image;
+                    slideshowImage.IsSelected = false;
+                    images.Add(slideshowImage);
                 }
-                return null;
+                return new ObservableCollection<SlideshowImage>(images);
+            }
+            return null;
         }
         void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
@@ -102,9 +101,45 @@ namespace AdvancedWindowsAppearence
 
             Shuffle = new BoolRegistrySetting("Shuffle", @"Control Panel\Personalization\Desktop Slideshow", "Shuffle");
             Interval = new IntRegistrySetting("Interval", @"Control Panel\Personalization\Desktop Slideshow", "Interval");
+            LoadSlideshow();
         }
+
+        /// <summary>
+        /// updates all properties in class
+        /// </summary>
+        void LoadSlideshow()
+        {
+
+            var iniText = GetIniText();
+            if (iniText == null)
+                return;
+            var paths = iniText.Replace("[Slideshow]", "")
+                .Replace("ImagesRootPIDL=", "")
+                .Replace("\r", "")
+                .Split('\n');
+            var folder = "";
+        }
+
+        public void SelectAll() 
+            => FolderImages.ToList().ForEach(x => x.IsSelected = true);
+
+        public void ClearSelection()
+            => FolderImages.ToList().ForEach(x => x.IsSelected = false);
+
+        string GetIniText()
+        {
+            string iniPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Microsoft\Windows\Themes\slideshow.ini";
+            if (File.Exists(iniPath))
+                return File.ReadAllText(iniPath);
+            else 
+                return null;
+        }
+
+
         internal void SetFolder(string path)
         {
+            if (!Directory.Exists(path))
+                throw new DirectoryNotFoundException("Folder not found!");
             Folder = path;
         }
 
@@ -142,38 +177,20 @@ namespace AdvancedWindowsAppearence
             File.Delete(iniPath);
         }
 
-        string CryptBinaryToString(string text) 
-        {
-            IntPtr pidl = Win32Methods.ILCreateFromPath(text);
-
-            uint CRYPT_STRING_BASE64 = 0x00000001;
-
-            int k = 0;
-            short cb = 0;
-
-            while ((k = Marshal.ReadInt16(pidl + cb)) > 0)
-            {
-                cb += (short)k;
-            }
-            int size = 0;
-            Win32Methods.CryptBinaryToString(pidl, cb, CRYPT_STRING_BASE64, null, ref size);
-            StringBuilder stringBuilder = new StringBuilder(size);
-            if (Win32Methods.CryptBinaryToString(pidl, cb, CRYPT_STRING_BASE64, stringBuilder, ref size))
-            {
-                return stringBuilder?.ToString();
-            }
-            return null;
-        }
+        
 
         private void CreateNewIni()
         {
-            FolderImages = new ObservableCollection<SlideshowImage>() { 
-                new SlideshowImage() { Path = @"F:\gamez\ManiaPlanet\UserData\Worktitles\TM2U_Island@adamkooo\Media\Images\Graphics\LoadscreenCurrent.png", IsSelected = true } 
-            };
+            DeleteIni();
+            if (FolderImages.Count == 0) return;
 
             string iniPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Microsoft\Windows\Themes\slideshow.ini";
             StringBuilder iniContentStringBuilder = new StringBuilder();
+            iniContentStringBuilder.AppendLine("[Slideshow]");
+            iniContentStringBuilder.AppendLine($"ImagesRootPath={Folder}");
+
             
+            int count = 0;
             foreach (var image in FolderImages)
             {
                 if (image == null)
@@ -182,8 +199,15 @@ namespace AdvancedWindowsAppearence
                     continue;
                 if (string.IsNullOrWhiteSpace(image.Path))
                     continue;
-                iniContentStringBuilder.Append(CryptBinaryToString(image.Path));
+                iniContentStringBuilder.AppendLine($"Item{count}Path={image.Path}");
+                count++;
             }
+            File.WriteAllText(iniPath, iniContentStringBuilder.ToString());
+        }
+
+        public void SaveToIni()
+        {
+            CreateNewIni();
         }
     }
 }
