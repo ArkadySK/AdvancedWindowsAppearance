@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AdvancedWindowsAppearence.Previews"
-      xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters"
+      xmlns:converters="clr-namespace:AdvancedWindowsAppearence.Converters" xmlns:controls="clr-namespace:AdvancedWindowsAppearence.Controls"
       mc:Ignorable="d" 
       
       Title="WallpaperSelectionPage">
@@ -12,8 +12,6 @@
     <Page.Resources>
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-            <converters:BrushToColorConverter x:Key="brushToColor" />
-            <converters:WallpaperStyleToImageStretchConverter x:Key="WallpaperStyleToImageStretch"/>
         </ResourceDictionary>
     </Page.Resources>
     
@@ -27,12 +25,8 @@
         </Grid.RowDefinitions>
 
         <!--Wallpaper background preview-->
-        <Viewbox IsEnabled="False">
-            <Grid Width="160" Height="90" Background="{Binding BackgroundColor.ItemColor, Converter={StaticResource brushToColor}}">
-                <Image Source="{Binding Wallpaper.Path}" Stretch="{Binding Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle, Converter={StaticResource WallpaperStyleToImageStretch}}"></Image>
-            </Grid>
-        </Viewbox>
-        
+        <controls:WallpaperControl/>
+
         <!--Wallpaper style-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
