@@ -119,58 +119,60 @@
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <Grid Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.ColumnSpan="5">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="45"/>
-                                </Grid.ColumnDefinitions>
+                        
+                       <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="45"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Style="{StaticResource SystemLabel}" Margin="1">Theme Color (Window Border)</Label>
+                            <Button x:Name="buttonThemeColor" Grid.Column="4" Style="{StaticResource SystemSmallButton}" Click="buttonThemeColor_Click">
+                                <Button x:Name="imageThemeColor" Padding="10" BorderThickness="2" Background="{Binding ThemeColor.ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                            </Button>
+                            <Label Style="{StaticResource SystemLabel}" Grid.Column="2" Margin="1">Opacity</Label>
+                            <Slider VerticalAlignment="Center" x:Name="sliderColorOpacity" Grid.Column="1" Value="{Binding ThemeColor.Opacity}"  Margin="3" Maximum="255" />
+                            <TextBox IsEnabled="False" Grid.Column="3" VerticalContentAlignment="Center" x:Name="textBoxColorOpacity" Margin="2" Text="{Binding Value, ElementName=sliderColorOpacity}" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
+                        </Grid>
 
-                                <Label Style="{StaticResource SystemLabel}" Margin="1">Theme Color (Window Border)</Label>
-                                <Button x:Name="buttonThemeColor" Grid.Column="4" Style="{StaticResource SystemSmallButton}" Click="buttonThemeColor_Click">
-                                    <Button x:Name="imageThemeColor" Padding="10" BorderThickness="2" Background="{Binding ThemeColor.ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                </Button>
-                                <Label Style="{StaticResource SystemLabel}" Grid.Column="2" Margin="1">Opacity</Label>
-                                <Slider VerticalAlignment="Center" x:Name="sliderColorOpacity" Grid.Column="1" Value="{Binding ThemeColor.Opacity}"  Margin="3" Maximum="255" />
-                                <TextBox IsEnabled="False" Grid.Column="3" VerticalContentAlignment="Center" x:Name="textBoxColorOpacity" Margin="2" Text="{Binding Value, ElementName=sliderColorOpacity}" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
-                            </Grid>
+                        <!--Active and Inactive color-->
+                        <ItemsControl x:Name="titleColorsItemsControl" Grid.ColumnSpan="5" Grid.Row="1" Focusable="False"  IsEnabled="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding AeroColorsViewModel.AeroColors}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Stretch" MinHeight="40" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto" MinWidth="40" />
+                                            <ColumnDefinition Width="45"/>
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox x:Name="checkBoxAeroColorEnabled" Content="{Binding Name}" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundColor}" IsChecked="{Binding Enabled}"/>
+                                        <Button Content="&#xE78B;" FontFamily="{StaticResource Segoe MDL2 Assets}" IsEnabled="{Binding Enabled}" FontSize="25" Grid.Column="2" Style="{StaticResource SystemSmallButton}" Click="ButtonColorSync_Click"/>
+                                        <Button x:Name="buttonAeroColor" Grid.Column="3" Style="{StaticResource SystemSmallButton}" Click="buttonAeroColor_Click" IsEnabled="{Binding Enabled}">
+                                            <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2" Background="{Binding ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                        </Button>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        
+                        <!--Aero colors Preview-->
+                        <Frame Grid.Row="2" Margin="0 5 0 0" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Source="Previews\TitleColorsPreviewPage.xaml"/>
+                        
 
-                            <!--Active and Inactive color-->
-                            <ItemsControl x:Name="titleColorsItemsControl" Grid.ColumnSpan="5" Grid.Row="2" Focusable="False"  IsEnabled="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding AeroColorsViewModel.AeroColors}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid HorizontalAlignment="Stretch" MinHeight="40" >
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto" MinWidth="40" />
-                                                <ColumnDefinition Width="45"/>
-                                            </Grid.ColumnDefinitions>
-                                            <CheckBox x:Name="checkBoxAeroColorEnabled" Content="{Binding Name}" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundColor}" IsChecked="{Binding Enabled}"/>
-                                            <Button Content="&#xE78B;" FontFamily="{StaticResource Segoe MDL2 Assets}" IsEnabled="{Binding Enabled}" FontSize="25" Grid.Column="2" Style="{StaticResource SystemSmallButton}" Click="ButtonColorSync_Click"/>
-                                            <Button x:Name="buttonAeroColor" Grid.Column="3" Style="{StaticResource SystemSmallButton}" Click="buttonAeroColor_Click" IsEnabled="{Binding Enabled}">
-                                                <Button x:Name="imageAeroColor" Padding="10" BorderThickness="2" Background="{Binding ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                            </Button>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                            <!--Aero colors Preview-->
-                            <Frame Margin="0 5 0 0" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Source="Previews\TitleColorsPreviewPage.xaml"/>
-                        </StackPanel>
-
-                        <TextBlock Style="{StaticResource InfoText}" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource InvertedBooleanToVisibilityConverter}, Mode=OneWay}" Grid.ColumnSpan="5" Grid.Row="1"
+                        <TextBlock Style="{StaticResource InfoText}" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource InvertedBooleanToVisibilityConverter}, Mode=OneWay}" Grid.ColumnSpan="5" Grid.Row="4"
                                            >To access active / inactive title color setting, please check 'enable colored titlebars' in Modern Apps Settings. If you dont have that setting, your version of Windows is not supported. This works only on Windows 10/11</TextBlock>
                         <!--The Apply buttons-->
-                        <StackPanel Margin="-5 0 0 0" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="4">
+                        <StackPanel Margin="-5 0 0 0" Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="4">
                             <Button x:Name="SaveTitleColorsAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveTitleColorsAsTheme_Click"/>
                             <Button x:Name="SaveTitleColorsToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveTitleColorsToRegistry_Click" />
                         </StackPanel>
