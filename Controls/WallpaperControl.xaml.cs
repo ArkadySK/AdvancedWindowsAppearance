@@ -24,5 +24,15 @@ namespace AdvancedWindowsAppearence.Controls
         {
             InitializeComponent();
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is WallpaperSettings)
+                return;
+            else if (DataContext is GeneralViewModel generalViewModel)
+                DataContext = generalViewModel.WallpaperSettings;
+            else
+                return;
+        }
     }
 }
