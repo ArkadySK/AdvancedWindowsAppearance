@@ -108,6 +108,9 @@
     <Compile Include="Controls\ClassicButton.xaml.cs">
       <DependentUpon>ClassicButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\WallpaperControl.xaml.cs">
+      <DependentUpon>WallpaperControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BooleanToBlurEffectConverter.cs" />
     <Compile Include="Converters\BooleanToIntConverter.cs" />
     <Compile Include="Converters\BrushToColorConverter.cs" />
@@ -150,6 +153,10 @@
     <Compile Include="Win32Methods.cs" />
     <Compile Include="WindowBlur.cs" />
     <Page Include="Controls\ClassicButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WallpaperControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
