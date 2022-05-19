@@ -43,6 +43,10 @@ namespace AdvancedWindowsAppearence
             UpdateFontList();
             LoadThemeName();
 
+            //if it is in minimal UI, disable everything else
+            if (!Settings.ShowAllUI)
+                return;
+            
             //add backup & restore page
             restoreTabFrame.Content = new RestorePage(Settings);
 
@@ -77,6 +81,12 @@ namespace AdvancedWindowsAppearence
             catch (Exception ex)
             {
                 MessageBox.Show("Error checking for update: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            if (!Settings.ShowAllUI)
+            {
+                MainTabControl.SelectedIndex = 2;
+                return;
             }
 
             Settings.WallpaperSettings.UpdateWallpaperType();
