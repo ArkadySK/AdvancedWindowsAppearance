@@ -114,10 +114,19 @@ namespace AdvancedWindowsAppearence
             if (iniText == null)
                 return;
             var paths = iniText.Replace("[Slideshow]", "")
-                .Replace("ImagesRootPIDL=", "")
+                .Replace("ImagesRootPath=", "")
                 .Replace("\r", "")
                 .Split('\n');
-            var folder = "";
+            Folder = paths[1];
+            int imagesCount = paths.Length - 2;
+            for (int i = 0; i < imagesCount; i++)
+            {
+                var path = paths[i + 2].Replace("Item"+ i +"Path=", "");
+                foreach (var img in FolderImages)
+                    if (string.Equals(path, img.Path))
+                        img.IsSelected = true;
+            }
+            
         }
 
         public void SelectAll() 
