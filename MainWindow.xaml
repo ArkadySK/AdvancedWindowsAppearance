@@ -47,7 +47,7 @@
 
 
             <!-- Theme Tab -->
-            <TabItem Style="{StaticResource DefaultTabStyle}" >
+            <TabItem Style="{StaticResource DefaultTabStyle}" Visibility="{Binding ShowAllUI, Converter={StaticResource BooleanToVisibilityConverter}}" >
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE771;"/>
@@ -109,7 +109,7 @@
             </TabItem>
 
             <!-- Aero settings -->
-            <TabItem Style="{StaticResource DefaultTabStyle}">
+            <TabItem Style="{StaticResource DefaultTabStyle}" Visibility="{Binding ShowAllUI, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE737;"/>
@@ -341,7 +341,7 @@
 
 
             <!--Wallpaper-->
-            <TabItem x:Name="wallpaperTab" Style="{StaticResource DefaultTabStyle}">
+            <TabItem x:Name="wallpaperTab" Style="{StaticResource DefaultTabStyle}" Visibility="{Binding ShowAllUI, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xEB9F;"/>
@@ -382,7 +382,7 @@
 
 
             <!--DWM and Registry Tab (win8 & win10)-->
-            <TabItem x:Name="pageModern" Style="{StaticResource DefaultTabStyle}">
+            <TabItem x:Name="pageModern" Style="{StaticResource DefaultTabStyle}" Visibility="{Binding ShowAllUI, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE9F5;"/>
@@ -418,7 +418,7 @@
 
 
             <!--Restore-->
-            <TabItem x:Name="restoreTab" Style="{StaticResource DefaultTabStyle}" >
+            <TabItem x:Name="restoreTab" Style="{StaticResource DefaultTabStyle}" Visibility="{Binding ShowAllUI, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xF61E;"/>

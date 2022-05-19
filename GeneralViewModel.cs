@@ -15,14 +15,15 @@ namespace AdvancedWindowsAppearence
     public class GeneralViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged; // to do: implement this to refresh the preview
-
-        ThemeSettings ThemeSettings;
-
-        
         internal void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public bool ShowAllUI { get; set; } = false;
+
+        private ThemeSettings ThemeSettings;
+
         public AeroColorRegistrySetting ThemeColor { get; set; } = new AeroColorRegistrySetting("Theme Color", "ColorizationColor");
         public ColorAppearanceSetting[] ColorSettings { get; set; }
         public FontAppearanceSetting[] FontSettings { get; set; }
