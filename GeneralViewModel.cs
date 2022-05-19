@@ -20,7 +20,16 @@ namespace AdvancedWindowsAppearence
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public bool ShowAllUI { get; set; } = false;
+        private bool _showAllUI = false;
+        public bool ShowAllUI 
+        { 
+            get => _showAllUI;
+            set
+            {
+                _showAllUI = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private ThemeSettings ThemeSettings;
 
@@ -33,13 +42,14 @@ namespace AdvancedWindowsAppearence
         public RegistrySettingsViewModel RegistrySettingsViewModel { get; set; } = new RegistrySettingsViewModel();
 
 
-        public string ThemeName {get; set;}
-    
+        public string ThemeName { get; set; }
+
         bool _isSavingInProgress = false;
-        public bool IsSavingInProgress 
-        { 
-            get => _isSavingInProgress; 
-            set { 
+        public bool IsSavingInProgress
+        {
+            get => _isSavingInProgress;
+            set
+            {
                 _isSavingInProgress = value;
                 NotifyPropertyChanged();
             }
@@ -148,7 +158,7 @@ namespace AdvancedWindowsAppearence
 
         #endregion
 
-        
+
 
         async Task KillDWM()
         {
@@ -159,7 +169,7 @@ namespace AdvancedWindowsAppearence
                 {
                     try
                     {
-                        await Task.Run(p.Kill);                     
+                        await Task.Run(p.Kill);
                     }
                     catch
                     {
@@ -219,11 +229,11 @@ namespace AdvancedWindowsAppearence
             await RegistrySettingsViewModel.SaveAll();
         }
 
- 
+
         internal async Task SaveTitleColorsAsTheme()
         {
             IsSavingInProgress = true;
-            await AeroColorsViewModel.SaveAll();       
+            await AeroColorsViewModel.SaveAll();
             await Task.Delay(2000);
             App.Current.Resources["ThemeColor"] = Converters.BrushToColorConverter.MediaColorToBrush(ThemeColor.ItemColor);
             await ThemeSettings.SaveTitleColors();
@@ -244,7 +254,7 @@ namespace AdvancedWindowsAppearence
             IsSavingInProgress = true;
             await ThemeSettings.SaveColorsAndMetrics();
             ShowSavedToRegistryDialog();
-            
+
         }
 
         internal async Task SaveColorsMetricsToRegistry()
@@ -353,7 +363,7 @@ namespace AdvancedWindowsAppearence
             await ThemeSettings.LoadTheme(@"C:\Windows\Resources\Themes\aero.theme");
             await Task.Delay(1000);
         }
-        
+
         #endregion
 
 
@@ -363,12 +373,12 @@ namespace AdvancedWindowsAppearence
         {
             string output = @"[HKEY_CURRENT_USER\Control Panel\Colors]";
 
-            foreach(var c in ColorSettings)
+            foreach (var c in ColorSettings)
             {
-                if(!c.HasColor)
+                if (!c.HasColor)
                     continue;
                 output += "\n\"" + c.ColorRegistryPath + "\"=\"" + c.ItemColorValue + "\"";
-                }
+            }
 
             output += Environment.NewLine + Environment.NewLine;
             output += @"[HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics]";
@@ -392,7 +402,7 @@ namespace AdvancedWindowsAppearence
                 if (!f.HasSize)
                     continue;
                 string valueText = "hex:";
-                foreach(byte b in f.GetFontInRegistryFormat())
+                foreach (byte b in f.GetFontInRegistryFormat())
                 {
                     valueText += b.ToString("X") + ",";
                 }

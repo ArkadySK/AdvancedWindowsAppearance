@@ -40,7 +40,10 @@
             <Rectangle Fill="{DynamicResource BackgroundColor}" Opacity=".88"/>
             <TextBlock Text="Saving..." Style="{StaticResource InfoText}" VerticalAlignment="Center"/>
         </Grid>
-        <TextBlock HorizontalAlignment="Left" x:Name="versionNameTextBlock" FontSize="11" Style="{DynamicResource HypertextTextBlockStyle}" VerticalAlignment="Bottom" Margin="5" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Panel.ZIndex="10" >
+            <CheckBox IsChecked="{Binding ShowAllUI}"  Background="{x:Null}">Show more settings</CheckBox>
+            <TextBlock x:Name="versionNameTextBlock" FontSize="11" Style="{DynamicResource HypertextTextBlockStyle}" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+        </StackPanel>
 
         <!--Main TabControl-->
         <TabControl Effect="{Binding IsSavingInProgress, Converter={StaticResource BooleanToBlurEffect}}" TabStripPlacement="Left" Margin="-1 0 0 0" x:Name="MainTabControl" BorderThickness="0" Background="{x:Null}">
