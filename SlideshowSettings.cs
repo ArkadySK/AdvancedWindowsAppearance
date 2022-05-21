@@ -111,12 +111,14 @@ namespace AdvancedWindowsAppearence
         {
 
             var iniText = GetIniText();
-            if (iniText == null)
+            if (string.IsNullOrWhiteSpace(iniText))
                 return;
             var paths = iniText.Replace("[Slideshow]", "")
                 .Replace("ImagesRootPath=", "")
                 .Replace("\r", "")
                 .Split('\n');
+            if (paths.Length == 0) 
+                return;
             Folder = paths[1];
             int imagesCount = paths.Length - 2;
             for (int i = 0; i < imagesCount; i++)
