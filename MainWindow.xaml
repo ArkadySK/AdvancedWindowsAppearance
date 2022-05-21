@@ -43,7 +43,7 @@
         </Grid>
 
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="3" Panel.ZIndex="10" >
-            <CheckBox IsChecked="{Binding ShowAllUI}" Margin="2" Background="{x:Null}">Show more settings</CheckBox>
+            <CheckBox IsChecked="{Binding ShowAllUI}" Margin="2" Background="{x:Null}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" >Show more settings</CheckBox>
             <TextBlock x:Name="versionNameTextBlock" Margin="2" FontSize="11" Style="{DynamicResource HypertextTextBlockStyle}" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
         </StackPanel>
 

@@ -523,5 +523,15 @@ namespace AdvancedWindowsAppearence
         }
 
         #endregion
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            ApplicationSettings.SetUIType(((CheckBox)sender).IsChecked.Value);
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ApplicationSettings.SetUIType(((CheckBox)sender).IsChecked.Value);
+        }
     }
 }

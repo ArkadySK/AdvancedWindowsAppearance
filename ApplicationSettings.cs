@@ -12,20 +12,28 @@ namespace AdvancedWindowsAppearence
     /// </summary>
     public static class ApplicationSettings
     {
-        static bool GetUIType()
+        public static bool GetUIType()
         {
-            var key = Registry.CurrentUser.OpenSubKey("SOFTWARE");
-            key.CreateSubKey("AWA");
-            key = key.OpenSubKey("AWA");
-            var value = (int)key.GetValue("UIType", 0);
+            var key = Registry.CurrentUser.OpenSubKey("SOFTWARE", true);
+            key.CreateSubKey("AWA", RegistryKeyPermissionCheck.Default);        
+            key.Close();
+
+            var key2 = Registry.CurrentUser.OpenSubKey("SOFTWARE\\AWA", true);
+            var value = (int)key2.GetValue("UIType", 0);
+            key2.Close();
             return value == 0? false : true; 
         }
 
-        static void SetUIType(bool value)
+        public static void SetUIType(bool value)
         {
-            var key = Registry.CurrentUser.OpenSubKey("SOFTWARE", true);
-            key.CreateSubKey("AWA");
-            key.SetValue("UIType", value);
+            var key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\AWA", true);
+            if (key == null)
+            {
+                key.Close();
+                return;
+            }
+            key.SetValue("UIType", value, RegistryValueKind.DWord);
+            key.Close();
         }
     }
 }
