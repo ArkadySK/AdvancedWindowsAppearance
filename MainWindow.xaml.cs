@@ -49,16 +49,19 @@ namespace AdvancedWindowsAppearence
 
         void LoadAdvancedUI()
         {
-            //add backup & restore page
-            restoreTabFrame.Content = new RestorePage(Settings);
+            Dispatcher.Invoke(() => 
+            {
+                //add backup & restore page
+                restoreTabFrame.Content = new RestorePage(Settings);
 
-            //add wallpaper, slideshow and color bg pages
-            WallpaperFrame.Content = new WallpaperSelectionPage(Settings.WallpaperSettings);
-            SlideshowFrame.Content = new SlideshowSettingsPage(Settings.WallpaperSettings);
-            ColorFrame.Content = new ColorBackgroundSelectionPage(Settings.WallpaperSettings);
+                //add wallpaper, slideshow and color bg pages
+                WallpaperFrame.Content = new WallpaperSelectionPage(Settings.WallpaperSettings);
+                SlideshowFrame.Content = new SlideshowSettingsPage(Settings.WallpaperSettings);
+                ColorFrame.Content = new ColorBackgroundSelectionPage(Settings.WallpaperSettings);
 
-            Settings.WallpaperSettings.UpdateWallpaperType();
-            UpdateWallpaperTypeComboBox();
+                Settings.WallpaperSettings.UpdateWallpaperType();
+                UpdateWallpaperTypeComboBox();
+            });
         }
 
         private async void window_Loaded(object sender, RoutedEventArgs e)
@@ -95,6 +98,7 @@ namespace AdvancedWindowsAppearence
                 MainTabControl.SelectedIndex = 2;
                 return;
             }
+            
 
             await Task.Run(LoadAdvancedUI);
         }
@@ -543,7 +547,7 @@ namespace AdvancedWindowsAppearence
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             ApplicationSettings.SetUIType(((CheckBox)sender).IsChecked.Value);
-            MainTabControl.SelectedIndex = 1;
+            MainTabControl.SelectedIndex = 2;
         }
     }
 }
