@@ -54,6 +54,9 @@ namespace AdvancedWindowsAppearence
 
     public class SlideshowSettings : INotifyPropertyChanged
     {
+        //default path to slideshow.ini file
+        readonly string iniPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Microsoft\Windows\Themes\slideshow.ini";
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public IntRegistrySetting Interval { get; }
@@ -109,7 +112,6 @@ namespace AdvancedWindowsAppearence
         /// </summary>
         void LoadSlideshow()
         {
-
             var iniText = GetIniText();
             if (string.IsNullOrWhiteSpace(iniText))
                 return;
@@ -124,6 +126,8 @@ namespace AdvancedWindowsAppearence
             for (int i = 0; i < imagesCount; i++)
             {
                 var path = paths[i + 2].Replace("Item"+ i +"Path=", "");
+                if (FolderImages is null) 
+                    return;
                 foreach (var img in FolderImages)
                     if (string.Equals(path, img.Path))
                         img.IsSelected = true;
@@ -137,10 +141,18 @@ namespace AdvancedWindowsAppearence
         public void ClearSelection()
             => FolderImages?.ToList().ForEach(x => x.IsSelected = false);
 
+        public static bool IsIniEmpty()
+        {
+            string initext = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Microsoft\Windows\Themes\slideshow.ini");
+            if (string.IsNullOrWhiteSpace(initext))
+                return true;
+            return false;
+        }
+
+
         string GetIniText()
         {
-            string iniPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Microsoft\Windows\Themes\slideshow.ini";
-            if (File.Exists(iniPath))
+            if (!IsIniEmpty())
                 return File.ReadAllText(iniPath);
             else 
                 return null;

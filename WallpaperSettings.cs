@@ -85,7 +85,7 @@ namespace AdvancedWindowsAppearence
             }
 
             //if it is a slideshow
-            if (Wallpaper.Path.Contains("\\TranscodedWallpaper"))
+            if (Wallpaper.Path.Contains("\\TranscodedWallpaper") && !SlideshowSettings.IsIniEmpty())
             {
                 WallpaperType = WallpaperTypes.Slideshow;
             }
