@@ -99,6 +99,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApplicationSettings.cs" />
     <Compile Include="ClassicWindowForm.cs">
       <SubType>Form</SubType>
     </Compile>
