@@ -33,6 +33,7 @@ namespace AdvancedWindowsAppearence
         public const int PreviewWidth = 200;
         GeneralViewModel Settings = new GeneralViewModel();
         ModernWindow ModernWindow = null;
+        bool allUILoadedAtStart = false;
 
         #region initialization
 
@@ -43,16 +44,21 @@ namespace AdvancedWindowsAppearence
             UpdateFontList();
             LoadThemeName();
 
-            //if it is in minimal UI, disable everything else
-            if (!Settings.ShowAllUI)
-                return;
-            
+            allUILoadedAtStart = Settings.ShowAllUI;
+        }
+
+        void LoadAdvancedUI()
+        {
             //add backup & restore page
             restoreTabFrame.Content = new RestorePage(Settings);
 
+            //add wallpaper, slideshow and color bg pages
             WallpaperFrame.Content = new WallpaperSelectionPage(Settings.WallpaperSettings);
             SlideshowFrame.Content = new SlideshowSettingsPage(Settings.WallpaperSettings);
             ColorFrame.Content = new ColorBackgroundSelectionPage(Settings.WallpaperSettings);
+
+            Settings.WallpaperSettings.UpdateWallpaperType();
+            UpdateWallpaperTypeComboBox();
         }
 
         private async void window_Loaded(object sender, RoutedEventArgs e)
@@ -83,14 +89,14 @@ namespace AdvancedWindowsAppearence
                 MessageBox.Show("Error checking for update: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
+            
             if (!Settings.ShowAllUI)
             {
                 MainTabControl.SelectedIndex = 2;
                 return;
             }
 
-            Settings.WallpaperSettings.UpdateWallpaperType();
-            UpdateWallpaperTypeComboBox();
+            await Task.Run(LoadAdvancedUI);
         }
 
         void UpdateWindowsLayout(Version WinVer)
@@ -527,11 +533,17 @@ namespace AdvancedWindowsAppearence
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             ApplicationSettings.SetUIType(((CheckBox)sender).IsChecked.Value);
+            if (!allUILoadedAtStart)
+            {
+                LoadAdvancedUI();
+                allUILoadedAtStart = true;
+            }
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             ApplicationSettings.SetUIType(((CheckBox)sender).IsChecked.Value);
+            MainTabControl.SelectedIndex = 1;
         }
     }
 }
