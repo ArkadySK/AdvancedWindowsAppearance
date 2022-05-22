@@ -143,7 +143,10 @@ namespace AdvancedWindowsAppearence
 
         public static bool IsIniEmpty()
         {
-            string initext = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Microsoft\Windows\Themes\slideshow.ini");
+            var iniPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Microsoft\Windows\Themes\slideshow.ini";
+            if (!File.Exists(iniPath))
+                return true;
+            string initext = File.ReadAllText(iniPath);
             if (string.IsNullOrWhiteSpace(initext))
                 return true;
             return false;
