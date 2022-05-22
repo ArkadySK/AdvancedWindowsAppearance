@@ -10,6 +10,8 @@
 - change titlebar colors - active and inactive
 - enable hidden Aero Lite style for your theme
 - backup and restore your settings
+- change desktop wallpaper even if you don't have permissions to it
+- setup custom slideshow
 - export to reg file
 - auto update
 - automatic switch to dark mode when enabled by system
@@ -23,11 +25,15 @@
 
 ## Images
 
-![obrázok](https://user-images.githubusercontent.com/74670743/154768557-e3b1c987-eb5d-4377-bb6f-a91dbcf58ab6.png)
+![obrázok](https://user-images.githubusercontent.com/74670743/169707098-c92d3f20-9339-4323-b718-44dd9a95b994.png)
 
-![AWA colors](https://user-images.githubusercontent.com/74670743/154767981-cbf717be-37fb-419b-8a73-80ef7de22c57.png)
+![obrázok](https://user-images.githubusercontent.com/74670743/169707293-87fd7e54-fadb-436d-976c-d53375164432.png)
 
-![obrázok](https://user-images.githubusercontent.com/74670743/158037633-b3dfe3fb-73db-471a-9d45-7b362ffb72c3.png)
+![obrázok](https://user-images.githubusercontent.com/74670743/169707565-de17c9ea-411c-4a94-b753-f8666d6aa30e.png)
+
+![obrázok](https://user-images.githubusercontent.com/74670743/169707201-f2b493de-a22f-4d6b-97e5-c05593e9ece0.png)
+
+![obrázok](https://user-images.githubusercontent.com/74670743/169707212-29d453a6-46b8-4d75-94f9-c2021c07b350.png)
 
 ![obrázok](https://user-images.githubusercontent.com/74670743/158037661-87cc94bd-df9c-4a64-b38c-c1422d8c02ee.png)
 
