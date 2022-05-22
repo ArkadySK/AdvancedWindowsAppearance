@@ -14,9 +14,8 @@
     </Page.Resources>
 
     <StackPanel Margin="5">
-        <Viewbox IsEnabled="False">
-            <Rectangle Width="160" Height="90" Fill="{Binding BackgroundColor.ItemColor, Converter={StaticResource brushToColor}}" HorizontalAlignment="Left"/>
-        </Viewbox>
-        <Button x:Name="ChangeBgColorButton" MinWidth="200" Style="{DynamicResource SystemButton}" HorizontalAlignment="Right" Click="ChangeBgColorButton_Click" >Change background color</Button>
+
+        <Rectangle Width="320" Height="180" Fill="{Binding BackgroundColor.ItemColor, Converter={StaticResource brushToColor}}" HorizontalAlignment="Left" />
+        <Button x:Name="ChangeBgColorButton" MinWidth="200" Style="{DynamicResource SystemButton}" HorizontalAlignment="Left" Click="ChangeBgColorButton_Click" >Change background color</Button>
     </StackPanel>
 </Page>
