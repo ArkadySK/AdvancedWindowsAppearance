@@ -159,8 +159,8 @@ namespace AdvancedWindowsAppearence
         #endregion
 
 
-
-        async Task KillDWM()
+        #region Processes
+        public static void KillDWM()
         {
             var processes = Process.GetProcesses();
             foreach (Process p in processes)
@@ -169,14 +169,39 @@ namespace AdvancedWindowsAppearence
                 {
                     try
                     {
-                        await Task.Run(p.Kill);
+                        p.Kill();
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        Console.WriteLine("not poss to kill dwm.exe, sry");
+                        Console.WriteLine("cannot kill dwm.exe, error: " + ex.Message);
                     }
                 }
             }
+        }
+
+        public static void RestartExplorer()
+        {
+            var processes = Process.GetProcesses();
+            foreach (Process p in processes)
+            {
+                if (p.ProcessName == "explorer")
+                {
+                    try
+                    {
+                        p.Kill();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("cannot kill explorer.exe, error: " + ex.Message);
+                    }
+                }
+            }
+
+            System.Threading.Thread.Sleep(1000);
+            if (Process.GetProcessesByName("explorer").Length == 0)
+                Process.Start("explorer.exe");
+
+
         }
 
         public void UpdateThemeStyle(string style)
@@ -198,6 +223,8 @@ namespace AdvancedWindowsAppearence
         {
             Process.Start("explorer", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Microsoft\\Windows\\Themes");
         }
+        #endregion 
+
 
         #region Save (Separate)
         private void ShowSavedToRegistryDialog()

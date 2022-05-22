@@ -46,5 +46,10 @@ namespace AdvancedWindowsAppearence.Previews
         {
             WallpaperSettings.Slideshow.ClearSelection();
         }
+
+        private void buttonRestartExplorer_Click(object sender, RoutedEventArgs e)
+        {
+            GeneralViewModel.RestartExplorer();
+        }
     }
 }
