@@ -394,11 +394,13 @@ namespace AdvancedWindowsAppearence
             {
                 opaqueRectangle.Width = bgGrid.ActualWidth;
                 MainTabControl.TabStripPlacement = Dock.Top;
+                SidepanelButtomTextStackPanel.Visibility = Visibility.Collapsed;
             }
             else
             {
                 opaqueRectangle.Width = bgGrid.ActualWidth - 320;
                 MainTabControl.TabStripPlacement = Dock.Left;
+                SidepanelButtomTextStackPanel.Visibility = Visibility.Visible;
             }
         }
         #endregion
