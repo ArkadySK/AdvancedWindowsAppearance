@@ -534,6 +534,8 @@ namespace AdvancedWindowsAppearence
 
         #endregion
 
+
+        #region UI type checkbox
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             ApplicationSettings.SetUIType(((CheckBox)sender).IsChecked.Value);
@@ -549,5 +551,19 @@ namespace AdvancedWindowsAppearence
             ApplicationSettings.SetUIType(((CheckBox)sender).IsChecked.Value);
             MainTabControl.SelectedIndex = 2;
         }
+        #endregion
+
+
+        #region Restart buttons
+        private void buttonRestartExplorer_Click(object sender, RoutedEventArgs e)
+        {
+            GeneralViewModel.RestartExplorer();
+        }
+
+        private void buttonRestartDwm_Click(object sender, RoutedEventArgs e)
+        {
+            GeneralViewModel.RestartDWM();
+        }
+        #endregion
     }
 }

@@ -399,6 +399,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
@@ -412,8 +413,13 @@
                         </ItemsControl>
                         <TextBlock Visibility="{Binding RegistrySettingsViewModel.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="1" Style="{StaticResource InfoText}" >Some of the changes made to these settings are applied after restart</TextBlock>
 
+                        <StackPanel Grid.Row="2" HorizontalAlignment="Left" Margin="0 10">
+                            <Button x:Name="buttonRestartExplorer" Width="200" Margin="0 2" Content="Restart explorer.exe" Style="{DynamicResource SystemButton}" HorizontalAlignment="Left" Click="buttonRestartExplorer_Click"/>
+                            <Button x:Name="buttonRestartDwm" Width="200" Margin="0 2" Content="Restart dwm.exe" Style="{DynamicResource SystemButton}" HorizontalAlignment="Left" Click="buttonRestartDwm_Click"/>
+                        </StackPanel>
+                        
                         <!--The Apply buttons-->
-                        <StackPanel Margin="-5 0 0 0" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="4">
+                        <StackPanel Margin="-5 0 0 0" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Left">
                             <Button Visibility="Collapsed" x:Name="SaveRegistrySettingsAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" />
                             <Button x:Name="SaveRegistrySettingsRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveRegistrySettingsRegistry_Click" />
                         </StackPanel>
