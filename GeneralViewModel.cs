@@ -160,7 +160,7 @@ namespace AdvancedWindowsAppearence
 
 
         #region Processes
-        public static void KillDWM()
+        public static void RestartDWM()
         {
             var processes = Process.GetProcesses();
             foreach (Process p in processes)

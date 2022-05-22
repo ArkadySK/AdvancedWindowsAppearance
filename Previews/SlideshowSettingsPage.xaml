@@ -64,7 +64,7 @@
         <!--Restart explorer button-->
         <StackPanel MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left">
             <TextBlock Text="Please consider restarting desktop (explorer.exe) process if changes you've made are not applied." Style="{StaticResource InfoText}" HorizontalAlignment="Left"/>
-            <Button x:Name="buttonRestartExplorer" Width="200" Content="Restart explorer.exe" Style="{DynamicResource SystemSmallButton}" MinWidth="100" HorizontalAlignment="Left" Click="buttonRestartExplorer_Click"/>
+            <Button x:Name="buttonRestartExplorer" Width="200" Content="Restart explorer.exe" Style="{DynamicResource SystemButton}" HorizontalAlignment="Left" Click="buttonRestartExplorer_Click"/>
         </StackPanel>
     </StackPanel>
 </Page>
