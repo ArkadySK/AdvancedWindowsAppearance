@@ -22,7 +22,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Label>Folder:</Label>
-            <Label Grid.Column="1" Content="{Binding Slideshow.Folder}"/>
+            <Label Grid.Column="1" Content="{Binding Slideshow.Folder}" Foreground="{DynamicResource ForegroundColor}"/>
             <Button x:Name="ChangeFolderButton" Grid.Column="2" Style="{DynamicResource SystemButton}" Content="Change" MinWidth="100" Click="ChangeFolderButton_Click" />
         </Grid>
         <ItemsControl x:Name="ImagesListView" ItemsSource="{Binding Slideshow.FolderImages}">
@@ -54,7 +54,7 @@
         </StackPanel>
 
         <!--Shuffle-->
-        <CheckBox Content="Shuffle" IsChecked="{Binding Slideshow.Shuffle.IsChecked}" Margin="5"/>
+        <CheckBox Content="Shuffle" IsChecked="{Binding Slideshow.Shuffle.IsChecked}" Foreground="{DynamicResource ForegroundColor}" Margin="5"/>
         <!--Change Interval-->
         <StackPanel Orientation="Horizontal">
             <Label Content="Time to change slide (in milliseconds): " Style="{DynamicResource SystemLabel}"/>
