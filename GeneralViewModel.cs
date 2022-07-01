@@ -31,7 +31,6 @@ namespace AdvancedWindowsAppearence
         public AeroColorsViewModel AeroColorsViewModel { get; set; } = new AeroColorsViewModel();
         public bool UseThemes = true; //when false: it means to not apply theme, only to change registry settings
         public bool IsWindows10 { get; private set; }
-        public bool UseNativeTitlebar { get; private set; } // use 
         public RegistrySettingsViewModel RegistrySettingsViewModel { get; set; } = new RegistrySettingsViewModel();
 
 
