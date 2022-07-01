@@ -14,17 +14,16 @@ namespace AdvancedWindowsAppearence
     {
         public static bool GetUIType()
         {
-            var key = Registry.CurrentUser.OpenSubKey("SOFTWARE", true);
-            key.CreateSubKey("AWA", RegistryKeyPermissionCheck.Default);        
-            key.Close();
-
-            var key2 = Registry.CurrentUser.OpenSubKey("SOFTWARE\\AWA", true);
-            var value = (int)key2.GetValue("UIType", 0);
-            key2.Close();
+            int value = (int)GetValue("UIType", 0);
             return value == 0? false : true; 
         }
 
         public static void SetUIType(bool value)
+        {
+            SetValue("UIType", value, RegistryValueKind.DWord);
+        }
+
+        private static void SetValue(string name, object value, RegistryValueKind registryValueKind)
         {
             var key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\AWA", true);
             if (key == null)
@@ -32,8 +31,23 @@ namespace AdvancedWindowsAppearence
                 key.Close();
                 return;
             }
-            key.SetValue("UIType", value, RegistryValueKind.DWord);
+            key.SetValue(name, value, registryValueKind);
             key.Close();
+        }
+        public static object GetValue(string name, object defaultValue) { 
+            var key = Registry.CurrentUser.OpenSubKey("SOFTWARE", true);
+            key.CreateSubKey("AWA", RegistryKeyPermissionCheck.Default);
+            key.Close();
+
+            var key2 = Registry.CurrentUser.OpenSubKey("SOFTWARE\\AWA", true);
+            object value = defaultValue;
+            try
+            {
+                value = (int)key2.GetValue(name, 0);
+            }
+            catch { }
+            key2.Close();
+            return value;
         }
     }
 }

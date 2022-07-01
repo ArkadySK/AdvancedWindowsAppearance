@@ -400,6 +400,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
@@ -417,9 +418,14 @@
                             <Button x:Name="buttonRestartExplorer" Width="200" Margin="0 2" Content="Restart explorer.exe" Style="{DynamicResource SystemButton}" HorizontalAlignment="Left" Click="buttonRestartExplorer_Click"/>
                             <Button x:Name="buttonRestartDwm" Width="200" Margin="0 2" Content="Restart dwm.exe" Style="{DynamicResource SystemButton}" HorizontalAlignment="Left" Click="buttonRestartDwm_Click"/>
                         </StackPanel>
+
+                        <StackPanel Grid.Row="3">
+                            <Label Style="{StaticResource SystemLabel}" Content="Program settings"/>
+                            <CheckBox Content="Use system titlebar (Win 10 and higher)" Margin="5" IsChecked="{Binding Checked}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="{DynamicResource ForegroundColor}"/>
+                        </StackPanel>
                         
                         <!--The Apply buttons-->
-                        <StackPanel Margin="-5 0 0 0" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <StackPanel Margin="-5 0 0 0" Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Left">
                             <Button Visibility="Collapsed" x:Name="SaveRegistrySettingsAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" />
                             <Button x:Name="SaveRegistrySettingsRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveRegistrySettingsRegistry_Click" />
                         </StackPanel>
