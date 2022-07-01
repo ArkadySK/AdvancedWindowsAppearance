@@ -22,6 +22,17 @@ namespace AdvancedWindowsAppearence
                 SetUIType(value);
             }
         }
+        public bool UseNativeTitlebar
+        {
+            get
+            {
+                return GetNativeTitlebar();
+            }
+            set
+            {
+                SetIsNativeTitlebar(value);
+            }
+        }
 
         public bool GetUIType()
         {
@@ -32,6 +43,17 @@ namespace AdvancedWindowsAppearence
         public void SetUIType(bool value)
         {
             SetValue("UIType", value, RegistryValueKind.DWord);
+        }
+
+        public void SetIsNativeTitlebar(bool value)
+        {
+            SetValue("IsNative", value, RegistryValueKind.DWord);
+        }
+
+        public bool GetNativeTitlebar()
+        {
+            int value = (int)GetValue("IsNative", 0);
+            return value == 0 ? false : true;
         }
 
         private static void SetValue(string name, object value, RegistryValueKind registryValueKind)
