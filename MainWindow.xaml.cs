@@ -118,8 +118,8 @@ namespace AdvancedWindowsAppearence
                     );
                 App.Current.Resources["ButtonFaceColor"] = buttonBrush;
             }
-
-            if (WinVer < new Version(10, 0)) //Windows 8.1 and less, keep standard UI
+            Settings.IsWindows10 = (bool)(WinVer >= new Version(10, 0));
+            if (!Settings.IsWindows10 || Settings.ApplicationSettings.UseNativeTitlebar) //Windows 8.1 and less, keep standard UI
                 return;
             
             //Windows 10/11 - create new modern window, close the old one

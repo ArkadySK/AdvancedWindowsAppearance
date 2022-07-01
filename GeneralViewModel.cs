@@ -30,7 +30,7 @@ namespace AdvancedWindowsAppearence
         public WallpaperSettings WallpaperSettings { get; private set; }
         public AeroColorsViewModel AeroColorsViewModel { get; set; } = new AeroColorsViewModel();
         public bool UseThemes = true; //when false: it means to not apply theme, only to change registry settings
-        public bool IsWindows10 { get; private set; }
+        public bool IsWindows10 { get; set; }
         public RegistrySettingsViewModel RegistrySettingsViewModel { get; set; } = new RegistrySettingsViewModel();
 
 

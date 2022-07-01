@@ -421,7 +421,7 @@
 
                         <StackPanel Grid.Row="3">
                             <Label Style="{StaticResource SystemLabel}" Content="Program settings"/>
-                            <CheckBox Content="Use system titlebar (Win 10 and higher)" Margin="5" IsChecked="{Binding Checked}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="{DynamicResource ForegroundColor}"/>
+                            <CheckBox Content="Use system titlebar (Win 10 and higher)" Margin="5" IsChecked="{Binding ApplicationSettings.UseNativeTitlebar}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="{DynamicResource ForegroundColor}"/>
                         </StackPanel>
                         
                         <!--The Apply buttons-->
