@@ -31,7 +31,7 @@ namespace AdvancedWindowsAppearence
     {
 
         public const int PreviewWidth = 200;
-        GeneralViewModel Settings = new GeneralViewModel();
+        GeneralViewModel Settings;
         ModernWindow ModernWindow = null;
         bool allUILoadedAtStart = false;
 
@@ -40,11 +40,18 @@ namespace AdvancedWindowsAppearence
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = Settings;
+            Task.Run(() =>
+            {
+                Settings = new GeneralViewModel();
+            }
+            );
+
             UpdateFontList();
             LoadThemeName();
 
             allUILoadedAtStart = Settings.ApplicationSettings.ShowAllUI;
+            this.DataContext = Settings;
+
         }
 
         void LoadAdvancedUI()

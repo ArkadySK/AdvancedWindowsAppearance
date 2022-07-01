@@ -20,18 +20,17 @@ namespace AdvancedWindowsAppearence
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public ApplicationSettings ApplicationSettings { get; set; } = new ApplicationSettings();
-
         private ThemeSettings ThemeSettings;
 
-        public AeroColorRegistrySetting ThemeColor { get; set; } = new AeroColorRegistrySetting("Theme Color", "ColorizationColor");
-        public ColorAppearanceSetting[] ColorSettings { get; set; }
-        public FontAppearanceSetting[] FontSettings { get; set; }
+        public ApplicationSettings ApplicationSettings { get; private set; }
+        public AeroColorRegistrySetting ThemeColor { get; private set; }
+        public ColorAppearanceSetting[] ColorSettings { get; private set; }
+        public FontAppearanceSetting[] FontSettings { get; private set; }
         public WallpaperSettings WallpaperSettings { get; private set; }
-        public AeroColorsViewModel AeroColorsViewModel { get; set; } = new AeroColorsViewModel();
-        public bool UseThemes = true; //when false: it means to not apply theme, only to change registry settings
+        public RegistrySettingsViewModel RegistrySettingsViewModel { get; private set; }
+        public AeroColorsViewModel AeroColorsViewModel { get; private set; }
+        public bool UseThemes { get; set; } = true; //when false: it means to not apply theme, only to change registry settings
         public bool IsWindows10 { get; set; }
-        public RegistrySettingsViewModel RegistrySettingsViewModel { get; set; } = new RegistrySettingsViewModel();
 
 
         public string ThemeName { get; set; }
@@ -53,13 +52,20 @@ namespace AdvancedWindowsAppearence
         #region Initialization
         public GeneralViewModel()
         {
-            InitAeroColors();
-            InitRegistrySettings();
-            InitDPIScale();
-            InitColors();
-            InitFonts();
-            InitWallpaper();
-            ThemeSettings = new ThemeSettings(this);
+            Task.Run(() =>
+            {
+               ApplicationSettings = new ApplicationSettings();
+               AeroColorsViewModel = new AeroColorsViewModel();
+               RegistrySettingsViewModel = new RegistrySettingsViewModel();
+               InitAeroColors();
+               InitRegistrySettings();
+               InitDPIScale();
+               InitColors();
+               InitFonts();
+               InitWallpaper();
+               ThemeSettings = new ThemeSettings(this);
+            }
+            );
         }
 
         void InitAeroColors()
