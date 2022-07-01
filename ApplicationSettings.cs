@@ -10,15 +10,26 @@ namespace AdvancedWindowsAppearence
     /// <summary>
     /// Class that manages AWA's settings, saves all data to registry key: Computer\HKEY_CURRENT_USER\SOFTWARE\AWA
     /// </summary>
-    public static class ApplicationSettings
+    public class ApplicationSettings
     {
-        public static bool GetUIType()
+        public bool ShowAllUI { 
+            get
+            {
+                return GetUIType();
+            }
+            set
+            {
+                SetUIType(value);
+            }
+        }
+
+        public bool GetUIType()
         {
             int value = (int)GetValue("UIType", 0);
             return value == 0? false : true; 
         }
 
-        public static void SetUIType(bool value)
+        public void SetUIType(bool value)
         {
             SetValue("UIType", value, RegistryValueKind.DWord);
         }

@@ -20,16 +20,7 @@ namespace AdvancedWindowsAppearence
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private bool _showAllUI = ApplicationSettings.GetUIType();
-        public bool ShowAllUI 
-        { 
-            get => _showAllUI;
-            set
-            {
-                _showAllUI = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public ApplicationSettings ApplicationSettings { get; set; } = new ApplicationSettings();
 
         private ThemeSettings ThemeSettings;
 
