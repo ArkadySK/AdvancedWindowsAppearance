@@ -43,7 +43,7 @@
         </Grid>
 
         <StackPanel x:Name="SidepanelButtomTextStackPanel" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="3" Panel.ZIndex="10" >
-            <CheckBox IsChecked="{Binding ShowAllUI}" Margin="2" Foreground="{DynamicResource ForegroundColor}" Background="{x:Null}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" >Show more settings</CheckBox>
+            <CheckBox IsChecked="{Binding ApplicationSettings.ShowAllUI}" Margin="2" Foreground="{DynamicResource ForegroundColor}" Background="{x:Null}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" >Show more settings</CheckBox>
             <TextBlock x:Name="versionNameTextBlock" Margin="2" FontSize="11" Style="{DynamicResource HypertextTextBlockStyle}" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
         </StackPanel>
 
@@ -52,7 +52,7 @@
 
 
             <!-- Theme Tab -->
-            <TabItem Style="{StaticResource DefaultTabStyle}" Visibility="{Binding ShowAllUI, Converter={StaticResource BooleanToVisibilityConverter}}" >
+            <TabItem Style="{StaticResource DefaultTabStyle}" Visibility="{Binding ApplicationSettings.ShowAllUI, Converter={StaticResource BooleanToVisibilityConverter}}" >
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE771;"/>
@@ -346,7 +346,7 @@
 
 
             <!--Wallpaper-->
-            <TabItem x:Name="wallpaperTab" Style="{StaticResource DefaultTabStyle}" Visibility="{Binding ShowAllUI, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <TabItem x:Name="wallpaperTab" Style="{StaticResource DefaultTabStyle}" Visibility="{Binding ApplicationSettings.ShowAllUI, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xEB9F;"/>
@@ -387,7 +387,7 @@
 
 
             <!--DWM and Registry Tab (win8 & win10)-->
-            <TabItem x:Name="pageModern" Style="{StaticResource DefaultTabStyle}" Visibility="{Binding ShowAllUI, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <TabItem x:Name="pageModern" Style="{StaticResource DefaultTabStyle}" Visibility="{Binding ApplicationSettings.ShowAllUI, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xE9F5;"/>
@@ -435,7 +435,7 @@
 
 
             <!--Restore-->
-            <TabItem x:Name="restoreTab" Style="{StaticResource DefaultTabStyle}" Visibility="{Binding ShowAllUI, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <TabItem x:Name="restoreTab" Style="{StaticResource DefaultTabStyle}" Visibility="{Binding ApplicationSettings.ShowAllUI, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource IconTextBlockStyle}" Text="&#xF61E;"/>

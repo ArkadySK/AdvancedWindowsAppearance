@@ -44,7 +44,7 @@ namespace AdvancedWindowsAppearence
             UpdateFontList();
             LoadThemeName();
 
-            allUILoadedAtStart = Settings.ShowAllUI;
+            allUILoadedAtStart = Settings.ApplicationSettings.ShowAllUI;
         }
 
         void LoadAdvancedUI()
@@ -93,7 +93,7 @@ namespace AdvancedWindowsAppearence
             }
 
             
-            if (!Settings.ShowAllUI)
+            if (!Settings.ApplicationSettings.ShowAllUI)
             {
                 MainTabControl.SelectedIndex = 2;
                 return;
@@ -540,7 +540,6 @@ namespace AdvancedWindowsAppearence
         #region UI type checkbox
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            ApplicationSettings.SetUIType(((CheckBox)sender).IsChecked.Value);
             if (!allUILoadedAtStart)
             {
                 LoadAdvancedUI();
@@ -550,7 +549,6 @@ namespace AdvancedWindowsAppearence
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            ApplicationSettings.SetUIType(((CheckBox)sender).IsChecked.Value);
             MainTabControl.SelectedIndex = 2;
         }
         #endregion
