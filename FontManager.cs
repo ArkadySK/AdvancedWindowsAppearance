@@ -53,6 +53,7 @@ namespace AdvancedWindowsAppearence
             List<Font> fonts = GetSystemFonts();
             foreach (var f in fonts)
             {
+                if (f is null) continue;
                 if (stringname.Contains(f.Name))
                 {
                     return f;
