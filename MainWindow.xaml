@@ -443,7 +443,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                    <Frame x:Name="restoreTabFrame" Content="RestorePage.xaml" Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left"/>
+                    <Frame x:Name="restoreTabFrame" NavigationUIVisibility="Hidden" Content="RestorePage.xaml" Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left"/>
                 </ScrollViewer>
             </TabItem>
         </TabControl>
