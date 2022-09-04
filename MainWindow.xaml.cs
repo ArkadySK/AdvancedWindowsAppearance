@@ -170,6 +170,7 @@ namespace AdvancedWindowsAppearence
             List<System.Drawing.Font> fonts = FontManager.GetSystemFonts();
             foreach (var f in fonts)
             {
+                if (f is null) continue;
                 comboBoxFont.Items.Add(f.Name);
             }
         }
