@@ -47,7 +47,7 @@ namespace AdvancedWindowsAppearence
         }
 
 
-        public string ThemeStyle = "";
+        public string ThemeStyle { get; private set; } = "";
 
         #region Initialization
         public GeneralViewModel()
