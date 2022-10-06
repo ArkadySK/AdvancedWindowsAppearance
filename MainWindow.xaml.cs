@@ -259,6 +259,11 @@ namespace AdvancedWindowsAppearence
             Settings.UpdateThemeStyle("Aero\\AeroLite");
         }
 
+        private void CustomStyleTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Settings.UpdateThemeStyle(((TextBox)sender).Text);
+        }
+
         private void CheckBoxOverwriteThemeStyle_Click(object sender, RoutedEventArgs e)
         {
             
@@ -569,5 +574,6 @@ namespace AdvancedWindowsAppearence
             GeneralViewModel.RestartDWM();
         }
         #endregion
+
     }
 }

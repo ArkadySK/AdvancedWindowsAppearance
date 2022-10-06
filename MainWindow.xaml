@@ -99,6 +99,9 @@
                                 <RadioButton Content="Aero (Windows default)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Padding="2" VerticalContentAlignment="Center" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="ToggleButtonAero_Click"/>
                                 <RadioButton Content="Aero Lite (has window border, better support for classic colors)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Padding="2" VerticalContentAlignment="Center" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="ToggleButtonAeroLite_Click"/>
                                 <RadioButton Content="High Contrast (more color options)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Click="ToggleButtonHighContrast_Click" Visibility="Collapsed"/>
+                                <RadioButton x:Name="customStyle" Foreground="{DynamicResource ForegroundColor}" Margin="2" VerticalContentAlignment="Center">
+                                    <TextBox IsEnabled="{Binding IsChecked, ElementName=customStyle}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2" VerticalContentAlignment="Center" MinHeight="35" Width="150" TextChanged="CustomStyleTextBox_TextChanged"/>
+                                </RadioButton>
                             </StackPanel>
                             <Button x:Name="buttonOpenControlPanel" Content="Open themes control panel" Padding="10 0" Style="{StaticResource SystemButton}" HorizontalAlignment="Left" Margin="5" Click="buttonOpenControlPanel_Click"/>
                             <TextBlock Margin="5" Style="{StaticResource HypertextTextBlockStyle}" Text="Open folder with saved themes" PreviewMouseDown="TextBlockOpenThemesFolder_PreviewMouseDown"/>
