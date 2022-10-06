@@ -40,11 +40,7 @@ namespace AdvancedWindowsAppearence
         public MainWindow()
         {
             InitializeComponent();
-            Task.Run(() =>
-            {
-                Settings = new GeneralViewModel();
-            }
-            );
+            Settings = new GeneralViewModel();
 
             UpdateFontList();
             LoadThemeName();
