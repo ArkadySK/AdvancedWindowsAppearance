@@ -1,5 +1,8 @@
 # Advanced Windows Appearance
 
+![image](https://user-images.githubusercontent.com/74670743/195193960-e609a91d-1419-44f5-98a2-aefa035370f3.png)
+
+
 ## A tool to configure the user interface of Windows
 
 ### Features:
