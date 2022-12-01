@@ -244,24 +244,30 @@ namespace AdvancedWindowsAppearence
 
 
         #region Theme Style
+
+        private void buttonMsstylesFileDialog_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void ToggleButtonAero_Click(object sender, RoutedEventArgs e)
         {
-            Settings.UpdateThemeStyle("Aero\\Aero");
+            Settings.UpdateThemeStyle("Aero\\Aero", false);
         }
 
         private void ToggleButtonAeroLite_Click(object sender, RoutedEventArgs e)
         {
-            Settings.UpdateThemeStyle("Aero\\AeroLite");
+            Settings.UpdateThemeStyle("Aero\\AeroLite", false);
         }
 
         private void ToggleButtonHighContrast_Click(object sender, RoutedEventArgs e)
         {
-            Settings.UpdateThemeStyle("Aero\\AeroLite");
+            Settings.UpdateThemeStyle("Aero\\AeroLite", false);
         }
 
         private void CustomStyleTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Settings.UpdateThemeStyle(((TextBox)sender).Text);
+            Settings.UpdateThemeStyle(((TextBox)sender).Text, true);
         }
 
         private void CheckBoxOverwriteThemeStyle_Click(object sender, RoutedEventArgs e)
@@ -270,7 +276,7 @@ namespace AdvancedWindowsAppearence
             stackPanelAeroSettingsButtons.IsEnabled = checkBoxOverwriteThemeStyle.IsChecked.Value;
             if (checkBoxOverwriteThemeStyle.IsChecked.Value == false)
             {
-                Settings.UpdateThemeStyle("");
+                Settings.UpdateThemeStyle("", true);
                 foreach(RadioButton rb in stackPanelAeroSettingsButtons.Children)
                 {
                     rb.IsChecked = false;
@@ -283,7 +289,7 @@ namespace AdvancedWindowsAppearence
             if (!checkBoxOverwriteThemeStyle.IsChecked.Value)
             {
                 checkBoxOverwriteThemeStyle.IsChecked = false;
-                Settings.UpdateThemeStyle("");
+                Settings.UpdateThemeStyle("", true);
             }
             else if (checkBoxOverwriteThemeStyle.IsChecked.Value)
                 checkBoxOverwriteThemeStyle.IsChecked = true;

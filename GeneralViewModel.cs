@@ -203,8 +203,13 @@ namespace AdvancedWindowsAppearence
 
         }
 
-        public void UpdateThemeStyle(string style)
+        public void UpdateThemeStyle(string style, bool isFullPath)
         {
+            if(isFullPath)
+            {
+                ThemeStyle = style;
+                return;
+            }
             if (string.IsNullOrWhiteSpace(style))
             {
                 ThemeStyle = "";

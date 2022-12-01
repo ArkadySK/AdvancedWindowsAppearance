@@ -103,7 +103,7 @@
                                     <StackPanel Orientation="Horizontal">
                                         <Label Style="{DynamicResource SystemLabel}" Padding="0" Content="Custom: "/>
                                         <TextBox IsEnabled="{Binding IsChecked, ElementName=customStyle}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2" VerticalContentAlignment="Center" MinHeight="35" Width="200" TextChanged="CustomStyleTextBox_TextChanged"/>
-                                        <Button x:Name="buttonMsstylesFileDialog" Content="File..." Style="{DynamicResource SystemButton}"/>
+                                        <Button x:Name="buttonMsstylesFileDialog" Content="File..." Style="{DynamicResource SystemButton}" Click="buttonMsstylesFileDialog_Click"/>
                                     </StackPanel>
                                 </RadioButton>
                             </StackPanel>
