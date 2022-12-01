@@ -33,6 +33,7 @@ namespace AdvancedWindowsAppearence
         {
             if (!_loaded)
             {
+                _loaded = true;
                 foreach (FontFamily fontfamily in FontFamily.Families)
                 {
                     try
@@ -43,7 +44,6 @@ namespace AdvancedWindowsAppearence
                     catch { }
 
                 }
-                _loaded = true;
             }
             return _fonts;
         }
