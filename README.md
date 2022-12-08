@@ -15,10 +15,9 @@
 - backup and restore your settings
 - change desktop wallpaper even if you don't have permissions to it
 - setup custom slideshow
-- export to reg file
+- export to .reg file
 - auto update
 - automatic switch to dark mode when enabled by system
-- modern titlebar with transparency on Windows 10/11, native on the older version(s) of Windows
 - and much more!
 
 
@@ -33,6 +32,8 @@
 ![obrázok](https://user-images.githubusercontent.com/74670743/169707293-87fd7e54-fadb-436d-976c-d53375164432.png)
 
 ![obrázok](https://user-images.githubusercontent.com/74670743/169707565-de17c9ea-411c-4a94-b753-f8666d6aa30e.png)
+
+![image](https://user-images.githubusercontent.com/74670743/206575227-a596525e-9441-4453-b573-41a16418380a.png)
 
 ![obrázok](https://user-images.githubusercontent.com/74670743/169707201-f2b493de-a22f-4d6b-97e5-c05593e9ece0.png)
 
