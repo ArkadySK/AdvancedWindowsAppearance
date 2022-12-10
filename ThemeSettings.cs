@@ -16,6 +16,9 @@ namespace AdvancedWindowsAppearence
 
         private string _themeStyle = "";
         private readonly string _initialThemeStyle;
+
+
+        private readonly string _resourcesThemesFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "resources", "Themes") + "\\";
         public string ThemeStyle { get => _themeStyle; 
             set {
                 if (File.Exists(value))
@@ -23,10 +26,10 @@ namespace AdvancedWindowsAppearence
                     _themeStyle = value;
                     return;
                 }
-                string fullPath = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\resources\\Themes\\" + value + ".msstyles";
+                string fullPath = _resourcesThemesFolder + value + ".msstyles";
                 if (File.Exists(fullPath))
                 {
-                    _themeStyle = @"%SystemRoot%\resources\Themes\" + value + ".msstyles";
+                    _themeStyle = fullPath;
                     return;
                 }
                 _themeStyle = "";
@@ -59,16 +62,16 @@ namespace AdvancedWindowsAppearence
                         continue;
                     string themeStyle = line.Replace("Path=", "");
                     if (themeStyle.Contains("%ResourceDir%\\Themes\\"))
-                        return themeStyle.Replace("%ResourceDir%\\Themes\\", "C:\\Windows\\resources\\Themes\\");
+                        return themeStyle.Replace("%ResourceDir%\\Themes\\", _resourcesThemesFolder);
                     if (themeStyle.Contains("%SystemRoot%\\resources\\Themes\\")) 
-                        return themeStyle.Replace("%SystemRoot%\\resources\\Themes\\", "C:\\Windows\\resources\\Themes\\");
+                        return themeStyle.Replace("%SystemRoot%\\resources\\Themes\\", _resourcesThemesFolder);
 
                 }
 
             }
             catch
             {
-                return "Aero\\Aero";
+                return _resourcesThemesFolder + "Aero\\Aero";
             }
             return "";
         }
@@ -94,7 +97,7 @@ namespace AdvancedWindowsAppearence
         {
             if (!File.Exists(themename))
             {
-                themename = @"C:\Windows\Resources\Themes\aero.theme";
+                themename = _resourcesThemesFolder + "aero.theme";
             }
             StreamReader streamReader = new StreamReader(themename);
             string ThemeSettingsIni = streamReader.ReadToEnd();
@@ -202,8 +205,8 @@ namespace AdvancedWindowsAppearence
 
             if (string.IsNullOrWhiteSpace(ThemeStyle))
                 return;
-            if (ThemeStyle.Contains("C:\\Windows\\Resources\\Themes\\"))
-                ThemeStyle = ThemeStyle.Replace("C:\\Windows\\Resources\\Themes\\", "%ResourceDir%\\Themes\\");
+            if (ThemeStyle.Contains(_resourcesThemesFolder))
+                ThemeStyle = ThemeStyle.Replace(_resourcesThemesFolder, "%ResourceDir%\\Themes\\");
 
             var visualStylesText = "Path=" + ThemeStyle;
             newThemeSettingsIni.Insert(visualStylesIdIndex + 1, visualStylesText);
