@@ -93,6 +93,7 @@
                                 </ComboBox>
                             </StackPanel>
 
+                            <!-- Styles checkbox -->
                             <CheckBox Margin="0 10 5 1" x:Name="checkBoxOverwriteThemeStyle" Grid.Row="1" Content="Overwrite theme style" Foreground="{DynamicResource ForegroundColor}" 
                               FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="CheckBoxOverwriteThemeStyle_Click" Checked="checkBoxOverwriteThemeStyle_Checked"/>
                             <StackPanel x:Name="stackPanelAeroSettingsButtons"  Margin="2" HorizontalAlignment="Center" IsEnabled="false" >
@@ -106,6 +107,12 @@
                                         <Button x:Name="buttonMsstylesFileDialog" Content="File..." Style="{DynamicResource SystemButton}" Click="buttonMsstylesFileDialog_Click"/>
                                     </StackPanel>
                                 </RadioButton>
+                            </StackPanel>
+                            
+                            <!-- Styles information -->
+                            <StackPanel Visibility="{Binding ThemeSettings.IsUsingCustomStyle, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay, FallbackValue=Collapsed}">
+                                <TextBlock Style="{StaticResource InfoText}">Usage of custom (Non-Microsoft) .msstyles can break the UI of the system!</TextBlock>
+                                <TextBlock Style="{StaticResource InfoText}">The program cannot apply custom themes unless you have your system patched.</TextBlock>
                             </StackPanel>
                             <Button x:Name="buttonOpenControlPanel" Content="Open themes control panel" Padding="10 0" Style="{StaticResource SystemButton}" HorizontalAlignment="Left" Margin="5" Click="buttonOpenControlPanel_Click"/>
                             <TextBlock Margin="5" Style="{StaticResource HypertextTextBlockStyle}" Text="Open folder with saved themes" PreviewMouseDown="TextBlockOpenThemesFolder_PreviewMouseDown"/>

@@ -30,7 +30,9 @@ namespace AdvancedWindowsAppearence
 
 
         private readonly string _resourcesThemesFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "resources", "Themes") + "\\";
-        public string ThemeStyle { get => _themeStyle; 
+        public string ThemeStyle 
+        { 
+            get => _themeStyle; 
             set {
                 if (File.Exists(value))
                     _themeStyle = value;
@@ -41,7 +43,14 @@ namespace AdvancedWindowsAppearence
                 else
                     _themeStyle = "";
                 NotifyPropertyChanged();
+                NotifyPropertyChanged("IsUsingCustomStyle");
             }
+        }
+
+        public bool IsUsingCustomStyle 
+        { 
+            get
+            => (ThemeStyle != _resourcesThemesFolder + "Aero\\Aero.msstyles" && ThemeStyle != _resourcesThemesFolder + "Aero\\AeroLite.msstyles");
         }
 
         public GeneralViewModel Settings { get; set; }
