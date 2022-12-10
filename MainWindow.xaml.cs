@@ -150,9 +150,9 @@ namespace AdvancedWindowsAppearence
             themeName = themeName.Replace(".theme", "");
 
             if (!themeName.Contains(" (Edited)"))
-                Settings.ThemeName = themeName + " (Edited)";
+                Settings.ThemeSettings.ThemeName = themeName + " (Edited)";
             else
-                Settings.ThemeName = themeName;
+                Settings.ThemeSettings.ThemeName = themeName;
 
         }
         #endregion
@@ -252,23 +252,19 @@ namespace AdvancedWindowsAppearence
 
         private void ToggleButtonAero_Click(object sender, RoutedEventArgs e)
         {
-            Settings.UpdateThemeStyle("Aero\\Aero", false);
+            Settings.ThemeSettings.ThemeStyle = "Aero\\Aero";
         }
 
         private void ToggleButtonAeroLite_Click(object sender, RoutedEventArgs e)
         {
-            Settings.UpdateThemeStyle("Aero\\AeroLite", false);
+            Settings.ThemeSettings.ThemeStyle = "Aero\\AeroLite";
         }
 
         private void ToggleButtonHighContrast_Click(object sender, RoutedEventArgs e)
         {
-            Settings.UpdateThemeStyle("Aero\\AeroLite", false);
+            Settings.ThemeSettings.ThemeStyle = "Aero\\AeroLite";
         }
 
-        private void CustomStyleTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Settings.UpdateThemeStyle(((TextBox)sender).Text, true);
-        }
 
         private void CheckBoxOverwriteThemeStyle_Click(object sender, RoutedEventArgs e)
         {
@@ -276,7 +272,7 @@ namespace AdvancedWindowsAppearence
             stackPanelAeroSettingsButtons.IsEnabled = checkBoxOverwriteThemeStyle.IsChecked.Value;
             if (checkBoxOverwriteThemeStyle.IsChecked.Value == false)
             {
-                Settings.UpdateThemeStyle("", true);
+                Settings.ThemeSettings.RestoreThemeStyle();
                 foreach(RadioButton rb in stackPanelAeroSettingsButtons.Children)
                 {
                     rb.IsChecked = false;
@@ -289,7 +285,7 @@ namespace AdvancedWindowsAppearence
             if (!checkBoxOverwriteThemeStyle.IsChecked.Value)
             {
                 checkBoxOverwriteThemeStyle.IsChecked = false;
-                Settings.UpdateThemeStyle("", true);
+                Settings.ThemeSettings.RestoreThemeStyle();
             }
             else if (checkBoxOverwriteThemeStyle.IsChecked.Value)
                 checkBoxOverwriteThemeStyle.IsChecked = true;

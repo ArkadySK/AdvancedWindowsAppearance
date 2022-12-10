@@ -76,7 +76,7 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Padding="2" Style="{StaticResource SystemLabel}">Theme Name</Label>
-                                <TextBox FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2" VerticalContentAlignment="Center" MinHeight="35" x:Name="textBoxThemeName" Grid.Column="1" Text="{Binding ThemeName}"/>
+                                <TextBox FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2" VerticalContentAlignment="Center" MinHeight="35" x:Name="textBoxThemeName" Grid.Column="1" Text="{Binding ThemeSettings.ThemeName}"/>
                             </Grid>
 
                             <!--Dark / Light modes selection-->
@@ -102,7 +102,7 @@
                                 <RadioButton x:Name="customStyle" Foreground="{DynamicResource ForegroundColor}" Margin="2" VerticalContentAlignment="Center">
                                     <StackPanel Orientation="Horizontal">
                                         <Label Style="{DynamicResource SystemLabel}" Padding="0" Content="Custom: "/>
-                                        <TextBox IsEnabled="{Binding IsChecked, ElementName=customStyle}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2" VerticalContentAlignment="Center" MinHeight="35" Width="200" TextChanged="CustomStyleTextBox_TextChanged"/>
+                                        <TextBox IsEnabled="{Binding IsChecked, ElementName=customStyle}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2" VerticalContentAlignment="Center" MinHeight="35" Width="200" Text="{Binding ThemeSettings.ThemeStyle, UpdateSourceTrigger=LostFocus}"/>
                                         <Button x:Name="buttonMsstylesFileDialog" Content="File..." Style="{DynamicResource SystemButton}" Click="buttonMsstylesFileDialog_Click"/>
                                     </StackPanel>
                                 </RadioButton>
