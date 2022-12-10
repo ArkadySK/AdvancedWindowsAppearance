@@ -15,6 +15,7 @@ namespace AdvancedWindowsAppearence
         public string ThemeName { get; set; }
 
         private string _themeStyle = "";
+        private readonly string _initialThemeStyle;
         public string ThemeStyle { get => _themeStyle; 
             set {
                 if (File.Exists(value))
@@ -41,7 +42,8 @@ namespace AdvancedWindowsAppearence
         /// <param name="settings"></param>
         public ThemeSettings(GeneralViewModel settings)
         {
-            _themeStyle = GetThemeStyle(ThemeName);
+            _initialThemeStyle = GetThemeStyle(ThemeName);
+            _themeStyle = _initialThemeStyle;
             Settings = settings;
         }
 
@@ -71,6 +73,9 @@ namespace AdvancedWindowsAppearence
             return "";
         }
 
+        public void RestoreThemeStyle() 
+            => _themeStyle = _initialThemeStyle;
+
         public static string GetThemePath()
         {
 
@@ -98,10 +103,10 @@ namespace AdvancedWindowsAppearence
         }
 
         #region Save
-        string colorsId = @"[Control Panel\Colors]";
-        string visualStylesId = @"[VisualStyles]";
-        string desktopId = @"[Control Panel\Desktop]";
-        string themeId = @"[Theme]";
+        readonly string colorsId = @"[Control Panel\Colors]";
+        readonly string visualStylesId = @"[VisualStyles]";
+        readonly string desktopId = @"[Control Panel\Desktop]";
+        readonly string themeId = @"[Theme]";
 
         public async Task SaveTitleColors()
         {
