@@ -21,6 +21,7 @@ using AdvancedWindowsAppearence.Converters;
 using System.Drawing;
 using System.Windows.Threading;
 using AdvancedWindowsAppearence.Previews;
+using Microsoft.Win32;
 
 namespace AdvancedWindowsAppearence
 {
@@ -245,11 +246,6 @@ namespace AdvancedWindowsAppearence
 
         #region Theme Style
 
-        private void buttonMsstylesFileDialog_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void ToggleButtonAero_Click(object sender, RoutedEventArgs e)
         {
             Settings.ThemeSettings.ThemeStyle = "Aero\\Aero";
@@ -265,6 +261,18 @@ namespace AdvancedWindowsAppearence
             Settings.ThemeSettings.ThemeStyle = "Aero\\AeroLite";
         }
 
+        private void buttonMsstylesFileDialog_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "MSSTYLES Files|*.msstyles;";
+            openFileDialog.Title = "Choose a .msstyle file";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Resources);
+
+            bool? result = openFileDialog.ShowDialog();
+            if (result.HasValue && result.Value == true){
+                Settings.ThemeSettings.ThemeStyle = openFileDialog.FileName;
+            }
+        }
 
         private void CheckBoxOverwriteThemeStyle_Click(object sender, RoutedEventArgs e)
         {
@@ -306,7 +314,6 @@ namespace AdvancedWindowsAppearence
 
 
         #region Aero Tab
-
 
         private void ButtonColorSync_Click(object sender, RoutedEventArgs e)
         {
