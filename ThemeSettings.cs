@@ -175,7 +175,7 @@ namespace AdvancedWindowsAppearence
             await Task.Run(() => newThemeSettingsIni.Insert(visualStylesIdIndex + 1, themeSb.ToString()));
 
             await SaveTheme(newThemeSettingsIni);
-            await LoadTheme();
+            await LoadCurrentTheme();
 
         }
 
@@ -230,7 +230,7 @@ namespace AdvancedWindowsAppearence
             newThemeSettingsIni.Insert(visualStylesIdIndex + 1, visualStylesText);
 
             await SaveTheme(newThemeSettingsIni);
-            await LoadTheme();
+            await LoadCurrentTheme();
         }
 
         public async Task SaveColorsAndMetrics()
@@ -269,7 +269,7 @@ namespace AdvancedWindowsAppearence
             }
 
             await SaveTheme(newThemeSettingsIni);
-            await LoadTheme();
+            await LoadCurrentTheme();
         }
 
         public async Task SaveFonts()
@@ -308,7 +308,7 @@ namespace AdvancedWindowsAppearence
             }
 
             await SaveTheme(newThemeSettingsIni);
-            await LoadTheme();
+            await LoadCurrentTheme();
         }
 
         public async Task SaveWallpaper()
@@ -354,7 +354,7 @@ namespace AdvancedWindowsAppearence
                     "WallpaperStyle=" + (int)Settings.WallpaperSettings.Wallpaper.WallpaperStyleSettings.SelectedWallpaperStyle);
 
             await SaveTheme(newThemeSettingsIni);
-            await LoadTheme();
+            await LoadCurrentTheme();
         }
         #endregion
 
@@ -371,7 +371,7 @@ namespace AdvancedWindowsAppearence
             streamWriter.Close();
         }
 
-        private async Task LoadTheme()
+        private async Task LoadCurrentTheme()
         {
             string themePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Microsoft\Windows\Themes\" + ThemeName + ".theme";
             await LoadTheme(themePath);
