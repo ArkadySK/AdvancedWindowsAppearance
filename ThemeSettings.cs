@@ -7,11 +7,21 @@ using System.IO;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace AdvancedWindowsAppearence
 {
-    public class ThemeSettings
+    public class ThemeSettings : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        internal void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
         private readonly string _initialThemePath;
         public string ThemeName { get; set; }
 
@@ -23,22 +33,14 @@ namespace AdvancedWindowsAppearence
         public string ThemeStyle { get => _themeStyle; 
             set {
                 if (File.Exists(value))
-                {
                     _themeStyle = value;
-                    return;
-                }
-                if (File.Exists(_resourcesThemesFolder + value))
-                {
+                else if (File.Exists(_resourcesThemesFolder + value))
                     _themeStyle = _resourcesThemesFolder + value;
-                    return;
-                }
-                string fullPath = _resourcesThemesFolder + value + ".msstyles";
-                if (File.Exists(fullPath))
-                {
-                    _themeStyle = fullPath;
-                    return;
-                }
-                _themeStyle = "";
+                else if (File.Exists(_resourcesThemesFolder + value + ".msstyles"))
+                    _themeStyle = _resourcesThemesFolder + value + ".msstyles";
+                else
+                    _themeStyle = "";
+                NotifyPropertyChanged();
             }
         }
 
