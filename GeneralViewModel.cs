@@ -20,8 +20,7 @@ namespace AdvancedWindowsAppearence
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private ThemeSettings ThemeSettings;
-
+        public ThemeSettings ThemeSettings { get; set; }
         public ApplicationSettings ApplicationSettings { get; private set; }
         public AeroColorRegistrySetting ThemeColor { get; private set; } = new AeroColorRegistrySetting("Theme Color", "ColorizationColor");
         public ColorAppearanceSetting[] ColorSettings { get; private set; }
@@ -31,9 +30,6 @@ namespace AdvancedWindowsAppearence
         public AeroColorsViewModel AeroColorsViewModel { get; private set; }
         public bool UseThemes { get; set; } = true; //when false: it means to not apply theme, only to change registry settings
         public bool IsWindows10 { get; set; }
-
-
-        public string ThemeName { get; set; }
 
         bool _isSavingInProgress = false;
         public bool IsSavingInProgress
@@ -46,15 +42,13 @@ namespace AdvancedWindowsAppearence
             }
         }
 
-
-        public string ThemeStyle { get; private set; } = "";
-
         #region Initialization
         public GeneralViewModel()
         {
             Task.Run(() =>
             {
                ApplicationSettings = new ApplicationSettings();
+               ThemeSettings = new ThemeSettings(this);
                AeroColorsViewModel = new AeroColorsViewModel();
                RegistrySettingsViewModel = new RegistrySettingsViewModel();
                InitAeroColors();
@@ -63,7 +57,6 @@ namespace AdvancedWindowsAppearence
                InitColors();
                InitFonts();
                InitWallpaper();
-               ThemeSettings = new ThemeSettings(this);
             }
             );
         }
@@ -201,21 +194,6 @@ namespace AdvancedWindowsAppearence
                 Process.Start("explorer.exe");
 
 
-        }
-
-        public void UpdateThemeStyle(string style, bool isFullPath)
-        {
-            if(isFullPath)
-            {
-                ThemeStyle = style;
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(style))
-            {
-                ThemeStyle = "";
-                return;
-            }
-            ThemeStyle = @"%SystemRoot%\resources\Themes\" + style + ".msstyles";
         }
 
         public void ShowThemesControlPanel()

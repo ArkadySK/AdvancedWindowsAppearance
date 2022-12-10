@@ -10,13 +10,70 @@ using System.Threading.Tasks;
 
 namespace AdvancedWindowsAppearence
 {
-    class ThemeSettings
+    public class ThemeSettings
     {
+        public string ThemeName { get; set; }
+
+        private string _themeStyle = "";
+        public string ThemeStyle { get => _themeStyle; 
+            set {
+                if (File.Exists(value))
+                {
+                    _themeStyle = value;
+                    return;
+                }
+                string fullPath = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\resources\\Themes\\" + value + ".msstyles";
+                if (File.Exists(fullPath))
+                {
+                    _themeStyle = @"%SystemRoot%\resources\Themes\" + value + ".msstyles";
+                    return;
+                }
+                _themeStyle = "";
+            }
+        }
+
         public GeneralViewModel Settings { get; set; }
+
+
+        /// <summary>
+        /// intialize the ThemeSettings with the viewmodel 
+        /// </summary>
+        /// <param name="settings"></param>
+        public ThemeSettings(GeneralViewModel settings)
+        {
+            _themeStyle = GetThemeStyle(ThemeName);
+            Settings = settings;
+        }
+
+        private string GetThemeStyle(string themeName)
+        {
+            try
+            {
+                string[] fileLines = GetThemeFile(themeName);
+
+                foreach (var line in fileLines) 
+                {
+                    if (!line.Contains("Path="))
+                        continue;
+                    string themeStyle = line.Replace("Path=", "");
+                    if (themeStyle.Contains("%ResourceDir%\\Themes\\"))
+                        return themeStyle.Replace("%ResourceDir%\\Themes\\", "C:\\Windows\\resources\\Themes\\");
+                    if (themeStyle.Contains("%SystemRoot%\\resources\\Themes\\")) 
+                        return themeStyle.Replace("%SystemRoot%\\resources\\Themes\\", "C:\\Windows\\resources\\Themes\\");
+
+                }
+
+            }
+            catch
+            {
+                return "Aero\\Aero";
+            }
+            return "";
+        }
 
         public static string GetThemePath()
         {
-            
+
             string RegistryPath = @"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes";
             string themepath = (string)Registry.GetValue(RegistryPath, "CurrentTheme", string.Empty);
 
@@ -37,20 +94,10 @@ namespace AdvancedWindowsAppearence
             StreamReader streamReader = new StreamReader(themename);
             string ThemeSettingsIni = streamReader.ReadToEnd();
             streamReader.Close();
-            return ThemeSettingsIni.Split(Environment.NewLine.ToCharArray());        
-        }
-
-        /// <summary>
-        /// intialize the ThemeSettings with the viewmodel 
-        /// </summary>
-        /// <param name="settings"></param>
-        public ThemeSettings(GeneralViewModel settings)
-        {
-            Settings = settings;
+            return ThemeSettingsIni.Split(Environment.NewLine.ToCharArray());
         }
 
         #region Save
-
         string colorsId = @"[Control Panel\Colors]";
         string visualStylesId = @"[VisualStyles]";
         string desktopId = @"[Control Panel\Desktop]";
@@ -65,7 +112,7 @@ namespace AdvancedWindowsAppearence
 
             string[] headersToRemove = new string[]{
                 "ColorizationColor=", "AutoColorization=", "ColorStyle", "Size="};
-            
+
             //remove lines that will be replaced
             var removeLinesTasks = new List<Task>();
             foreach (string line in themeSettingsIni)
@@ -76,7 +123,7 @@ namespace AdvancedWindowsAppearence
                 //avoid mess in the theme
                 foreach (string header in headersToRemove)
                     if (line.Contains(header))
-                        removeLinesTasks.Add(Task.Run(()=>newThemeSettingsIni.Remove(line)));
+                        removeLinesTasks.Add(Task.Run(() => newThemeSettingsIni.Remove(line)));
             }
             await Task.WhenAll(removeLinesTasks);
 
@@ -100,7 +147,7 @@ namespace AdvancedWindowsAppearence
                 themeSb.AppendLine("ColorizationColor=" + colorstring);
             }
             await Task.Run(() => newThemeSettingsIni.Insert(visualStylesIdIndex + 1, themeSb.ToString()));
-            
+
             await SaveTheme(newThemeSettingsIni);
             await LoadTheme();
 
@@ -108,11 +155,11 @@ namespace AdvancedWindowsAppearence
 
         public async Task SaveTheme()
         {
-            string themePath = GetThemePath();;
+            string themePath = GetThemePath(); ;
             string[] themeSettingsIni = GetThemeFile(themePath);
             List<string> newThemeSettingsIni = themeSettingsIni.ToList();
             string[] headersToRemove = new string[]{
-                "Path=", 
+                "Path=",
                 "DisplayName=", "ThemeId=",
                 "SystemMode=", "AppMode="
             };
@@ -138,7 +185,7 @@ namespace AdvancedWindowsAppearence
                 newThemeSettingsIni.Add(themeId);
                 themeIdIndex = newThemeSettingsIni.Count - 1;
             }
-            await Task.Run(() => newThemeSettingsIni.Insert(themeIdIndex + 1, "DisplayName=" + Settings.ThemeName));
+            await Task.Run(() => newThemeSettingsIni.Insert(themeIdIndex + 1, "DisplayName=" + ThemeName));
 
             //Set visual style
             int visualStylesIdIndex = newThemeSettingsIni.IndexOf(visualStylesId);
@@ -148,9 +195,12 @@ namespace AdvancedWindowsAppearence
                 visualStylesIdIndex = newThemeSettingsIni.Count - 1;
             }
 
-            if (string.IsNullOrWhiteSpace(Settings.ThemeStyle))
+            if (string.IsNullOrWhiteSpace(ThemeStyle))
                 return;
-            var visualStylesText = "Path=" + Settings.ThemeStyle;
+            if (ThemeStyle.Contains("C:\\Windows\\Resources\\Themes\\"))
+                ThemeStyle = ThemeStyle.Replace("C:\\Windows\\Resources\\Themes\\", "%ResourceDir%\\Themes\\");
+
+            var visualStylesText = "Path=" + ThemeStyle;
             newThemeSettingsIni.Insert(visualStylesIdIndex + 1, visualStylesText);
 
             await SaveTheme(newThemeSettingsIni);
@@ -177,7 +227,7 @@ namespace AdvancedWindowsAppearence
                     if (!color.IsEdited)
                         continue;
                     if (line.Contains(color.Name))
-                        removeLinesTasks.Add(Task.Run(()=> newThemeSettingsIni.Remove(line)));
+                        removeLinesTasks.Add(Task.Run(() => newThemeSettingsIni.Remove(line)));
                 }
             }
             await Task.WhenAll(removeLinesTasks);
@@ -188,7 +238,7 @@ namespace AdvancedWindowsAppearence
                     continue;
                 color.IsEdited = false;
                 colorsIdIndex = newThemeSettingsIni.IndexOf(colorsId);
-                if(color.HasColor)
+                if (color.HasColor)
                     newThemeSettingsIni.Insert(colorsIdIndex + 1, color.ColorRegistryPath + "=" + color.ItemColorValue);
             }
 
@@ -202,7 +252,7 @@ namespace AdvancedWindowsAppearence
             int colorsIdIndex = -1;
             string[] themeSettingsIni = GetThemeFile(themePath);
             List<string> newThemeSettingsIni = GetThemeFile(themePath).ToList();
-            
+
             //remove lines that will be replaced
             var removeLinesTasks = new List<Task>();
             foreach (string line in themeSettingsIni)
@@ -280,12 +330,11 @@ namespace AdvancedWindowsAppearence
             await SaveTheme(newThemeSettingsIni);
             await LoadTheme();
         }
-
-
         #endregion
+
         private async Task SaveTheme(List<string> newThemeSettingsIni)
         {
-            string themePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Microsoft\Windows\Themes\" + Settings.ThemeName + ".theme";
+            string themePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Microsoft\Windows\Themes\" + ThemeName + ".theme";
             if (File.Exists(themePath))
                 File.Delete(themePath);
 
@@ -298,7 +347,7 @@ namespace AdvancedWindowsAppearence
 
         private async Task LoadTheme()
         {
-            string themePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Microsoft\Windows\Themes\" + Settings.ThemeName + ".theme";
+            string themePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Microsoft\Windows\Themes\" + ThemeName + ".theme";
             await LoadTheme(themePath);
         }
 
