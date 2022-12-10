@@ -6,7 +6,11 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary >
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/PresentationFramework.Aero2, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35;component/themes/aero2.normalcolor.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
             <sys:Double x:Key="PreviewWidth">800</sys:Double>
             <FontFamily x:Key="Segoe MDL2 Assets">./Fonts/segoe-mdl2-assets.ttf#Segoe MDL2 Assets</FontFamily>
             <SolidColorBrush x:Key="ThemeColor"/>
@@ -14,6 +18,7 @@
             <SolidColorBrush x:Key="BackgroundColor" Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}"/>
             <SolidColorBrush x:Key="BackgroundColorTabItems" Color="#BFFFFFFF"/>
             <SolidColorBrush x:Key="ForegroundColor" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
+
 
             <!--default label-->
             <Style x:Key="SystemLabel" TargetType="Label">
@@ -32,6 +37,7 @@
                 <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSize}}"/>
                 <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
                 <Setter Property="Background" Value="{DynamicResource ButtonFaceColor}"/>
+                <Setter Property="BorderBrush" Value="{x:Null}"/>
                 <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="MinHeight" Value="35"/>
             </Style>
@@ -46,10 +52,11 @@
             </Style>
 
             <!--button used for properties and settings-->
-            <Style x:Key="SystemSmallButton"  TargetType="Button" >
+            <Style x:Key="SystemSmallButton" TargetType="Button">
                 <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSize}}"/>
                 <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
                 <Setter Property="Background" Value="{DynamicResource ButtonFaceColor}"/>
+                <Setter Property="BorderBrush" Value="{x:Null}"/>
                 <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="MinHeight" Value="35"/>
                 <Setter Property="Margin" Value="2"/>
@@ -59,6 +66,7 @@
                 <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSize}}"/>
                 <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
                 <Setter Property="Background" Value="{DynamicResource ButtonFaceColor}"/>
+                <Setter Property="BorderBrush" Value="{x:Null}"/>
                 <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="MinHeight" Value="35"/>
                 <Setter Property="Margin" Value="2"/>
@@ -90,9 +98,9 @@
                             <Grid>
                                 <Rectangle Name="Bg" Fill="{TemplateBinding Background}"/>
                                 <ContentPresenter x:Name="ContentSite"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Stretch"
-                                        Margin="18 6"/>
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Stretch"
+                                            Margin="18 6"/>
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -112,9 +120,9 @@
                             <Grid>
                                 <Rectangle Name="Bg" Fill="{TemplateBinding Background}"/>
                                 <ContentPresenter x:Name="ContentSite"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Stretch"
-                                        Margin="18 6"/>
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Stretch"
+                                            Margin="18 6"/>
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -144,12 +152,12 @@
                             <StackPanel Name="Panel" Height="48" VerticalAlignment="Stretch" Orientation="Horizontal" HorizontalAlignment="Stretch" MinWidth="320">
                                 <Rectangle Name="SelRectangle" Width="5" Margin="0 12" HorizontalAlignment="Left"/>
                                 <ContentPresenter x:Name="ContentSite"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Stretch"
-                                        ContentSource="Header"
-                                        Margin="10"/>
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Stretch"
+                                            ContentSource="Header"
+                                            Margin="10"/>
                             </StackPanel>
-                            
+
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsSelected" Value="True">
                                     <Setter TargetName="SelRectangle" Property="Fill" Value="{DynamicResource ThemeColor}" />
@@ -192,6 +200,7 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
