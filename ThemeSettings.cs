@@ -12,6 +12,7 @@ namespace AdvancedWindowsAppearence
 {
     public class ThemeSettings
     {
+        private readonly string _initialThemePath;
         public string ThemeName { get; set; }
 
         private string _themeStyle = "";
@@ -24,6 +25,11 @@ namespace AdvancedWindowsAppearence
                 if (File.Exists(value))
                 {
                     _themeStyle = value;
+                    return;
+                }
+                if (File.Exists(_resourcesThemesFolder + value))
+                {
+                    _themeStyle = _resourcesThemesFolder + value;
                     return;
                 }
                 string fullPath = _resourcesThemesFolder + value + ".msstyles";
@@ -45,7 +51,8 @@ namespace AdvancedWindowsAppearence
         /// <param name="settings"></param>
         public ThemeSettings(GeneralViewModel settings)
         {
-            _initialThemeStyle = GetThemeStyle(ThemeName);
+            _initialThemePath = GetThemePath();
+            _initialThemeStyle = GetThemeStyle(_initialThemePath);
             _themeStyle = _initialThemeStyle;
             Settings = settings;
         }
