@@ -20,7 +20,12 @@ namespace AdvancedWindowsAppearence
         {
             InitializeComponent();
             SetWindowTheme(this.Handle, "", "");
-            
+            this.Font = SystemFonts.DialogFont;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
