@@ -23,6 +23,11 @@ namespace AdvancedWindowsAppearence.Controls
         public WallpaperControl()
         {
             InitializeComponent();
+
+            double w = SystemParameters.VirtualScreenWidth;
+            double h = SystemParameters.VirtualScreenHeight;
+            wallpaperGrid.Width = w / 10;
+            wallpaperGrid.Height = h / 10;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
