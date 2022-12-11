@@ -12,48 +12,52 @@ namespace AdvancedWindowsAppearence
     /// </summary>
     public class ApplicationSettings
     {
-        public bool ShowAllUI { 
-            get
-            {
-                return GetUIType();
-            }
-            set
-            {
-                SetUIType(value);
-            }
+        public bool ShowAllUI 
+        { 
+            get => GetShowAllUI();
+            set => SetShowAllUI(value);
         }
         public bool UseNativeTitlebar
         {
-            get
-            {
-                return GetNativeTitlebar();
-            }
-            set
-            {
-                SetIsNativeTitlebar(value);
-            }
+            get => GetNativeTitlebar();
+            set => SetIsNativeTitlebar(value);
+        }
+        public bool SaveToRegistry
+        {
+            get => GetSaveToRegistry();
+            set => SetSaveToRegistry(value);
         }
 
-        public bool GetUIType()
+        public bool GetShowAllUI()
         {
             int value = (int)GetValue("UIType", 0);
-            return value == 0? false : true; 
+            return value != 0; 
         }
 
-        public void SetUIType(bool value)
+        public void SetShowAllUI(bool value)
         {
             SetValue("UIType", value, RegistryValueKind.DWord);
-        }
-
-        public void SetIsNativeTitlebar(bool value)
-        {
-            SetValue("IsNative", value, RegistryValueKind.DWord);
         }
 
         public bool GetNativeTitlebar()
         {
             int value = (int)GetValue("IsNative", 0);
-            return value == 0 ? false : true;
+            return value != 0;
+        }
+        public void SetIsNativeTitlebar(bool value)
+        {
+            SetValue("IsNative", value, RegistryValueKind.DWord);
+        }
+
+        public bool GetSaveToRegistry()
+        {
+            int value = (int)GetValue("SaveToRegistry", 0);
+            return value != 0;
+        }
+
+        public void SetSaveToRegistry(bool value)
+        {
+            SetValue("SaveToRegistry", value, RegistryValueKind.DWord);
         }
 
         private static void SetValue(string name, object value, RegistryValueKind registryValueKind)
