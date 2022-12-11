@@ -9,6 +9,7 @@ namespace AdvancedWindowsAppearence
     {
         public static double DPI = -1.0f;
         static bool _loaded = false;
+        static bool _loading = true;
         static List<Font> _fonts = new List<Font>();
 
         public static void GetDPI()
@@ -44,7 +45,9 @@ namespace AdvancedWindowsAppearence
                     catch { }
 
                 }
+                _loading = false;
             }
+            while (_loading) { }
             return _fonts;
         }
 
