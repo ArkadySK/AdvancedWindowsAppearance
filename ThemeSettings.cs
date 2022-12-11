@@ -258,6 +258,11 @@ namespace AdvancedWindowsAppearence
             }
             await Task.WhenAll(removeLinesTasks);
 
+            // If colorsId was not found
+            colorsIdIndex = newThemeSettingsIni.IndexOf(colorsId);
+            if (colorsIdIndex == -1)
+                newThemeSettingsIni.Add(colorsId);
+
             foreach (ColorAppearanceSetting color in Settings.ColorSettings)
             {
                 if (!color.IsEdited)
@@ -278,6 +283,11 @@ namespace AdvancedWindowsAppearence
             int colorsIdIndex = -1;
             string[] themeSettingsIni = GetThemeFile(themePath);
             List<string> newThemeSettingsIni = GetThemeFile(themePath).ToList();
+
+            // If colorsId was not found
+            colorsIdIndex = newThemeSettingsIni.IndexOf(colorsId);
+            if (colorsIdIndex == -1)
+                newThemeSettingsIni.Add(colorsId);
 
             //remove lines that will be replaced
             var removeLinesTasks = new List<Task>();
@@ -366,7 +376,11 @@ namespace AdvancedWindowsAppearence
 
             StreamWriter streamWriter = new StreamWriter(themePath);
             StringBuilder stringBuilderTheme = new StringBuilder();
-            newThemeSettingsIni.ForEach(x => stringBuilderTheme.AppendLine(x));
+            foreach (string line in newThemeSettingsIni)
+            {
+                if(!string.IsNullOrEmpty(line)) 
+                    stringBuilderTheme.AppendLine(line);
+            }
             await streamWriter.WriteAsync(stringBuilderTheme.ToString());
             streamWriter.Close();
         }
