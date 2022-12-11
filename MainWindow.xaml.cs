@@ -53,7 +53,7 @@ namespace AdvancedWindowsAppearence
 
         void LoadAdvancedUI()
         {
-            Dispatcher.Invoke(() => 
+            Dispatcher.Invoke(() =>
             {
                 //add backup & restore page
                 restoreTabFrame.Content = new RestorePage(Settings);
@@ -96,13 +96,13 @@ namespace AdvancedWindowsAppearence
                 MessageBox.Show("Error checking for update: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            
+
             if (!Settings.ApplicationSettings.ShowAllUI)
             {
                 MainTabControl.SelectedIndex = 2;
                 return;
             }
-            
+
 
             await Task.Run(LoadAdvancedUI);
         }
@@ -125,7 +125,7 @@ namespace AdvancedWindowsAppearence
             Settings.IsWindows10 = (bool)(WinVer >= new Version(10, 0));
             if (!Settings.IsWindows10 || Settings.ApplicationSettings.UseNativeTitlebar) //Windows 8.1 and less, keep standard UI
                 return;
-            
+
             //Windows 10/11 - create new modern window, close the old one
             ModernWindow = new ModernWindow(Settings.RegistrySettingsViewModel.RegistrySettings[5].Checked);
 
@@ -141,7 +141,7 @@ namespace AdvancedWindowsAppearence
 
         #endregion
 
-        
+
         #region Theme tab
         void LoadThemeName()
         {
@@ -174,7 +174,7 @@ namespace AdvancedWindowsAppearence
 
         ColorAppearanceSetting GetSelItemSetting()
         {
-            return (ColorAppearanceSetting)comboBoxItems.SelectedItem; 
+            return (ColorAppearanceSetting)comboBoxItems.SelectedItem;
         }
 
         FontAppearanceSetting GetSelFontSetting()
@@ -229,7 +229,7 @@ namespace AdvancedWindowsAppearence
 
         private void comboBoxFont_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(comboBoxFont.SelectedItem is string selection)
+            if (comboBoxFont.SelectedItem is string selection)
             {
                 var selSetting = GetSelFontSetting();
                 selSetting.ChangeFontName(selection);
@@ -269,19 +269,20 @@ namespace AdvancedWindowsAppearence
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Resources);
 
             bool? result = openFileDialog.ShowDialog();
-            if (result.HasValue && result.Value == true){
+            if (result.HasValue && result.Value == true)
+            {
                 Settings.ThemeSettings.ThemeStyle = openFileDialog.FileName;
             }
         }
 
         private void CheckBoxOverwriteThemeStyle_Click(object sender, RoutedEventArgs e)
         {
-            
+
             stackPanelAeroSettingsButtons.IsEnabled = checkBoxOverwriteThemeStyle.IsChecked.Value;
             if (checkBoxOverwriteThemeStyle.IsChecked.Value == false)
             {
                 Settings.ThemeSettings.RestoreThemeStyle();
-                foreach(RadioButton rb in stackPanelAeroSettingsButtons.Children)
+                foreach (RadioButton rb in stackPanelAeroSettingsButtons.Children)
                 {
                     rb.IsChecked = false;
                 }
@@ -342,7 +343,7 @@ namespace AdvancedWindowsAppearence
             if (!textBoxColorOpacity.IsFocused)
                 return;
             string opacityText = textBoxColorOpacity.Text;
-            if (opacityText == null || opacityText=="")
+            if (opacityText == null || opacityText == "")
                 return;
             int alpha = int.Parse(opacityText);
             if (alpha > byte.MaxValue || alpha < byte.MinValue) return;
@@ -426,7 +427,7 @@ namespace AdvancedWindowsAppearence
 
         #region Save
         //updating the theme
-        async Task UpdateTheme() 
+        async Task UpdateTheme()
         {
             await Task.Delay(200);
             if (ModernWindow != null)
@@ -445,9 +446,10 @@ namespace AdvancedWindowsAppearence
 
         private async void SaveTitleColorsAsTheme_Click(object sender, RoutedEventArgs e)
         {
-            try { 
-            await Settings.SaveTitleColorsAsTheme();
-            }       
+            try
+            {
+                await Settings.SaveTitleColorsAsTheme();
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -558,6 +560,7 @@ namespace AdvancedWindowsAppearence
         #region UI type checkbox
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            // Load UI only once if it was not loaded
             if (!allUILoadedAtStart)
             {
                 LoadAdvancedUI();
@@ -568,6 +571,12 @@ namespace AdvancedWindowsAppearence
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             MainTabControl.SelectedIndex = 2;
+            if (!Settings.ApplicationSettings.SaveToRegistry)
+            {
+                MessageBoxResult result = MessageBox.Show("Because the theme menu is not accessible anymore, the changes you will have made will be applied to registry instead of theme. \n\nDo you want to confirm these changes?", "Info", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                    Settings.ApplicationSettings.SaveToRegistry = true;
+            }
         }
         #endregion
 
