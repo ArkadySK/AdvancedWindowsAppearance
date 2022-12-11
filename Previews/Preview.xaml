@@ -64,6 +64,11 @@
                 </Grid>
                 <Polygon x:Name="desktopColor" Points="100,100 0,100 100,0"  Fill="{Binding ColorSettings[13].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,0"/>
 
+                <Grid Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10">
+                    <Rectangle Fill="{Binding ColorSettings[17].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Stroke="{x:Null}" Opacity=".3"/>
+                    <Rectangle Stroke="{Binding ColorSettings[15].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Fill="{x:Null}" StrokeThickness="1" />
+                </Grid>
+
 
                 <!-- Inactive Window -->
                 <Grid Width="350" Height="110" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Background="{Binding ColorSettings[24].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}">
