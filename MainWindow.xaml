@@ -127,8 +127,8 @@
 
                         <!--The Apply buttons-->
                         <StackPanel Margin="-5 0 0 0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="4">
-                            <Button x:Name="SaveThemeAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveThemeAsTheme_Click"/>
-                            <Button x:Name="SaveThemeToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveThemeToRegistry_Click"/>
+                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" x:Name="SaveThemeAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveThemeAsTheme_Click"/>
+                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="SaveThemeToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveThemeToRegistry_Click"/>
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
@@ -203,8 +203,8 @@
                         
                         <!--The Apply buttons-->
                         <StackPanel Margin="-5 0 0 0" Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="4">
-                            <Button x:Name="SaveTitleColorsAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveTitleColorsAsTheme_Click"/>
-                            <Button x:Name="SaveTitleColorsToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveTitleColorsToRegistry_Click" />
+                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" x:Name="SaveTitleColorsAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveTitleColorsAsTheme_Click"/>
+                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="SaveTitleColorsToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveTitleColorsToRegistry_Click" />
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
@@ -260,8 +260,8 @@
 
                         <!--The Apply buttons-->
                         <StackPanel Grid.Row="6" Margin="-5 0 0 0" Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="4">
-                            <Button x:Name="SaveColorsMetricsAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveColorsMetricsAsTheme_Click"/>
-                            <Button x:Name="SaveColorsMetricsToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveColorsMetricsToRegistry_Click" />
+                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" x:Name="SaveColorsMetricsAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveColorsMetricsAsTheme_Click"/>
+                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="SaveColorsMetricsToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveColorsMetricsToRegistry_Click" />
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
@@ -362,8 +362,8 @@
 
                         <!--The Apply buttons-->
                         <StackPanel Margin="-5 0 0 0" Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="4">
-                            <Button x:Name="SaveFontsAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveFontsAsTheme_Click"/>
-                            <Button x:Name="SaveFontsToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveFontsToRegistry_Click" />
+                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" x:Name="SaveFontsAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveFontsAsTheme_Click"/>
+                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="SaveFontsToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveFontsToRegistry_Click" />
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
@@ -403,8 +403,8 @@
                         </StackPanel>
                         <!--The Apply buttons-->
                         <StackPanel Grid.Row="3" Margin="0 5" Orientation="Horizontal" HorizontalAlignment="Left">
-                            <Button x:Name="SaveWallpaperAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveWallpaperAsTheme_Click"/>
-                            <Button x:Name="SaveWallpaperToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveWallpaperToRegistry_Click"/>
+                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" x:Name="SaveWallpaperAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveWallpaperAsTheme_Click"/>
+                            <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="SaveWallpaperToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveWallpaperToRegistry_Click"/>
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
