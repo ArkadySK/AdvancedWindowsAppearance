@@ -242,10 +242,10 @@ namespace AdvancedWindowsAppearence
         internal async Task SaveTitleColorsAsTheme()
         {
             IsSavingInProgress = true;
-            await AeroColorsViewModel.SaveAll();
+            await ThemeSettings.SaveTitleColors();
             await Task.Delay(2000);
             App.Current.Resources["ThemeColor"] = Converters.BrushToColorConverter.MediaColorToBrush(ThemeColor.ItemColor);
-            await ThemeSettings.SaveTitleColors();
+            await AeroColorsViewModel.SaveAll();
             ShowSavedSuccessfullyDialog();
         }
 
