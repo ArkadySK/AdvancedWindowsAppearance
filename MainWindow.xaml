@@ -128,7 +128,7 @@
                         <!--The Apply buttons-->
                         <StackPanel Margin="-5 0 0 0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="4">
                             <Button x:Name="SaveThemeAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveThemeAsTheme_Click"/>
-                            <Button Visibility="Collapsed"  x:Name="SaveThemeToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5"/>
+                            <Button x:Name="SaveThemeToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveThemeToRegistry_Click"/>
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>

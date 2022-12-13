@@ -228,14 +228,17 @@ namespace AdvancedWindowsAppearence
         }
 
 
+        internal async Task SaveThemeModesToRegistry()
+        {
+            IsSavingInProgress = true;
+            await RegistrySettingsViewModel.SaveAll();
+        }
 
         internal async Task SaveThemeAsTheme()
         {
             IsSavingInProgress = true;
             await ThemeSettings.SaveTheme();
             ShowSavedSuccessfullyDialog();
-            //separate color modes from these settings in future
-            await RegistrySettingsViewModel.SaveAll();
         }
 
 

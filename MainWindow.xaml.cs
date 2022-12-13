@@ -440,7 +440,14 @@ namespace AdvancedWindowsAppearence
         private async void SaveThemeAsTheme_Click(object sender, RoutedEventArgs e)
         {
             await Settings.SaveThemeAsTheme();
+            await Settings.SaveThemeModesToRegistry();
             await UpdateTheme();
+        }
+
+
+        private async void SaveThemeToRegistry_Click(object sender, RoutedEventArgs e)
+        {
+            await Settings.SaveThemeModesToRegistry();
         }
 
 
