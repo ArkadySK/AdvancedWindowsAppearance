@@ -88,35 +88,35 @@ namespace AdvancedWindowsAppearence
 
         void InitColors()
         {
-            ColorSettings = new ColorAppearanceSetting[] { //I -, NI - not implemented, NU - not used
+            ColorSettings = new ColorAppearanceSetting[] { //I - implemented, NI - not implemented, NU - not used (in Windows)
                 new ColorAppearanceSetting("Active Title Color 1", "", "ActiveTitle"), //I
                 new ColorAppearanceSetting("Active Title Color 2", "", "GradientActiveTitle"), //I
                 new ColorAppearanceSetting("Active Title Text", "", "TitleText"), //I
                 new ColorAppearanceSetting("Active Window Border", "", "ActiveBorder"), //I
-                new ColorAppearanceSetting("Application Background", "", "AppWorkspace"), //NU 
-                new ColorAppearanceSetting("Button Alternate Face", "", "ButtonAlternateFace"), // NI - where is it?
+                new ColorAppearanceSetting("Application Background (Deprecated)", "", "AppWorkspace"), //NU 
+                new ColorAppearanceSetting("Button Alternate Face (Deprecated)", "", "ButtonAlternateFace"), // NU
                 new ColorAppearanceSetting("Button Dark Shadow (Right & Bottom Border)", "", "ButtonDkShadow"),//I
                 new ColorAppearanceSetting("Button Face / 3D Objects", "", "ButtonFace"),//I
                 new ColorAppearanceSetting("Button Hilight (Edge of Top & Left Border)", "", "ButtonHiLight"), //I       
                 new ColorAppearanceSetting("Button Light (Top & Left Border)", "", "ButtonLight"), //I
                 new ColorAppearanceSetting("Button Shadow (Edge of Right & Bottom Border)", "", "ButtonShadow"), //I
                 new ColorAppearanceSetting("Button Text Color", "", "ButtonText"), //I
-                new ColorAppearanceSetting("Caption Buttons Width", "CaptionWidth", ""), //., I
+                new ColorAppearanceSetting("Caption Buttons Width", "CaptionWidth", ""), //I
                 new ColorAppearanceSetting("Desktop", "", "Background"),//I
                 new ColorAppearanceSetting("Gray Text", "", "GrayText"), //I
-                new ColorAppearanceSetting("Hilight", "", "Hilight"), //I
-                new ColorAppearanceSetting("Hilighted Text", "", "HilightText"),
-                new ColorAppearanceSetting("Hypertext link / Hilight (Fill)", "", "HotTrackingColor"), //I
-                new ColorAppearanceSetting("Icon Size", "Shell Icon Size", ""),
-                new ColorAppearanceSetting("Icon Horizontal Spacing", "IconSpacing", ""),
-                new ColorAppearanceSetting("Icon Vertical Spacing", "IconVerticalSpacing", ""),
+                new ColorAppearanceSetting("Hilight (Selection Border)", "", "Hilight"), //I
+                new ColorAppearanceSetting("Hilighted Text", "", "HilightText"), //I
+                new ColorAppearanceSetting("Hypertext Link / Hilight Selection (Fill)", "", "HotTrackingColor"), //I
+                new ColorAppearanceSetting("Icon Size", "Shell Icon Size", ""), //I
+                new ColorAppearanceSetting("Icon Horizontal Spacing", "IconSpacing", ""), //I
+                new ColorAppearanceSetting("Icon Vertical Spacing", "IconVerticalSpacing", ""), //I
                 new ColorAppearanceSetting("Inactive Title Color 1", "", "InactiveTitle"), //I
                 new ColorAppearanceSetting("Inactive Title Color 2", "", "GradientInactiveTitle"), //I
                 new ColorAppearanceSetting("Inactive Title Text", "", "InactiveTitleText"), //I
                 new ColorAppearanceSetting("Inactive Window Border", "", "InactiveBorder"),
                 new ColorAppearanceSetting("Menu", "MenuHeight", "Menu"),//I
-                new ColorAppearanceSetting("Scrollbar", "ScrollWidth", "Scrollbar"), //
-                new ColorAppearanceSetting("Selected Items", "", "MenuHilight"), //
+                new ColorAppearanceSetting("Scrollbar", "ScrollWidth", "Scrollbar"), //I, NU
+                new ColorAppearanceSetting("Selected Items", "", "MenuHilight"), //NI
                 new ColorAppearanceSetting("Tool Tip", "", "InfoWindow"), //I
                 new ColorAppearanceSetting("Window", "", "Window"),//I
                 new ColorAppearanceSetting("Window Border Width", "BorderWidth", ""), //I
