@@ -70,7 +70,7 @@ namespace AdvancedWindowsAppearence
 
         private async void window_Loaded(object sender, RoutedEventArgs e)
         {
-            UpdateWindowsLayout(Environment.OSVersion.Version);
+            UpdateWindowsLayout();
 
             Updater updater = new Updater();
             Version curVersion = updater.GetCurrentVersionInfo();
@@ -107,9 +107,10 @@ namespace AdvancedWindowsAppearence
             await Task.Run(LoadAdvancedUI);
         }
 
-        void UpdateWindowsLayout(Version WinVer)
+        void UpdateWindowsLayout()
         {
-            if (WinVer < new Version(6, 2))
+            var winVer = Environment.OSVersion.Version;
+            if (winVer < new Version(6, 2))
             {
                 LinearGradientBrush buttonBrush = new LinearGradientBrush(
                     new GradientStopCollection(
@@ -122,7 +123,7 @@ namespace AdvancedWindowsAppearence
                     );
                 App.Current.Resources["ButtonFaceColor"] = buttonBrush;
             }
-            Settings.IsWindows10 = (bool)(WinVer >= new Version(10, 0));
+            
             if (!Settings.IsWindows10 || Settings.ApplicationSettings.UseNativeTitlebar) //Windows 8.1 and less, keep standard UI
                 return;
 

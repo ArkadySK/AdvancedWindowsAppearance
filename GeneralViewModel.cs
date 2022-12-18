@@ -1,10 +1,12 @@
-﻿using System;
+﻿using AdvancedWindowsAppearence.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,24 +47,28 @@ namespace AdvancedWindowsAppearence
         #region Initialization
         public GeneralViewModel()
         {
+            IsWindows10 = (bool)(Environment.OSVersion.Version >= new Version(10, 0));
+
             Task.Run(() =>
             {
-               ApplicationSettings = new ApplicationSettings();
-               ThemeSettings = new ThemeSettings(this);
-               AeroColorsViewModel = new AeroColorsViewModel();
-               RegistrySettingsViewModel = new RegistrySettingsViewModel();
-               InitAeroColors();
-               InitRegistrySettings();
-               InitDPIScale();
-               InitColors();
-               InitFonts();
-               InitWallpaper();
+                ApplicationSettings = new ApplicationSettings();
+                ThemeSettings = new ThemeSettings(this);
+                RegistrySettingsViewModel = new RegistrySettingsViewModel();
+                InitAeroColors();
+                InitRegistrySettings();
+                InitDPIScale();
+                InitColors();
+                InitFonts();
+                InitWallpaper();
             }
             );
         }
 
         void InitAeroColors()
         {
+            AeroColorsViewModel = new AeroColorsViewModel();
+            if (!IsWindows10)
+                return;
             AeroColorsViewModel.AddNoCheck("Active Window Color", "AccentColor");
             AeroColorsViewModel.AddNoCheck("Inactive Window Color", "AccentColorInactive");
         }
