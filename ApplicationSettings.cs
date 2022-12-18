@@ -51,7 +51,7 @@ namespace AdvancedWindowsAppearence
 
         public bool GetSaveToRegistry()
         {
-            int value = (int)GetValue("SaveToRegistry", 0);
+            int value = (int)GetValue("SaveToRegistry", 1);
             return value != 0;
         }
 
