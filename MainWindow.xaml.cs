@@ -337,6 +337,9 @@ namespace AdvancedWindowsAppearence
         private void buttonThemeColor_Click(object sender, RoutedEventArgs e)
         {
             Settings.ThemeColor.ItemColor = OpenColorDialog(Settings.ThemeColor.ItemColor);
+            if (Settings.AeroColorsViewModel.AeroColors.Count == 0)
+                return;
+            Settings.AeroColorsViewModel.AeroColors[0].ItemColor = Settings.ThemeColor.ItemColor;
         }
 
         private void textBoxColorOpacity_TextChanged(object sender, TextChangedEventArgs e)
