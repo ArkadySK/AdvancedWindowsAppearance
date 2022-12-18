@@ -67,10 +67,8 @@ namespace AdvancedWindowsAppearence
         void InitAeroColors()
         {
             AeroColorsViewModel = new AeroColorsViewModel();
-            if (!IsWindows10)
-                return;
-            AeroColorsViewModel.AddNoCheck("Active Window Color", "AccentColor");
-            AeroColorsViewModel.AddNoCheck("Inactive Window Color", "AccentColorInactive");
+            AeroColorsViewModel.Add("Active Window Color", "AccentColor", new Version(10, 0));
+            AeroColorsViewModel.Add("Inactive Window Color", "AccentColorInactive", new Version(10, 0));
         }
 
         void InitDPIScale()
