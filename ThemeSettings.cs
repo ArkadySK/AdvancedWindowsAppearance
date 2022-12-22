@@ -346,6 +346,7 @@ namespace AdvancedWindowsAppearence
             {
                 if (!font.IsEdited)
                     continue;
+                font.SaveToRegistry();
                 font.IsEdited = false;
                 colorsIdIndex = newThemeSettingsIni.IndexOf(colorsId);
                 if (font.HasColor)
