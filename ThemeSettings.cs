@@ -44,7 +44,7 @@ namespace AdvancedWindowsAppearence
         }
 
         private readonly string _resourcesThemesFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "resources", "Themes") + "\\";
-        
+
         public bool IsThemeStyleModified
         {
             get => ThemeStyle == _initialThemeStyle;
@@ -212,7 +212,7 @@ namespace AdvancedWindowsAppearence
 
         public async Task SaveTheme()
         {
-            string themePath = GetThemePath(); 
+            string themePath = GetThemePath();
             string[] themeSettingsIni = GetThemeFile(themePath);
             List<string> newThemeSettingsIni = themeSettingsIni.ToList();
             string[] headersToRemove = new string[]{
@@ -224,21 +224,21 @@ namespace AdvancedWindowsAppearence
             // Update theme name
             VerifyAndUpdateThemeName();
 
-            //remove lines that will be replaced
+            // Remove lines that will be replaced
             var removeLinesTasks = new List<Task>();
             foreach (string line in themeSettingsIni)
             {
-                //ignore all comments
+                // Ignore all comments
                 if (line.StartsWith(";")) continue;
 
-                //avoid mess in the theme
+                // Avoid mess in the theme
                 foreach (string header in headersToRemove)
                     if (line.Contains(header))
                         removeLinesTasks.Add(Task.Run(() => newThemeSettingsIni.Remove(line)));
             }
             await Task.WhenAll(removeLinesTasks);
 
-            //Set theme name
+            // Set theme name
             int themeIdIndex = newThemeSettingsIni.IndexOf(themeId);
             if (themeIdIndex == -1)
             {
@@ -247,22 +247,33 @@ namespace AdvancedWindowsAppearence
             }
             await Task.Run(() => newThemeSettingsIni.Insert(themeIdIndex + 1, "DisplayName=" + ThemeName));
 
-            //Set visual style
+            // Set visual style
             int visualStylesIdIndex = newThemeSettingsIni.IndexOf(visualStylesId);
             if (visualStylesIdIndex == -1)
             {
                 newThemeSettingsIni.Add(visualStylesId);
                 visualStylesIdIndex = newThemeSettingsIni.Count - 1;
             }
-
             if (IsThemeStyleModified)
-            {
                 if (string.IsNullOrWhiteSpace(ThemeStyle))
                     ThemeStyle = _initialThemeStyle;
-            }
-
             var visualStylesText = "Path=" + ThemeStyle;
             newThemeSettingsIni.Insert(visualStylesIdIndex + 1, visualStylesText);
+
+            // Color modes
+            string systemColorMode = "SystemMode=";
+            if (Settings.RegistrySettingsViewModel.RegistrySettings[6].Checked.Value == true)
+                systemColorMode += "Light";
+            else
+                systemColorMode += "Dark";
+            string appColorMode = "AppMode=";
+            if (Settings.RegistrySettingsViewModel.RegistrySettings[5].Checked.Value)
+                appColorMode += "Light";
+            else
+                appColorMode += "Dark";
+
+            newThemeSettingsIni.Insert(visualStylesIdIndex + 1, systemColorMode);
+            newThemeSettingsIni.Insert(visualStylesIdIndex + 1, appColorMode);
 
             await SaveTheme(newThemeSettingsIni);
             await ApplyCurrentTheme();
@@ -451,6 +462,6 @@ namespace AdvancedWindowsAppearence
             await Task.Delay(1000);
             process.Close();
         }
-    #endregion
+        #endregion
     }
 }

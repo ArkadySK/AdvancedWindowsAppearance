@@ -423,8 +423,6 @@ namespace AdvancedWindowsAppearence
         private async void SaveThemeAsTheme_Click(object sender, RoutedEventArgs e)
         {
             await Settings.SaveThemeAsTheme();
-            await Task.Delay(1000);
-            await Settings.SaveThemeModesToRegistry();
             await UpdateTheme();
         }
 
