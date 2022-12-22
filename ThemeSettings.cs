@@ -145,7 +145,20 @@ namespace AdvancedWindowsAppearence
             return ThemeSettingsIni.Split(Environment.NewLine.ToCharArray());
         }
 
-        #region Save
+        private void VerifyAndUpdateThemeName() 
+        {
+            string themePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Microsoft\Windows\Themes\" + ThemeName + ".theme";
+            if (File.Exists(themePath))
+            {
+                File.Delete(themePath);
+                if (ThemeName.EndsWith("_"))
+                    ThemeName = ThemeName.Remove(ThemeName.Length - 1, 1);
+                else
+                    ThemeName += "_";
+            }
+        }
+
+        #region Save (each type separately)
         readonly string colorsId = @"[Control Panel\Colors]";
         readonly string visualStylesId = @"[VisualStyles]";
         readonly string desktopId = @"[Control Panel\Desktop]";
@@ -211,6 +224,9 @@ namespace AdvancedWindowsAppearence
                 "DisplayName=", "ThemeId=",
                 "SystemMode=", "AppMode="
             };
+
+            // Update theme name
+            VerifyAndUpdateThemeName();
 
             //remove lines that will be replaced
             var removeLinesTasks = new List<Task>();
