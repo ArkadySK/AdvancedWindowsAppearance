@@ -403,7 +403,10 @@ namespace AdvancedWindowsAppearence
             {
                 if (!c.HasSize)
                     continue;
-                output += "\n\"" + c.SizeRegistryKey + "\"=\"" + (-15 * c.Size) + "\"";
+                if (c.SizeRegistryKey == "Shell Icon Size")
+                    output += "\n\"" + c.SizeRegistryKey + "\"=\"" + (c.Size) + "\"";
+                else
+                    output += "\n\"" + c.SizeRegistryKey + "\"=\"" + (-15 * c.Size) + "\"";
             }
 
             return output;
