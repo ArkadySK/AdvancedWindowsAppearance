@@ -375,7 +375,7 @@ namespace AdvancedWindowsAppearence
 
         internal async Task ResetTheme()
         {
-            await ThemeSettings.LoadTheme(@"C:\Windows\Resources\Themes\aero.theme");
+            await ThemeSettings.ApplyTheme(@"C:\Windows\Resources\Themes\aero.theme");
             await Task.Delay(1000);
         }
 
