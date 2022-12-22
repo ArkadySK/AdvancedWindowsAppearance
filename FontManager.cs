@@ -7,27 +7,20 @@ namespace AdvancedWindowsAppearence
 {
     static class FontManager
     {
-        public static double DPI = -1.0f;
+        public static double DPI = -1.0;
         static bool _loaded = false;
         static bool _loading = true;
         static List<Font> _fonts = new List<Font>();
 
         public static void GetDPI()
         {
-            /*if (samplefontsize == 0)
-                return;
-            DPI = System.Windows.SystemFonts.CaptionFontSize / samplefontsize;
-            */
             RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop\WindowMetrics");
             if (key == null)
             {
-                DPI = 1;
+                DPI = 1d;
                 return;
             }
-            Console.WriteLine();
-            DPI = (int)key.GetValue("AppliedDPI") / 96f;
-            Console.WriteLine(SystemFonts.MenuFont.Size);
-
+            DPI = (int)key.GetValue("AppliedDPI") / 96d;
         }
 
         public static List<Font> GetSystemFonts()
