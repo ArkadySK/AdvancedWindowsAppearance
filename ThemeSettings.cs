@@ -63,9 +63,25 @@ namespace AdvancedWindowsAppearence
         public ThemeSettings(GeneralViewModel settings)
         {
             _initialThemePath = GetThemePath();
+            ThemeName = GetShortThemeName(_initialThemePath);
+
             _initialThemeStyle = GetThemeStyle(_initialThemePath);
             _themeStyle = _initialThemeStyle;
+
             Settings = settings;
+        }
+
+        private string GetShortThemeName(string themePath)
+        {
+            if (string.IsNullOrEmpty(themePath))
+                return "New";
+
+            themePath = Path.GetFileNameWithoutExtension(themePath);
+
+            if (!themePath.Contains(" (Edited)"))
+                return themePath + " (Edited)";
+            else
+                return themePath;
         }
 
         private string GetThemeStyle(string themeName)

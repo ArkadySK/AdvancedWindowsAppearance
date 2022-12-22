@@ -32,7 +32,7 @@ namespace AdvancedWindowsAppearence
     {
 
         public const int PreviewWidth = 200;
-        GeneralViewModel Settings;
+        GeneralViewModel Settings = new GeneralViewModel();
         ModernWindow ModernWindow = null;
         bool allUILoadedAtStart = false;
 
@@ -41,14 +41,10 @@ namespace AdvancedWindowsAppearence
         public MainWindow()
         {
             InitializeComponent();
-            Settings = new GeneralViewModel();
-
             UpdateFontList();
-            LoadThemeName();
 
             allUILoadedAtStart = Settings.ApplicationSettings.ShowAllUI;
             this.DataContext = Settings;
-
         }
 
         void LoadAdvancedUI()
@@ -140,23 +136,6 @@ namespace AdvancedWindowsAppearence
 
         }
 
-        #endregion
-
-
-        #region Theme tab
-        void LoadThemeName()
-        {
-            string themeName = ThemeSettings.GetThemePath();
-
-            themeName = themeName.Split("\\".ToCharArray()).Last();
-            themeName = themeName.Replace(".theme", "");
-
-            if (!themeName.Contains(" (Edited)"))
-                Settings.ThemeSettings.ThemeName = themeName + " (Edited)";
-            else
-                Settings.ThemeSettings.ThemeName = themeName;
-
-        }
         #endregion
 
 
