@@ -26,14 +26,15 @@ namespace AdvancedWindowsAppearence
         public string ThemeName { get; set; }
 
         private string _themeStyle = "";
-        private readonly string _initialThemeStyle;
+        private string _initialThemeStyle;
 
 
         private readonly string _resourcesThemesFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "resources", "Themes") + "\\";
         public string ThemeStyle 
         { 
             get => _themeStyle; 
-            set {
+            set
+            {
                 if (File.Exists(value))
                     _themeStyle = value;
                 else if (File.Exists(_resourcesThemesFolder + value))
@@ -45,6 +46,11 @@ namespace AdvancedWindowsAppearence
                 NotifyPropertyChanged();
                 NotifyPropertyChanged("IsUsingCustomStyle");
             }
+        }
+
+        public bool IsThemeStyleModified
+        {
+            get => ThemeStyle == _initialThemeStyle;
         }
 
         public bool IsUsingCustomStyle 
@@ -99,7 +105,7 @@ namespace AdvancedWindowsAppearence
                         return themeStyle.Replace("%ResourceDir%\\Themes\\", _resourcesThemesFolder);
                     if (themeStyle.Contains("%SystemRoot%\\resources\\Themes\\")) 
                         return themeStyle.Replace("%SystemRoot%\\resources\\Themes\\", _resourcesThemesFolder);
-
+                    return themeStyle;
                 }
 
             }
@@ -107,7 +113,7 @@ namespace AdvancedWindowsAppearence
             {
                 return _resourcesThemesFolder + "Aero\\Aero";
             }
-            return "";
+            return "Aero\\Aero";
         }
 
         public void RestoreThemeStyle() 
@@ -237,10 +243,11 @@ namespace AdvancedWindowsAppearence
                 visualStylesIdIndex = newThemeSettingsIni.Count - 1;
             }
 
+            if (IsThemeStyleModified)
+            {
             if (string.IsNullOrWhiteSpace(ThemeStyle))
-                return;
-            if (ThemeStyle.Contains(_resourcesThemesFolder))
-                ThemeStyle = ThemeStyle.Replace(_resourcesThemesFolder, "%ResourceDir%\\Themes\\");
+                    ThemeStyle = _initialThemeStyle;
+            }
 
             var visualStylesText = "Path=" + ThemeStyle;
             newThemeSettingsIni.Insert(visualStylesIdIndex + 1, visualStylesText);
