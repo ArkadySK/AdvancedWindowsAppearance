@@ -234,7 +234,6 @@ namespace AdvancedWindowsAppearence
 
         internal async Task SaveThemeModesToRegistry()
         {
-            IsSavingInProgress = true;
             await RegistrySettingsViewModel.SaveAll();
         }
 
