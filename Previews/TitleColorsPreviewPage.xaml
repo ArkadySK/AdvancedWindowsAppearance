@@ -77,12 +77,12 @@
                 </Grid.ColumnDefinitions>
                 
                 <!--System default background, will be overridden by the rectangle below-->
-                <Rectangle Grid.ColumnSpan="4" Fill="{Binding ThemeColor.ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=SteelBlue}"/>
+                <Rectangle Grid.ColumnSpan="4" Fill="DodgerBlue"/>
                 
                 <!--The color of active window-->
                 <!--the blue background is on purpose, thats how system handles no active color-->
                 <Rectangle Grid.ColumnSpan="4" Visibility="{Binding AeroColorsViewModel.AeroColors[0].Enabled, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" 
-                           Fill="{Binding AeroColorsViewModel.AeroColors[0].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=SteelBlue}"/>
+                           Fill="{Binding AeroColorsViewModel.AeroColors[0].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay, FallbackValue=DodgerBlue}"/>
 
                 <Label x:Name="label" Padding="4" Grid.Column="1" MinHeight="{Binding ColorSettings[32].Size}" Content="Active Window" FontFamily="{Binding FontSettings[0].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"  
                                         FontSize="{Binding FontSettings[0].Size}" Foreground="{Binding ColorSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"
