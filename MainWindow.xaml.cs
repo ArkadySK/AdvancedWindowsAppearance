@@ -301,7 +301,7 @@ namespace AdvancedWindowsAppearence
             Button btn = sender as Button;
             var selItem = (AeroColorRegistrySetting)btn.DataContext;
             if (selItem == null) return;
-            selItem.ItemColor = Settings.ThemeColor.ItemColor;
+            selItem.ItemColor = System.Drawing.Color.FromArgb(Settings.ThemeColor.ItemColor.Value.R, Settings.ThemeColor.ItemColor.Value.G, Settings.ThemeColor.ItemColor.Value.B);
 
         }
 
