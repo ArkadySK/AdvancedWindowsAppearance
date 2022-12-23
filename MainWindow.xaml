@@ -149,6 +149,7 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
@@ -171,8 +172,9 @@
                             <TextBox IsEnabled="False" Grid.Column="3" VerticalContentAlignment="Center" x:Name="textBoxColorOpacity" Margin="2" Text="{Binding Value, ElementName=sliderColorOpacity}" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
                         </Grid>
 
+                        <CheckBox Style="{StaticResource SystemSmallToggleButton}" Grid.Row="1" IsEnabled="{Binding IsWindows10, Mode=OneTime}" VerticalContentAlignment="Center" IsChecked="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked}">Enable colored titlebars</CheckBox>
                         <!--Active and Inactive color-->
-                        <ItemsControl x:Name="titleColorsItemsControl" Grid.ColumnSpan="5" Grid.Row="1" Focusable="False"  IsEnabled="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding AeroColorsViewModel.AeroColors}">
+                        <ItemsControl x:Name="titleColorsItemsControl" Grid.Row="2" Focusable="False"  IsEnabled="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding AeroColorsViewModel.AeroColors}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch" MinHeight="40" >
@@ -193,17 +195,17 @@
                         </ItemsControl>
 
                         <!--Aero colors Preview-->
-                        <Frame Grid.Row="2" Margin="0 5 0 0" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Source="Previews\TitleColorsPreviewPage.xaml"/>
+                        <Frame Grid.Row="3" Margin="0 5 0 0" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Source="Previews\TitleColorsPreviewPage.xaml"/>
 
 
-                        <TextBlock Style="{StaticResource InfoText}" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource InvertedBooleanToVisibilityConverter}, Mode=OneWay}" Grid.ColumnSpan="5" Grid.Row="4"
-                                           >To access active / inactive title color setting, please check 'enable colored titlebars' in 'Other Settings'. If you dont have that setting, your version of Windows is not supported. This works only on Windows 10/11</TextBlock>
-                        <TextBlock Style="{StaticResource InfoText}" Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Grid.ColumnSpan="5" Grid.Row="4"
+                        <TextBlock Style="{StaticResource InfoText}" Visibility="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked, Converter={StaticResource InvertedBooleanToVisibilityConverter}, Mode=OneWay}" Grid.Row="5"
+                                           >To access active / inactive title color setting, please check 'enable colored titlebars'. If you dont see that setting, your version of Windows is not supported. This works only on Windows 10/11</TextBlock>
+                        <TextBlock Style="{StaticResource InfoText}" Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Grid.Row="5"
                                            >To acces the main theme color, please uncheck 'Ignore theme settings' in Theme Settings.</TextBlock>
 
                         
                         <!--The Apply buttons-->
-                        <StackPanel Margin="-5 0 0 0" Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="4">
+                        <StackPanel Margin="-5 0 0 0" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="4">
                             <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" x:Name="SaveTitleColorsAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveTitleColorsAsTheme_Click"/>
                             <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="SaveTitleColorsToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveTitleColorsToRegistry_Click" />
                         </StackPanel>

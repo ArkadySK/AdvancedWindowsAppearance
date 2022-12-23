@@ -251,6 +251,10 @@ namespace AdvancedWindowsAppearence
             await ThemeSettings.SaveTitleColors();
             await Task.Delay(2000);
             App.Current.Resources["ThemeColor"] = Converters.BrushToColorConverter.MediaColorToBrush(ThemeColor.ItemColor);
+            // Save "Emable colored titlebars"
+            if (IsWindows10 && RegistrySettingsViewModel.RegistrySettings.Count > 0) {
+                RegistrySettingsViewModel.RegistrySettings[0].SaveToRegistry();
+            }
             await AeroColorsViewModel.SaveAll();
             ShowSavedSuccessfullyDialog();
         }
