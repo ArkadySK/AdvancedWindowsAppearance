@@ -111,7 +111,7 @@
                             </StackPanel>
 
                             <!--Dark / Light modes selection-->
-                            <StackPanel Margin="0 10 0 0">
+                            <StackPanel Margin="0 10 0 0" Visibility="{Binding IsWindows10, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
                                 <Label Style="{StaticResource SystemLabel}" Content="Apps color mode: "/>
                                 <ComboBox Style="{StaticResource SystemComboBox}" Margin="2" Width="300" HorizontalAlignment="Left" SelectedIndex="{Binding RegistrySettingsViewModel.RegistrySettings[5].Checked, Converter={StaticResource BooleanToInt}, Mode=TwoWay}">
                                     <ComboBoxItem>Dark</ComboBoxItem>
@@ -168,7 +168,7 @@
                                 <Button x:Name="imageThemeColor" Padding="10" BorderThickness="2" Background="{Binding ThemeColor.ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                             </Button>
                             <Label Style="{StaticResource SystemLabel}" Grid.Column="2" Margin="1">Opacity</Label>
-                            <Slider VerticalAlignment="Center" x:Name="sliderColorOpacity" Grid.Column="1" Value="{Binding ThemeColor.Opacity}"  Margin="3" Maximum="255" />
+                            <Slider VerticalAlignment="Center" x:Name="sliderColorOpacity" Grid.Column="1" Value="{Binding ThemeColor.Opacity}"  Margin="3" Maximum="255" MinWidth="200" />
                             <TextBox IsEnabled="False" Grid.Column="3" VerticalContentAlignment="Center" x:Name="textBoxColorOpacity" Margin="2" Text="{Binding Value, ElementName=sliderColorOpacity}" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
                         </Grid>
 
@@ -448,7 +448,7 @@
                             <Button x:Name="buttonRestartDwm" Width="200" Margin="0 2" Content="Restart dwm.exe" Style="{DynamicResource SystemButton}" HorizontalAlignment="Left" Click="buttonRestartDwm_Click"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="3">
+                        <StackPanel Grid.Row="3" Visibility="{Binding IsWindows10, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <Label Style="{StaticResource SystemLabel}" Content="Program settings"/>
                             <CheckBox Content="Use system titlebar (Win 10 and higher)" Margin="5" IsChecked="{Binding ApplicationSettings.UseNativeTitlebar}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="{DynamicResource ForegroundColor}"/>
                         </StackPanel>
