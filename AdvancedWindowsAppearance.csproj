@@ -68,7 +68,9 @@
       <HintPath>packages\Octokit.0.40.0\lib\net45\Octokit.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
-    <Reference Include="PresentationFramework.Aero2" />
+    <Reference Include="PresentationFramework.Aero2, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\PresentationFramework.Aero2.1.0.1\lib\PresentationFramework.Aero2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
