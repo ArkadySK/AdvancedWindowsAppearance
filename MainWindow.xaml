@@ -255,7 +255,7 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
                         <TextBox x:Name="textBoxItemSize" MinWidth="100" Text="{Binding SelectedItem.Size, ElementName=comboBoxItems}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxItems}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Grid.Column="1" Margin="2" 
-                             InputScope="Number" MaxLines="1" MaxLength="2" PreviewTextInput="NumberValidationTextBox" Foreground="{DynamicResource ForegroundColor}"/>
+                             InputScope="Number" MaxLines="1" MaxLength="2" PreviewTextInput="NumberValidationTextBox"/>
                         <Button x:Name="buttonItemColor" Style="{StaticResource SystemSmallButton}" Grid.Column="2" Click="buttonEditItemColor_Click" IsEnabled="{Binding SelectedItem.HasColor, ElementName=comboBoxItems}">
                             <Button x:Name="imageItemColor" Padding="10" BorderThickness="2" Background="{Binding SelectedItem.ItemColor, ElementName=comboBoxItems, Converter={StaticResource brushToColor}, Mode=OneWay}" />
                         </Button>
