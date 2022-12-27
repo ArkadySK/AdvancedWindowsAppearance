@@ -362,7 +362,7 @@
                         <ToggleButton x:Name="buttonFontBold" Content="B" Style="{StaticResource SystemSmallToggleButton}" IsChecked="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts}" FontSize="20" Grid.Column="4" FontWeight="Bold"/>
                         <ToggleButton x:Name="buttonFontItalic" Content="I" Style="{StaticResource SystemSmallToggleButton}" IsChecked="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts}" FontSize="20"  Grid.Column="5" FontStyle="Italic"/>
 
-                        <TextBlock Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxFonts, Mode=OneWay, FallbackValue=Collapsed}" Grid.ColumnSpan="5" Grid.Row="2" 
+                        <TextBlock Visibility="{Binding SelectedItem.IsEdited, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=comboBoxFonts, Mode=OneWay, FallbackValue=Collapsed}" Grid.ColumnSpan="6" Grid.Row="2" 
                                        Style="{StaticResource InfoText}" >Changes made to fonts are applied after restart</TextBlock>
 
 
