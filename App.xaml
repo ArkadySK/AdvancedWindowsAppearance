@@ -201,6 +201,14 @@
                 </Style.Triggers>
             </Style>
 
+            <Style TargetType="CheckBox">
+                <Setter Property="Background" Value="{x:Null}"/>
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}"/>
+                <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MessageFontSize}}"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
+
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

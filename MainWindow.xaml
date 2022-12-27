@@ -43,8 +43,8 @@
         </Grid>
 
         <StackPanel x:Name="SidepanelButtomTextStackPanel" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="3" Panel.ZIndex="10" >
-            <CheckBox Content="Ignore theme settings" Margin="2" IsChecked="{Binding ApplicationSettings.SaveToRegistry}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="{DynamicResource ForegroundColor}"/>
-            <CheckBox IsChecked="{Binding ApplicationSettings.ShowAllUI}" Margin="2" Foreground="{DynamicResource ForegroundColor}" Background="{x:Null}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" >Show more settings</CheckBox>
+            <CheckBox IsChecked="{Binding ApplicationSettings.SaveToRegistry}" Margin="2" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">Ignore theme settings</CheckBox>
+            <CheckBox IsChecked="{Binding ApplicationSettings.ShowAllUI}" Margin="2" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" >Show more settings</CheckBox>
             <TextBlock x:Name="versionNameTextBlock" Margin="2" FontSize="11" Style="{DynamicResource HypertextTextBlockStyle}" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
         </StackPanel>
 
@@ -70,7 +70,8 @@
 
                         <!--Theme Settings-->
                         <StackPanel>
-                            <CheckBox FontWeight="Bold" Content="Ignore theme settings, save to registry instead" Margin="0 0 0 10" IsChecked="{Binding ApplicationSettings.SaveToRegistry}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="{DynamicResource ForegroundColor}"/>
+                            <CheckBox FontSize="16" Content="Ignore theme settings, save to registry instead" Margin="0 0 0 10" IsChecked="{Binding ApplicationSettings.SaveToRegistry}" 
+                                      Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                             
                             <!-- Theme name -->
                             <Grid Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
@@ -85,17 +86,18 @@
 
                             <!-- Styles -->
                             <StackPanel Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
-                                <CheckBox Margin="0 5" x:Name="checkBoxOverwriteThemeStyle" Grid.Row="1" Content="Overwrite theme style" Foreground="{DynamicResource ForegroundColor}" 
-                                           FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="CheckBoxOverwriteThemeStyle_Click" Checked="checkBoxOverwriteThemeStyle_Checked"/>
+                                <CheckBox Margin="0 5" x:Name="checkBoxOverwriteThemeStyle" Grid.Row="1" Content="Overwrite theme style" Click="CheckBoxOverwriteThemeStyle_Click" Checked="checkBoxOverwriteThemeStyle_Checked"/>
                                 <!-- Style options -->
                                 <StackPanel x:Name="stackPanelAeroSettingsButtons"  Margin="2" HorizontalAlignment="Center" IsEnabled="false" >
                                     <RadioButton Content="Aero (Windows default)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Padding="2" VerticalContentAlignment="Center" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="ToggleButtonAero_Click"/>
-                                    <RadioButton Content="Aero Lite (has window border, better support for classic colors)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Padding="2" VerticalContentAlignment="Center" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="ToggleButtonAeroLite_Click"/>
+                                    <RadioButton Content="Aero Lite (has window border, better support for classic colors)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Padding="2" VerticalContentAlignment="Center" 
+                                                 FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Click="ToggleButtonAeroLite_Click"/>
                                     <RadioButton Content="High Contrast (more color options)" Foreground="{DynamicResource ForegroundColor}" Margin="2" Click="ToggleButtonHighContrast_Click" Visibility="Collapsed"/>
                                     <RadioButton x:Name="customStyle" Foreground="{DynamicResource ForegroundColor}" Margin="2" VerticalContentAlignment="Center">
                                         <StackPanel Orientation="Horizontal">
                                             <Label Style="{DynamicResource SystemLabel}" Padding="0" Content="Custom: "/>
-                                            <TextBox IsEnabled="{Binding IsChecked, ElementName=customStyle}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2" VerticalContentAlignment="Center" MinHeight="35" Width="200" Text="{Binding ThemeSettings.ThemeStyle, UpdateSourceTrigger=LostFocus}"/>
+                                            <TextBox IsEnabled="{Binding IsChecked, ElementName=customStyle}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Margin="2" VerticalContentAlignment="Center" MinHeight="35" Width="200" 
+                                                     Text="{Binding ThemeSettings.ThemeStyle, UpdateSourceTrigger=LostFocus}"/>
                                             <Button x:Name="buttonMsstylesFileDialog" Content="File..." Style="{DynamicResource SystemButton}" Click="buttonMsstylesFileDialog_Click"/>
                                         </StackPanel>
                                     </RadioButton>
@@ -169,10 +171,11 @@
                             </Button>
                             <Label Style="{StaticResource SystemLabel}" Grid.Column="2" Margin="1">Opacity</Label>
                             <Slider VerticalAlignment="Center" x:Name="sliderColorOpacity" Grid.Column="1" Value="{Binding ThemeColor.Opacity}"  Margin="3" Maximum="255" MinWidth="200" />
-                            <TextBox IsEnabled="False" Grid.Column="3" VerticalContentAlignment="Center" x:Name="textBoxColorOpacity" Margin="2" Text="{Binding Value, ElementName=sliderColorOpacity}" MaxLength="3" PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
+                            <TextBox IsEnabled="False" Grid.Column="3" VerticalContentAlignment="Center" x:Name="textBoxColorOpacity" Margin="2" Text="{Binding Value, ElementName=sliderColorOpacity}" MaxLength="3" 
+                                     PreviewTextInput="NumberValidationTextBox" TextChanged="textBoxColorOpacity_TextChanged"/>
                         </Grid>
 
-                        <CheckBox Style="{StaticResource SystemSmallToggleButton}" Grid.Row="1" IsEnabled="{Binding IsWindows10, Mode=OneTime}" VerticalContentAlignment="Center" IsChecked="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked}">Enable colored titlebars</CheckBox>
+                        <CheckBox Grid.Row="1" IsEnabled="{Binding IsWindows10, Mode=OneTime}" Margin="2 20 2 10" VerticalContentAlignment="Center" IsChecked="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked}">Enable colored titlebars</CheckBox>
                         <!--Active and Inactive color-->
                         <ItemsControl x:Name="titleColorsItemsControl" Grid.Row="2" Focusable="False"  IsEnabled="{Binding RegistrySettingsViewModel.RegistrySettings[0].Checked}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding AeroColorsViewModel.AeroColors}">
                             <ItemsControl.ItemTemplate>
@@ -184,7 +187,7 @@
                                             <ColumnDefinition Width="Auto" MinWidth="40" />
                                             <ColumnDefinition Width="45"/>
                                         </Grid.ColumnDefinitions>
-                                        <CheckBox x:Name="checkBoxAeroColorEnabled" Content="{Binding Name}" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundColor}" IsChecked="{Binding Enabled}"/>
+                                        <CheckBox x:Name="checkBoxAeroColorEnabled" Content="{Binding Name}" Grid.Column="0" VerticalAlignment="Center" IsChecked="{Binding Enabled}"/>
                                         <Button Content="&#xE78B;" FontFamily="{StaticResource Segoe MDL2 Assets}" IsEnabled="{Binding ThemeColor.ItemColor.HasValue}" Visibility="{Binding Enabled, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
                                                 FontSize="25" Grid.Column="2" Style="{StaticResource SystemSmallButton}" Click="ButtonColorSync_Click"/>
                                         <Button x:Name="buttonAeroColor" Grid.Column="3" Style="{StaticResource SystemSmallButton}" Click="buttonAeroColor_Click" IsEnabled="{Binding Enabled}">
@@ -315,7 +318,8 @@
                              Foreground="{Binding SelectedItem.ItemColor, ElementName=comboBoxFonts, Converter={StaticResource brushToColor}, Mode=OneWay}" Text="The quick brown fox jumps over the lazy dog" FontWeight="{Binding SelectedItem.IsBold, ElementName=comboBoxFonts, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" 
                              FontStyle="{Binding SelectedItem.IsItalic, ElementName=comboBoxFonts, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" FontFamily="{Binding SelectedItem.Font, ElementName=comboBoxFonts, Converter={StaticResource FontToFontFamily}, Mode=OneWay}"/>
 
-                        <ComboBox x:Name="comboBoxFontSize" MinWidth="100" Text="{Binding SelectedItem.Size, ElementName=comboBoxFonts, UpdateSourceTrigger=LostFocus}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxFonts}" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Grid.Column="2" Margin="2" IsEditable="True" 
+                        <ComboBox x:Name="comboBoxFontSize" MinWidth="100" Text="{Binding SelectedItem.Size, ElementName=comboBoxFonts, UpdateSourceTrigger=LostFocus}" IsEnabled="{Binding Path=SelectedItem.HasSize, ElementName=comboBoxFonts}" 
+                                  FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSize}}" Grid.Column="2" Margin="2" IsEditable="True" 
                               PreviewTextInput="NumberValidationTextBox" VerticalContentAlignment="Center">
                             <ComboBoxItem Content="2"/>
                             <ComboBoxItem Content="3"/>
@@ -437,7 +441,7 @@
                         <ItemsControl x:Name="listBoxDMW" BorderBrush="{x:Null}" Grid.Row="0" ItemsSource="{Binding RegistrySettingsViewModel.RegistrySettings}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <CheckBox Content="{Binding Name}" Margin="5" IsChecked="{Binding Checked}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="{DynamicResource ForegroundColor}"/>
+                                    <CheckBox Content="{Binding Name}" Margin="5" IsChecked="{Binding Checked}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
@@ -450,7 +454,7 @@
 
                         <StackPanel Grid.Row="3" Visibility="{Binding IsWindows10, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <Label Style="{StaticResource SystemLabel}" Content="Program settings"/>
-                            <CheckBox Content="Use system titlebar (Win 10 and higher)" Margin="5" IsChecked="{Binding ApplicationSettings.UseNativeTitlebar}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="{DynamicResource ForegroundColor}"/>
+                            <CheckBox Content="Use system titlebar (Win 10 and higher)" Margin="5" IsChecked="{Binding ApplicationSettings.UseNativeTitlebar}" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                         </StackPanel>
 
                         <!--The Apply buttons-->
