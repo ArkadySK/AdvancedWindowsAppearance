@@ -191,6 +191,7 @@
 
             <Style x:Key="HypertextTextBlockStyle" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="{DynamicResource ThemeColor}"/>
+                <Setter Property="Cursor" Value="Hand"/>
                 <Style.Triggers>
                     <Trigger Property="IsMouseDirectlyOver" Value="True">
                         <Trigger.Setters>
