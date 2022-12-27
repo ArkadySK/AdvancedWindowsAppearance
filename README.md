@@ -26,20 +26,15 @@
 - .NET Framework 4.5, pre-installed on Win 8.1, Win 10 and Win 11
 
 ## Images
+![obrázok](https://user-images.githubusercontent.com/74670743/209708407-e2cc4c2f-aceb-4674-b92a-1514d0a28fa8.png)
 
-![obrázok](https://user-images.githubusercontent.com/74670743/169707098-c92d3f20-9339-4323-b718-44dd9a95b994.png)
-
-![obrázok](https://user-images.githubusercontent.com/74670743/169707293-87fd7e54-fadb-436d-976c-d53375164432.png)
-
-![obrázok](https://user-images.githubusercontent.com/74670743/169707565-de17c9ea-411c-4a94-b753-f8666d6aa30e.png)
+![obrázok](https://user-images.githubusercontent.com/74670743/209708060-cd75c1fe-c696-4afe-939f-4a80bc85b7dd.png)
 
 ![image](https://user-images.githubusercontent.com/74670743/206575227-a596525e-9441-4453-b573-41a16418380a.png)
 
-![obrázok](https://user-images.githubusercontent.com/74670743/169707201-f2b493de-a22f-4d6b-97e5-c05593e9ece0.png)
+![obrázok](https://user-images.githubusercontent.com/74670743/209707414-95d84857-c02f-45ec-9524-c6b711f580bd.png)
 
-![obrázok](https://user-images.githubusercontent.com/74670743/169707212-29d453a6-46b8-4d75-94f9-c2021c07b350.png)
-
-![obrázok](https://user-images.githubusercontent.com/74670743/158037661-87cc94bd-df9c-4a64-b38c-c1422d8c02ee.png)
+![obrázok](https://user-images.githubusercontent.com/74670743/209704257-85202fa2-c24a-47cc-b857-6bd8f136c859.png)
 
 
 
