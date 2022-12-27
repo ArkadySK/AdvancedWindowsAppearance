@@ -22,7 +22,7 @@ namespace AdvancedWindowsAppearence.Controls
     {
 
         static readonly DependencyProperty TextProperty
-                = DependencyProperty.Register(nameof(Text), typeof(string), typeof(ToggleSwitch), new PropertyMetadata(default(string)));
+            = DependencyProperty.Register(nameof(Text), typeof(string), typeof(ToggleSwitch), new PropertyMetadata(default(string)));
 
         static readonly DependencyProperty IsOnProperty
             = DependencyProperty.Register(nameof(IsOn), typeof(bool), typeof(ToggleSwitch), new PropertyMetadata(default(bool)));
@@ -49,6 +49,7 @@ namespace AdvancedWindowsAppearence.Controls
             {
                 SetValue(IsOnProperty, value);
                 NotifyPropertyChanged();
+                UpdateState();
             }
         }
 
@@ -90,7 +91,6 @@ namespace AdvancedWindowsAppearence.Controls
         private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)
         {
             IsOn = !IsOn;
-            UpdateState();
         }
 
         private void UpdateState()
