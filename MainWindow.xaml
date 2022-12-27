@@ -45,7 +45,11 @@
         <StackPanel x:Name="SidepanelButtomTextStackPanel" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Panel.ZIndex="10" >
             <CheckBox IsChecked="{Binding ApplicationSettings.SaveToRegistry}" Margin="5" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">Ignore theme settings</CheckBox>
             <CheckBox IsChecked="{Binding ApplicationSettings.ShowAllUI}" Margin="5" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" >Show more settings</CheckBox>
-            <TextBlock x:Name="versionNameTextBlock" Margin="5" FontSize="11" Style="{DynamicResource HypertextTextBlockStyle}" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+            <TextBlock x:Name="versionNameTextBlock" Margin="5" FontSize="11" Style="{DynamicResource HypertextTextBlockStyle}" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="1" ShadowDepth="1" Opacity=".5"/>
+                </TextBlock.Effect>
+            </TextBlock>
         </StackPanel>
 
         <!--Main TabControl-->
