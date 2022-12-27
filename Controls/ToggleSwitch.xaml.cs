@@ -79,7 +79,7 @@ namespace AdvancedWindowsAppearence.Controls
 
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
-            switchBorder.Opacity = 0.7;
+            switchBorder.Opacity = 0.65;
         }
 
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)

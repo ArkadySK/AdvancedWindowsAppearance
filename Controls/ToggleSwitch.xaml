@@ -21,7 +21,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Border x:Name="switchBorder" Background="{Binding Fill, RelativeSource={RelativeSource AncestorType=UserControl}, FallbackValue=Black}" CornerRadius="10" Height="20" BorderThickness="2" Loaded="switchBorder_Loaded"/>
-        <ContentPresenter x:Name="contentPresenter" Grid.Column="1" VerticalAlignment="Center" Margin="2" Content="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+        <ContentPresenter x:Name="contentPresenter" Grid.Column="1" VerticalAlignment="Center" Margin="10 2 2 2" Content="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}}" />
         <Ellipse x:Name="switchEllipse" Width="11" Margin="3" Height="11" HorizontalAlignment="Center" Fill="White"/>
         
     </Grid>
