@@ -231,7 +231,6 @@ namespace AdvancedWindowsAppearence
             IsSavingInProgress = false;
         }
 
-
         internal async Task SaveThemeModesToRegistry()
         {
             await RegistrySettingsViewModel.SaveAll();
@@ -241,6 +240,7 @@ namespace AdvancedWindowsAppearence
         {
             IsSavingInProgress = true;
             await ThemeSettings.SaveTheme();
+            await AeroColorsViewModel.SaveAll();
             ShowSavedSuccessfullyDialog();
         }
 
@@ -251,7 +251,7 @@ namespace AdvancedWindowsAppearence
             await ThemeSettings.SaveTitleColors();
             await Task.Delay(2000);
             App.Current.Resources["ThemeColor"] = Converters.BrushToColorConverter.MediaColorToBrush(ThemeColor.ItemColor);
-            // Save "Emable colored titlebars"
+            // Save "Enable colored titlebars"
             if (IsWindows10 && RegistrySettingsViewModel.RegistrySettings.Count > 0) {
                 RegistrySettingsViewModel.RegistrySettings[0].SaveToRegistry();
             }
@@ -273,7 +273,7 @@ namespace AdvancedWindowsAppearence
             IsSavingInProgress = true;
             await ThemeSettings.SaveColorsAndMetrics();
             ShowSavedToRegistryDialog();
-
+            await AeroColorsViewModel.SaveAll();
         }
 
         internal async Task SaveColorsMetricsToRegistry()
@@ -297,6 +297,7 @@ namespace AdvancedWindowsAppearence
             IsSavingInProgress = true;
             await ThemeSettings.SaveFonts();
             ShowSavedAsThemeDialog();
+            await AeroColorsViewModel.SaveAll();
         }
         internal async Task SaveFontsToRegistry()
         {
@@ -319,7 +320,9 @@ namespace AdvancedWindowsAppearence
             IsSavingInProgress = true;
             await ThemeSettings.SaveWallpaper();
             ShowSavedSuccessfullyDialog();
+            await AeroColorsViewModel.SaveAll();
         }
+
         internal async Task SaveWallpaperToRegistry()
         {
             IsSavingInProgress = true;
@@ -327,15 +330,12 @@ namespace AdvancedWindowsAppearence
             ShowSavedToRegistryDialog();
         }
 
-
         internal async Task SaveRegistrySettingsToRegistry()
         {
             IsSavingInProgress = true;
             await RegistrySettingsViewModel.SaveAll();
             ShowSavedToRegistryDialog();
         }
-
-
         #endregion
 
 
