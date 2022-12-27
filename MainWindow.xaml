@@ -42,10 +42,10 @@
 
         </Grid>
 
-        <StackPanel x:Name="SidepanelButtomTextStackPanel" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="3" Panel.ZIndex="10" >
-            <CheckBox IsChecked="{Binding ApplicationSettings.SaveToRegistry}" Margin="2" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">Ignore theme settings</CheckBox>
-            <CheckBox IsChecked="{Binding ApplicationSettings.ShowAllUI}" Margin="2" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" >Show more settings</CheckBox>
-            <TextBlock x:Name="versionNameTextBlock" Margin="2" FontSize="11" Style="{DynamicResource HypertextTextBlockStyle}" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+        <StackPanel x:Name="SidepanelButtomTextStackPanel" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5" Panel.ZIndex="10" >
+            <CheckBox IsChecked="{Binding ApplicationSettings.SaveToRegistry}" Margin="5" Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">Ignore theme settings</CheckBox>
+            <CheckBox IsChecked="{Binding ApplicationSettings.ShowAllUI}" Margin="5" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" >Show more settings</CheckBox>
+            <TextBlock x:Name="versionNameTextBlock" Margin="5" FontSize="11" Style="{DynamicResource HypertextTextBlockStyle}" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
         </StackPanel>
 
         <!--Main TabControl-->
@@ -70,8 +70,6 @@
 
                         <!--Theme Settings-->
                         <StackPanel>
-                            <CheckBox FontSize="16" Content="Ignore theme settings, save to registry instead" Margin="0 0 0 10" IsChecked="{Binding ApplicationSettings.SaveToRegistry}" 
-                                      Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                             
                             <!-- Theme name -->
                             <Grid Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
@@ -132,6 +130,8 @@
                         <StackPanel Margin="-5 0 0 0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="4">
                             <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" x:Name="SaveThemeAsTheme" Width="200" Style="{DynamicResource SystemButton}" Content="Apply as theme" Margin="5" Click="SaveThemeAsTheme_Click"/>
                             <Button Visibility="{Binding ApplicationSettings.SaveToRegistry, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="SaveThemeToRegistry" Width="200" Style="{DynamicResource SystemButton}" Content="Apply to registry" Margin="5" Click="SaveThemeToRegistry_Click"/>
+                            <CheckBox VerticalAlignment="Bottom" Content="Ignore theme settings, save to registry instead" Margin="5" IsChecked="{Binding ApplicationSettings.SaveToRegistry}" 
+                                      Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
@@ -187,7 +187,7 @@
                                             <ColumnDefinition Width="Auto" MinWidth="40" />
                                             <ColumnDefinition Width="45"/>
                                         </Grid.ColumnDefinitions>
-                                        <CheckBox x:Name="checkBoxAeroColorEnabled" Content="{Binding Name}" Grid.Column="0" VerticalAlignment="Center" IsChecked="{Binding Enabled}"/>
+                                        <CheckBox x:Name="checkBoxAeroColorEnabled" Content="{Binding Name}" Margin="15 5" Grid.Column="0" VerticalAlignment="Center" IsChecked="{Binding Enabled}"/>
                                         <Button Content="&#xE78B;" FontFamily="{StaticResource Segoe MDL2 Assets}" IsEnabled="{Binding ThemeColor.ItemColor.HasValue}" Visibility="{Binding Enabled, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
                                                 FontSize="25" Grid.Column="2" Style="{StaticResource SystemSmallButton}" Click="ButtonColorSync_Click"/>
                                         <Button x:Name="buttonAeroColor" Grid.Column="3" Style="{StaticResource SystemSmallButton}" Click="buttonAeroColor_Click" IsEnabled="{Binding Enabled}">
