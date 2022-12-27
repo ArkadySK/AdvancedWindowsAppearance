@@ -315,6 +315,8 @@ namespace AdvancedWindowsAppearence
                     continue;
                 color.IsEdited = false;
                 colorsIdIndex = newThemeSettingsIni.IndexOf(colorsId);
+                if (color.HasSize)
+                    color.SaveToRegistry();
                 if (color.HasColor)
                     newThemeSettingsIni.Insert(colorsIdIndex + 1, color.ColorRegistryPath + "=" + color.ItemColorValue);
             }
@@ -360,6 +362,8 @@ namespace AdvancedWindowsAppearence
                 font.SaveToRegistry();
                 font.IsEdited = false;
                 colorsIdIndex = newThemeSettingsIni.IndexOf(colorsId);
+                if (font.HasSize)
+                    font.SaveToRegistry();
                 if (font.HasColor)
                     newThemeSettingsIni.Insert(colorsIdIndex + 1, font.Name + "=" + font.ItemColorValue);
             }
