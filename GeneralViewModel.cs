@@ -87,8 +87,6 @@ namespace AdvancedWindowsAppearence
             RegistrySettingsViewModel.AddWithPath("Use light theme for Apps", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", new Version(10, 0));
             RegistrySettingsViewModel.AddWithPath("Use light theme for System", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", new Version(10, 0));
             RegistrySettingsViewModel.AddWithPath("Always hide scrollbars in modern apps", @"Control Panel\Accessibility", "DynamicScrollbars", new Version(10, 0));
-            RegistrySettingsViewModel.AddWithPath("Make taskbar more transparent", @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "UseOLEDTaskbarTransparency", new Version(10, 0));
-            RegistrySettingsViewModel.Add("Force taskbar more transparent (must check both)", "ForceEffectMode", new Version(10, 0));
             RegistrySettingsViewModel.AddWithPath("Show Windows version on desktop", @"Control Panel\Desktop", "PaintDesktopVersion", new Version(6, 1));
         }
 
