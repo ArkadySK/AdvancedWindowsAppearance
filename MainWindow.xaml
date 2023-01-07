@@ -401,7 +401,7 @@
                         </Grid.RowDefinitions>
 
                         <!--Wallpaper type-->
-                        <StackPanel MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left" >
+                        <StackPanel Margin="5" MaxWidth="{StaticResource PreviewWidth}" HorizontalAlignment="Left" >
                             <Label Style="{StaticResource SystemLabel}" Content="Wallpaper type: "/>
                             <ComboBox MinWidth="250" x:Name="WallpaperTypeComboBox" ItemsSource="{Binding WallpaperSettings.WallpaperTypesStrings}" Style="{StaticResource SystemComboBox}"  DropDownClosed="WallpaperTypeComboBox_DropDownClosed"
                                        IsEditable="False" Text="{Binding WallpaperSettings.WallpaperType, Converter={StaticResource EnumToString}}">
