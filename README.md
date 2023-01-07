@@ -30,7 +30,7 @@
 
 ![obrázok](https://user-images.githubusercontent.com/74670743/209708060-cd75c1fe-c696-4afe-939f-4a80bc85b7dd.png)
 
-![image](https://user-images.githubusercontent.com/74670743/206575227-a596525e-9441-4453-b573-41a16418380a.png)
+![obrázok](https://user-images.githubusercontent.com/74670743/211169122-55e7fa98-bb8a-4d09-afac-186c9ff68bf4.png)
 
 ![obrázok](https://user-images.githubusercontent.com/74670743/209707414-95d84857-c02f-45ec-9524-c6b711f580bd.png)
 
