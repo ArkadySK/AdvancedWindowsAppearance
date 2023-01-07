@@ -168,9 +168,8 @@
                             <!--Content of Active Window-->
                             <Menu Grid.Row="1" MinHeight="{Binding ColorSettings[25].Size}" FontSize="{Binding FontSettings[2].Size}" Grid.ColumnSpan="4" Padding="-1" Margin="0 -2"
                                        FontWeight="{Binding FontSettings[2].IsBold, Converter={StaticResource BooleanToFontWeight}, Mode=OneWay}" FontStyle="{Binding FontSettings[2].IsItalic, Converter={StaticResource BooleanToFontStyle}, Mode=OneWay}" FontFamily="{Binding FontSettings[2].Font, Converter={StaticResource FontToFontFamily}, Mode=OneWay}">
-                                <MenuItem Header="Normal" Foreground="{Binding FontSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                <MenuItem Header="Disabled" IsEnabled="False" Foreground="{Binding ColorSettings[14].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
-                                <MenuItem Header="Selected" Foreground="{Binding ColorSettings[15].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
+                                <Label Content="Normal" Foreground="{Binding FontSettings[2].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Padding="0"/>
+                                <Label Content="Disabled" IsEnabled="False" Foreground="{Binding ColorSettings[14].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Padding="0"/>
                             </Menu>
                             <Rectangle Grid.Row="1" Height="1" Grid.ColumnSpan="4" VerticalAlignment="Bottom" Fill="{Binding ColorSettings[25].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}"/>
                             <Label Padding="2" Content="Window Text" Grid.Row="2" Grid.ColumnSpan="4" Panel.ZIndex="1" FontSize="{Binding FontSettings[5].Size}" Foreground="{Binding ColorSettings[32].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" Background="{Binding ColorSettings[29].ItemColor, Converter={StaticResource brushToColor}, Mode=OneWay}" 
