@@ -87,10 +87,7 @@ namespace AdvancedWindowsAppearence
         {
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(RegistryPath, true);
             if (registryKey == null)
-            {
-                registryKey.Close();
                 return;
-            }
             registryKey.SetValue(RegistryKey, Checked, RegistryValueKind.DWord);
             registryKey.Close();
         }
