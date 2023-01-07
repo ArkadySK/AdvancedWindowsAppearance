@@ -115,6 +115,8 @@ namespace AdvancedWindowsAppearence
 
             if(registrykey == "ColorizationColor")
             {
+                if(Environment.OSVersion.Version > new Version(10, 0))
+                    color = Color.FromArgb(255, color.R, color.G, color.B);
                 App.Current.Resources["ThemeColor"] = BrushToColorConverter.MediaColorToBrush(color);
             }
 
